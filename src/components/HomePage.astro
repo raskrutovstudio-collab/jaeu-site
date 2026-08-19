@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { homeCopy, localeMeta, type Locale } from '../data/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = homeCopy[locale];
+const languages = Object.entries(localeMeta);
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.description}>
+  <header class="site-header">
+    <a class="brand" href={localeMeta[locale].path} aria-label={copy.title}>
+      <img src="/assets/jaeu-emblem.svg" width="38" height="49" alt="" />
+      <span>JAEU</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#about">{locale === 'en' ? 'About' : locale === 'kz' ? 'Қауымдастық туралы' : 'Об Ассоциации'}</a>
+      <a href="#activities">{locale === 'en' ? 'Activities' : locale === 'kz' ? 'Қызмет' : 'Деятельность'}</a>
+      <a href="#membership">{locale === 'en' ? 'Membership' : locale === 'kz' ? 'Мүшелік' : 'Членство'}</a>
+    </nav>
+    <div class="languages" aria-label="Language selection">
+      {languages.map(([key, item]) => <a class:list={{ active: key === locale }} href={item.path} lang={item.lang}>{item.label}</a>)}
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__copy">
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.heading}</h1>
+        <p class="lead">{copy.lead}</p>
+        <div class="actions">
+          <a class="button button--primary" href="#membership">{copy.primary}</a>
+          <a class="button button--secondary" href="#contact">{copy.secondary}</a>
+        </div>
+      </div>
+      <div class="hero__mark" aria-hidden="true">
+        <img src="/assets/jaeu-emblem.svg" width="270" height="350" alt="" />
+      </div>
+    </section>
+
+    <section id="about" class="split-section">
+      <p class="section-label">JAEU · 2016</p>
+      <div>
+        <h2>{copy.aboutTitle}</h2>
+        <p>{copy.aboutText}</p>
+      </div>
+    </section>
+
+    <section id="activities" class="activity-section">
+      <div class="section-heading">
+        <p class="section-label">EAEU</p>
+        <h2>{copy.activityTitle}</h2>
+      </div>
+      <ul class="activity-list">
+        {copy.activities.map((activity) => <li>{activity}<span aria-hidden="true">↗</span></li>)}
+      </ul>
+    </section>
+
+    <section id="membership" class="membership-section">
+      <p>{copy.note}</p>
+      <a class="button button--primary" href="mailto:info@jaeu.kz">{copy.primary}</a>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="footer-brand">
+      <img src="/assets/jaeu-emblem.svg" width="58" height="75" alt="" />
+      <strong>{copy.title}</strong>
+    </div>
+    <p>© {new Date().getFullYear()} JAEU</p>
+  </footer>
+</BaseLayout>

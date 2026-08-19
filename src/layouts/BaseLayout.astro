@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import { localeMeta, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const current = localeMeta[locale];
+const canonical = new URL(current.path, Astro.site);
+---
+
+<!doctype html>
+<html lang={current.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#171d36" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ru-KZ" href={new URL('/', Astro.site)} />
+    <link rel="alternate" hreflang="kk-KZ" href={new URL('/kz/', Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
