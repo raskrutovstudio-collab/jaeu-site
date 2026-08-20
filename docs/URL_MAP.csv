@@ -1,0 +1,26 @@
+priority,type,ru_label,ru_url,kz_label,kz_url,en_label,en_url,indexable,content_status
+P0,page,Главная,/,Басты бет,/kz/,Home,/en/,yes,starter exists
+P0,page,Об Ассоциации,/about/,Қауымдастық туралы,/kz/about/,About the Association,/en/about/,yes,source material confirmed
+P0,page,Деятельность,/activities/,Қызмет,/kz/activities/,Activities,/en/activities/,yes,source material confirmed
+P0,page,Экспертно-консультативный совет,/expert-council/,Сараптамалық-консультативтік кеңес,/kz/expert-council/,Expert Advisory Council,/en/expert-council/,yes,source material confirmed
+P0,page,Членство,/membership/,Мүшелік,/kz/membership/,Membership,/en/membership/,yes,source material confirmed
+P0,page,Как вступить,/membership/how-to-join/,Қалай мүше болуға болады,/kz/membership/how-to-join/,How to join,/en/membership/how-to-join/,yes,source material confirmed
+P0,page,Члены Ассоциации,/members/,Қауымдастық мүшелері,/kz/members/,Association members,/en/members/,yes,list requires final verification
+P0,page,Партнёрство,/partnership/,Серіктестік,/kz/partnership/,Partnership,/en/partnership/,yes,memorandums require inventory
+P0,hub,Новости,/news/,Жаңалықтар,/kz/news/,News,/en/news/,yes,2024-2025 materials confirmed
+P0,template,Новость,/news/[slug]/,Жаңалық,/kz/news/[slug]/,News article,/en/news/[slug]/,yes,collection template
+P0,hub,Мероприятия,/events/,Іс-шаралар,/kz/events/,Events,/en/events/,yes,2024-2025 materials confirmed
+P0,template,Мероприятие,/events/[slug]/,Іс-шара,/kz/events/[slug]/,Event,/en/events/[slug]/,yes,collection template
+P0,hub,Документы,/documents/,Құжаттар,/kz/documents/,Documents,/en/documents/,yes,document inventory confirmed
+P0,template,Документ,/documents/[slug]/,Құжат,/kz/documents/[slug]/,Document,/en/documents/[slug]/,yes,collection template
+P0,hub,Отчёты,/reports/,Есептер,/kz/reports/,Reports,/en/reports/,yes,2024 report confirmed
+P0,template,Отчёт,/reports/[slug]/,Есеп,/kz/reports/[slug]/,Report,/en/reports/[slug]/,yes,collection template
+P0,hub,Центр знаний,/knowledge/,Білім орталығы,/kz/knowledge/,Knowledge centre,/en/knowledge/,yes,editorial hub
+P0,hub,Законодательство,/knowledge/legislation/,Заңнама,/kz/knowledge/legislation/,Legislation,/en/knowledge/legislation/,yes,requires dated sources
+P0,hub,Маркировка и клеймение,/knowledge/marking-and-hallmarking/,Таңбалау және сынамалау,/kz/knowledge/marking-and-hallmarking/,Marking and hallmarking,/en/knowledge/marking-and-hallmarking/,yes,requires expert review
+P0,hub,Ювелирный рынок ЕАЭС,/knowledge/eaeu-jewelry-market/,ЕАЭО зергерлік нарығы,/kz/knowledge/eaeu-jewelry-market/,EAEU jewellery market,/en/knowledge/eaeu-jewelry-market/,yes,requires expert review
+P0,template,Материал центра знаний,/knowledge/[slug]/,Білім орталығының материалы,/kz/knowledge/[slug]/,Knowledge article,/en/knowledge/[slug]/,yes,collection template
+P0,page,Контакты,/contacts/,Байланыстар,/kz/contacts/,Contacts,/en/contacts/,yes,contacts require final verification
+P0,legal,Политика конфиденциальности,/privacy/,Құпиялылық саясаты,/kz/privacy/,Privacy policy,/en/privacy/,yes,source document confirmed
+P1,utility,Поиск,/search/,Іздеу,/kz/search/,Search,/en/search/,conditional,enable after content growth
+P1,utility,Страница 404,/404/,404 беті,/kz/404/,404 page,/en/404/,no,required at launch

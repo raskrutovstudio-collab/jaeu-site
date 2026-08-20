@@ -16,21 +16,22 @@ Create a polished desktop and mobile homepage concept for the Association of Jew
 ## Visual system
 
 - canvas: warm off-white and white;
-- primary: deep navy `#171d36`;
-- text: graphite `#262936`;
-- accent: restrained gold `#edbf42`;
-- borders: cool grey with low contrast;
+- primary: deep emerald `#103E36`;
+- secondary: dark graphite `#18201F`;
+- text: graphite `#262D2B`;
+- accent: restrained cool teal `#4F8075` and silver-grey `#B8C2BF`;
+- borders: cool grey-green with low contrast;
 - generous whitespace and editorial rhythm;
 - elegant serif for selected display headings, neutral sans-serif for UI and body copy;
 - real event photography and documentary imagery;
 - use the existing logo, but give it enough clear space.
 
-Avoid black luxury-store styling, jewellery-shop catalog patterns, excessive gold, glossy product renders, purple gradients, generic card mosaics and decorative section numbers.
+Avoid yellow and gold accents, black luxury-store styling, jewellery-shop catalog patterns, glossy product renders, purple gradients, generic card mosaics and decorative section numbers.
 
 ## Required desktop frame
 
 - 1440 px wide;
-- content container around 1200–1240 px;
+- content container around 1240–1280 px;
 - sticky but compact header;
 - Russian navigation with visible RU / KZ / EN switch;
 - primary action: “Вступить в Ассоциацию”;
