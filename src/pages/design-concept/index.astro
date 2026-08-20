@@ -1,0 +1,435 @@
+---
+import { Picture } from 'astro:assets';
+import '../../styles/design-concept.css';
+import heroJeweler from '../../assets/design-concept/hero-jeweler.jpg';
+
+const title = 'Ассоциация ювелиров ЕАЭС — концепция главной страницы';
+const description =
+  'Экспериментальная дизайн-концепция главной страницы Ассоциации ювелиров ЕАЭС. Макет для согласования визуального направления.';
+const canonical = new URL('/design-concept/', Astro.site);
+
+const nav = [
+  { href: '/about/', label: 'Об Ассоциации' },
+  { href: '/activities/', label: 'Деятельность' },
+  { href: '/expert-council/', label: 'Экспертный совет' },
+  { href: '/news/', label: 'Новости' },
+  { href: '/documents/', label: 'Документы' },
+  { href: '/contacts/', label: 'Контакты' }
+];
+
+const directions = [
+  {
+    title: 'Развитие отраслевого диалога',
+    text: 'Площадка для регулярного профессионального диалога между участниками ювелирной отрасли стран ЕАЭС.',
+    icon: 'dialogue'
+  },
+  {
+    title: 'Экспертная и консультационная работа',
+    text: 'Экспертная поддержка и консультации по вопросам отраслевой деятельности.',
+    icon: 'expertise'
+  },
+  {
+    title: 'Поддержка членов Ассоциации',
+    text: 'Информационная, консультационная и представительская поддержка членов Ассоциации.',
+    icon: 'support'
+  },
+  {
+    title: 'Партнёрства и международное сотрудничество',
+    text: 'Развитие партнёрских связей и международного сотрудничества ювелирного сообщества.',
+    icon: 'partnership'
+  }
+] as const;
+
+const documents = [
+  'Положение о членстве и членских взносах',
+  'Положение об Экспертном совете',
+  'Политика конфиденциальности'
+];
+---
+
+<!doctype html>
+<html lang="ru-KZ">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#202A57" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/assets/jaeu-emblem.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body class="dc-page">
+    <a class="dc-skip" href="#dc-main">Перейти к содержимому</a>
+
+    <header class="dc-header">
+      <div class="dc-container dc-header__inner">
+        <a class="dc-brand" href="/design-concept/" aria-label="Ассоциация ювелиров ЕАЭС — концепция главной">
+          <img class="dc-brand__mark" src="/assets/jaeu-emblem.svg" alt="" width="30" height="39" />
+          <span class="dc-brand__name">Ассоциация ювелиров ЕАЭС</span>
+        </a>
+
+        <nav class="dc-nav" aria-label="Основная навигация">
+          <ul class="dc-nav__list">
+            {nav.map((item) => (
+              <li><a class="dc-nav__link" href={item.href}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+
+        <div class="dc-header__aside">
+          <p class="dc-langs" aria-label="Выбор языка">
+            <a class="dc-langs__link is-active" href="/design-concept/" aria-current="true">RU</a>
+            <a class="dc-langs__link" href="/kz/">KZ</a>
+            <a class="dc-langs__link" href="/en/">EN</a>
+          </p>
+          <a class="dc-btn dc-btn--primary dc-header__cta" href="/membership/">Вступить в Ассоциацию</a>
+        </div>
+
+        <details class="dc-menu">
+          <summary class="dc-menu__toggle" aria-label="Открыть меню">
+            <span class="dc-menu__line"></span>
+            <span class="dc-menu__line"></span>
+          </summary>
+          <div class="dc-menu__panel">
+            <nav aria-label="Мобильная навигация">
+              <ul class="dc-menu__list">
+                {nav.map((item) => (
+                  <li><a class="dc-menu__link" href={item.href}>{item.label}</a></li>
+                ))}
+              </ul>
+            </nav>
+            <p class="dc-langs dc-menu__langs" aria-label="Выбор языка">
+              <a class="dc-langs__link is-active" href="/design-concept/" aria-current="true">RU</a>
+              <a class="dc-langs__link" href="/kz/">KZ</a>
+              <a class="dc-langs__link" href="/en/">EN</a>
+            </p>
+            <a class="dc-btn dc-btn--primary dc-menu__cta" href="/membership/">Вступить в Ассоциацию</a>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <main id="dc-main">
+      <section class="dc-hero" aria-labelledby="dc-hero-title">
+        <div class="dc-container dc-hero__grid">
+          <div class="dc-hero__content">
+            <p class="dc-eyebrow">Ассоциация ювелиров ЕАЭС</p>
+            <h1 class="dc-h1" id="dc-hero-title">Объединяем ювелирную отрасль ЕАЭС</h1>
+            <p class="dc-lead">
+              Международная отраслевая организация, представляющая интересы ювелирного
+              сообщества стран Евразийского экономического союза и развивающая
+              профессиональный диалог в отрасли.
+            </p>
+            <div class="dc-hero__actions">
+              <a class="dc-btn dc-btn--primary" href="/membership/">Стать членом</a>
+              <a class="dc-link-arrow" href="/activities/">О деятельности</a>
+            </div>
+          </div>
+          <figure class="dc-hero__media">
+            <Picture
+              src={heroJeweler}
+              alt="Руки ювелира закрепляют камень в кольце за рабочим столом мастерской. Чёрно-белая фотография."
+              widths={[560, 840, 1120, 1680]}
+              sizes="(min-width: 1100px) 560px, (min-width: 700px) 84vw, 100vw"
+              formats={['webp']}
+              fallbackFormat="jpg"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
+        </div>
+        <div class="dc-container">
+          <ul class="dc-theses" aria-label="Ключевые тезисы">
+            <li class="dc-theses__item">Профессиональное сообщество</li>
+            <li class="dc-theses__item">Диалог с отраслью</li>
+            <li class="dc-theses__item">Совместные инициативы</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="dc-section dc-section--alt" aria-labelledby="dc-about-title">
+        <div class="dc-container dc-split">
+          <div class="dc-split__main">
+            <h2 class="dc-h2" id="dc-about-title">Об Ассоциации</h2>
+            <p class="dc-text">
+              Ассоциация ювелиров Евразийского экономического союза — отраслевая
+              организация, созданная для развития профессионального сообщества
+              и представления интересов ювелирной отрасли.
+            </p>
+            <p class="dc-text">
+              Ассоциация работает в странах ЕАЭС: развивает отраслевой диалог,
+              ведёт экспертную и консультационную работу и поддерживает
+              международное сотрудничество.
+            </p>
+            <a class="dc-link-arrow" href="/about/">Подробнее об Ассоциации</a>
+          </div>
+          <ul class="dc-points">
+            <li class="dc-points__item">
+              <h3 class="dc-points__title">Представительство</h3>
+              <p class="dc-points__text">Представляем интересы отрасли в диалоге с институтами и регуляторами ЕАЭС.</p>
+            </li>
+            <li class="dc-points__item">
+              <h3 class="dc-points__title">Экспертиза</h3>
+              <p class="dc-points__text">Ведём экспертную и консультационную работу по отраслевым вопросам.</p>
+            </li>
+            <li class="dc-points__item">
+              <h3 class="dc-points__title">Сотрудничество</h3>
+              <p class="dc-points__text">Развиваем партнёрства и международные связи ювелирного сообщества.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="dc-section" aria-labelledby="dc-contour-title">
+        <div class="dc-container dc-split dc-split--media-right">
+          <div class="dc-split__main">
+            <h2 class="dc-h2" id="dc-contour-title">Отраслевой контур</h2>
+            <p class="dc-text">
+              Ассоциация выстраивает взаимодействие между участниками отрасли,
+              отраслевыми институтами и партнёрскими организациями. Структура
+              контура представлена в официальной инфографике.
+            </p>
+            <button class="dc-link-arrow dc-link-arrow--button" type="button" data-lightbox-src="dc-tpl-contour" data-lightbox-caption="Инфографика из материалов Ассоциации">
+              Открыть в полном размере
+            </button>
+          </div>
+          <figure class="dc-figure">
+            <button class="dc-figure__frame" type="button" data-lightbox-src="dc-tpl-contour" data-lightbox-caption="Инфографика из материалов Ассоциации" aria-label="Открыть инфографику в полном размере">
+              <span class="dc-figure__placeholder">
+                <img src="/assets/jaeu-emblem.svg" alt="" width="34" height="44" loading="lazy" />
+                <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
+                <span class="dc-figure__placeholder-sub">Институциональный контур Ассоциации</span>
+              </span>
+            </button>
+            <figcaption class="dc-figure__caption">Инфографика из материалов Ассоциации</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="dc-section dc-section--alt" aria-labelledby="dc-directions-title">
+        <div class="dc-container">
+          <h2 class="dc-h2" id="dc-directions-title">Направления деятельности</h2>
+          <ul class="dc-directions">
+            {directions.map((item) => (
+              <li class="dc-directions__item">
+                <span class="dc-directions__icon" aria-hidden="true">
+                  {item.icon === 'dialogue' && (
+                    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h15v10H11l-4.5 4v-4H4z"/><path d="M19 9.5h5v9h-2.5v3.5L18 19h-4"/></svg>
+                  )}
+                  {item.icon === 'expertise' && (
+                    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.5" cy="12.5" r="7.5"/><path d="M18 18l6 6"/><path d="M9.5 12.5h6M12.5 9.5v6"/></svg>
+                  )}
+                  {item.icon === 'support' && (
+                    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5l9 3.5v6c0 5.5-3.8 9.6-9 11.5-5.2-1.9-9-6-9-11.5V7z"/><path d="M10 13.5l3 3 5-5.5"/></svg>
+                  )}
+                  {item.icon === 'partnership' && (
+                    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="14" r="6.5"/><circle cx="17.5" cy="14" r="6.5"/></svg>
+                  )}
+                </span>
+                <h3 class="dc-directions__title">{item.title}</h3>
+                <p class="dc-directions__text">{item.text}</p>
+                <a class="dc-link-arrow dc-directions__link" href="/activities/">Подробнее</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section class="dc-section" aria-labelledby="dc-community-title">
+        <div class="dc-container dc-split dc-split--media-left">
+          <figure class="dc-figure">
+            <button class="dc-figure__frame" type="button" data-lightbox-src="dc-tpl-community" data-lightbox-caption="Инфографика из материалов Ассоциации" aria-label="Открыть схему состава Ассоциации в полном размере">
+              <span class="dc-figure__placeholder">
+                <img src="/assets/jaeu-emblem.svg" alt="" width="34" height="44" loading="lazy" />
+                <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
+                <span class="dc-figure__placeholder-sub">Состав Ассоциации</span>
+              </span>
+            </button>
+            <figcaption class="dc-figure__caption">Инфографика из материалов Ассоциации</figcaption>
+          </figure>
+          <div class="dc-split__main">
+            <h2 class="dc-h2" id="dc-community-title">Профессиональное сообщество</h2>
+            <p class="dc-text">
+              Ассоциация объединяет участников ювелирной отрасли стран ЕАЭС.
+              Структура состава представлена в официальной схеме из материалов
+              Ассоциации.
+            </p>
+            <button class="dc-btn dc-btn--outline" type="button" data-lightbox-src="dc-tpl-community" data-lightbox-caption="Инфографика из материалов Ассоциации">
+              Открыть схему
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="dc-cta" aria-labelledby="dc-cta-title">
+        <div class="dc-container dc-cta__inner">
+          <div class="dc-cta__content">
+            <h2 class="dc-cta__title" id="dc-cta-title">Станьте частью профессионального сообщества</h2>
+            <p class="dc-cta__text">Узнайте об условиях членства и порядке вступления в Ассоциацию.</p>
+          </div>
+          <a class="dc-btn dc-btn--light" href="/membership/">Стать членом Ассоциации</a>
+        </div>
+      </section>
+
+      <section class="dc-section" aria-labelledby="dc-news-title">
+        <div class="dc-container">
+          <div class="dc-section__head">
+            <h2 class="dc-h2" id="dc-news-title">Новости</h2>
+            <a class="dc-link-arrow" href="/news/">Все новости</a>
+          </div>
+          <div class="dc-news">
+            <article class="dc-news__featured">
+              <a class="dc-news__card" href="/news/">
+                <span class="dc-ph dc-news__image" role="img" aria-label="Изображение будет добавлено после публикации">
+                  <img src="/assets/jaeu-emblem.svg" alt="" width="30" height="39" loading="lazy" />
+                </span>
+                <span class="dc-news__meta">Публикация</span>
+                <span class="dc-news__title dc-news__title--large">Материал будет добавлен после публикации</span>
+                <span class="dc-news__text">Анонс появится на сайте после официальной публикации Ассоциацией.</span>
+              </a>
+            </article>
+            <div class="dc-news__list">
+              <article class="dc-news__secondary">
+                <a class="dc-news__card dc-news__card--row" href="/news/">
+                  <span class="dc-ph dc-news__thumb" role="img" aria-label="Изображение будет добавлено после публикации">
+                    <img src="/assets/jaeu-emblem.svg" alt="" width="22" height="28" loading="lazy" />
+                  </span>
+                  <span class="dc-news__body">
+                    <span class="dc-news__meta">Публикация</span>
+                    <span class="dc-news__title">Материал будет добавлен после публикации</span>
+                  </span>
+                </a>
+              </article>
+              <article class="dc-news__secondary">
+                <a class="dc-news__card dc-news__card--row" href="/news/">
+                  <span class="dc-ph dc-news__thumb" role="img" aria-label="Изображение будет добавлено после публикации">
+                    <img src="/assets/jaeu-emblem.svg" alt="" width="22" height="28" loading="lazy" />
+                  </span>
+                  <span class="dc-news__body">
+                    <span class="dc-news__meta">Публикация</span>
+                    <span class="dc-news__title">Материал будет добавлен после публикации</span>
+                  </span>
+                </a>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dc-section dc-section--alt" aria-labelledby="dc-docs-title">
+        <div class="dc-container">
+          <div class="dc-section__head">
+            <h2 class="dc-h2" id="dc-docs-title">Документы</h2>
+            <a class="dc-link-arrow" href="/documents/">Все документы</a>
+          </div>
+          <ul class="dc-docs">
+            {documents.map((name) => (
+              <li class="dc-docs__item">
+                <a class="dc-docs__link" href="/documents/">
+                  <span class="dc-docs__name">{name}</span>
+                  <span class="dc-docs__hint">Раздел документов</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="dc-footer">
+      <div class="dc-container">
+        <div class="dc-footer__grid">
+          <div class="dc-footer__brand">
+            <a class="dc-brand dc-brand--footer" href="/design-concept/">
+              <img class="dc-brand__mark" src="/assets/jaeu-emblem.svg" alt="" width="26" height="34" loading="lazy" />
+              <span class="dc-brand__name">Ассоциация ювелиров ЕАЭС</span>
+            </a>
+            <p class="dc-footer__blurb">Международная отраслевая организация ювелирного сообщества.</p>
+          </div>
+          <nav class="dc-footer__col" aria-label="Разделы">
+            <h2 class="dc-footer__heading">Разделы</h2>
+            <ul class="dc-footer__list">
+              <li><a class="dc-footer__link" href="/about/">Об Ассоциации</a></li>
+              <li><a class="dc-footer__link" href="/activities/">Деятельность</a></li>
+              <li><a class="dc-footer__link" href="/expert-council/">Экспертный совет</a></li>
+            </ul>
+          </nav>
+          <nav class="dc-footer__col" aria-label="Материалы">
+            <h2 class="dc-footer__heading">Материалы</h2>
+            <ul class="dc-footer__list">
+              <li><a class="dc-footer__link" href="/news/">Новости</a></li>
+              <li><a class="dc-footer__link" href="/documents/">Документы</a></li>
+              <li><a class="dc-footer__link" href="/membership/">Членство</a></li>
+            </ul>
+          </nav>
+          <div class="dc-footer__col">
+            <h2 class="dc-footer__heading">Контакты</h2>
+            <p class="dc-footer__text">Контактные данные будут добавлены после подтверждения.</p>
+            <a class="dc-footer__link" href="/contacts/">Страница контактов</a>
+          </div>
+        </div>
+        <div class="dc-footer__bottom">
+          <p>© 2026 Ассоциация ювелиров ЕАЭС</p>
+          <p>Дизайн-концепция для внутреннего согласования</p>
+        </div>
+      </div>
+    </footer>
+
+    <template id="dc-tpl-contour">
+      <span class="dc-lightbox__placeholder">
+        <img src="/assets/jaeu-emblem.svg" alt="" width="44" height="57" loading="lazy" />
+        <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
+        <span class="dc-figure__placeholder-sub">Институциональный контур Ассоциации</span>
+      </span>
+    </template>
+    <template id="dc-tpl-community">
+      <span class="dc-lightbox__placeholder">
+        <img src="/assets/jaeu-emblem.svg" alt="" width="44" height="57" loading="lazy" />
+        <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
+        <span class="dc-figure__placeholder-sub">Состав Ассоциации</span>
+      </span>
+    </template>
+
+    <dialog class="dc-lightbox" id="dc-lightbox" aria-label="Просмотр изображения">
+      <div class="dc-lightbox__panel">
+        <button class="dc-lightbox__close" type="button" data-lightbox-close aria-label="Закрыть просмотр">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16"/></svg>
+        </button>
+        <div class="dc-lightbox__body" data-lightbox-body></div>
+        <p class="dc-lightbox__caption" data-lightbox-caption></p>
+      </div>
+    </dialog>
+
+    <script>
+      const dialog = document.getElementById('dc-lightbox');
+      if (dialog instanceof HTMLDialogElement) {
+        const body = dialog.querySelector('[data-lightbox-body]');
+        const caption = dialog.querySelector('[data-lightbox-caption]');
+        document.querySelectorAll('[data-lightbox-src]').forEach((trigger) => {
+          trigger.addEventListener('click', () => {
+            const id = trigger.getAttribute('data-lightbox-src');
+            const tpl = id ? document.getElementById(id) : null;
+            if (tpl instanceof HTMLTemplateElement && body) {
+              body.replaceChildren(tpl.content.cloneNode(true));
+              if (caption) {
+                caption.textContent = trigger.getAttribute('data-lightbox-caption') ?? '';
+              }
+              dialog.showModal();
+            }
+          });
+        });
+        dialog.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
+        dialog.addEventListener('click', (event) => {
+          if (event.target === dialog) dialog.close();
+        });
+      }
+    </script>
+  </body>
+</html>
