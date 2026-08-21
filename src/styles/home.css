@@ -112,13 +112,15 @@ body.h-body {
   margin: 0;
 }
 
+/* Верхние границы clamp занижены: на широких мониторах заголовки перестают
+   выдавливать первый экран, планшет и мобильный остаются на прежних значениях. */
 .h-h1 {
-  font-size: clamp(40px, 5.5vw, 80px);
+  font-size: clamp(40px, 5.5vw, 66px);
   line-height: 1.02;
 }
 
 .h-h2 {
-  font-size: clamp(32px, 4vw, 60px);
+  font-size: clamp(32px, 4vw, 50px);
   line-height: 1.08;
 }
 
@@ -277,7 +279,7 @@ body.h-body {
   display: flex;
   align-items: center;
   gap: 24px;
-  height: 88px;
+  height: 80px;
 }
 
 .h-logo {
@@ -479,8 +481,8 @@ body.h-body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 30px;
-  padding-block: 96px 104px;
+  gap: 22px;
+  padding-block: 56px 64px;
   padding-right: 64px;
   padding-left: max(40px, calc((100% - var(--shell)) / 2 + 40px));
 }
@@ -553,14 +555,14 @@ body.h-body {
   margin: 0;
   padding: 0;
   list-style: none;
-  min-height: 112px;
+  min-height: 96px;
 }
 
 .h-trust__item {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 26px 40px 26px 0;
+  padding: 22px 40px 22px 0;
 }
 
 .h-trust__item + .h-trust__item {
@@ -585,7 +587,7 @@ body.h-body {
 /* ---------- Секции ---------- */
 
 .h-section {
-  padding-block: 116px;
+  padding-block: 96px;
 }
 
 .h-section--ivory {
@@ -600,12 +602,44 @@ body.h-body {
   background: #fff;
 }
 
+/* Вертикальный ритм задаётся посекционно: у каждой секции своя композиция,
+   поэтому общий padding служит только основой, а не единой мерой. */
+@media (min-width: 1041px) {
+  .h-section:has(.h-about__grid) {
+    padding-block: 92px;
+  }
+
+  .h-section:has(.h-contour__context) {
+    padding-block: 88px 84px;
+  }
+
+  .h-section:has(.h-dirs) {
+    padding-block: 92px 84px;
+  }
+
+  .h-section:has(.h-band) {
+    padding-block: 92px;
+  }
+
+  .h-section:has(.h-news) {
+    padding-block: 88px;
+  }
+
+  .h-section:has(.h-docs) {
+    padding-block: 88px;
+  }
+
+  .h-faq-section {
+    padding-block: 92px;
+  }
+}
+
 .h-section__head {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 40px;
-  margin-bottom: 56px;
+  margin-bottom: 44px;
 }
 
 .h-section__head--center {
@@ -623,7 +657,7 @@ body.h-body {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 40px;
-  row-gap: 76px;
+  row-gap: 60px;
   align-items: start;
 }
 
@@ -717,12 +751,12 @@ body.h-body {
 
 /* Контекстный пояс под инфографикой контура: работает фоном, не карточкой. */
 .h-contour__context {
-  margin: 88px 0 0;
+  margin: 56px 0 0;
 }
 
 .h-contour__context img {
   width: 100%;
-  aspect-ratio: 32 / 9;
+  aspect-ratio: 40 / 9;
   object-fit: cover;
 }
 
@@ -759,7 +793,7 @@ body.h-body {
 
 .h-split {
   display: grid;
-  gap: 88px;
+  gap: 72px;
   align-items: center;
 }
 
@@ -836,8 +870,16 @@ body.h-body {
   max-width: 42ch;
 }
 
+/* Парные блоки читаются как ряд: заголовку отдано место под две строки,
+   поэтому описания стартуют по одной линии, а ссылка уходит к низу. */
+@media (min-width: 1041px) {
+  .h-dirs__item .h-h3 {
+    min-height: calc(2em * 1.22);
+  }
+}
+
 .h-dirs__item .h-link {
-  margin-top: 4px;
+  margin-top: auto;
 }
 
 .h-dirs__strip {
@@ -855,7 +897,7 @@ body.h-body {
 .h-dirs__band {
   grid-column: 1 / span 12;
   grid-row: 4;
-  margin: 44px 0 0;
+  margin: 36px 0 0;
 }
 
 .h-dirs__band img {
@@ -871,8 +913,8 @@ body.h-body {
   grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   gap: 64px;
   align-items: center;
-  margin-top: 104px;
-  padding-top: 64px;
+  margin-top: 76px;
+  padding-top: 52px;
   border-top: 1px solid var(--line);
 }
 
@@ -898,7 +940,7 @@ body.h-body {
   position: relative;
   overflow: hidden;
   background: var(--navy);
-  padding-block: 108px;
+  padding-block: 88px;
 }
 
 /* Почти чёрный кадр растворяется в navy: screen оставляет только контурный
@@ -1083,7 +1125,7 @@ body.h-body {
 
 /* Очень тонкий архивный пояс: даёт секции материальность без карточек. */
 .h-docs__belt {
-  margin-bottom: 56px;
+  margin-bottom: 44px;
 }
 
 .h-docs__belt img {
@@ -1176,7 +1218,7 @@ body.h-body {
 .h-faq {
   display: grid;
   grid-template-columns: minmax(0, 34fr) minmax(0, 66fr);
-  gap: 88px;
+  gap: 72px;
   align-items: start;
 }
 
@@ -1262,7 +1304,7 @@ body.h-body {
 
 .h-final {
   background: var(--ivory);
-  padding-block: 104px;
+  padding-block: 88px;
 }
 
 .h-final__inner {
