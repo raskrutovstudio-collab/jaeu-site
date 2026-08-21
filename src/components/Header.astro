@@ -1,0 +1,77 @@
+---
+import { ui } from '../data/copy';
+import { homePath, localeMeta, navMobileExtra, navPrimary, routes, type Locale } from '../data/site';
+import MobileMenu from './MobileMenu.astro';
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const copy = ui[locale];
+const languages = Object.entries(localeMeta);
+const isCurrent = (href: string) => currentPath === href;
+---
+
+<header class="site-header" data-header>
+  <div class="container site-header__bar">
+    <a class="brand" href={homePath(locale)} aria-label={copy.brandSub}>
+      <span class="brand__mark">
+        <img src="/assets/jaeu-emblem.svg" width="22" height="28" alt="" />
+      </span>
+      <span>
+        <span class="brand__name">{copy.brandName}</span>
+        <span class="brand__sub">{copy.brandSub}</span>
+      </span>
+    </a>
+
+    <nav class="nav-desktop" aria-label={copy.navLabel}>
+      {navPrimary.map((item) => (
+        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+          {copy.nav[item.key]}
+        </a>
+      ))}
+    </nav>
+
+    <div class="header-tools">
+      <div class="lang-switch" aria-label={copy.langLabel}>
+        {languages.map(([key, item], index) => (
+          <>
+            {index > 0 && <span aria-hidden="true">/</span>}
+            <a
+              href={item.path}
+              lang={item.lang}
+              hreflang={item.lang}
+              aria-current={key === locale ? 'true' : undefined}
+            >
+              {item.label}
+            </a>
+          </>
+        ))}
+      </div>
+
+      <a class="button button--primary button--header" href={routes.membership}>{copy.nav.join}</a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        data-menu-toggle
+        data-label-open={copy.menuOpen}
+        data-label-close={copy.menuClose}
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={copy.menuOpen}
+      >
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <MobileMenu locale={locale} currentPath={currentPath} extra={navMobileExtra} />
+</header>

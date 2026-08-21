@@ -1,0 +1,57 @@
+---
+import Icon from './Icon.astro';
+import { about, org, routes } from '../../data/home';
+---
+
+<section class="h-section h-section--stone" aria-labelledby="about-title" data-reveal>
+  <div class="h-shell">
+    <div class="h-about__grid">
+      <div class="h-about__main">
+        <h2 class="h-h2" id="about-title">{about.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text">{about.lead}</p>
+        <p class="h-text">{about.text}</p>
+        <p class="h-about__meta">{org.registeredLabel}</p>
+        <a class="h-link" href={routes.about}>
+          {about.link}
+          <Icon name="arrow" class="h-link__arrow" />
+        </a>
+      </div>
+
+      <ul class="h-points">
+        {about.points.map((point) => (
+          <li class="h-points__item">
+            <h3 class="h-h3 h-points__title">{point.title}</h3>
+            <p class="h-points__text">{point.text}</p>
+          </li>
+        ))}
+      </ul>
+
+      <figure class="h-about__portrait" data-reveal-media>
+        <img
+          src="/assets/jaeu/about-meeting-680.webp"
+          srcset="/assets/jaeu/about-meeting-460.webp 460w, /assets/jaeu/about-meeting-680.webp 680w"
+          sizes="(min-width: 1041px) 330px, (min-width: 761px) 45vw, 100vw"
+          width="680"
+          height="907"
+          alt={about.portraitAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+
+      <figure class="h-about__detail" data-reveal-media>
+        <img
+          src="/assets/jaeu/about-detail-1200.webp"
+          srcset="/assets/jaeu/about-detail-760.webp 760w, /assets/jaeu/about-detail-1200.webp 1200w"
+          sizes="(min-width: 1041px) 640px, 100vw"
+          width="1200"
+          height="800"
+          alt={about.imageAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </div>
+</section>

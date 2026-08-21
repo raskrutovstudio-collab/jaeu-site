@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import { finalCta, org, routes } from '../../data/home';
+---
+
+<section class="h-final" aria-labelledby="final-title" data-reveal>
+  <div class="h-shell h-final__inner">
+    <h2 class="h-h2 h-final__title" id="final-title">{finalCta.h2}</h2>
+    <hr class="h-rule" />
+    <p class="h-final__text">{finalCta.text}</p>
+    <div class="h-final__actions">
+      <a class="h-btn h-btn--primary" href={routes.membership}>
+        {finalCta.primary}
+        <Icon name="arrow" class="h-btn__arrow" />
+      </a>
+      <a class="h-link" href={`mailto:${org.email}`}>
+        {finalCta.secondary}
+        <Icon name="arrow" class="h-link__arrow" />
+      </a>
+    </div>
+  </div>
+</section>

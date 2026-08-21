@@ -1,0 +1,66 @@
+---
+import { ui } from '../data/copy';
+import { footerGroups, homePath, localeMeta, routes, type Locale } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = ui[locale];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" id="contacts">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href={homePath(locale)} aria-label={copy.brandSub}>
+          <span class="brand__mark">
+            <img src="/assets/jaeu-emblem.svg" width="22" height="28" alt="" />
+          </span>
+          <span>
+            <span class="brand__name">{copy.brandName}</span>
+            <span class="brand__sub">{copy.brandSub}</span>
+          </span>
+        </a>
+        <p class="footer-blurb">{copy.footer.blurb}</p>
+        <p class="footer-note">{copy.placeholders.contacts}</p>
+      </div>
+
+      <div class="footer-nav">
+        <div>
+          <h2>{copy.footer.organisation}</h2>
+          {footerGroups.organisation.map((item) => (
+            <a href={item.href}>{copy.nav[item.key]}</a>
+          ))}
+        </div>
+        <div>
+          <h2>{copy.footer.membership}</h2>
+          {footerGroups.membership.map((item) => (
+            <a href={item.href}>{copy.nav[item.key]}</a>
+          ))}
+        </div>
+        <div>
+          <h2>{copy.footer.press}</h2>
+          {footerGroups.press.map((item) => (
+            <a href={item.href}>{copy.nav[item.key]}</a>
+          ))}
+          <a href={routes.membership}>{copy.footer.apply}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} {copy.brandName}. {copy.footer.rights}</p>
+      <div class="lang-switch" aria-label={copy.langLabel}>
+        {Object.entries(localeMeta).map(([key, item], index) => (
+          <>
+            {index > 0 && <span aria-hidden="true">/</span>}
+            <a href={item.path} lang={item.lang} aria-current={key === locale ? 'true' : undefined}>{item.label}</a>
+          </>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>

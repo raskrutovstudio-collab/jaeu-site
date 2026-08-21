@@ -1,0 +1,33 @@
+---
+import { ui } from '../data/copy';
+import { homePath, type Locale } from '../data/site';
+
+interface Crumb {
+  href?: string;
+  label: string;
+}
+
+interface Props {
+  locale?: Locale;
+  items: Crumb[];
+}
+
+const { locale = 'ru', items } = Astro.props;
+const home = { href: homePath(locale), label: ui[locale].home };
+const crumbs = [home, ...items];
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {crumbs.map((item, index) => (
+      <li>
+        {index > 0 && <span aria-hidden="true"> / </span>}
+        {item.href && index < crumbs.length - 1 ? (
+          <a href={item.href}>{item.label}</a>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

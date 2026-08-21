@@ -1,0 +1,59 @@
+---
+import { footer, languages, org, routes } from '../../data/home';
+
+const year = new Date().getFullYear();
+const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org.address.city}, ${org.address.street}`;
+---
+
+<footer class="h-footer">
+  <div class="h-shell">
+    <div class="h-footer__grid">
+      <div>
+        <a class="h-footer__logo" href={routes.home} aria-label={`${org.shortName} — на главную`}>
+          <img
+            src="/assets/jaeu/logo-jaeu-invert.webp"
+            width="210"
+            height="66"
+            alt="Ассоциация ювелиров Евразийского экономического союза"
+            loading="lazy"
+          />
+        </a>
+        <p class="h-footer__blurb">{footer.blurb}</p>
+      </div>
+
+      {footer.columns.map((column) => (
+        <nav aria-label={column.heading}>
+          <p class="h-footer__heading">{column.heading}</p>
+          <ul class="h-footer__list">
+            {column.links.map((link) => (
+              <li>
+                <a class="h-footer__link" href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+
+      <div>
+        <p class="h-footer__heading">{footer.contactsHeading}</p>
+        <dl class="h-footer__contacts">
+          <dt>Электронная почта</dt>
+          <dd><a href={`mailto:${org.email}`}>{org.email}</a></dd>
+          <dt>Телефон</dt>
+          <dd><a href={`tel:${org.phoneHref}`}>{org.phone}</a></dd>
+          <dt>Адрес</dt>
+          <dd>Республика Казахстан, {addressLine}</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="h-footer__bottom">
+      <p>© {year} {org.shortName}. {footer.rights}</p>
+      <p class="h-footer__langs" aria-label="Выбор языка">
+        {languages.map((lang) => (
+          <a href={lang.href} aria-current={lang.current ? 'page' : undefined}>{lang.code}</a>
+        ))}
+      </p>
+    </div>
+  </div>
+</footer>

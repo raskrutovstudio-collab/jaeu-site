@@ -1,0 +1,1954 @@
+/* Главная страница JAEU. Автономная система, классы с префиксом h-. */
+
+:root {
+  --navy: #202a57;
+  --navy-deep: #172047;
+  --gold: #c89b32;
+  --gold-light: #e3c36a;
+  --ivory: #fcfbf8;
+  --stone: #f5f3ee;
+  --text: #25272d;
+  --muted: #646875;
+
+  --line: rgba(23, 32, 71, 0.14);
+  --line-soft: rgba(23, 32, 71, 0.08);
+  --serif: 'Playfair Display', 'Times New Roman', serif;
+  --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --shell: 1240px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.h-body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+.h-body img,
+.h-body svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Атрибуты width/height нужны для резервирования места, но без height:auto
+   они блокируют aspect-ratio у кадрированных изображений. */
+.h-body img {
+  height: auto;
+}
+
+.h-shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: 40px;
+}
+
+/* Масштеад шире контентной сетки: шесть разделов, языки и широкая CTA
+   не укладываются в 1240 px при читаемых размерах. */
+.h-shell--wide {
+  max-width: 1440px;
+  padding-inline: 48px;
+}
+
+.h-skip {
+  position: fixed;
+  top: -60px;
+  left: 16px;
+  z-index: 200;
+  padding: 12px 20px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 150ms var(--ease);
+}
+
+.h-skip:focus-visible {
+  top: 14px;
+}
+
+.h-body :focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.h-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px
+  ;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Типографика ---------- */
+
+.h-h1,
+.h-h2,
+.h-h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--navy-deep);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.h-h1 {
+  font-size: clamp(40px, 5.5vw, 80px);
+  line-height: 1.02;
+}
+
+.h-h2 {
+  font-size: clamp(32px, 4vw, 60px);
+  line-height: 1.08;
+}
+
+.h-h3 {
+  font-size: clamp(22px, 1.7vw, 27px);
+  line-height: 1.22;
+}
+
+.h-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.h-eyebrow::before {
+  content: '';
+  flex: none;
+  width: 34px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.h-lead {
+  font-size: clamp(18px, 1.35vw, 21px);
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  max-width: 34ch;
+}
+
+.h-text {
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+  max-width: 58ch;
+}
+
+.h-rule {
+  width: 64px;
+  height: 2px;
+  background: var(--gold);
+  border: 0;
+  margin: 0;
+}
+
+/* ---------- Кнопки и ссылки ---------- */
+
+.h-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 18px 34px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+}
+
+.h-btn__arrow {
+  flex: none;
+  width: 20px;
+  height: 10px;
+  transition: transform 180ms var(--ease);
+}
+
+.h-btn:hover .h-btn__arrow {
+  transform: translateX(5px);
+}
+
+.h-btn--primary {
+  background: var(--navy);
+  color: #fff;
+}
+
+.h-btn--primary:hover {
+  background: var(--navy-deep);
+}
+
+.h-btn--light {
+  background: var(--ivory);
+  color: var(--navy-deep);
+}
+
+.h-btn--light:hover {
+  background: var(--gold-light);
+}
+
+.h-btn--outline {
+  background: transparent;
+  border-color: rgba(23, 32, 71, 0.3);
+  color: var(--navy-deep);
+}
+
+.h-btn--outline:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.h-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy-deep);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: color 180ms var(--ease);
+}
+
+.h-link__arrow {
+  flex: none;
+  width: 20px;
+  height: 10px;
+  color: var(--gold);
+  transition: transform 180ms var(--ease);
+}
+
+.h-link:hover {
+  color: var(--gold);
+}
+
+.h-link:hover .h-link__arrow {
+  transform: translateX(5px);
+}
+
+/* ---------- Header ---------- */
+
+.h-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: #fff;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.h-header__bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 88px;
+}
+
+.h-logo {
+  flex: none;
+  display: block;
+  line-height: 0;
+}
+
+.h-logo img {
+  width: 190px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.h-nav {
+  margin-inline: auto;
+}
+
+.h-nav__list {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h-nav__link {
+  position: relative;
+  display: block;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 180ms var(--ease);
+}
+
+.h-nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--gold);
+  transition: right 180ms var(--ease);
+}
+
+.h-nav__link:hover {
+  color: var(--navy-deep);
+}
+
+.h-nav__link:hover::after {
+  right: 0;
+}
+
+.h-header__aside {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.h-langs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+}
+
+.h-langs__link {
+  padding: 4px 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 180ms var(--ease);
+}
+
+.h-langs__link + .h-langs__link {
+  border-left: 1px solid var(--line);
+}
+
+.h-langs__link:hover {
+  color: var(--gold);
+}
+
+.h-langs__link[aria-current] {
+  color: var(--navy-deep);
+  font-weight: 600;
+}
+
+.h-header__cta {
+  gap: 10px;
+  padding: 14px 22px;
+  font-size: 14px;
+}
+
+.h-burger {
+  display: none;
+  width: 48px;
+  height: 48px;
+  margin-left: auto;
+  padding: 12px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--navy-deep);
+  cursor: pointer;
+}
+
+.h-burger svg {
+  width: 22px;
+  height: 22px;
+}
+
+.h-burger .h-burger__close {
+  display: none;
+}
+
+.h-burger[aria-expanded='true'] .h-burger__open {
+  display: none;
+}
+
+.h-burger[aria-expanded='true'] .h-burger__close {
+  display: block;
+}
+
+.h-mobile {
+  display: none;
+  border-top: 1px solid var(--line-soft);
+  background: #fff;
+}
+
+.h-mobile.is-open {
+  display: block;
+}
+
+.h-mobile__inner {
+  padding: 12px 0 30px;
+}
+
+.h-mobile__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h-mobile__link {
+  display: block;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 17px
+  ;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.h-mobile__link:hover {
+  color: var(--gold);
+}
+
+.h-mobile__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.h-mobile__foot .h-btn {
+  width: 100%;
+}
+
+/* ---------- Hero ---------- */
+
+.h-hero {
+  position: relative;
+  background: var(--ivory);
+  overflow: hidden;
+}
+
+/* Правая колонка выходит в край вьюпорта: фото получает основную визуальную
+   массу, текст остаётся на контентной сетке 1240. */
+.h-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-inline: 0;
+}
+
+.h-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  padding-block: 96px 104px;
+  padding-right: 64px;
+  padding-left: max(40px, calc((100% - var(--shell)) / 2 + 40px));
+}
+
+.h-hero__h1 {
+  max-width: 15ch;
+}
+
+.h-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.h-hero__media {
+  position: relative;
+  margin: 0;
+}
+
+.h-hero__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  object-fit: cover;
+  object-position: 76% center;
+  /* Кинематографичность без цветного фильтра: чуть плотнее тени и контраст. */
+  filter: contrast(1.06) brightness(0.97);
+}
+
+/* Растворение кадра в сторону текста и лёгкая тёмная посадка по низу. */
+.h-hero__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, var(--ivory) 0%, rgba(252, 251, 248, 0.55) 12%, rgba(252, 251, 248, 0) 42%),
+    linear-gradient(to top, rgba(23, 32, 71, 0.34) 0%, rgba(23, 32, 71, 0) 46%);
+}
+
+.h-hero__edge {
+  position: absolute;
+  left: -32px;
+  top: 56px;
+  bottom: 56px;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold) 25%, var(--gold) 75%, transparent);
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: h-line-in 700ms var(--ease) 260ms forwards;
+}
+
+@keyframes h-line-in {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- Trust bar ---------- */
+
+.h-trust {
+  background: var(--navy);
+  color: #fff;
+}
+
+.h-trust__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-height: 112px;
+}
+
+.h-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 40px 26px 0;
+}
+
+.h-trust__item + .h-trust__item {
+  padding-left: 40px;
+  border-left: 1px solid rgba(227, 195, 106, 0.24);
+}
+
+.h-trust__icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  color: var(--gold-light);
+}
+
+.h-trust__label {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.5vw, 23px);
+  line-height: 1.24;
+  color: #fff;
+}
+
+/* ---------- Секции ---------- */
+
+.h-section {
+  padding-block: 116px;
+}
+
+.h-section--ivory {
+  background: var(--ivory);
+}
+
+.h-section--stone {
+  background: var(--stone);
+}
+
+.h-section--white {
+  background: #fff;
+}
+
+.h-section__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+.h-section__head--center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+/* ---------- Об Ассоциации ---------- */
+
+/* Журнальная разворотная композиция: текст и тезисы сверху, два кадра
+   разного масштаба во втором ряду. */
+.h-about__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 76px;
+  align-items: start;
+}
+
+.h-about__grid > .h-about__main {
+  grid-column: 1 / span 5;
+}
+
+.h-about__grid > .h-points {
+  grid-column: 7 / span 6;
+}
+
+.h-about__portrait {
+  grid-column: 1 / span 4;
+  margin: 0;
+}
+
+.h-about__portrait img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.h-about__detail {
+  grid-column: 6 / span 7;
+  align-self: end;
+  margin: 0;
+}
+
+.h-about__detail img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.h-about__main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.h-about__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.h-about__meta::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  flex: none;
+}
+
+.h-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h-points__item {
+  padding: 30px 0 32px;
+  border-top: 1px solid var(--line);
+  transition: border-color 180ms var(--ease);
+}
+
+.h-points__item:first-child {
+  padding-top: 8px;
+  border-top: 0;
+}
+
+.h-points__item:hover {
+  border-top-color: var(--gold);
+}
+
+.h-points__title {
+  margin: 0 0 10px;
+}
+
+.h-points__text {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 44ch;
+}
+
+/* Контекстный пояс под инфографикой контура: работает фоном, не карточкой. */
+.h-contour__context {
+  margin: 88px 0 0;
+}
+
+.h-contour__context img {
+  width: 100%;
+  aspect-ratio: 32 / 9;
+  object-fit: cover;
+}
+
+/* ---------- Инфографики ---------- */
+
+.h-figure {
+  margin: 0;
+}
+
+.h-figure__btn {
+  display: block;
+  width: 100%;
+  padding: 26px;
+  background: var(--stone);
+  border: 0;
+  cursor: zoom-in;
+  transition: background-color 180ms var(--ease);
+}
+
+.h-figure__btn:hover {
+  background: #efece4;
+}
+
+.h-figure__btn img {
+  width: 100%;
+  height: auto;
+}
+
+.h-figure__caption {
+  margin-top: 16px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.h-split {
+  display: grid;
+  gap: 88px;
+  align-items: center;
+}
+
+.h-split--text-left {
+  grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
+}
+
+.h-split--media-left {
+  grid-template-columns: minmax(0, 56fr) minmax(0, 44fr);
+}
+
+.h-split__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+}
+
+/* ---------- Направления ---------- */
+
+/* Асимметричный ритм: два ряда направлений, между ними узкая полоса-вставка,
+   в конце — широкий спокойный кадр. Порядок задаётся grid-row, а не DOM. */
+.h-dirs {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 40px;
+}
+
+.h-dirs__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 40px 0 44px;
+  border-top: 1px solid var(--line);
+  transition: border-color 180ms var(--ease);
+}
+
+.h-dirs__item:nth-of-type(1) {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+}
+
+.h-dirs__item:nth-of-type(2) {
+  grid-column: 8 / span 5;
+  grid-row: 1;
+}
+
+.h-dirs__item:nth-of-type(3) {
+  grid-column: 1 / span 5;
+  grid-row: 3;
+}
+
+.h-dirs__item:nth-of-type(4) {
+  grid-column: 8 / span 5;
+  grid-row: 3;
+}
+
+.h-dirs__item:hover {
+  border-top-color: var(--gold);
+}
+
+.h-dirs__icon {
+  width: 40px;
+  height: 40px;
+  color: var(--gold);
+}
+
+.h-dirs__text {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.62;
+  color: var(--muted);
+  max-width: 42ch;
+}
+
+.h-dirs__item .h-link {
+  margin-top: 4px;
+}
+
+.h-dirs__strip {
+  grid-column: 4 / span 9;
+  grid-row: 2;
+  margin: 0 0 12px;
+}
+
+.h-dirs__strip img {
+  width: 100%;
+  aspect-ratio: 32 / 9;
+  object-fit: cover;
+}
+
+.h-dirs__band {
+  grid-column: 1 / span 12;
+  grid-row: 4;
+  margin: 44px 0 0;
+}
+
+.h-dirs__band img {
+  width: 100%;
+  aspect-ratio: 24 / 7;
+  object-fit: cover;
+}
+
+/* ---------- Сообщество ---------- */
+
+.h-band {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: 64px;
+  align-items: center;
+  margin-top: 104px;
+  padding-top: 64px;
+  border-top: 1px solid var(--line);
+}
+
+.h-band figure {
+  margin: 0;
+}
+
+.h-band img {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+}
+
+.h-band__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- Членство ---------- */
+
+.h-membership {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+  padding-block: 108px;
+}
+
+/* Почти чёрный кадр растворяется в navy: screen оставляет только контурный
+   свет по силуэтам, маска гасит левый край под текстом. */
+.h-membership__media {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: 58%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 46%, #000 100%);
+  mask-image: linear-gradient(to right, transparent, #000 46%, #000 100%);
+}
+
+.h-membership__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.h-membership__facets {
+  position: absolute;
+  top: 50%;
+  right: -80px;
+  transform: translateY(-50%);
+  width: 520px;
+  height: 520px;
+  color: var(--gold-light);
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+.h-membership__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+  min-height: 168px;
+}
+
+.h-membership__text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.h-membership__title {
+  color: #fff;
+  max-width: 24ch;
+}
+
+.h-membership__lead {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.74);
+  max-width: 46ch;
+}
+
+.h-membership .h-btn {
+  flex: none;
+}
+
+/* ---------- Новости ---------- */
+
+.h-news {
+  display: grid;
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  gap: 72px;
+  align-items: start;
+}
+
+.h-news__card {
+  display: block;
+  text-decoration: none;
+}
+
+.h-news__media {
+  display: block;
+  overflow: hidden;
+}
+
+.h-news__media img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 200ms var(--ease);
+}
+
+.h-news__media--lg img {
+  aspect-ratio: 16 / 9;
+}
+
+.h-news__card:hover .h-news__media img {
+  transform: scale(1.04);
+}
+
+.h-news__date {
+  display: block;
+  margin: 24px 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.h-news__title {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--navy-deep);
+  letter-spacing: -0.01em;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 180ms var(--ease);
+}
+
+.h-news__card:hover .h-news__title {
+  text-decoration-color: var(--gold);
+}
+
+.h-news__title--lg {
+  font-size: clamp(24px, 2.1vw, 33px);
+  line-height: 1.2;
+}
+
+.h-news__text {
+  display: block;
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.h-news__side {
+  display: flex;
+  flex-direction: column;
+}
+
+.h-news__row {
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+}
+
+.h-news__row-link {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.h-news__side .h-news__row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.h-news__row .h-news__date {
+  margin: 0 0 8px;
+}
+
+.h-news__row .h-news__title {
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+/* Разный масштаб кадров серии: квадратный close-up и узкая горизонталь. */
+.h-news__row:nth-child(1) .h-news__media img {
+  aspect-ratio: 1;
+}
+
+.h-news__row:nth-child(2) .h-news__media img {
+  aspect-ratio: 21 / 9;
+}
+
+/* ---------- Документы ---------- */
+
+/* Очень тонкий архивный пояс: даёт секции материальность без карточек. */
+.h-docs__belt {
+  margin-bottom: 56px;
+}
+
+.h-docs__belt img {
+  width: 100%;
+  aspect-ratio: 48 / 7;
+  object-fit: cover;
+}
+
+.h-docs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.h-docs__item {
+  padding-block: 34px;
+}
+
+.h-docs__item + .h-docs__item {
+  border-left: 1px solid rgba(200, 155, 50, 0.34);
+}
+
+.h-docs__link {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  padding-inline: 32px;
+  text-decoration: none;
+}
+
+.h-docs__item:first-child .h-docs__link {
+  padding-left: 0;
+}
+
+.h-docs__item:last-child .h-docs__link {
+  padding-right: 0;
+}
+
+.h-docs__icon {
+  width: 30px;
+  height: 30px;
+  color: var(--gold);
+}
+
+.h-docs__name {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--navy-deep);
+  transition: color 180ms var(--ease);
+}
+
+.h-docs__hint {
+  margin-top: auto;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.h-docs__link:hover .h-docs__name {
+  color: var(--gold);
+}
+
+/* ---------- FAQ ---------- */
+
+.h-faq-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.h-faq-section__facets {
+  position: absolute;
+  top: 50%;
+  left: -140px;
+  transform: translateY(-50%);
+  width: 620px;
+  height: 620px;
+  color: var(--navy);
+  opacity: 0.055;
+  pointer-events: none;
+}
+
+.h-faq-section > .h-shell {
+  position: relative;
+}
+
+.h-faq {
+  display: grid;
+  grid-template-columns: minmax(0, 34fr) minmax(0, 66fr);
+  gap: 88px;
+  align-items: start;
+}
+
+.h-faq__list {
+  border-top: 1px solid var(--line);
+}
+
+.h-faq__item {
+  border-bottom: 1px solid var(--line);
+}
+
+.h-faq__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  width: 100%;
+  padding: 26px 0;
+  background: none;
+  border: 0;
+  font-family: var(--serif);
+  font-size: clamp(19px, 1.5vw, 24px);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--navy-deep);
+  text-align: left;
+  cursor: pointer;
+  transition: color 180ms var(--ease);
+}
+
+.h-faq__trigger:hover {
+  color: var(--gold);
+}
+
+.h-faq__sign {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--gold);
+}
+
+.h-faq__sign::before,
+.h-faq__sign::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 180ms var(--ease);
+}
+
+.h-faq__sign::after {
+  transform: rotate(90deg);
+}
+
+.h-faq__trigger[aria-expanded='true'] .h-faq__sign::after {
+  transform: rotate(0deg);
+}
+
+.h-faq__panel {
+  max-width: 66ch;
+  overflow: hidden;
+  transition: max-height 280ms var(--ease);
+}
+
+.h-faq__panel > p {
+  padding-bottom: 28px;
+}
+
+.h-faq__panel[hidden] {
+  display: none;
+}
+
+.h-faq__panel p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.68;
+  color: var(--muted);
+}
+
+/* ---------- Финальный CTA ---------- */
+
+.h-final {
+  background: var(--ivory);
+  padding-block: 104px;
+}
+
+.h-final__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  text-align: center;
+}
+
+.h-final__title {
+  max-width: 26ch;
+}
+
+.h-final__text {
+  max-width: 56ch;
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.62;
+  color: var(--muted);
+}
+
+.h-final__actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* ---------- Footer ---------- */
+
+.h-footer {
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.72);
+  padding-block: 76px 32px;
+}
+
+.h-footer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)) minmax(0, 1.3fr);
+  gap: 48px;
+  padding-bottom: 56px;
+}
+
+.h-footer__logo img {
+  width: 210px;
+  height: 66px;
+  object-fit: contain;
+}
+
+.h-footer__blurb {
+  margin: 22px 0 0;
+  font-size: 15px;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.58);
+  max-width: 30ch;
+}
+
+.h-footer__heading {
+  margin: 0 0 20px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+
+.h-footer__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h-footer__list li + li {
+  margin-top: 12px;
+}
+
+.h-footer__link {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  transition: color 180ms var(--ease);
+}
+
+.h-footer__link:hover {
+  color: var(--gold-light);
+}
+
+.h-footer__contacts {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.h-footer__contacts dt {
+  margin-top: 14px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.44);
+}
+
+.h-footer__contacts dt:first-child {
+  margin-top: 0;
+}
+
+.h-footer__contacts dd {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.h-footer__contacts a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(227, 195, 106, 0.4);
+  transition: color 180ms var(--ease);
+}
+
+.h-footer__contacts a:hover {
+  color: var(--gold-light);
+}
+
+.h-footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  border-top: 1px solid rgba(227, 195, 106, 0.34);
+}
+
+.h-footer__bottom p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.h-footer__langs {
+  display: flex;
+  gap: 2px;
+}
+
+.h-footer__langs a {
+  padding: 4px 9px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 180ms var(--ease);
+}
+
+.h-footer__langs a + a {
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.h-footer__langs a:hover,
+.h-footer__langs a[aria-current] {
+  color: var(--gold-light);
+}
+
+/* ---------- Lightbox ---------- */
+
+.h-lightbox {
+  width: min(1180px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  border: 0;
+  background: #fff;
+}
+
+.h-lightbox::backdrop {
+  background: rgba(23, 32, 71, 0.66);
+}
+
+.h-lightbox__panel {
+  position: relative;
+  padding: 28px;
+}
+
+.h-lightbox__figure {
+  margin: 0;
+}
+
+.h-lightbox__figure img {
+  width: 100%;
+  height: auto;
+  max-height: 74vh;
+  object-fit: contain;
+}
+
+.h-lightbox__caption {
+  margin: 18px 0 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.h-lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--navy-deep);
+  cursor: pointer;
+  transition: border-color 180ms var(--ease), color 180ms var(--ease);
+}
+
+.h-lightbox__close:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.h-lightbox__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Motion ----------
+   Начальное состояние ставится только при data-motion="on": атрибут выдаёт
+   инлайновый скрипт, поэтому без JS и при reduced-motion контент виден сразу. */
+
+[data-motion='on'] [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 640ms var(--ease), transform 640ms var(--ease);
+}
+
+[data-motion='on'] [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Золотая линия ключевых заголовков раскрывается после текста. */
+[data-motion='on'] [data-reveal] .h-rule {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 620ms var(--ease) 140ms;
+}
+
+[data-motion='on'] [data-reveal].is-in .h-rule {
+  transform: none;
+}
+
+/* Изображения: мягкое раскрытие маской, один раз при первом появлении. */
+[data-motion='on'] [data-reveal-media] {
+  opacity: 0;
+  clip-path: inset(0 0 14% 0);
+  transition: opacity 700ms var(--ease) 120ms, clip-path 700ms var(--ease) 120ms;
+}
+
+[data-motion='on'] [data-reveal].is-in [data-reveal-media] {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1359px) {
+  .h-nav,
+  .h-header__aside {
+    display: none;
+  }
+
+  .h-burger {
+    display: block;
+  }
+
+  .h-header__bar {
+    height: 80px;
+    gap: 20px;
+  }
+
+  .h-shell--wide {
+    max-width: var(--shell);
+    padding-inline: 40px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .h-hero__grid {
+    grid-template-columns: 1fr;
+    max-width: var(--shell);
+    margin-inline: auto;
+    padding-inline: 40px;
+    padding-block: 64px 72px;
+    gap: 48px;
+  }
+
+  .h-hero__content {
+    padding: 0;
+    gap: 26px;
+  }
+
+  .h-hero__h1,
+  .h-lead {
+    max-width: none;
+  }
+
+  .h-hero__media img {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 3 / 2;
+    object-position: center;
+  }
+
+  .h-hero__media::after {
+    left: -14px;
+    top: 28px;
+    bottom: 28px;
+  }
+
+  .h-split,
+  .h-split--text-left,
+  .h-split--media-left,
+  .h-faq,
+  .h-news,
+  .h-band {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .h-split--media-left .h-split__text {
+    order: -1;
+  }
+
+  .h-about__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 48px;
+    row-gap: 52px;
+  }
+
+  .h-about__grid > .h-about__main,
+  .h-about__grid > .h-points {
+    grid-column: 1 / span 2;
+  }
+
+  .h-about__portrait {
+    grid-column: 1;
+  }
+
+  .h-about__detail {
+    grid-column: 2;
+  }
+
+  .h-dirs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 48px;
+  }
+
+  .h-dirs__item:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .h-dirs__item:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .h-dirs__item:nth-of-type(3) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .h-dirs__item:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .h-dirs__strip {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+  }
+
+  .h-dirs__band {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+  }
+
+  .h-membership__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+  }
+
+  .h-membership__facets {
+    right: -220px;
+    opacity: 0.2;
+  }
+
+  .h-docs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .h-docs__item {
+    padding-block: 28px;
+  }
+
+  .h-docs__item:nth-child(odd) .h-docs__link {
+    padding-left: 0;
+  }
+
+  .h-docs__item:nth-child(even) .h-docs__link {
+    padding-right: 0;
+  }
+
+  .h-docs__item:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .h-docs__item:nth-child(n + 3) {
+    border-top: 1px solid rgba(200, 155, 50, 0.34);
+  }
+
+  .h-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+  }
+
+  .h-band {
+    margin-top: 72px;
+    padding-top: 48px;
+  }
+
+  .h-band img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .h-about__detail img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .h-contour__context {
+    margin-top: 64px;
+  }
+
+  .h-contour__context img,
+  .h-dirs__strip img {
+    aspect-ratio: 21 / 9;
+  }
+
+  .h-membership__media {
+    width: 74%;
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 760px) {
+  body.h-body {
+    font-size: 17px;
+  }
+
+  .h-shell,
+  .h-shell--wide {
+    padding-inline: 20px;
+  }
+
+  .h-section {
+    padding-block: 72px;
+  }
+
+  .h-section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 36px;
+  }
+
+  .h-hero__grid {
+    padding-inline: 20px;
+    padding-block: 48px 56px;
+  }
+
+  .h-hero__content {
+    gap: 24px;
+  }
+
+  .h-hero__actions {
+    gap: 22px;
+  }
+
+  .h-hero__actions .h-btn {
+    width: 100%;
+  }
+
+  .h-hero__media::after {
+    display: none;
+  }
+
+  .h-trust__list {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .h-trust__item {
+    padding: 22px 0;
+  }
+
+  .h-trust__item + .h-trust__item {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(227, 195, 106, 0.24);
+  }
+
+  .h-about__grid,
+  .h-split,
+  .h-faq,
+  .h-news,
+  .h-band {
+    gap: 40px;
+  }
+
+  .h-about__grid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .h-about__grid > .h-about__main,
+  .h-about__grid > .h-points,
+  .h-about__portrait,
+  .h-about__detail {
+    grid-column: 1;
+  }
+
+  .h-about__portrait {
+    max-width: 320px;
+  }
+
+  .h-dirs {
+    grid-template-columns: 1fr;
+  }
+
+  /* Специфичность держим на уровне nth-of-type из десктопной раскладки,
+     иначе элементы остаются в колонках 12-колоночной сетки. */
+  .h-dirs__item:nth-of-type(1),
+  .h-dirs__item:nth-of-type(2),
+  .h-dirs__item:nth-of-type(3),
+  .h-dirs__item:nth-of-type(4),
+  .h-dirs__strip,
+  .h-dirs__band {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .h-dirs__item:nth-of-type(1) {
+    order: 1;
+  }
+
+  .h-dirs__item:nth-of-type(2) {
+    order: 2;
+  }
+
+  .h-dirs__strip {
+    order: 3;
+    margin-bottom: 0;
+  }
+
+  .h-dirs__item:nth-of-type(3) {
+    order: 4;
+  }
+
+  .h-dirs__item:nth-of-type(4) {
+    order: 5;
+  }
+
+  .h-dirs__band {
+    order: 6;
+    margin-top: 32px;
+  }
+
+  .h-dirs__item {
+    padding: 30px 0 32px;
+  }
+
+  .h-dirs__strip img,
+  .h-dirs__band img,
+  .h-contour__context img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .h-docs__belt {
+    margin-bottom: 40px;
+  }
+
+  .h-docs__belt img {
+    aspect-ratio: 32 / 9;
+  }
+
+  .h-figure__btn {
+    padding: 16px;
+  }
+
+  .h-membership {
+    padding-block: 68px;
+  }
+
+  .h-membership .h-btn,
+  .h-final__actions .h-btn {
+    width: 100%;
+  }
+
+  .h-news__row-link {
+    grid-template-columns: 116px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .h-docs {
+    grid-template-columns: 1fr;
+  }
+
+  .h-docs__item {
+    padding-block: 24px;
+  }
+
+  .h-docs__item + .h-docs__item {
+    border-left: 0;
+    border-top: 1px solid rgba(200, 155, 50, 0.34);
+  }
+
+  .h-docs__link {
+    padding-inline: 0;
+  }
+
+  .h-final {
+    padding-block: 72px;
+  }
+
+  .h-final__actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .h-footer {
+    padding-block: 56px 28px;
+  }
+
+  .h-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-bottom: 40px;
+  }
+
+  .h-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .h-lightbox__panel {
+    padding: 16px;
+  }
+
+  .h-lightbox__figure img {
+    max-height: 62vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .h-body *,
+  .h-body *::before,
+  .h-body *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  [data-reveal],
+  [data-reveal] .h-rule,
+  [data-reveal-media],
+  .h-hero__edge {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+
+  .h-news__card:hover .h-news__media img {
+    transform: none;
+  }
+}

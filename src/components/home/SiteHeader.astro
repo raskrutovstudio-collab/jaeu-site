@@ -1,0 +1,83 @@
+---
+import Icon from './Icon.astro';
+import { languages, nav, org, routes } from '../../data/home';
+
+const cta = 'Стать членом Ассоциации';
+---
+
+<header class="h-header">
+  <div class="h-shell h-shell--wide h-header__bar">
+    <a class="h-logo" href={routes.home} aria-label={`${org.shortName} — на главную`}>
+      <img
+        src="/assets/jaeu/logo-jaeu.webp"
+        width="190"
+        height="60"
+        alt="Ассоциация ювелиров Евразийского экономического союза"
+        fetchpriority="high"
+      />
+    </a>
+
+    <nav class="h-nav" aria-label="Основная навигация">
+      <ul class="h-nav__list">
+        {nav.map((item) => (
+          <li>
+            <a class="h-nav__link" href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="h-header__aside">
+      <p class="h-langs" aria-label="Выбор языка">
+        {languages.map((lang) => (
+          <a class="h-langs__link" href={lang.href} aria-current={lang.current ? 'page' : undefined}>
+            {lang.code}
+          </a>
+        ))}
+      </p>
+      <a class="h-btn h-btn--primary h-header__cta" href={routes.membership}>
+        {cta}
+        <Icon name="arrow" class="h-btn__arrow" />
+      </a>
+    </div>
+
+    <button
+      class="h-burger"
+      type="button"
+      id="h-burger"
+      aria-expanded="false"
+      aria-controls="h-mobile-menu"
+      aria-label="Открыть меню"
+    >
+      <Icon name="burger" class="h-burger__open" />
+      <Icon name="close" class="h-burger__close" />
+    </button>
+  </div>
+
+  <div class="h-mobile" id="h-mobile-menu">
+    <div class="h-shell h-shell--wide h-mobile__inner">
+      <nav aria-label="Мобильная навигация">
+        <ul class="h-mobile__list">
+          {nav.map((item) => (
+            <li>
+              <a class="h-mobile__link" href={item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="h-mobile__foot">
+        <p class="h-langs" aria-label="Выбор языка">
+          {languages.map((lang) => (
+            <a class="h-langs__link" href={lang.href} aria-current={lang.current ? 'page' : undefined}>
+              {lang.code}
+            </a>
+          ))}
+        </p>
+        <a class="h-btn h-btn--primary" href={routes.membership}>
+          {cta}
+          <Icon name="arrow" class="h-btn__arrow" />
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

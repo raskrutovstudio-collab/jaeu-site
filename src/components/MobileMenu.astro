@@ -1,0 +1,32 @@
+---
+import { ui } from '../data/copy';
+import { navPrimary, routes, type Locale } from '../data/site';
+
+interface ExtraLink {
+  href: string;
+  key: 'documents' | 'reports';
+}
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+  extra: ExtraLink[];
+}
+
+const { locale, currentPath, extra } = Astro.props;
+const copy = ui[locale];
+const links = [...navPrimary, ...extra];
+---
+
+<div class="mobile-menu" id="mobile-menu" data-menu-panel hidden>
+  <nav class="container" aria-label={copy.navLabel}>
+    <div class="mobile-menu__list">
+      {links.map((item) => (
+        <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
+          {copy.nav[item.key]}
+        </a>
+      ))}
+      <a class="button button--primary mobile-menu__cta" href={routes.membership}>{copy.nav.join}</a>
+    </div>
+  </nav>
+</div>

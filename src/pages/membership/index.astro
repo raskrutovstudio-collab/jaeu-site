@@ -1,0 +1,29 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DemoForm from '../../components/DemoForm.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, pageCopy } from '../../data/copy';
+import { routes } from '../../data/site';
+
+const page = pageCopy.membership;
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.membership}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <section class="section content-card">
+      <h2>{page.pathTitle}</h2>
+      <p>{page.pathText}</p>
+    </section>
+
+    <div class="section">
+      <DemoForm variant="membership" title={page.formTitle} />
+    </div>
+
+    <FaqAccordion items={faqCopy.membership} />
+  </article>
+</PageLayout>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  ctaLabel: string;
+  href: string;
+  variant?: 'dark' | 'light';
+}
+
+const { title, text, ctaLabel, href, variant = 'dark' } = Astro.props;
+---
+
+<section class:list={['cta-banner', `cta-banner--${variant}`]}>
+  <h2>{title}</h2>
+  <p>{text}</p>
+  <div class="cta-banner__actions">
+    <a class:list={['button', variant === 'dark' ? 'button--light' : 'button--primary']} href={href}>
+      {ctaLabel}
+    </a>
+  </div>
+</section>

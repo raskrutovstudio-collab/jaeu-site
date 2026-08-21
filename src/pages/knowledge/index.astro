@@ -1,0 +1,41 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SearchFilter from '../../components/SearchFilter.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, filterLabels, pageCopy, ui } from '../../data/copy';
+import { knowledgePlaceholders } from '../../data/placeholders';
+import { routes } from '../../data/site';
+
+const page = pageCopy.knowledge;
+const items = knowledgePlaceholders('ru');
+const chrome = ui.ru;
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.knowledge}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <div class="section">
+      <SearchFilter
+        searchLabel={chrome.search}
+        searchPlaceholder={chrome.search}
+        filters={filterLabels.knowledge}
+        emptyText={chrome.placeholders.emptySearch}
+      >
+        <div class="content-stack">
+          {items.map((item) => (
+            <article class="content-card" data-item data-category={item.category} data-search={item.title}>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </SearchFilter>
+    </div>
+
+    <FaqAccordion items={faqCopy.knowledge} />
+  </article>
+</PageLayout>

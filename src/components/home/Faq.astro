@@ -1,0 +1,47 @@
+---
+import { faq } from '../../data/home';
+---
+
+<section class="h-section h-section--stone h-faq-section" aria-labelledby="faq-title" data-reveal>
+  <svg class="h-faq-section__facets" viewBox="0 0 600 600" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+    <path d="M300 40l190 130-72 350H182L110 170z" />
+    <path d="M300 40l118 480M300 40L182 520M110 170h380M190 170l110 350 110-350" />
+  </svg>
+
+  <div class="h-shell h-faq">
+    <div class="h-split__text">
+      <h2 class="h-h2" id="faq-title">{faq.h2}</h2>
+      <hr class="h-rule" />
+      <p class="h-text">{faq.lead}</p>
+    </div>
+
+    <div class="h-faq__list">
+      {faq.items.map((item, index) => (
+        <div class="h-faq__item">
+          <h3>
+            <button
+              class="h-faq__trigger"
+              type="button"
+              data-faq-trigger
+              id={`faq-trigger-${index}`}
+              aria-expanded={index === 0 ? 'true' : 'false'}
+              aria-controls={`faq-panel-${index}`}
+            >
+              <span>{item.q}</span>
+              <span class="h-faq__sign" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div
+            class="h-faq__panel"
+            id={`faq-panel-${index}`}
+            role="region"
+            aria-labelledby={`faq-trigger-${index}`}
+            hidden={index !== 0}
+          >
+            <p>{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

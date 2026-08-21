@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import { membership, routes } from '../../data/home';
+---
+
+<section class="h-membership" aria-labelledby="membership-title" data-reveal>
+  <div class="h-membership__media" aria-hidden="true">
+    <img
+      src="/assets/jaeu/membership-visual-1024.webp"
+      srcset="/assets/jaeu/membership-visual-700.webp 700w, /assets/jaeu/membership-visual-1024.webp 1024w"
+      sizes="(min-width: 1041px) 56vw, 100vw"
+      width="1024"
+      height="576"
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <svg class="h-membership__facets" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+    <path d="M200 20l140 90-52 250H112L60 110z" />
+    <path d="M200 20l88 340M200 20L112 360M60 110h280M126 110l74 250 74-250" />
+  </svg>
+
+  <div class="h-shell h-membership__inner">
+    <div class="h-membership__text">
+      <h2 class="h-h2 h-membership__title" id="membership-title">{membership.h2}</h2>
+      <p class="h-membership__lead">{membership.text}</p>
+    </div>
+    <a class="h-btn h-btn--light" href={routes.membership}>
+      {membership.cta}
+      <Icon name="arrow" class="h-btn__arrow" />
+    </a>
+  </div>
+</section>

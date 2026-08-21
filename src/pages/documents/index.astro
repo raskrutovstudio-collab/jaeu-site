@@ -1,0 +1,43 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SearchFilter from '../../components/SearchFilter.astro';
+import DocumentRow from '../../components/DocumentRow.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, filterLabels, pageCopy, ui } from '../../data/copy';
+import { documentPlaceholders } from '../../data/placeholders';
+import { routes } from '../../data/site';
+
+const page = pageCopy.documents;
+const items = documentPlaceholders('ru');
+const chrome = ui.ru;
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.documents}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <div class="section">
+      <SearchFilter
+        searchLabel={chrome.search}
+        searchPlaceholder={chrome.search}
+        filters={filterLabels.documents}
+        emptyText={chrome.placeholders.emptySearch}
+      >
+        <div class="document-list">
+          {items.map((item) => (
+            <DocumentRow title={item.title} category={item.category} search={item.title} />
+          ))}
+        </div>
+      </SearchFilter>
+    </div>
+
+    <p class="section">
+      <a class="text-link" href={routes.reports}>{chrome.nav.reports}</a>
+    </p>
+
+    <FaqAccordion items={faqCopy.documents} />
+  </article>
+</PageLayout>

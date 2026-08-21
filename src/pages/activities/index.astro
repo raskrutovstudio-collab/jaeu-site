@@ -1,0 +1,43 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, pageCopy, ui } from '../../data/copy';
+import { activityItems, placeholderText } from '../../data/placeholders';
+import { routes } from '../../data/site';
+
+const page = pageCopy.activities;
+const info = placeholderText('ru');
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.activities}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <div class="section activities-grid">
+      {activityItems.map((item) => (
+        <section class:list={['activity-card', `activity-card--${item.span}`, `activity-card--${item.tone}`]}>
+          <div>
+            <h2>{item.title.ru}</h2>
+            <p>{info}</p>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <div class="section">
+      <CtaBanner
+        variant="dark"
+        title="Членство в Ассоциации"
+        text={ui.ru.placeholders.info}
+        ctaLabel={ui.ru.nav.join}
+        href={routes.membership}
+      />
+    </div>
+
+    <FaqAccordion items={faqCopy.activities} />
+  </article>
+</PageLayout>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  href?: string;
+  search?: string;
+  category?: string;
+}
+
+const { title, href, search = title, category = 'document' } = Astro.props;
+---
+
+{href ? (
+  <a class="document-row" href={href} data-item data-category={category} data-search={search}>
+    <span class="document-row__mark" aria-hidden="true"></span>
+    <p>{title}</p>
+  </a>
+) : (
+  <div class="document-row" data-item data-category={category} data-search={search}>
+    <span class="document-row__mark" aria-hidden="true"></span>
+    <p>{title}</p>
+  </div>
+)}

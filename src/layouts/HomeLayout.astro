@@ -1,0 +1,141 @@
+---
+import '../styles/home.css';
+import SiteHeader from '../components/home/SiteHeader.astro';
+import SiteFooter from '../components/home/SiteFooter.astro';
+import Icon from '../components/home/Icon.astro';
+import { faq, meta, org } from '../data/home';
+
+const site = Astro.site ?? new URL('https://jaeu.kz');
+const canonical = new URL('/', site).href;
+const ogImage = new URL('/assets/jaeu/og-home.jpg', site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${new URL('/', site).href}#website`,
+      url: new URL('/', site).href,
+      name: org.shortName,
+      inLanguage: 'ru',
+      publisher: { '@id': `${new URL('/', site).href}#organization` }
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: meta.title,
+      description: meta.description,
+      inLanguage: 'ru',
+      isPartOf: { '@id': `${new URL('/', site).href}#website` },
+      about: { '@id': `${new URL('/', site).href}#organization` }
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${new URL('/', site).href}#organization`,
+      name: org.shortName,
+      legalName: org.legalName,
+      url: new URL('/', site).href,
+      logo: new URL('/assets/jaeu/logo-jaeu.webp', site).href,
+      email: org.email,
+      telephone: org.phone,
+      foundingDate: org.registeredOn,
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: org.address.country,
+        addressRegion: org.address.region,
+        addressLocality: org.address.city,
+        streetAddress: org.address.street,
+        postalCode: org.address.postalCode
+      }
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${canonical}#faq`,
+      mainEntity: faq.items.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a }
+      }))
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#202A57" />
+    <link rel="icon" type="image/svg+xml" href="/assets/jaeu-emblem.svg" />
+
+    <link rel="alternate" hreflang="ru-KZ" href={new URL('/', site).href} />
+    <link rel="alternate" hreflang="kk-KZ" href={new URL('/kz/', site).href} />
+    <link rel="alternate" hreflang="en" href={new URL('/en/', site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={org.shortName} />
+    <meta property="og:title" content={meta.ogTitle} />
+    <meta property="og:description" content={meta.ogDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ассоциация ювелиров ЕАЭС" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.ogTitle} />
+    <meta name="twitter:description" content={meta.ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap"
+    />
+    <link rel="preload" as="image" href="/assets/jaeu/hero-1600.webp" imagesrcset="/assets/jaeu/hero-760.webp 760w, /assets/jaeu/hero-1100.webp 1100w, /assets/jaeu/hero-1600.webp 1536w" imagesizes="(min-width: 1041px) 50vw, 100vw" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+    <script is:inline>
+      // Начальное состояние reveal включаем до отрисовки, иначе контент мигнёт.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.dataset.motion = 'on';
+      }
+    </script>
+  </head>
+
+  <body class="h-body">
+    <a class="h-skip" href="#main">Перейти к содержимому</a>
+    <SiteHeader />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <SiteFooter />
+
+    <dialog class="h-lightbox" id="h-lightbox" aria-labelledby="h-lightbox-caption">
+      <div class="h-lightbox__panel">
+        <button class="h-lightbox__close" type="button" data-lightbox-close aria-label="Закрыть просмотр">
+          <Icon name="close" />
+        </button>
+        <figure class="h-lightbox__figure">
+          <img data-lightbox-image alt="" width="1600" height="1097" />
+          <figcaption class="h-lightbox__caption" id="h-lightbox-caption" data-lightbox-caption></figcaption>
+        </figure>
+      </div>
+    </dialog>
+
+    <script>
+      import '../scripts/home';
+    </script>
+  </body>
+</html>

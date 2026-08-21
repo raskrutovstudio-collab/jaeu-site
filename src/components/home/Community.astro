@@ -1,0 +1,75 @@
+---
+import Icon from './Icon.astro';
+import { community } from '../../data/home';
+
+const full = '/assets/jaeu/composition-1400.webp';
+---
+
+<section class="h-section h-section--white" aria-labelledby="community-title" data-reveal>
+  <div class="h-shell">
+    <div class="h-split h-split--media-left">
+      <figure class="h-figure" data-reveal-media>
+        <button
+          class="h-figure__btn"
+          type="button"
+          data-lightbox-src={full}
+          data-lightbox-alt={community.imageAlt}
+          data-lightbox-caption={community.caption}
+          data-lightbox-width="1400"
+          data-lightbox-height="759"
+          aria-label="Открыть схему состава Ассоциации в полном размере"
+        >
+          <img
+            src={full}
+            srcset="/assets/jaeu/composition-900.webp 900w, /assets/jaeu/composition-1400.webp 1400w"
+            sizes="(min-width: 1040px) 640px, 100vw"
+            width="1400"
+            height="759"
+            alt={community.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </button>
+        <figcaption class="h-figure__caption">{community.caption}</figcaption>
+      </figure>
+
+      <div class="h-split__text">
+        <p class="h-eyebrow">{community.eyebrow}</p>
+        <h2 class="h-h2" id="community-title">{community.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text">{community.text}</p>
+        <button
+          class="h-btn h-btn--outline"
+          type="button"
+          data-lightbox-src={full}
+          data-lightbox-alt={community.imageAlt}
+          data-lightbox-caption={community.caption}
+          data-lightbox-width="1400"
+          data-lightbox-height="759"
+        >
+          {community.cta}
+          <Icon name="arrow" class="h-btn__arrow" />
+        </button>
+      </div>
+    </div>
+
+    <div class="h-band">
+      <figure data-reveal-media>
+        <img
+          src="/assets/jaeu/community-experts-820.webp"
+          srcset="/assets/jaeu/community-experts-600.webp 600w, /assets/jaeu/community-experts-820.webp 820w"
+          sizes="(min-width: 1041px) 620px, 100vw"
+          width="820"
+          height="656"
+          alt={community.band.imageAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+      <div class="h-band__text">
+        <h3 class="h-h3">{community.band.title}</h3>
+        <p class="h-text">{community.band.text}</p>
+      </div>
+    </div>
+  </div>
+</section>

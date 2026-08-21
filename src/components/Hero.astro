@@ -1,0 +1,28 @@
+---
+import { routes } from '../data/site';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+
+interface Props {
+  title: string;
+  lead: string;
+  joinLabel: string;
+  activitiesLabel: string;
+  imageLabel: string;
+}
+
+const { title, lead, joinLabel, activitiesLabel, imageLabel } = Astro.props;
+---
+
+<section class="hero container">
+  <div class="hero__grid">
+    <div>
+      <h1>{title}</h1>
+      <p class="hero__lead">{lead}</p>
+      <div class="hero__actions">
+        <a class="button button--primary" href={routes.membership}>{joinLabel}</a>
+        <a class="button button--secondary" href={routes.activities}>{activitiesLabel}</a>
+      </div>
+    </div>
+    <ImagePlaceholder label={imageLabel} variant="hero" />
+  </div>
+</section>

@@ -1,0 +1,37 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, pageCopy, ui } from '../../data/copy';
+import { routes } from '../../data/site';
+
+const page = pageCopy.expertCouncil;
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.expertCouncil}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <section class="section">
+      <h2>{page.compositionTitle}</h2>
+      <div class="composition-box" style="margin-top: 20px;">
+        <p>{ui.ru.placeholders.composition}</p>
+      </div>
+    </section>
+
+    <div class="section">
+      <CtaBanner
+        variant="light"
+        title="Членство в Ассоциации"
+        text={ui.ru.placeholders.info}
+        ctaLabel={ui.ru.nav.join}
+        href={routes.membership}
+      />
+    </div>
+
+    <FaqAccordion items={faqCopy.expertCouncil} />
+  </article>
+</PageLayout>

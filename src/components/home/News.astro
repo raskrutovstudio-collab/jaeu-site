@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import { news, routes } from '../../data/home';
+
+/** Соотношения сторон отличаются у каждого кадра серии — задают ритм блока. */
+const thumbSizes = {
+  'news-expertise': { width: 400, height: 400 },
+  'news-event': { width: 400, height: 171 }
+} as const;
+---
+
+<section class="h-section h-section--ivory" aria-labelledby="news-title" data-reveal>
+  <div class="h-shell">
+    <div class="h-section__head">
+      <h2 class="h-h2" id="news-title">{news.h2}</h2>
+      <a class="h-link" href={routes.news}>
+        {news.allLink}
+        <Icon name="arrow" class="h-link__arrow" />
+      </a>
+    </div>
+
+    <div class="h-news">
+      <article>
+        <a class="h-news__card" href={routes.news}>
+          <span class="h-news__media h-news__media--lg" data-reveal-media>
+            <img
+              src="/assets/jaeu/news-discussion-1000.webp"
+              srcset="/assets/jaeu/news-discussion-660.webp 660w, /assets/jaeu/news-discussion-1000.webp 1000w"
+              sizes="(min-width: 1041px) 660px, 100vw"
+              width="1000"
+              height="563"
+              alt={news.featured.imageAlt}
+              loading="lazy"
+              decoding="async"
+            />
+          </span>
+          <time class="h-news__date" datetime={news.featured.date}>{news.featured.dateLabel}</time>
+          <span class="h-news__title h-news__title--lg">{news.featured.title}</span>
+          <span class="h-news__text">{news.featured.text}</span>
+        </a>
+      </article>
+
+      <div class="h-news__side">
+        {news.items.map((item) => (
+          <article class="h-news__row">
+            <a class="h-news__card h-news__row-link" href={routes.news}>
+              <span class="h-news__media" data-reveal-media>
+                <img
+                  src={`/assets/jaeu/${item.image}-400.webp`}
+                  srcset={`/assets/jaeu/${item.image}-240.webp 240w, /assets/jaeu/${item.image}-400.webp 400w`}
+                  sizes="(min-width: 1041px) 168px, 116px"
+                  width={thumbSizes[item.image].width}
+                  height={thumbSizes[item.image].height}
+                  alt={item.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span>
+                <time class="h-news__date" datetime={item.date}>{item.dateLabel}</time>
+                <span class="h-news__title">{item.title}</span>
+              </span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

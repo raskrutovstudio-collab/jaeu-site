@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import { directions } from '../../data/home';
+---
+
+<section class="h-section h-section--stone" aria-labelledby="directions-title" data-reveal>
+  <div class="h-shell">
+    <div class="h-section__head h-section__head--center">
+      <h2 class="h-h2" id="directions-title">{directions.h2}</h2>
+      <hr class="h-rule" />
+      <p class="h-text">{directions.lead}</p>
+    </div>
+
+    <div class="h-dirs">
+      {directions.items.map((item) => (
+        <article class="h-dirs__item">
+          <Icon name={item.icon} class="h-dirs__icon" />
+          <h3 class="h-h3">{item.title}</h3>
+          <p class="h-dirs__text">{item.text}</p>
+          <a class="h-link" href={item.href}>
+            Подробнее
+            <Icon name="arrow" class="h-link__arrow" />
+          </a>
+        </article>
+      ))}
+
+      <figure class="h-dirs__strip" data-reveal-media>
+        <img
+          src="/assets/jaeu/directions-review-1160.webp"
+          srcset="/assets/jaeu/directions-review-760.webp 760w, /assets/jaeu/directions-review-1160.webp 1160w"
+          sizes="(min-width: 1041px) 870px, 100vw"
+          width="1160"
+          height="326"
+          alt={directions.reviewAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+
+      <figure class="h-dirs__band" data-reveal-media>
+        <img
+          src="/assets/jaeu/directions-craft-1160.webp"
+          srcset="/assets/jaeu/directions-craft-760.webp 760w, /assets/jaeu/directions-craft-1160.webp 1160w"
+          sizes="(min-width: 1240px) 1160px, 100vw"
+          width="1160"
+          height="338"
+          alt={directions.craftAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </div>
+</section>

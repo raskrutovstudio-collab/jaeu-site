@@ -1,74 +1,118 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { homeCopy, localeMeta, type Locale } from '../data/site';
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from './Hero.astro';
+import TrustBar from './TrustBar.astro';
+import SectionHeading from './SectionHeading.astro';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+import NewsCard from './NewsCard.astro';
+import DocumentRow from './DocumentRow.astro';
+import CtaBanner from './CtaBanner.astro';
+import { homeCopy, ui } from '../data/copy';
+import { activityItems, documentPlaceholders, newsPlaceholders, placeholderText } from '../data/placeholders';
+import { homePath, routes, type Locale } from '../data/site';
 
-interface Props { locale: Locale }
+interface Props {
+  locale: Locale;
+}
+
 const { locale } = Astro.props;
 const copy = homeCopy[locale];
-const languages = Object.entries(localeMeta);
+const chrome = ui[locale];
+const info = placeholderText(locale);
+const news = newsPlaceholders(locale);
+const documents = documentPlaceholders(locale);
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.description}>
-  <header class="site-header">
-    <a class="brand" href={localeMeta[locale].path} aria-label={copy.title}>
-      <img src="/assets/jaeu-emblem.svg" width="38" height="49" alt="" />
-      <span>JAEU</span>
-    </a>
-    <nav aria-label="Primary navigation">
-      <a href="#about">{locale === 'en' ? 'About' : locale === 'kz' ? 'Қауымдастық туралы' : 'Об Ассоциации'}</a>
-      <a href="#activities">{locale === 'en' ? 'Activities' : locale === 'kz' ? 'Қызмет' : 'Деятельность'}</a>
-      <a href="#membership">{locale === 'en' ? 'Membership' : locale === 'kz' ? 'Мүшелік' : 'Членство'}</a>
-    </nav>
-    <div class="languages" aria-label="Language selection">
-      {languages.map(([key, item]) => <a class:list={{ active: key === locale }} href={item.path} lang={item.lang}>{item.label}</a>)}
-    </div>
-  </header>
+<PageLayout locale={locale} title={copy.title} description={copy.description} path={homePath(locale)} withHreflang>
+  <Hero
+    title={copy.h1}
+    lead={copy.lead}
+    joinLabel={copy.join}
+    activitiesLabel={copy.aboutActivities}
+    imageLabel={chrome.placeholders.image}
+  />
 
-  <main>
-    <section class="hero">
-      <div class="hero__copy">
-        <p class="eyebrow">{copy.eyebrow}</p>
-        <h1>{copy.heading}</h1>
-        <p class="lead">{copy.lead}</p>
-        <div class="actions">
-          <a class="button button--primary" href="#membership">{copy.primary}</a>
-          <a class="button button--secondary" href="#contact">{copy.secondary}</a>
-        </div>
-      </div>
-      <div class="hero__mark" aria-hidden="true">
-        <img src="/assets/jaeu-emblem.svg" width="270" height="350" alt="" />
-      </div>
-    </section>
+  <TrustBar items={copy.trust} />
 
-    <section id="about" class="split-section">
-      <p class="section-label">JAEU · 2016</p>
-      <div>
+  <section class="section container" id="about">
+    <div class="about-split">
+      <div class="about-split__meta">
         <h2>{copy.aboutTitle}</h2>
-        <p>{copy.aboutText}</p>
       </div>
-    </section>
-
-    <section id="activities" class="activity-section">
-      <div class="section-heading">
-        <p class="section-label">EAEU</p>
-        <h2>{copy.activityTitle}</h2>
+      <div class="about-split__content">
+        <p class="prose">{copy.aboutText}</p>
+        <a class="text-link" href={routes.about}>{copy.aboutLink}</a>
+        <ImagePlaceholder label={chrome.placeholders.image} variant="about" />
       </div>
-      <ul class="activity-list">
-        {copy.activities.map((activity) => <li>{activity}<span aria-hidden="true">↗</span></li>)}
-      </ul>
-    </section>
-
-    <section id="membership" class="membership-section">
-      <p>{copy.note}</p>
-      <a class="button button--primary" href="mailto:info@jaeu.kz">{copy.primary}</a>
-    </section>
-  </main>
-
-  <footer id="contact">
-    <div class="footer-brand">
-      <img src="/assets/jaeu-emblem.svg" width="58" height="75" alt="" />
-      <strong>{copy.title}</strong>
     </div>
-    <p>© {new Date().getFullYear()} JAEU</p>
-  </footer>
-</BaseLayout>
+  </section>
+
+  <section class="section container" id="activities">
+    <SectionHeading title={copy.activitiesTitle} lead={copy.activitiesLead} />
+    <div class="activities-grid">
+      {activityItems.map((item) => (
+        <article class:list={['activity-card', `activity-card--${item.span}`, `activity-card--${item.tone}`]}>
+          <div>
+            <h3>{item.title[locale]}</h3>
+            <p>{info}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section container">
+    <CtaBanner
+      variant="dark"
+      title={copy.membershipTitle}
+      text={copy.membershipText}
+      ctaLabel={copy.membershipCta}
+      href={routes.membership}
+    />
+  </section>
+
+  <section class="section container" id="news">
+    <SectionHeading title={copy.newsTitle} />
+    <div class="news-grid">
+      <NewsCard
+        size="large"
+        title={news[0].title}
+        text={news[0].text}
+        href={routes.news}
+        imageLabel={chrome.placeholders.image}
+      />
+      <div class="news-grid__side">
+        <NewsCard size="medium" title={news[1].title} text={news[1].text} href={routes.news} />
+        <NewsCard size="small" title={news[2].title} text={news[2].text} href={routes.news} />
+      </div>
+    </div>
+    <p style="margin-top: 24px;">
+      <a class="text-link" href={routes.news}>{chrome.allNews}</a>
+    </p>
+  </section>
+
+  <section class="section container" id="documents">
+    <div class="about-split" style="align-items: start;">
+      <div class="about-split__meta">
+        <h2>{copy.documentsTitle}</h2>
+        <p class="section-heading__lead" style="margin-top: 12px;">{copy.documentsLead}</p>
+        <a class="text-link" href={routes.documents}>{chrome.allDocuments}</a>
+      </div>
+      <div class="document-list">
+        {documents.map((doc) => (
+          <DocumentRow title={doc.title} href={routes.documents} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <CtaBanner
+      variant="light"
+      title={copy.ctaTitle}
+      text={copy.ctaText}
+      ctaLabel={copy.join}
+      href={routes.membership}
+    />
+  </section>
+</PageLayout>

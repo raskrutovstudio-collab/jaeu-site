@@ -1,0 +1,52 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SearchFilter from '../../components/SearchFilter.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, filterLabels, pageCopy, ui } from '../../data/copy';
+import { newsPlaceholders } from '../../data/placeholders';
+import { routes } from '../../data/site';
+
+const page = pageCopy.news;
+const items = newsPlaceholders('ru');
+const chrome = ui.ru;
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.news}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <div class="section">
+      <SearchFilter
+        searchLabel={chrome.search}
+        searchPlaceholder={chrome.search}
+        filters={filterLabels.news}
+        emptyText={chrome.placeholders.emptySearch}
+      >
+        <div class="news-grid">
+          <div data-item data-category={items[0].category} data-search={items[0].title}>
+            <NewsCard
+              size="large"
+              title={items[0].title}
+              text={items[0].text}
+              href={routes.news}
+              imageLabel={chrome.placeholders.image}
+            />
+          </div>
+          <div class="news-grid__side">
+            {items.slice(1).map((item) => (
+              <div data-item data-category={item.category} data-search={item.title}>
+                <NewsCard size={item.size} title={item.title} text={item.text} href={routes.news} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </SearchFilter>
+    </div>
+
+    <FaqAccordion items={faqCopy.news} />
+  </article>
+</PageLayout>

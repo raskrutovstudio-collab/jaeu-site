@@ -1,0 +1,12 @@
+---
+interface Props {
+  label: string;
+  variant?: 'hero' | 'about' | 'news';
+}
+
+const { label, variant = 'about' } = Astro.props;
+---
+
+<div class:list={['media-placeholder', `media-placeholder--${variant}`]} role="img" aria-label={label}>
+  {label}
+</div>

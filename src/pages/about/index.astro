@@ -1,0 +1,45 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, pageCopy, ui } from '../../data/copy';
+import { routes } from '../../data/site';
+
+const page = pageCopy.about;
+const chrome = ui.ru;
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.about}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <div class="section two-col">
+      {page.sections.map((section) => (
+        <section class="content-card">
+          <h2>{section.title}</h2>
+          <p>{section.text}</p>
+        </section>
+      ))}
+    </div>
+
+    <div class="section">
+      <ImagePlaceholder label={chrome.placeholders.image} variant="about" />
+    </div>
+
+    <div class="section">
+      <CtaBanner
+        variant="dark"
+        title="Членство в Ассоциации"
+        text={chrome.placeholders.info}
+        ctaLabel={chrome.nav.join}
+        href={routes.membership}
+      />
+    </div>
+
+    <FaqAccordion items={faqCopy.about} />
+  </article>
+</PageLayout>

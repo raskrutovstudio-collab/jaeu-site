@@ -1,4 +1,26 @@
 ---
-import HomePage from '../components/HomePage.astro';
+import HomeLayout from '../layouts/HomeLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import About from '../components/home/About.astro';
+import Contour from '../components/home/Contour.astro';
+import Directions from '../components/home/Directions.astro';
+import Community from '../components/home/Community.astro';
+import Membership from '../components/home/Membership.astro';
+import News from '../components/home/News.astro';
+import Documents from '../components/home/Documents.astro';
+import Faq from '../components/home/Faq.astro';
+import FinalCta from '../components/home/FinalCta.astro';
 ---
-<HomePage locale="ru" />
+
+<HomeLayout>
+  <Hero />
+  <About />
+  <Contour />
+  <Directions />
+  <Community />
+  <Membership />
+  <News />
+  <Documents />
+  <Faq />
+  <FinalCta />
+</HomeLayout>

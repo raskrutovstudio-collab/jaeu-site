@@ -1,0 +1,52 @@
+---
+import Icon from './Icon.astro';
+import { hero, routes, trust } from '../../data/home';
+---
+
+<section class="h-hero" aria-labelledby="hero-title">
+  <div class="h-hero__grid">
+    <div class="h-hero__content">
+      <p class="h-eyebrow">{hero.eyebrow}</p>
+      <h1 class="h-h1 h-hero__h1" id="hero-title">{hero.h1}</h1>
+      <p class="h-lead">{hero.lead}</p>
+      <div class="h-hero__actions">
+        <a class="h-btn h-btn--primary" href={routes.membership}>
+          {hero.primaryCta}
+          <Icon name="arrow" class="h-btn__arrow" />
+        </a>
+        <a class="h-link" href={routes.activities}>
+          {hero.secondaryCta}
+          <Icon name="arrow" class="h-link__arrow" />
+        </a>
+      </div>
+    </div>
+
+    <figure class="h-hero__media">
+      <img
+        src="/assets/jaeu/hero-1600.webp"
+        srcset="/assets/jaeu/hero-760.webp 760w, /assets/jaeu/hero-1100.webp 1100w, /assets/jaeu/hero-1600.webp 1536w"
+        sizes="(min-width: 1041px) 50vw, 100vw"
+        width="1536"
+        height="1024"
+        alt={hero.imageAlt}
+        fetchpriority="high"
+        decoding="async"
+      />
+      <span class="h-hero__veil" aria-hidden="true"></span>
+      <span class="h-hero__edge" aria-hidden="true"></span>
+    </figure>
+  </div>
+
+  <div class="h-trust">
+    <div class="h-shell">
+      <ul class="h-trust__list">
+        {trust.map((item) => (
+          <li class="h-trust__item">
+            <Icon name={item.icon} class="h-trust__icon" />
+            <span class="h-trust__label">{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+---
+interface Filter {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  searchLabel: string;
+  searchPlaceholder: string;
+  filters: readonly Filter[] | Filter[];
+  emptyText: string;
+}
+
+const { searchLabel, searchPlaceholder, filters, emptyText } = Astro.props;
+---
+
+<div class="search-filter" data-search-filter>
+  <div class="search-filter__controls">
+    <div class="search-field">
+      <label class="visually-hidden" for="local-search">{searchLabel}</label>
+      <input id="local-search" type="search" data-search-input placeholder={searchPlaceholder} />
+    </div>
+    <div class="filter-pills" role="group" aria-label={searchLabel}>
+      {filters.map((filter, index) => (
+        <button
+          type="button"
+          data-filter={filter.id}
+          class:list={{ 'is-active': index === 0 }}
+          aria-pressed={index === 0 ? 'true' : 'false'}
+        >
+          {filter.label}
+        </button>
+      ))}
+    </div>
+  </div>
+  <div data-search-results>
+    <slot />
+  </div>
+  <p class="search-empty" data-empty>{emptyText}</p>
+</div>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  href: string;
+  size?: 'large' | 'medium' | 'small';
+  imageLabel?: string;
+}
+
+const { title, text, href, size = 'medium', imageLabel } = Astro.props;
+---
+
+<article class:list={['news-card', size !== 'large' && 'news-card--panel', size === 'small' && 'news-card--muted']}>
+  <a href={href}>
+    {size === 'large' && imageLabel && (
+      <div class="media-placeholder media-placeholder--news" role="img" aria-label={imageLabel}>
+        {imageLabel}
+      </div>
+    )}
+    <h3>{title}</h3>
+    <p>{text}</p>
+  </a>
+</article>

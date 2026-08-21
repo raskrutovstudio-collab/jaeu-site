@@ -1,0 +1,35 @@
+---
+interface Item {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: readonly Item[] | Item[];
+  heading?: string;
+}
+
+const { items, heading = 'Вопросы' } = Astro.props;
+---
+
+<section class="section" aria-labelledby="faq-heading">
+  <h2 id="faq-heading">{heading}</h2>
+  <div class="faq" style="margin-top: 20px;">
+    {items.map((item, index) => {
+      const id = `faq-panel-${index}`;
+      return (
+        <div class="faq__item">
+          <h3>
+            <button type="button" data-faq-toggle aria-expanded="false" aria-controls={id} id={`faq-button-${index}`}>
+              {item.q}
+              <span aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="faq__panel" id={id} role="region" aria-labelledby={`faq-button-${index}`} hidden>
+            {item.a}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>

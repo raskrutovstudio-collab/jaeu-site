@@ -1,0 +1,27 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DemoForm from '../../components/DemoForm.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { faqCopy, pageCopy, ui } from '../../data/copy';
+import { routes } from '../../data/site';
+
+const page = pageCopy.contacts;
+---
+
+<PageLayout locale="ru" title={page.title} description={page.description} path={routes.contacts}>
+  <article class="container page-intro">
+    <Breadcrumbs items={[{ label: page.h1 }]} />
+    <h1>{page.h1}</h1>
+    <p class="page-intro__lead">{page.lead}</p>
+
+    <div class="section two-col">
+      <section class="contact-box">
+        <p>{ui.ru.placeholders.contacts}</p>
+      </section>
+      <DemoForm variant="contact" title={page.formTitle} />
+    </div>
+
+    <FaqAccordion items={faqCopy.contacts} />
+  </article>
+</PageLayout>
