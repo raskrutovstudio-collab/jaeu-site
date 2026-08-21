@@ -4,6 +4,7 @@ import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
 import Icon from '../components/home/Icon.astro';
 import { faq, meta, org } from '../data/home';
+import { homeI18nPayload } from '../data/homeI18n';
 import { canonicalUrl, productionOrigin, withBase } from '../data/site';
 
 const site = new URL(productionOrigin);
@@ -68,16 +69,17 @@ const jsonLd = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{meta.title}</title>
-    <meta name="description" content={meta.description} />
+    <title data-i18n="meta.title">{meta.title}</title>
+    <meta name="description" content={meta.description} data-i18n-attrs="content:meta.description" />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#202A57" />
     <link rel="icon" type="image/svg+xml" href={withBase('/assets/jaeu-emblem.svg')} />
 
-    <link rel="alternate" hreflang="ru-KZ" href={new URL('/', site).href} />
-    <link rel="alternate" hreflang="kk-KZ" href={new URL('/kz/', site).href} />
-    <link rel="alternate" hreflang="en" href={new URL('/en/', site).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
+    {/*
+      Языки главной переключаются на одном URL, поэтому hreflang-альтернатив
+      у этой страницы нет: индексируется только русская версия.
+      Маршруты /kz/ и /en/ сохранены, их SEO не менялось.
+    */}
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
@@ -120,7 +122,7 @@ const jsonLd = {
   </head>
 
   <body class="h-body">
-    <a class="h-skip" href="#main">Перейти к содержимому</a>
+    <a class="h-skip" href="#main" data-i18n="ui.skip">Перейти к содержимому</a>
     <SiteHeader />
 
     <main id="main">
@@ -131,7 +133,13 @@ const jsonLd = {
 
     <dialog class="h-lightbox" id="h-lightbox" aria-labelledby="h-lightbox-caption">
       <div class="h-lightbox__panel">
-        <button class="h-lightbox__close" type="button" data-lightbox-close aria-label="Закрыть просмотр">
+        <button
+          class="h-lightbox__close"
+          type="button"
+          data-lightbox-close
+          aria-label="Закрыть просмотр"
+          data-i18n-attrs="aria-label:ui.lightboxClose"
+        >
           <Icon name="close" />
         </button>
         <figure class="h-lightbox__figure">
@@ -140,6 +148,89 @@ const jsonLd = {
         </figure>
       </div>
     </dialog>
+
+    {/*
+      Экспериментальная локализация одной страницы без смены URL.
+      Скрипт стоит в конце body и выполняется синхронно: разметка уже
+      разобрана, а первая отрисовка ещё не произошла, поэтому сохранённый
+      язык применяется без мигания и без сдвига layout.
+      Русские строки берутся из самой разметки, а не из полезной нагрузки,
+      поэтому без JavaScript страница остаётся полноценно русской.
+    */}
+    <script is:inline define:vars={{ i18n: homeI18nPayload }}>
+      (() => {
+        const root = document.documentElement;
+        const langAttr = new Map(i18n.locales.map((item) => [item.id, item.lang]));
+        const texts = [];
+        const attrs = [];
+
+        // Заголовок может содержать иконку, поэтому меняется только текстовый узел.
+        const firstText = (element) => {
+          for (const node of element.childNodes) {
+            if (node.nodeType === 3 && node.textContent.trim()) return node;
+          }
+          return null;
+        };
+
+        document.querySelectorAll('[data-i18n]').forEach((element) => {
+          const node = firstText(element);
+          texts.push({
+            key: element.dataset.i18n,
+            target: node || element,
+            base: node ? node.textContent : element.textContent
+          });
+        });
+
+        document.querySelectorAll('[data-i18n-attrs]').forEach((element) => {
+          element.dataset.i18nAttrs.split(';').forEach((entry) => {
+            const separator = entry.indexOf(':');
+            if (separator < 1) return;
+            const attr = entry.slice(0, separator).trim();
+            const key = entry.slice(separator + 1).trim();
+            attrs.push({ element, attr, key, base: element.getAttribute(attr) || '' });
+          });
+        });
+
+        // Ключ без подтверждённого перевода остаётся русским из разметки.
+        const resolve = (locale, key, base) => {
+          if (locale === 'ru') return base;
+          const table = i18n.overrides[locale];
+          return (table && table[key]) || base;
+        };
+
+        let current = 'ru';
+
+        const apply = (locale) => {
+          const next = langAttr.has(locale) ? locale : 'ru';
+          current = next;
+          root.lang = langAttr.get(next);
+          texts.forEach((item) => {
+            item.target.textContent = resolve(next, item.key, item.base);
+          });
+          attrs.forEach((item) => {
+            item.element.setAttribute(item.attr, resolve(next, item.key, item.base));
+          });
+          document.dispatchEvent(new CustomEvent('jaeu:lang', { detail: next }));
+        };
+
+        window.jaeuLang = {
+          storageKey: i18n.storageKey,
+          locales: i18n.locales.map((item) => item.id),
+          apply,
+          get current() {
+            return current;
+          }
+        };
+
+        let stored = null;
+        try {
+          stored = localStorage.getItem(i18n.storageKey);
+        } catch {
+          stored = null;
+        }
+        if (stored && stored !== 'ru') apply(stored);
+      })();
+    </script>
 
     <script>
       import '../scripts/home';

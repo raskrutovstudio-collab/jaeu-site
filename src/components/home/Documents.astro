@@ -20,20 +20,20 @@ import { withBase } from '../../data/site';
     </div>
 
     <div class="h-section__head">
-      <h2 class="h-h2" id="documents-title">{documents.h2}</h2>
+      <h2 class="h-h2" id="documents-title" data-i18n="documents.h2">{documents.h2}</h2>
       <a class="h-link" href={routes.documents}>
-        {documents.allLink}
+        <span data-i18n="documents.allLink">{documents.allLink}</span>
         <Icon name="arrow" class="h-link__arrow" />
       </a>
     </div>
 
     <ul class="h-docs">
-      {documents.items.map((title) => (
+      {documents.items.map((title, index) => (
         <li class="h-docs__item">
           <a class="h-docs__link" href={routes.documents}>
             <Icon name="document" class="h-docs__icon" />
-            <span class="h-docs__name">{title}</span>
-            <span class="h-docs__hint">{documents.hint}</span>
+            <span class="h-docs__name" data-i18n={`documents.items.${index}`}>{title}</span>
+            <span class="h-docs__hint" data-i18n="documents.hint">{documents.hint}</span>
           </a>
         </li>
       ))}

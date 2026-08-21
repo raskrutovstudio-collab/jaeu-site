@@ -25,11 +25,11 @@ import { withBase } from '../../data/site';
 
   <div class="h-shell h-membership__inner">
     <div class="h-membership__text">
-      <h2 class="h-h2 h-membership__title" id="membership-title">{membership.h2}</h2>
-      <p class="h-membership__lead">{membership.text}</p>
+      <h2 class="h-h2 h-membership__title" id="membership-title" data-i18n="membership.h2">{membership.h2}</h2>
+      <p class="h-membership__lead" data-i18n="membership.text">{membership.text}</p>
     </div>
     <a class="h-btn h-btn--light" href={routes.membership}>
-      {membership.cta}
+      <span data-i18n="ui.becomeMember">{membership.cta}</span>
       <Icon name="arrow" class="h-btn__arrow" />
     </a>
   </div>

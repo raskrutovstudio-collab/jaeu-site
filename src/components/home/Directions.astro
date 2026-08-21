@@ -7,19 +7,19 @@ import { withBase } from '../../data/site';
 <section class="h-section h-section--stone" aria-labelledby="directions-title" data-reveal>
   <div class="h-shell">
     <div class="h-section__head h-section__head--center">
-      <h2 class="h-h2" id="directions-title">{directions.h2}</h2>
+      <h2 class="h-h2" id="directions-title" data-i18n="directions.h2">{directions.h2}</h2>
       <hr class="h-rule" />
-      <p class="h-text">{directions.lead}</p>
+      <p class="h-text" data-i18n="directions.lead">{directions.lead}</p>
     </div>
 
     <div class="h-dirs">
-      {directions.items.map((item) => (
+      {directions.items.map((item, index) => (
         <article class="h-dirs__item">
           <Icon name={item.icon} class="h-dirs__icon" />
-          <h3 class="h-h3">{item.title}</h3>
-          <p class="h-dirs__text">{item.text}</p>
+          <h3 class="h-h3" data-i18n={`directions.items.${index}.title`}>{item.title}</h3>
+          <p class="h-dirs__text" data-i18n={`directions.items.${index}.text`}>{item.text}</p>
           <a class="h-link" href={item.href}>
-            Подробнее
+            <span data-i18n="ui.readMore">Подробнее</span>
             <Icon name="arrow" class="h-link__arrow" />
           </a>
         </article>
@@ -33,6 +33,7 @@ import { withBase } from '../../data/site';
           width="1160"
           height="326"
           alt={directions.reviewAlt}
+          data-i18n-attrs="alt:directions.reviewAlt"
           loading="lazy"
           decoding="async"
         />
@@ -46,6 +47,7 @@ import { withBase } from '../../data/site';
           width="1160"
           height="338"
           alt={directions.craftAlt}
+          data-i18n-attrs="alt:directions.craftAlt"
           loading="lazy"
           decoding="async"
         />

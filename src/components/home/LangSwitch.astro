@@ -1,0 +1,27 @@
+---
+import { homeLocales } from '../../data/homeI18n';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+{/*
+  Экспериментальный переключатель без отдельных URL: кнопки меняют язык на
+  месте, поэтому активное состояние выражается через aria-pressed, а не
+  aria-current. Без JavaScript кнопки неактивны и страница остаётся русской.
+*/}
+<div class:list={['h-langs', className]} role="group" data-i18n-attrs="aria-label:ui.langLabel" aria-label="Выбор языка">
+  {homeLocales.map((locale) => (
+    <button
+      class="h-langs__link"
+      type="button"
+      data-lang-switch={locale.id}
+      aria-pressed={locale.id === 'ru' ? 'true' : 'false'}
+    >
+      {locale.code}
+    </button>
+  ))}
+</div>

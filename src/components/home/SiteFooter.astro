@@ -1,5 +1,6 @@
 ---
-import { footer, languages, org, routes } from '../../data/home';
+import LangSwitch from './LangSwitch.astro';
+import { footer, org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const year = new Date().getFullYear();
@@ -10,25 +11,31 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
   <div class="h-shell">
     <div class="h-footer__grid">
       <div>
-        <a class="h-footer__logo" href={routes.home} aria-label={`${org.shortName} — на главную`}>
+        <a
+          class="h-footer__logo"
+          href={routes.home}
+          aria-label={`${org.shortName} — на главную`}
+          data-i18n-attrs="aria-label:ui.logoAria"
+        >
           <img
             src={withBase('/assets/jaeu/logo-jaeu-invert.webp')}
             width="210"
             height="66"
             alt="Ассоциация ювелиров Евразийского экономического союза"
+            data-i18n-attrs="alt:ui.logoAlt"
             loading="lazy"
           />
         </a>
-        <p class="h-footer__blurb">{footer.blurb}</p>
+        <p class="h-footer__blurb" data-i18n="footer.blurb">{footer.blurb}</p>
       </div>
 
-      {footer.columns.map((column) => (
-        <nav aria-label={column.heading}>
-          <p class="h-footer__heading">{column.heading}</p>
+      {footer.columns.map((column, columnIndex) => (
+        <nav aria-label={column.heading} data-i18n-attrs={`aria-label:footer.columns.${columnIndex}.heading`}>
+          <p class="h-footer__heading" data-i18n={`footer.columns.${columnIndex}.heading`}>{column.heading}</p>
           <ul class="h-footer__list">
             {column.links.map((link) => (
               <li>
-                <a class="h-footer__link" href={link.href}>{link.label}</a>
+                <a class="h-footer__link" href={link.href} data-i18n={link.i18n}>{link.label}</a>
               </li>
             ))}
           </ul>
@@ -36,25 +43,21 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
       ))}
 
       <div>
-        <p class="h-footer__heading">{footer.contactsHeading}</p>
+        <p class="h-footer__heading" data-i18n="nav.contacts">{footer.contactsHeading}</p>
         <dl class="h-footer__contacts">
-          <dt>Электронная почта</dt>
+          <dt data-i18n="footer.emailLabel">Электронная почта</dt>
           <dd><a href={`mailto:${org.email}`}>{org.email}</a></dd>
-          <dt>Телефон</dt>
+          <dt data-i18n="footer.phoneLabel">Телефон</dt>
           <dd><a href={`tel:${org.phoneHref}`}>{org.phone}</a></dd>
-          <dt>Адрес</dt>
-          <dd>Республика Казахстан, {addressLine}</dd>
+          <dt data-i18n="footer.addressLabel">Адрес</dt>
+          <dd data-i18n="footer.addressValue">Республика Казахстан, {addressLine}</dd>
         </dl>
       </div>
     </div>
 
     <div class="h-footer__bottom">
-      <p>© {year} {org.shortName}. {footer.rights}</p>
-      <p class="h-footer__langs" aria-label="Выбор языка">
-        {languages.map((lang) => (
-          <a href={lang.href} aria-current={lang.current ? 'page' : undefined}>{lang.code}</a>
-        ))}
-      </p>
+      <p>© {year} <span data-i18n="ui.orgShortName">{org.shortName}</span>. <span data-i18n="footer.rights">{footer.rights}</span></p>
+      <LangSwitch class="h-footer__langs" />
     </div>
   </div>
 </footer>

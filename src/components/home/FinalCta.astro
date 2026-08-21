@@ -5,16 +5,16 @@ import { finalCta, org, routes } from '../../data/home';
 
 <section class="h-final" aria-labelledby="final-title" data-reveal>
   <div class="h-shell h-final__inner">
-    <h2 class="h-h2 h-final__title" id="final-title">{finalCta.h2}</h2>
+    <h2 class="h-h2 h-final__title" id="final-title" data-i18n="finalCta.h2">{finalCta.h2}</h2>
     <hr class="h-rule" />
-    <p class="h-final__text">{finalCta.text}</p>
+    <p class="h-final__text" data-i18n="finalCta.text">{finalCta.text}</p>
     <div class="h-final__actions">
       <a class="h-btn h-btn--primary" href={routes.membership}>
-        {finalCta.primary}
+        <span data-i18n="ui.becomeMember">{finalCta.primary}</span>
         <Icon name="arrow" class="h-btn__arrow" />
       </a>
       <a class="h-link" href={`mailto:${org.email}`}>
-        {finalCta.secondary}
+        <span data-i18n="finalCta.secondary">{finalCta.secondary}</span>
         <Icon name="arrow" class="h-link__arrow" />
       </a>
     </div>

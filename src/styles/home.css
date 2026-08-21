@@ -354,10 +354,14 @@ body.h-body {
 
 .h-langs__link {
   padding: 4px 7px;
+  font-family: var(--sans);
   font-size: 13px;
   font-weight: 500;
   color: var(--muted);
   text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
   transition: color 180ms var(--ease);
 }
 
@@ -369,7 +373,11 @@ body.h-body {
   color: var(--gold);
 }
 
-.h-langs__link[aria-current] {
+/*
+  Язык меняется на месте, без перехода на другой URL, поэтому активное
+  состояние выражается через aria-pressed.
+*/
+.h-langs__link[aria-pressed='true'] {
   color: var(--navy-deep);
   font-weight: 600;
 }
@@ -1447,20 +1455,18 @@ body.h-body {
   gap: 2px;
 }
 
-.h-footer__langs a {
+.h-footer__langs .h-langs__link {
   padding: 4px 9px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  transition: color 180ms var(--ease);
 }
 
-.h-footer__langs a + a {
+.h-footer__langs .h-langs__link + .h-langs__link {
   border-left: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.h-footer__langs a:hover,
-.h-footer__langs a[aria-current] {
+.h-footer__langs .h-langs__link:hover,
+.h-footer__langs .h-langs__link[aria-pressed='true'] {
   color: var(--gold-light);
 }
 
@@ -1793,6 +1799,14 @@ body.h-body {
 
   .h-hero__actions .h-btn {
     width: 100%;
+  }
+
+  /*
+    Казахские и английские подписи кнопок длиннее русских, а на узком
+    экране запрет переноса выдавливал бы содержимое за границу вьюпорта.
+  */
+  .h-btn {
+    white-space: normal;
   }
 
   .h-hero__media::after {

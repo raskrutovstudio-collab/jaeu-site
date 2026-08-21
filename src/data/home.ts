@@ -41,18 +41,12 @@ export const org = {
 } as const;
 
 export const nav = [
-  { href: routes.about, label: 'Об Ассоциации' },
-  { href: routes.activities, label: 'Деятельность' },
-  { href: routes.expertCouncil, label: 'Экспертный совет' },
-  { href: routes.news, label: 'Новости' },
-  { href: routes.documents, label: 'Документы' },
-  { href: routes.contacts, label: 'Контакты' }
-] as const;
-
-export const languages = [
-  { code: 'RU', href: routes.home, current: true },
-  { code: 'KZ', href: routes.kz, current: false },
-  { code: 'EN', href: routes.en, current: false }
+  { href: routes.about, label: 'Об Ассоциации', i18n: 'nav.about' },
+  { href: routes.activities, label: 'Деятельность', i18n: 'nav.activities' },
+  { href: routes.expertCouncil, label: 'Экспертный совет', i18n: 'nav.experts' },
+  { href: routes.news, label: 'Новости', i18n: 'nav.news' },
+  { href: routes.documents, label: 'Документы', i18n: 'nav.documents' },
+  { href: routes.contacts, label: 'Контакты', i18n: 'nav.contacts' }
 ] as const;
 
 export const hero = {
@@ -266,25 +260,25 @@ export const footer = {
     {
       heading: 'Ассоциация',
       links: [
-        { href: routes.about, label: 'Об Ассоциации' },
-        { href: routes.activities, label: 'Деятельность' },
-        { href: routes.expertCouncil, label: 'Экспертный совет' }
+        { href: routes.about, label: 'Об Ассоциации', i18n: 'nav.about' },
+        { href: routes.activities, label: 'Деятельность', i18n: 'nav.activities' },
+        { href: routes.expertCouncil, label: 'Экспертный совет', i18n: 'nav.experts' }
       ]
     },
     {
       heading: 'Членам Ассоциации',
       links: [
-        { href: routes.membership, label: 'Членство' },
-        { href: routes.documents, label: 'Документы' },
-        { href: routes.knowledge, label: 'Центр знаний' }
+        { href: routes.membership, label: 'Членство', i18n: 'nav.membership' },
+        { href: routes.documents, label: 'Документы', i18n: 'nav.documents' },
+        { href: routes.knowledge, label: 'Центр знаний', i18n: 'nav.knowledge' }
       ]
     },
     {
       heading: 'Материалы',
       links: [
-        { href: routes.news, label: 'Новости' },
-        { href: routes.reports, label: 'Отчёты' },
-        { href: routes.contacts, label: 'Контакты' }
+        { href: routes.news, label: 'Новости', i18n: 'nav.news' },
+        { href: routes.reports, label: 'Отчёты', i18n: 'nav.reports' },
+        { href: routes.contacts, label: 'Контакты', i18n: 'nav.contacts' }
       ]
     }
   ],

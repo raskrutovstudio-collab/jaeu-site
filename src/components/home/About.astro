@@ -8,22 +8,22 @@ import { withBase } from '../../data/site';
   <div class="h-shell">
     <div class="h-about__grid">
       <div class="h-about__main">
-        <h2 class="h-h2" id="about-title">{about.h2}</h2>
+        <h2 class="h-h2" id="about-title" data-i18n="about.h2">{about.h2}</h2>
         <hr class="h-rule" />
-        <p class="h-text">{about.lead}</p>
-        <p class="h-text">{about.text}</p>
-        <p class="h-about__meta">{org.registeredLabel}</p>
+        <p class="h-text" data-i18n="about.lead">{about.lead}</p>
+        <p class="h-text" data-i18n="about.text">{about.text}</p>
+        <p class="h-about__meta" data-i18n="about.registered">{org.registeredLabel}</p>
         <a class="h-link" href={routes.about}>
-          {about.link}
+          <span data-i18n="about.link">{about.link}</span>
           <Icon name="arrow" class="h-link__arrow" />
         </a>
       </div>
 
       <ul class="h-points">
-        {about.points.map((point) => (
+        {about.points.map((point, index) => (
           <li class="h-points__item">
-            <h3 class="h-h3 h-points__title">{point.title}</h3>
-            <p class="h-points__text">{point.text}</p>
+            <h3 class="h-h3 h-points__title" data-i18n={`about.points.${index}.title`}>{point.title}</h3>
+            <p class="h-points__text" data-i18n={`about.points.${index}.text`}>{point.text}</p>
           </li>
         ))}
       </ul>
@@ -36,6 +36,7 @@ import { withBase } from '../../data/site';
           width="680"
           height="907"
           alt={about.portraitAlt}
+          data-i18n-attrs="alt:about.portraitAlt"
           loading="lazy"
           decoding="async"
         />
@@ -49,6 +50,7 @@ import { withBase } from '../../data/site';
           width="1200"
           height="800"
           alt={about.imageAlt}
+          data-i18n-attrs="alt:about.imageAlt"
           loading="lazy"
           decoding="async"
         />

@@ -4,15 +4,16 @@ import { contour } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const full = withBase('/assets/jaeu/contour-1600.webp');
+const lightboxKeys = 'data-lightbox-alt:contour.imageAlt;data-lightbox-caption:contour.caption';
 ---
 
 <section class="h-section h-section--white" aria-labelledby="contour-title" data-reveal>
   <div class="h-shell h-split h-split--text-left">
     <div class="h-split__text">
-      <p class="h-eyebrow">Институциональное взаимодействие</p>
-      <h2 class="h-h2" id="contour-title">{contour.h2}</h2>
+      <p class="h-eyebrow" data-i18n="contour.eyebrow">Институциональное взаимодействие</p>
+      <h2 class="h-h2" id="contour-title" data-i18n="contour.h2">{contour.h2}</h2>
       <hr class="h-rule" />
-      <p class="h-text">{contour.text}</p>
+      <p class="h-text" data-i18n="contour.text">{contour.text}</p>
       <button
         class="h-link"
         type="button"
@@ -21,8 +22,9 @@ const full = withBase('/assets/jaeu/contour-1600.webp');
         data-lightbox-caption={contour.caption}
         data-lightbox-width="1600"
         data-lightbox-height="1097"
+        data-i18n-attrs={lightboxKeys}
       >
-        {contour.link}
+        <span data-i18n="contour.link">{contour.link}</span>
         <Icon name="arrow" class="h-link__arrow" />
       </button>
     </div>
@@ -37,6 +39,7 @@ const full = withBase('/assets/jaeu/contour-1600.webp');
         data-lightbox-width="1600"
         data-lightbox-height="1097"
         aria-label="Открыть инфографику институционального контура в полном размере"
+        data-i18n-attrs={`aria-label:contour.figureAria;${lightboxKeys}`}
       >
         <img
           src={full}
@@ -45,11 +48,12 @@ const full = withBase('/assets/jaeu/contour-1600.webp');
           width="1600"
           height="1097"
           alt={contour.imageAlt}
+          data-i18n-attrs="alt:contour.imageAlt"
           loading="lazy"
           decoding="async"
         />
       </button>
-      <figcaption class="h-figure__caption">{contour.caption}</figcaption>
+      <figcaption class="h-figure__caption" data-i18n="contour.caption">{contour.caption}</figcaption>
     </figure>
   </div>
 
@@ -62,6 +66,7 @@ const full = withBase('/assets/jaeu/contour-1600.webp');
         width="1160"
         height="261"
         alt={contour.contextAlt}
+        data-i18n-attrs="alt:contour.contextAlt"
         loading="lazy"
         decoding="async"
       />

@@ -4,6 +4,7 @@ import { community } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const full = withBase('/assets/jaeu/composition-1400.webp');
+const lightboxKeys = 'data-lightbox-alt:community.imageAlt;data-lightbox-caption:community.caption';
 ---
 
 <section class="h-section h-section--white" aria-labelledby="community-title" data-reveal>
@@ -19,6 +20,7 @@ const full = withBase('/assets/jaeu/composition-1400.webp');
           data-lightbox-width="1400"
           data-lightbox-height="759"
           aria-label="Открыть схему состава Ассоциации в полном размере"
+          data-i18n-attrs={`aria-label:community.figureAria;${lightboxKeys}`}
         >
           <img
             src={full}
@@ -27,18 +29,19 @@ const full = withBase('/assets/jaeu/composition-1400.webp');
             width="1400"
             height="759"
             alt={community.imageAlt}
+            data-i18n-attrs="alt:community.imageAlt"
             loading="lazy"
             decoding="async"
           />
         </button>
-        <figcaption class="h-figure__caption">{community.caption}</figcaption>
+        <figcaption class="h-figure__caption" data-i18n="community.caption">{community.caption}</figcaption>
       </figure>
 
       <div class="h-split__text">
-        <p class="h-eyebrow">{community.eyebrow}</p>
-        <h2 class="h-h2" id="community-title">{community.h2}</h2>
+        <p class="h-eyebrow" data-i18n="community.eyebrow">{community.eyebrow}</p>
+        <h2 class="h-h2" id="community-title" data-i18n="community.h2">{community.h2}</h2>
         <hr class="h-rule" />
-        <p class="h-text">{community.text}</p>
+        <p class="h-text" data-i18n="community.text">{community.text}</p>
         <button
           class="h-btn h-btn--outline"
           type="button"
@@ -47,8 +50,9 @@ const full = withBase('/assets/jaeu/composition-1400.webp');
           data-lightbox-caption={community.caption}
           data-lightbox-width="1400"
           data-lightbox-height="759"
+          data-i18n-attrs={lightboxKeys}
         >
-          {community.cta}
+          <span data-i18n="community.cta">{community.cta}</span>
           <Icon name="arrow" class="h-btn__arrow" />
         </button>
       </div>
@@ -63,13 +67,14 @@ const full = withBase('/assets/jaeu/composition-1400.webp');
           width="820"
           height="656"
           alt={community.band.imageAlt}
+          data-i18n-attrs="alt:community.band.imageAlt"
           loading="lazy"
           decoding="async"
         />
       </figure>
       <div class="h-band__text">
-        <h3 class="h-h3">{community.band.title}</h3>
-        <p class="h-text">{community.band.text}</p>
+        <h3 class="h-h3" data-i18n="community.band.title">{community.band.title}</h3>
+        <p class="h-text" data-i18n="community.band.text">{community.band.text}</p>
       </div>
     </div>
   </div>

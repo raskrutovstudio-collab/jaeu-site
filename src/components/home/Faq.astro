@@ -10,9 +10,9 @@ import { faq } from '../../data/home';
 
   <div class="h-shell h-faq">
     <div class="h-split__text">
-      <h2 class="h-h2" id="faq-title">{faq.h2}</h2>
+      <h2 class="h-h2" id="faq-title" data-i18n="faq.h2">{faq.h2}</h2>
       <hr class="h-rule" />
-      <p class="h-text">{faq.lead}</p>
+      <p class="h-text" data-i18n="faq.lead">{faq.lead}</p>
     </div>
 
     <div class="h-faq__list">
@@ -27,7 +27,7 @@ import { faq } from '../../data/home';
               aria-expanded={index === 0 ? 'true' : 'false'}
               aria-controls={`faq-panel-${index}`}
             >
-              <span>{item.q}</span>
+              <span data-i18n={`faq.items.${index}.q`}>{item.q}</span>
               <span class="h-faq__sign" aria-hidden="true"></span>
             </button>
           </h3>
@@ -38,7 +38,7 @@ import { faq } from '../../data/home';
             aria-labelledby={`faq-trigger-${index}`}
             hidden={index !== 0}
           >
-            <p>{item.a}</p>
+            <p data-i18n={`faq.items.${index}.a`}>{item.a}</p>
           </div>
         </div>
       ))}

@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
-import { languages, nav, org, routes } from '../../data/home';
+import LangSwitch from './LangSwitch.astro';
+import { nav, org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const cta = 'Стать членом Ассоциации';
@@ -8,36 +9,36 @@ const cta = 'Стать членом Ассоциации';
 
 <header class="h-header">
   <div class="h-shell h-shell--wide h-header__bar">
-    <a class="h-logo" href={routes.home} aria-label={`${org.shortName} — на главную`}>
+    <a
+      class="h-logo"
+      href={routes.home}
+      aria-label={`${org.shortName} — на главную`}
+      data-i18n-attrs="aria-label:ui.logoAria"
+    >
       <img
         src={withBase('/assets/jaeu/logo-jaeu.webp')}
         width="190"
         height="60"
         alt="Ассоциация ювелиров Евразийского экономического союза"
+        data-i18n-attrs="alt:ui.logoAlt"
         fetchpriority="high"
       />
     </a>
 
-    <nav class="h-nav" aria-label="Основная навигация">
+    <nav class="h-nav" data-i18n-attrs="aria-label:ui.navLabel" aria-label="Основная навигация">
       <ul class="h-nav__list">
         {nav.map((item) => (
           <li>
-            <a class="h-nav__link" href={item.href}>{item.label}</a>
+            <a class="h-nav__link" href={item.href} data-i18n={item.i18n}>{item.label}</a>
           </li>
         ))}
       </ul>
     </nav>
 
     <div class="h-header__aside">
-      <p class="h-langs" aria-label="Выбор языка">
-        {languages.map((lang) => (
-          <a class="h-langs__link" href={lang.href} aria-current={lang.current ? 'page' : undefined}>
-            {lang.code}
-          </a>
-        ))}
-      </p>
+      <LangSwitch />
       <a class="h-btn h-btn--primary h-header__cta" href={routes.membership}>
-        {cta}
+        <span data-i18n="ui.becomeMember">{cta}</span>
         <Icon name="arrow" class="h-btn__arrow" />
       </a>
     </div>
@@ -49,6 +50,9 @@ const cta = 'Стать членом Ассоциации';
       aria-expanded="false"
       aria-controls="h-mobile-menu"
       aria-label="Открыть меню"
+      data-label-open="Открыть меню"
+      data-label-close="Закрыть меню"
+      data-i18n-attrs="aria-label:ui.menuOpen;data-label-open:ui.menuOpen;data-label-close:ui.menuClose"
     >
       <Icon name="burger" class="h-burger__open" />
       <Icon name="close" class="h-burger__close" />
@@ -57,25 +61,19 @@ const cta = 'Стать членом Ассоциации';
 
   <div class="h-mobile" id="h-mobile-menu">
     <div class="h-shell h-shell--wide h-mobile__inner">
-      <nav aria-label="Мобильная навигация">
+      <nav aria-label="Мобильная навигация" data-i18n-attrs="aria-label:ui.navLabelMobile">
         <ul class="h-mobile__list">
           {nav.map((item) => (
             <li>
-              <a class="h-mobile__link" href={item.href}>{item.label}</a>
+              <a class="h-mobile__link" href={item.href} data-i18n={item.i18n}>{item.label}</a>
             </li>
           ))}
         </ul>
       </nav>
       <div class="h-mobile__foot">
-        <p class="h-langs" aria-label="Выбор языка">
-          {languages.map((lang) => (
-            <a class="h-langs__link" href={lang.href} aria-current={lang.current ? 'page' : undefined}>
-              {lang.code}
-            </a>
-          ))}
-        </p>
+        <LangSwitch />
         <a class="h-btn h-btn--primary" href={routes.membership}>
-          {cta}
+          <span data-i18n="ui.becomeMember">{cta}</span>
           <Icon name="arrow" class="h-btn__arrow" />
         </a>
       </div>

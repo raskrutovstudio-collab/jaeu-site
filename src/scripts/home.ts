@@ -12,12 +12,19 @@ function initMobileMenu(): void {
 
   const setState = (open: boolean) => {
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    // Подписи локализованы через data-i18n-attrs, поэтому берутся из разметки.
+    const label = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
+    if (label) toggle.setAttribute('aria-label', label);
     panel.classList.toggle('is-open', open);
   };
 
   toggle.addEventListener('click', () => {
     setState(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Смена языка переписывает aria-label, поэтому состояние синхронизируем.
+  document.addEventListener('jaeu:lang', () => {
+    setState(toggle.getAttribute('aria-expanded') === 'true');
   });
 
   document.addEventListener('keydown', (event) => {
@@ -31,6 +38,45 @@ function initMobileMenu(): void {
   media.addEventListener('change', (event) => {
     if (event.matches) setState(false);
   });
+}
+
+/**
+ * Переключатель языка главной страницы. URL не меняется: подстановка строк
+ * выполняется inline-скриптом из HomeLayout, здесь только органы управления,
+ * состояние aria-pressed и запоминание выбора.
+ */
+function initLangSwitch(): void {
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-lang-switch]');
+  if (!buttons.length) return;
+
+  const i18n = window.jaeuLang;
+  if (!i18n) return;
+
+  const syncState = (locale: string) => {
+    buttons.forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.langSwitch === locale));
+    });
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const locale = button.dataset.langSwitch;
+      if (!locale || locale === i18n.current) return;
+      i18n.apply(locale);
+      try {
+        window.localStorage.setItem(i18n.storageKey, locale);
+      } catch {
+        // Приватный режим блокирует хранилище — выбор действует до перезагрузки.
+      }
+    });
+  });
+
+  document.addEventListener('jaeu:lang', (event) => {
+    const detail = (event as CustomEvent<string>).detail;
+    if (typeof detail === 'string') syncState(detail);
+  });
+
+  syncState(i18n.current);
 }
 
 function initFaq(): void {
@@ -154,6 +200,7 @@ function initLightbox(): void {
 }
 
 initMobileMenu();
+initLangSwitch();
 initFaq();
 initLightbox();
 initReveal();
