@@ -3,11 +3,11 @@ import Icon from './Icon.astro';
 import { news, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
-/** Соотношения сторон отличаются у каждого кадра серии — задают ритм блока. */
-const thumbSizes = {
-  'news-expertise': { width: 400, height: 400 },
-  'news-event': { width: 400, height: 171 }
-} as const;
+/*
+  Обе компактные новости используют один медиаформат: квадрат в одинаковом
+  контейнере. Разный масштаб оставлен только за крупной новостью сверху.
+*/
+const thumb = 400;
 ---
 
 <section class="h-section h-section--ivory" aria-labelledby="news-title" data-reveal>
@@ -51,8 +51,8 @@ const thumbSizes = {
                   src={withBase(`/assets/jaeu/${item.image}-400.webp`)}
                   srcset={`${withBase(`/assets/jaeu/${item.image}-240.webp`)} 240w, ${withBase(`/assets/jaeu/${item.image}-400.webp`)} 400w`}
                   sizes="(min-width: 1041px) 168px, 116px"
-                  width={thumbSizes[item.image].width}
-                  height={thumbSizes[item.image].height}
+                  width={thumb}
+                  height={thumb}
                   alt={item.imageAlt}
                   data-i18n-attrs={`alt:news.items.${index}.imageAlt`}
                   loading="lazy"

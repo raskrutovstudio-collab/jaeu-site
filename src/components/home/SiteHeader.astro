@@ -5,6 +5,8 @@ import { nav, org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const cta = 'Стать членом Ассоциации';
+/* В строке шапки кнопка соседствует с восемью пунктами меню, поэтому короче. */
+const ctaShort = 'Стать членом';
 ---
 
 <header class="h-header">
@@ -38,7 +40,7 @@ const cta = 'Стать членом Ассоциации';
     <div class="h-header__aside">
       <LangSwitch />
       <a class="h-btn h-btn--primary h-header__cta" href={routes.membership}>
-        <span data-i18n="ui.becomeMember">{cta}</span>
+        <span data-i18n="ui.becomeMemberShort">{ctaShort}</span>
         <Icon name="arrow" class="h-btn__arrow" />
       </a>
     </div>

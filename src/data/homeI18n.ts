@@ -61,6 +61,11 @@ export const homeTranslations = {
   'ui.menuClose': reuse(ui.kz.menuClose, ui.en.menuClose),
   'ui.readMore': reuse(ui.kz.readMore, ui.en.readMore),
   'ui.becomeMember': reuse(homeCopy.kz.ctaTitle, homeCopy.en.ctaTitle),
+  /*
+    Короткая подпись только для кнопки в шапке: полная формулировка вместе
+    с восемью пунктами меню не укладывается в строку на 1440 px.
+  */
+  'ui.becomeMemberShort': pair('Мүше болу', 'Join'),
   'ui.lightboxClose': pair('Қарауды жабу', 'Close the viewer'),
   'ui.orgShortName': reuse(ui.kz.brandSub, ui.en.brandSub),
   'ui.logoAria': pair(
@@ -76,6 +81,12 @@ export const homeTranslations = {
   'nav.about': reuse(ui.kz.nav.about, ui.en.nav.about),
   'nav.activities': reuse(ui.kz.nav.activities, ui.en.nav.activities),
   'nav.experts': reuse(ui.kz.nav.experts, ui.en.nav.experts),
+  'nav.cooperation': pair('Ынтымақтастық', 'Cooperation'),
+  /*
+    Отдельный пункт исходной шапки. Не путать с `nav.knowledge` — «Центр
+    знаний» в подвале; оба ведут на /knowledge/, но подписи разные.
+  */
+  'nav.knowledgeBase': pair('Білім базасы', 'Knowledge base'),
   'nav.membership': reuse(ui.kz.nav.membership, ui.en.nav.membership),
   'nav.knowledge': reuse(ui.kz.nav.knowledge, ui.en.nav.knowledge),
   'nav.news': reuse(ui.kz.nav.news, ui.en.nav.news),
@@ -293,6 +304,10 @@ export const homeTranslations = {
   'documents.h2': pair('Құжаттар мен материалдар', 'Documents and materials'),
   'documents.allLink': reuse(ui.kz.allDocuments, ui.en.allDocuments),
   'documents.hint': pair('Құжаттар бөлімі', 'Documents section'),
+  'documents.beltAlt': pair(
+    'Жұмыс үстеліндегі құжаттары бар ашық қалта, лупа және тіркеуші-қалта',
+    'An open folder of documents, a magnifying glass and a lever-arch folder on a desk'
+  ),
   'documents.items.0': pair(
     'ЕАЭО зергерлер қауымдастығына кіру тәртібі',
     'Procedure for joining the Association of Jewellers of the EAEU'

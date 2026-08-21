@@ -40,10 +40,17 @@ export const org = {
   }
 } as const;
 
+/*
+  Состав пунктов повторяет исходную шапку jaeu.kz. «Сотрудничество» ведёт на
+  блок членства этой же страницы: отдельного маршрута под него в проекте нет,
+  а пустую страницу создавать нельзя.
+*/
 export const nav = [
   { href: routes.about, label: 'Об Ассоциации', i18n: 'nav.about' },
   { href: routes.activities, label: 'Деятельность', i18n: 'nav.activities' },
   { href: routes.expertCouncil, label: 'Экспертный совет', i18n: 'nav.experts' },
+  { href: '#membership', label: 'Сотрудничество', i18n: 'nav.cooperation' },
+  { href: routes.knowledge, label: 'База знаний', i18n: 'nav.knowledgeBase' },
   { href: routes.news, label: 'Новости', i18n: 'nav.news' },
   { href: routes.documents, label: 'Документы', i18n: 'nav.documents' },
   { href: routes.contacts, label: 'Контакты', i18n: 'nav.contacts' }
@@ -198,7 +205,7 @@ export const news = {
       date: '2025-04-02',
       dateLabel: '2 апреля 2025',
       title: 'Экспертное совещание по совершенствованию государственного регулирования отрасли',
-      image: 'news-event',
+      image: 'news-event-hall',
       imageAlt: 'Зал отраслевого мероприятия с участниками и раздаточными материалами'
     }
   ]
@@ -209,6 +216,8 @@ export const documents = {
   h2: 'Документы и материалы',
   allLink: 'Все документы',
   hint: 'Раздел документов',
+  beltAlt:
+    'Раскрытая папка с документами, увеличительное стекло и папка-регистратор на рабочем столе',
   items: [
     'Порядок вступления в Ассоциацию ювелиров ЕАЭС',
     'Положение об уплате членских взносов',
