@@ -4,9 +4,10 @@ import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
 import Icon from '../components/home/Icon.astro';
 import { faq, meta, org } from '../data/home';
+import { canonicalUrl, productionOrigin, withBase } from '../data/site';
 
-const site = Astro.site ?? new URL('https://jaeu.kz');
-const canonical = new URL('/', site).href;
+const site = new URL(productionOrigin);
+const canonical = canonicalUrl('/');
 const ogImage = new URL('/assets/jaeu/og-home.jpg', site).href;
 
 const jsonLd = {
@@ -71,7 +72,7 @@ const jsonLd = {
     <meta name="description" content={meta.description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#202A57" />
-    <link rel="icon" type="image/svg+xml" href="/assets/jaeu-emblem.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/assets/jaeu-emblem.svg')} />
 
     <link rel="alternate" hreflang="ru-KZ" href={new URL('/', site).href} />
     <link rel="alternate" hreflang="kk-KZ" href={new URL('/kz/', site).href} />
@@ -100,7 +101,13 @@ const jsonLd = {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap"
     />
-    <link rel="preload" as="image" href="/assets/jaeu/hero-1600.webp" imagesrcset="/assets/jaeu/hero-760.webp 760w, /assets/jaeu/hero-1100.webp 1100w, /assets/jaeu/hero-1600.webp 1536w" imagesizes="(min-width: 1041px) 50vw, 100vw" />
+    <link
+      rel="preload"
+      as="image"
+      href={withBase('/assets/jaeu/hero-1600.webp')}
+      imagesrcset={`${withBase('/assets/jaeu/hero-760.webp')} 760w, ${withBase('/assets/jaeu/hero-1100.webp')} 1100w, ${withBase('/assets/jaeu/hero-1600.webp')} 1536w`}
+      imagesizes="(min-width: 1041px) 50vw, 100vw"
+    />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 

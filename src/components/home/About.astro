@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { about, org, routes } from '../../data/home';
+import { withBase } from '../../data/site';
 ---
 
 <section class="h-section h-section--stone" aria-labelledby="about-title" data-reveal>
@@ -29,8 +30,8 @@ import { about, org, routes } from '../../data/home';
 
       <figure class="h-about__portrait" data-reveal-media>
         <img
-          src="/assets/jaeu/about-meeting-680.webp"
-          srcset="/assets/jaeu/about-meeting-460.webp 460w, /assets/jaeu/about-meeting-680.webp 680w"
+          src={withBase('/assets/jaeu/about-meeting-680.webp')}
+          srcset={`${withBase('/assets/jaeu/about-meeting-460.webp')} 460w, ${withBase('/assets/jaeu/about-meeting-680.webp')} 680w`}
           sizes="(min-width: 1041px) 330px, (min-width: 761px) 45vw, 100vw"
           width="680"
           height="907"
@@ -42,8 +43,8 @@ import { about, org, routes } from '../../data/home';
 
       <figure class="h-about__detail" data-reveal-media>
         <img
-          src="/assets/jaeu/about-detail-1200.webp"
-          srcset="/assets/jaeu/about-detail-760.webp 760w, /assets/jaeu/about-detail-1200.webp 1200w"
+          src={withBase('/assets/jaeu/about-detail-1200.webp')}
+          srcset={`${withBase('/assets/jaeu/about-detail-760.webp')} 760w, ${withBase('/assets/jaeu/about-detail-1200.webp')} 1200w`}
           sizes="(min-width: 1041px) 640px, 100vw"
           width="1200"
           height="800"

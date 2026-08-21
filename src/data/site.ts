@@ -1,24 +1,49 @@
 export type Locale = 'ru' | 'kz' | 'en';
 
+/**
+ * Домен, на котором сайт будет работать в production. Canonical, hreflang и
+ * структурированные данные всегда указывают сюда, даже когда сборка
+ * опубликована как preview на GitHub Pages.
+ */
+export const productionOrigin = 'https://jaeu.kz';
+
+/** Astro `base`, всегда со слешами по краям: `/` или `/jaeu-site/`. */
+const base = `/${import.meta.env.BASE_URL.replace(/^\/|\/$/g, '')}/`.replace(/^\/\/$/, '/');
+
+/** Префиксует корневой путь значением Astro `base`: `/about/` → `/jaeu-site/about/`. */
+export function withBase(path: string): string {
+  return `${base}${path.replace(/^\//, '')}`;
+}
+
+/** Убирает префикс `base`, возвращая путь относительно корня сайта. */
+export function withoutBase(path: string): string {
+  return path.startsWith(base) ? `/${path.slice(base.length)}` : path;
+}
+
+/** Абсолютный URL страницы на production-домене, независимо от `base`. */
+export function canonicalUrl(path: string): string {
+  return new URL(withoutBase(path), productionOrigin).href;
+}
+
 export const localeMeta = {
-  ru: { lang: 'ru-KZ', path: '/', label: 'RU' },
-  kz: { lang: 'kk-KZ', path: '/kz/', label: 'KZ' },
-  en: { lang: 'en', path: '/en/', label: 'EN' }
+  ru: { lang: 'ru-KZ', path: withBase('/'), label: 'RU' },
+  kz: { lang: 'kk-KZ', path: withBase('/kz/'), label: 'KZ' },
+  en: { lang: 'en', path: withBase('/en/'), label: 'EN' }
 } as const;
 
 export const routes = {
-  home: '/',
-  about: '/about/',
-  activities: '/activities/',
-  expertCouncil: '/expert-council/',
-  membership: '/membership/',
-  knowledge: '/knowledge/',
-  documents: '/documents/',
-  reports: '/reports/',
-  news: '/news/',
-  contacts: '/contacts/',
-  kz: '/kz/',
-  en: '/en/'
+  home: withBase('/'),
+  about: withBase('/about/'),
+  activities: withBase('/activities/'),
+  expertCouncil: withBase('/expert-council/'),
+  membership: withBase('/membership/'),
+  knowledge: withBase('/knowledge/'),
+  documents: withBase('/documents/'),
+  reports: withBase('/reports/'),
+  news: withBase('/news/'),
+  contacts: withBase('/contacts/'),
+  kz: withBase('/kz/'),
+  en: withBase('/en/')
 } as const;
 
 export type RouteKey = keyof typeof routes;

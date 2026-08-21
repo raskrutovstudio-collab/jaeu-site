@@ -1,5 +1,6 @@
 ---
 import { footer, languages, org, routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
 const year = new Date().getFullYear();
 const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org.address.city}, ${org.address.street}`;
@@ -11,7 +12,7 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
       <div>
         <a class="h-footer__logo" href={routes.home} aria-label={`${org.shortName} — на главную`}>
           <img
-            src="/assets/jaeu/logo-jaeu-invert.webp"
+            src={withBase('/assets/jaeu/logo-jaeu-invert.webp')}
             width="210"
             height="66"
             alt="Ассоциация ювелиров Евразийского экономического союза"

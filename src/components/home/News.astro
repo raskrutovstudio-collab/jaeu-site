@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { news, routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
 /** Соотношения сторон отличаются у каждого кадра серии — задают ритм блока. */
 const thumbSizes = {
@@ -24,8 +25,8 @@ const thumbSizes = {
         <a class="h-news__card" href={routes.news}>
           <span class="h-news__media h-news__media--lg" data-reveal-media>
             <img
-              src="/assets/jaeu/news-discussion-1000.webp"
-              srcset="/assets/jaeu/news-discussion-660.webp 660w, /assets/jaeu/news-discussion-1000.webp 1000w"
+              src={withBase('/assets/jaeu/news-discussion-1000.webp')}
+              srcset={`${withBase('/assets/jaeu/news-discussion-660.webp')} 660w, ${withBase('/assets/jaeu/news-discussion-1000.webp')} 1000w`}
               sizes="(min-width: 1041px) 660px, 100vw"
               width="1000"
               height="563"
@@ -46,8 +47,8 @@ const thumbSizes = {
             <a class="h-news__card h-news__row-link" href={routes.news}>
               <span class="h-news__media" data-reveal-media>
                 <img
-                  src={`/assets/jaeu/${item.image}-400.webp`}
-                  srcset={`/assets/jaeu/${item.image}-240.webp 240w, /assets/jaeu/${item.image}-400.webp 400w`}
+                  src={withBase(`/assets/jaeu/${item.image}-400.webp`)}
+                  srcset={`${withBase(`/assets/jaeu/${item.image}-240.webp`)} 240w, ${withBase(`/assets/jaeu/${item.image}-400.webp`)} 400w`}
                   sizes="(min-width: 1041px) 168px, 116px"
                   width={thumbSizes[item.image].width}
                   height={thumbSizes[item.image].height}

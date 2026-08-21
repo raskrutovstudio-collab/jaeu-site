@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { languages, nav, org, routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
 const cta = 'Стать членом Ассоциации';
 ---
@@ -9,7 +10,7 @@ const cta = 'Стать членом Ассоциации';
   <div class="h-shell h-shell--wide h-header__bar">
     <a class="h-logo" href={routes.home} aria-label={`${org.shortName} — на главную`}>
       <img
-        src="/assets/jaeu/logo-jaeu.webp"
+        src={withBase('/assets/jaeu/logo-jaeu.webp')}
         width="190"
         height="60"
         alt="Ассоциация ювелиров Евразийского экономического союза"

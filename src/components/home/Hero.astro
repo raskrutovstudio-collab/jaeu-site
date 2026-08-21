@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { hero, routes, trust } from '../../data/home';
+import { withBase } from '../../data/site';
 ---
 
 <section class="h-hero" aria-labelledby="hero-title">
@@ -23,8 +24,8 @@ import { hero, routes, trust } from '../../data/home';
 
     <figure class="h-hero__media">
       <img
-        src="/assets/jaeu/hero-1600.webp"
-        srcset="/assets/jaeu/hero-760.webp 760w, /assets/jaeu/hero-1100.webp 1100w, /assets/jaeu/hero-1600.webp 1536w"
+        src={withBase('/assets/jaeu/hero-1600.webp')}
+        srcset={`${withBase('/assets/jaeu/hero-760.webp')} 760w, ${withBase('/assets/jaeu/hero-1100.webp')} 1100w, ${withBase('/assets/jaeu/hero-1600.webp')} 1536w`}
         sizes="(min-width: 1041px) 50vw, 100vw"
         width="1536"
         height="1024"

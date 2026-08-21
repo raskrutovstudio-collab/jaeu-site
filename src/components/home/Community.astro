@@ -1,8 +1,9 @@
 ---
 import Icon from './Icon.astro';
 import { community } from '../../data/home';
+import { withBase } from '../../data/site';
 
-const full = '/assets/jaeu/composition-1400.webp';
+const full = withBase('/assets/jaeu/composition-1400.webp');
 ---
 
 <section class="h-section h-section--white" aria-labelledby="community-title" data-reveal>
@@ -21,7 +22,7 @@ const full = '/assets/jaeu/composition-1400.webp';
         >
           <img
             src={full}
-            srcset="/assets/jaeu/composition-900.webp 900w, /assets/jaeu/composition-1400.webp 1400w"
+            srcset={`${withBase('/assets/jaeu/composition-900.webp')} 900w, ${withBase('/assets/jaeu/composition-1400.webp')} 1400w`}
             sizes="(min-width: 1040px) 640px, 100vw"
             width="1400"
             height="759"
@@ -56,8 +57,8 @@ const full = '/assets/jaeu/composition-1400.webp';
     <div class="h-band">
       <figure data-reveal-media>
         <img
-          src="/assets/jaeu/community-experts-820.webp"
-          srcset="/assets/jaeu/community-experts-600.webp 600w, /assets/jaeu/community-experts-820.webp 820w"
+          src={withBase('/assets/jaeu/community-experts-820.webp')}
+          srcset={`${withBase('/assets/jaeu/community-experts-600.webp')} 600w, ${withBase('/assets/jaeu/community-experts-820.webp')} 820w`}
           sizes="(min-width: 1041px) 620px, 100vw"
           width="820"
           height="656"

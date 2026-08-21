@@ -1,6 +1,6 @@
 ---
 import { ui } from '../data/copy';
-import { homePath, localeMeta, navMobileExtra, navPrimary, routes, type Locale } from '../data/site';
+import { homePath, localeMeta, navMobileExtra, navPrimary, routes, withBase, type Locale } from '../data/site';
 import MobileMenu from './MobileMenu.astro';
 
 interface Props {
@@ -18,7 +18,7 @@ const isCurrent = (href: string) => currentPath === href;
   <div class="container site-header__bar">
     <a class="brand" href={homePath(locale)} aria-label={copy.brandSub}>
       <span class="brand__mark">
-        <img src="/assets/jaeu-emblem.svg" width="22" height="28" alt="" />
+        <img src={withBase('/assets/jaeu-emblem.svg')} width="22" height="28" alt="" />
       </span>
       <span>
         <span class="brand__name">{copy.brandName}</span>

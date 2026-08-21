@@ -1,14 +1,15 @@
 ---
 import Icon from './Icon.astro';
 import { documents, routes } from '../../data/home';
+import { withBase } from '../../data/site';
 ---
 
 <section class="h-section h-section--white" aria-labelledby="documents-title" data-reveal>
   <div class="h-shell">
     <div class="h-docs__belt" aria-hidden="true">
       <img
-        src="/assets/jaeu/documents-belt-1160.webp"
-        srcset="/assets/jaeu/documents-belt-760.webp 760w, /assets/jaeu/documents-belt-1160.webp 1160w"
+        src={withBase('/assets/jaeu/documents-belt-1160.webp')}
+        srcset={`${withBase('/assets/jaeu/documents-belt-760.webp')} 760w, ${withBase('/assets/jaeu/documents-belt-1160.webp')} 1160w`}
         sizes="(min-width: 1240px) 1160px, 100vw"
         width="1160"
         height="261"

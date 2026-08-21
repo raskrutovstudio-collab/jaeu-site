@@ -1,13 +1,14 @@
 ---
 import Icon from './Icon.astro';
 import { membership, routes } from '../../data/home';
+import { withBase } from '../../data/site';
 ---
 
 <section class="h-membership" aria-labelledby="membership-title" data-reveal>
   <div class="h-membership__media" aria-hidden="true">
     <img
-      src="/assets/jaeu/membership-visual-1024.webp"
-      srcset="/assets/jaeu/membership-visual-700.webp 700w, /assets/jaeu/membership-visual-1024.webp 1024w"
+      src={withBase('/assets/jaeu/membership-visual-1024.webp')}
+      srcset={`${withBase('/assets/jaeu/membership-visual-700.webp')} 700w, ${withBase('/assets/jaeu/membership-visual-1024.webp')} 1024w`}
       sizes="(min-width: 1041px) 56vw, 100vw"
       width="1024"
       height="576"

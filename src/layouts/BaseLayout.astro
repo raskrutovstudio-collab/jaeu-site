@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { localeMeta, type Locale } from '../data/site';
+import { canonicalUrl, localeMeta, type Locale } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -12,7 +12,7 @@ interface Props {
 
 const { locale, title, description, path, withHreflang = false } = Astro.props;
 const current = localeMeta[locale];
-const canonical = new URL(path, Astro.site);
+const canonical = canonicalUrl(path);
 ---
 
 <!doctype html>
@@ -25,10 +25,10 @@ const canonical = new URL(path, Astro.site);
     <link rel="canonical" href={canonical} />
     {withHreflang && (
       <>
-        <link rel="alternate" hreflang="ru-KZ" href={new URL('/', Astro.site)} />
-        <link rel="alternate" hreflang="kk-KZ" href={new URL('/kz/', Astro.site)} />
-        <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site)} />
-        <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />
+        <link rel="alternate" hreflang="ru-KZ" href={canonicalUrl('/')} />
+        <link rel="alternate" hreflang="kk-KZ" href={canonicalUrl('/kz/')} />
+        <link rel="alternate" hreflang="en" href={canonicalUrl('/en/')} />
+        <link rel="alternate" hreflang="x-default" href={canonicalUrl('/')} />
       </>
     )}
     <link rel="preconnect" href="https://fonts.googleapis.com" />

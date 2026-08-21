@@ -2,19 +2,22 @@
 import { Picture } from 'astro:assets';
 import '../../styles/design-concept.css';
 import heroJeweler from '../../assets/design-concept/hero-jeweler.jpg';
+import { canonicalUrl, routes, withBase } from '../../data/site';
 
 const title = 'Ассоциация ювелиров ЕАЭС — концепция главной страницы';
 const description =
   'Экспериментальная дизайн-концепция главной страницы Ассоциации ювелиров ЕАЭС. Макет для согласования визуального направления.';
-const canonical = new URL('/design-concept/', Astro.site);
+const canonical = canonicalUrl('/design-concept/');
+const emblem = withBase('/assets/jaeu-emblem.svg');
+const self = withBase('/design-concept/');
 
 const nav = [
-  { href: '/about/', label: 'Об Ассоциации' },
-  { href: '/activities/', label: 'Деятельность' },
-  { href: '/expert-council/', label: 'Экспертный совет' },
-  { href: '/news/', label: 'Новости' },
-  { href: '/documents/', label: 'Документы' },
-  { href: '/contacts/', label: 'Контакты' }
+  { href: routes.about, label: 'Об Ассоциации' },
+  { href: routes.activities, label: 'Деятельность' },
+  { href: routes.expertCouncil, label: 'Экспертный совет' },
+  { href: routes.news, label: 'Новости' },
+  { href: routes.documents, label: 'Документы' },
+  { href: routes.contacts, label: 'Контакты' }
 ];
 
 const directions = [
@@ -56,7 +59,7 @@ const documents = [
     <meta name="robots" content="noindex, nofollow" />
     <meta name="theme-color" content="#202A57" />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/assets/jaeu-emblem.svg" />
+    <link rel="icon" type="image/svg+xml" href={emblem} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -70,8 +73,8 @@ const documents = [
 
     <header class="dc-header">
       <div class="dc-container dc-header__inner">
-        <a class="dc-brand" href="/design-concept/" aria-label="Ассоциация ювелиров ЕАЭС — концепция главной">
-          <img class="dc-brand__mark" src="/assets/jaeu-emblem.svg" alt="" width="30" height="39" />
+        <a class="dc-brand" href={self} aria-label="Ассоциация ювелиров ЕАЭС — концепция главной">
+          <img class="dc-brand__mark" src={emblem} alt="" width="30" height="39" />
           <span class="dc-brand__name">Ассоциация ювелиров ЕАЭС</span>
         </a>
 
@@ -85,11 +88,11 @@ const documents = [
 
         <div class="dc-header__aside">
           <p class="dc-langs" aria-label="Выбор языка">
-            <a class="dc-langs__link is-active" href="/design-concept/" aria-current="true">RU</a>
-            <a class="dc-langs__link" href="/kz/">KZ</a>
-            <a class="dc-langs__link" href="/en/">EN</a>
+            <a class="dc-langs__link is-active" href={self} aria-current="true">RU</a>
+            <a class="dc-langs__link" href={routes.kz}>KZ</a>
+            <a class="dc-langs__link" href={routes.en}>EN</a>
           </p>
-          <a class="dc-btn dc-btn--primary dc-header__cta" href="/membership/">Вступить в Ассоциацию</a>
+          <a class="dc-btn dc-btn--primary dc-header__cta" href={routes.membership}>Вступить в Ассоциацию</a>
         </div>
 
         <details class="dc-menu">
@@ -106,11 +109,11 @@ const documents = [
               </ul>
             </nav>
             <p class="dc-langs dc-menu__langs" aria-label="Выбор языка">
-              <a class="dc-langs__link is-active" href="/design-concept/" aria-current="true">RU</a>
-              <a class="dc-langs__link" href="/kz/">KZ</a>
-              <a class="dc-langs__link" href="/en/">EN</a>
+              <a class="dc-langs__link is-active" href={self} aria-current="true">RU</a>
+              <a class="dc-langs__link" href={routes.kz}>KZ</a>
+              <a class="dc-langs__link" href={routes.en}>EN</a>
             </p>
-            <a class="dc-btn dc-btn--primary dc-menu__cta" href="/membership/">Вступить в Ассоциацию</a>
+            <a class="dc-btn dc-btn--primary dc-menu__cta" href={routes.membership}>Вступить в Ассоциацию</a>
           </div>
         </details>
       </div>
@@ -128,8 +131,8 @@ const documents = [
               профессиональный диалог в отрасли.
             </p>
             <div class="dc-hero__actions">
-              <a class="dc-btn dc-btn--primary" href="/membership/">Стать членом</a>
-              <a class="dc-link-arrow" href="/activities/">О деятельности</a>
+              <a class="dc-btn dc-btn--primary" href={routes.membership}>Стать членом</a>
+              <a class="dc-link-arrow" href={routes.activities}>О деятельности</a>
             </div>
           </div>
           <figure class="dc-hero__media">
@@ -168,7 +171,7 @@ const documents = [
               ведёт экспертную и консультационную работу и поддерживает
               международное сотрудничество.
             </p>
-            <a class="dc-link-arrow" href="/about/">Подробнее об Ассоциации</a>
+            <a class="dc-link-arrow" href={routes.about}>Подробнее об Ассоциации</a>
           </div>
           <ul class="dc-points">
             <li class="dc-points__item">
@@ -203,7 +206,7 @@ const documents = [
           <figure class="dc-figure">
             <button class="dc-figure__frame" type="button" data-lightbox-src="dc-tpl-contour" data-lightbox-caption="Инфографика из материалов Ассоциации" aria-label="Открыть инфографику в полном размере">
               <span class="dc-figure__placeholder">
-                <img src="/assets/jaeu-emblem.svg" alt="" width="34" height="44" loading="lazy" />
+                <img src={emblem} alt="" width="34" height="44" loading="lazy" />
                 <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
                 <span class="dc-figure__placeholder-sub">Институциональный контур Ассоциации</span>
               </span>
@@ -235,7 +238,7 @@ const documents = [
                 </span>
                 <h3 class="dc-directions__title">{item.title}</h3>
                 <p class="dc-directions__text">{item.text}</p>
-                <a class="dc-link-arrow dc-directions__link" href="/activities/">Подробнее</a>
+                <a class="dc-link-arrow dc-directions__link" href={routes.activities}>Подробнее</a>
               </li>
             ))}
           </ul>
@@ -247,7 +250,7 @@ const documents = [
           <figure class="dc-figure">
             <button class="dc-figure__frame" type="button" data-lightbox-src="dc-tpl-community" data-lightbox-caption="Инфографика из материалов Ассоциации" aria-label="Открыть схему состава Ассоциации в полном размере">
               <span class="dc-figure__placeholder">
-                <img src="/assets/jaeu-emblem.svg" alt="" width="34" height="44" loading="lazy" />
+                <img src={emblem} alt="" width="34" height="44" loading="lazy" />
                 <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
                 <span class="dc-figure__placeholder-sub">Состав Ассоциации</span>
               </span>
@@ -274,7 +277,7 @@ const documents = [
             <h2 class="dc-cta__title" id="dc-cta-title">Станьте частью профессионального сообщества</h2>
             <p class="dc-cta__text">Узнайте об условиях членства и порядке вступления в Ассоциацию.</p>
           </div>
-          <a class="dc-btn dc-btn--light" href="/membership/">Стать членом Ассоциации</a>
+          <a class="dc-btn dc-btn--light" href={routes.membership}>Стать членом Ассоциации</a>
         </div>
       </section>
 
@@ -282,13 +285,13 @@ const documents = [
         <div class="dc-container">
           <div class="dc-section__head">
             <h2 class="dc-h2" id="dc-news-title">Новости</h2>
-            <a class="dc-link-arrow" href="/news/">Все новости</a>
+            <a class="dc-link-arrow" href={routes.news}>Все новости</a>
           </div>
           <div class="dc-news">
             <article class="dc-news__featured">
-              <a class="dc-news__card" href="/news/">
+              <a class="dc-news__card" href={routes.news}>
                 <span class="dc-ph dc-news__image" role="img" aria-label="Изображение будет добавлено после публикации">
-                  <img src="/assets/jaeu-emblem.svg" alt="" width="30" height="39" loading="lazy" />
+                  <img src={emblem} alt="" width="30" height="39" loading="lazy" />
                 </span>
                 <span class="dc-news__meta">Публикация</span>
                 <span class="dc-news__title dc-news__title--large">Материал будет добавлен после публикации</span>
@@ -297,9 +300,9 @@ const documents = [
             </article>
             <div class="dc-news__list">
               <article class="dc-news__secondary">
-                <a class="dc-news__card dc-news__card--row" href="/news/">
+                <a class="dc-news__card dc-news__card--row" href={routes.news}>
                   <span class="dc-ph dc-news__thumb" role="img" aria-label="Изображение будет добавлено после публикации">
-                    <img src="/assets/jaeu-emblem.svg" alt="" width="22" height="28" loading="lazy" />
+                    <img src={emblem} alt="" width="22" height="28" loading="lazy" />
                   </span>
                   <span class="dc-news__body">
                     <span class="dc-news__meta">Публикация</span>
@@ -308,9 +311,9 @@ const documents = [
                 </a>
               </article>
               <article class="dc-news__secondary">
-                <a class="dc-news__card dc-news__card--row" href="/news/">
+                <a class="dc-news__card dc-news__card--row" href={routes.news}>
                   <span class="dc-ph dc-news__thumb" role="img" aria-label="Изображение будет добавлено после публикации">
-                    <img src="/assets/jaeu-emblem.svg" alt="" width="22" height="28" loading="lazy" />
+                    <img src={emblem} alt="" width="22" height="28" loading="lazy" />
                   </span>
                   <span class="dc-news__body">
                     <span class="dc-news__meta">Публикация</span>
@@ -327,12 +330,12 @@ const documents = [
         <div class="dc-container">
           <div class="dc-section__head">
             <h2 class="dc-h2" id="dc-docs-title">Документы</h2>
-            <a class="dc-link-arrow" href="/documents/">Все документы</a>
+            <a class="dc-link-arrow" href={routes.documents}>Все документы</a>
           </div>
           <ul class="dc-docs">
             {documents.map((name) => (
               <li class="dc-docs__item">
-                <a class="dc-docs__link" href="/documents/">
+                <a class="dc-docs__link" href={routes.documents}>
                   <span class="dc-docs__name">{name}</span>
                   <span class="dc-docs__hint">Раздел документов</span>
                 </a>
@@ -347,8 +350,8 @@ const documents = [
       <div class="dc-container">
         <div class="dc-footer__grid">
           <div class="dc-footer__brand">
-            <a class="dc-brand dc-brand--footer" href="/design-concept/">
-              <img class="dc-brand__mark" src="/assets/jaeu-emblem.svg" alt="" width="26" height="34" loading="lazy" />
+            <a class="dc-brand dc-brand--footer" href={self}>
+              <img class="dc-brand__mark" src={emblem} alt="" width="26" height="34" loading="lazy" />
               <span class="dc-brand__name">Ассоциация ювелиров ЕАЭС</span>
             </a>
             <p class="dc-footer__blurb">Международная отраслевая организация ювелирного сообщества.</p>
@@ -356,23 +359,23 @@ const documents = [
           <nav class="dc-footer__col" aria-label="Разделы">
             <h2 class="dc-footer__heading">Разделы</h2>
             <ul class="dc-footer__list">
-              <li><a class="dc-footer__link" href="/about/">Об Ассоциации</a></li>
-              <li><a class="dc-footer__link" href="/activities/">Деятельность</a></li>
-              <li><a class="dc-footer__link" href="/expert-council/">Экспертный совет</a></li>
+              <li><a class="dc-footer__link" href={routes.about}>Об Ассоциации</a></li>
+              <li><a class="dc-footer__link" href={routes.activities}>Деятельность</a></li>
+              <li><a class="dc-footer__link" href={routes.expertCouncil}>Экспертный совет</a></li>
             </ul>
           </nav>
           <nav class="dc-footer__col" aria-label="Материалы">
             <h2 class="dc-footer__heading">Материалы</h2>
             <ul class="dc-footer__list">
-              <li><a class="dc-footer__link" href="/news/">Новости</a></li>
-              <li><a class="dc-footer__link" href="/documents/">Документы</a></li>
-              <li><a class="dc-footer__link" href="/membership/">Членство</a></li>
+              <li><a class="dc-footer__link" href={routes.news}>Новости</a></li>
+              <li><a class="dc-footer__link" href={routes.documents}>Документы</a></li>
+              <li><a class="dc-footer__link" href={routes.membership}>Членство</a></li>
             </ul>
           </nav>
           <div class="dc-footer__col">
             <h2 class="dc-footer__heading">Контакты</h2>
             <p class="dc-footer__text">Контактные данные будут добавлены после подтверждения.</p>
-            <a class="dc-footer__link" href="/contacts/">Страница контактов</a>
+            <a class="dc-footer__link" href={routes.contacts}>Страница контактов</a>
           </div>
         </div>
         <div class="dc-footer__bottom">
@@ -384,14 +387,14 @@ const documents = [
 
     <template id="dc-tpl-contour">
       <span class="dc-lightbox__placeholder">
-        <img src="/assets/jaeu-emblem.svg" alt="" width="44" height="57" loading="lazy" />
+        <img src={emblem} alt="" width="44" height="57" loading="lazy" />
         <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
         <span class="dc-figure__placeholder-sub">Институциональный контур Ассоциации</span>
       </span>
     </template>
     <template id="dc-tpl-community">
       <span class="dc-lightbox__placeholder">
-        <img src="/assets/jaeu-emblem.svg" alt="" width="44" height="57" loading="lazy" />
+        <img src={emblem} alt="" width="44" height="57" loading="lazy" />
         <span class="dc-figure__placeholder-title">Оригинальная инфографика будет добавлена</span>
         <span class="dc-figure__placeholder-sub">Состав Ассоциации</span>
       </span>

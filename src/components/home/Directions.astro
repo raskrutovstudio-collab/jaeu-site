@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { directions } from '../../data/home';
+import { withBase } from '../../data/site';
 ---
 
 <section class="h-section h-section--stone" aria-labelledby="directions-title" data-reveal>
@@ -26,8 +27,8 @@ import { directions } from '../../data/home';
 
       <figure class="h-dirs__strip" data-reveal-media>
         <img
-          src="/assets/jaeu/directions-review-1160.webp"
-          srcset="/assets/jaeu/directions-review-760.webp 760w, /assets/jaeu/directions-review-1160.webp 1160w"
+          src={withBase('/assets/jaeu/directions-review-1160.webp')}
+          srcset={`${withBase('/assets/jaeu/directions-review-760.webp')} 760w, ${withBase('/assets/jaeu/directions-review-1160.webp')} 1160w`}
           sizes="(min-width: 1041px) 870px, 100vw"
           width="1160"
           height="326"
@@ -39,8 +40,8 @@ import { directions } from '../../data/home';
 
       <figure class="h-dirs__band" data-reveal-media>
         <img
-          src="/assets/jaeu/directions-craft-1160.webp"
-          srcset="/assets/jaeu/directions-craft-760.webp 760w, /assets/jaeu/directions-craft-1160.webp 1160w"
+          src={withBase('/assets/jaeu/directions-craft-1160.webp')}
+          srcset={`${withBase('/assets/jaeu/directions-craft-760.webp')} 760w, ${withBase('/assets/jaeu/directions-craft-1160.webp')} 1160w`}
           sizes="(min-width: 1240px) 1160px, 100vw"
           width="1160"
           height="338"

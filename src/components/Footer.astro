@@ -1,6 +1,6 @@
 ---
 import { ui } from '../data/copy';
-import { footerGroups, homePath, localeMeta, routes, type Locale } from '../data/site';
+import { footerGroups, homePath, localeMeta, routes, withBase, type Locale } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
       <div>
         <a class="brand" href={homePath(locale)} aria-label={copy.brandSub}>
           <span class="brand__mark">
-            <img src="/assets/jaeu-emblem.svg" width="22" height="28" alt="" />
+            <img src={withBase('/assets/jaeu-emblem.svg')} width="22" height="28" alt="" />
           </span>
           <span>
             <span class="brand__name">{copy.brandName}</span>
