@@ -1,43 +1,133 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import SearchFilter from '../../components/SearchFilter.astro';
-import DocumentRow from '../../components/DocumentRow.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, filterLabels, pageCopy, ui } from '../../data/copy';
-import { documentPlaceholders } from '../../data/placeholders';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { documents } from '../../data/pages';
+import { org, routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
-const page = pageCopy.documents;
-const items = documentPlaceholders('ru');
-const chrome = ui.ru;
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+
+/*
+  Файлы документов на сайте не размещены, поэтому вместо кнопки загрузки у
+  каждой позиции стоит обращение за копией с темой письма по названию
+  документа: действие честное и работает без backend.
+*/
+const requestHref = (title: string) =>
+  `mailto:${org.email}?subject=${encodeURIComponent(`${documents.action.prefix}: ${title}`)}`;
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.documents}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
-
-    <div class="section">
-      <SearchFilter
-        searchLabel={chrome.search}
-        searchPlaceholder={chrome.search}
-        filters={filterLabels.documents}
-        emptyText={chrome.placeholders.emptySearch}
-      >
-        <div class="document-list">
-          {items.map((item) => (
-            <DocumentRow title={item.title} category={item.category} search={item.title} />
-          ))}
+<InnerLayout
+  title={documents.meta.title}
+  description={documents.meta.description}
+  ogTitle={documents.meta.ogTitle}
+  path={routes.documents}
+  crumb={documents.crumb}
+>
+  <section class="p-hero p-hero--tight">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{documents.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{documents.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{documents.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{documents.hero.lead}</p>
+          <p class="p-hero__note">{documents.hero.note}</p>
         </div>
-      </SearchFilter>
+      </div>
     </div>
+  </section>
 
-    <p class="section">
-      <a class="text-link" href={routes.reports}>{chrome.nav.reports}</a>
-    </p>
+  <!-- Первая секция начинается в пределах первого экрана, поэтому reveal здесь
+       не подключается: содержимое видно сразу. -->
+  <section class="h-section h-section--white" aria-label="Перечень документов">
+    <div class="h-shell">
+      <div class="p-lib">
+        {documents.groups.map((group, index) => (
+          <section class="p-lib__group" aria-labelledby={`documents-group-${index}`}>
+            <h2 class="h-h3 p-lib__title" id={`documents-group-${index}`}>{group.title}</h2>
 
-    <FaqAccordion items={faqCopy.documents} />
-  </article>
-</PageLayout>
+            <ul class="p-lib__rows">
+              {group.items.map((item) => (
+                <li class="p-lib__row">
+                  <div>
+                    <p class="p-lib__name">{item.title}</p>
+                    <p class="p-lib__text">{item.text}</p>
+                  </div>
+
+                  <div class="p-lib__side">
+                    <a
+                      class="p-lib__action"
+                      href={requestHref(item.title)}
+                      aria-label={`${documents.action.label}: ${item.title}`}
+                    >
+                      <span>{documents.action.label}</span>
+                      <Icon name="arrow" class="p-lib__arrow" />
+                    </a>
+
+                    {'link' in item && item.link ? (
+                      <a class="p-lib__ref" href={item.link.href}>
+                        <span>{item.link.label}</span>
+                        <Icon name="arrow" class="p-lib__arrow" />
+                      </a>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="documents-access" data-reveal>
+    <div class="h-shell">
+      <figure class="p-belt" data-reveal-media>
+        <img
+          src={asset('page-documents-belt-1160.webp')}
+          srcset={`${asset('page-documents-belt-760.webp')} 760w, ${asset('page-documents-belt-1160.webp')} 1160w`}
+          sizes="(min-width: 1041px) 1160px, 100vw"
+          width="1160"
+          height="326"
+          alt={documents.belt.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+
+      <div class="p-head p-head--belt">
+        <h2 class="h-h2" id="documents-access" data-rise="1">{documents.access.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{documents.access.text}</p>
+      </div>
+
+      <p class="p-note" data-rise="3">{documents.access.note}</p>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="documents-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="documents-cta" data-rise="1">{documents.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{documents.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={documents.cta.primary.href}>
+            <span>{documents.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={documents.cta.secondary.href}>
+            <span>{documents.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>

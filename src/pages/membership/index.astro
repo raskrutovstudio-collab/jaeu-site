@@ -1,29 +1,190 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import DemoForm from '../../components/DemoForm.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, pageCopy } from '../../data/copy';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { membership } from '../../data/pages';
+import { routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
-const page = pageCopy.membership;
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.membership}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
+<InnerLayout
+  title={membership.meta.title}
+  description={membership.meta.description}
+  ogTitle={membership.meta.ogTitle}
+  path={routes.membership}
+  crumb={membership.crumb}
+>
+  <section class="p-hero p-hero--calm">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{membership.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{membership.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{membership.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{membership.hero.lead}</p>
+          <p class="p-hero__note">{membership.hero.note}</p>
+        </div>
 
-    <section class="section content-card">
-      <h2>{page.pathTitle}</h2>
-      <p>{page.pathText}</p>
-    </section>
-
-    <div class="section">
-      <DemoForm variant="membership" title={page.formTitle} />
+        <figure class="p-hero__media">
+          <img
+            src={asset('page-membership-hero-1160.webp')}
+            srcset={`${asset('page-membership-hero-760.webp')} 760w, ${asset('page-membership-hero-1160.webp')} 1160w`}
+            sizes="(min-width: 1041px) 580px, 100vw"
+            width="1160"
+            height="773"
+            alt={membership.hero.imageAlt}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      </div>
     </div>
+  </section>
 
-    <FaqAccordion items={faqCopy.membership} />
-  </article>
-</PageLayout>
+  <!-- Секция попадает в первый экран вместе с hero, поэтому reveal здесь не
+       подключается: содержимое не должно проявляться при загрузке. -->
+  <section class="h-section h-section--white" aria-labelledby="membership-eligibility">
+    <div class="h-shell">
+      <div class="p-spread">
+        <div class="p-spread__aside">
+          <h2 class="h-h2" id="membership-eligibility">{membership.eligibility.h2}</h2>
+          <hr class="h-rule" />
+        </div>
+
+        <div class="p-spread__body">
+          {membership.eligibility.paragraphs.map((text) => (
+            <p class="h-text">{text}</p>
+          ))}
+
+          <div>
+            <p class="p-label">{membership.eligibility.scopeTitle}</p>
+            <ul class="p-scope">
+              {membership.eligibility.scope.map((item) => (
+                <li class="p-scope__item">{item}</li>
+              ))}
+            </ul>
+            <p class="p-note">{membership.eligibility.scopeNote}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="membership-steps" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="membership-steps" data-rise="1">{membership.steps.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{membership.steps.lead}</p>
+      </div>
+
+      <ol class="p-steps" data-rise="3">
+        {membership.steps.items.map((step) => (
+          <li class="p-steps__item">
+            <h3 class="h-h3 p-steps__title">{step.title}</h3>
+            <p class="p-steps__text">{step.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="h-section h-section--white" aria-labelledby="membership-attachments" data-reveal>
+    <div class="h-shell">
+      <div class="p-narrow">
+        <div class="p-narrow__body">
+          <h2 class="h-h2" id="membership-attachments" data-rise="1">{membership.attachments.h2}</h2>
+          <hr class="h-rule" />
+          <p class="h-text" data-rise="2">{membership.attachments.lead}</p>
+
+          <ul class="p-list" data-rise="3">
+            {membership.attachments.items.map((item) => (
+              <li class="p-list__item">{item}</li>
+            ))}
+          </ul>
+
+          <p class="p-note" data-rise="4">{membership.attachments.note}</p>
+        </div>
+
+        <figure class="p-narrow__media" data-reveal-media>
+          <img
+            src={asset('page-membership-detail-700.webp')}
+            srcset={`${asset('page-membership-detail-460.webp')} 460w, ${asset('page-membership-detail-700.webp')} 700w`}
+            sizes="(min-width: 1041px) 360px, (min-width: 761px) 340px, 300px"
+            width="700"
+            height="933"
+            alt={membership.attachments.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="membership-rights" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="membership-rights" data-rise="1">{membership.rights.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{membership.rights.lead}</p>
+      </div>
+
+      <ul class="p-cols p-cols--3" data-rise="3">
+        {membership.rights.items.map((item) => (
+          <li class="p-cols__item">
+            <h3 class="h-h3 p-cols__title">{item.title}</h3>
+            <p class="p-cols__text">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="h-section h-section--white" aria-labelledby="membership-fees" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="membership-fees" data-rise="1">{membership.fees.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+
+      <dl class="p-facts" data-rise="2">
+        {membership.fees.items.map((item) => (
+          <>
+            <dt>{item.term}</dt>
+            <dd>{item.value}</dd>
+          </>
+        ))}
+      </dl>
+      <p class="p-note" data-rise="3">{membership.fees.note}</p>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="membership-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="membership-cta" data-rise="1">{membership.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{membership.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={membership.cta.primary.href}>
+            <span>{membership.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={membership.cta.secondary.href}>
+            <span>{membership.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>

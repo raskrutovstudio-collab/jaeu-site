@@ -1,52 +1,126 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import SearchFilter from '../../components/SearchFilter.astro';
-import NewsCard from '../../components/NewsCard.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, filterLabels, pageCopy, ui } from '../../data/copy';
-import { newsPlaceholders } from '../../data/placeholders';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { news } from '../../data/pages';
+import { routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
-const page = pageCopy.news;
-const items = newsPlaceholders('ru');
-const chrome = ui.ru;
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+
+/* Квадратные превью материалов существуют в двух ширинах: 240 и 400 px. */
+const thumb = 400;
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.news}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
-
-    <div class="section">
-      <SearchFilter
-        searchLabel={chrome.search}
-        searchPlaceholder={chrome.search}
-        filters={filterLabels.news}
-        emptyText={chrome.placeholders.emptySearch}
-      >
-        <div class="news-grid">
-          <div data-item data-category={items[0].category} data-search={items[0].title}>
-            <NewsCard
-              size="large"
-              title={items[0].title}
-              text={items[0].text}
-              href={routes.news}
-              imageLabel={chrome.placeholders.image}
-            />
-          </div>
-          <div class="news-grid__side">
-            {items.slice(1).map((item) => (
-              <div data-item data-category={item.category} data-search={item.title}>
-                <NewsCard size={item.size} title={item.title} text={item.text} href={routes.news} />
-              </div>
-            ))}
-          </div>
+<InnerLayout
+  title={news.meta.title}
+  description={news.meta.description}
+  ogTitle={news.meta.ogTitle}
+  path={routes.news}
+  crumb={news.crumb}
+>
+  <section class="p-hero p-hero--tight">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{news.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{news.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{news.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{news.hero.lead}</p>
+          <p class="p-hero__note">{news.hero.note}</p>
         </div>
-      </SearchFilter>
+      </div>
     </div>
+  </section>
 
-    <FaqAccordion items={faqCopy.news} />
-  </article>
-</PageLayout>
+  <!-- Ведущий материал попадает в первый экран, поэтому идёт без reveal. -->
+  <section class="h-section h-section--white" aria-labelledby="news-featured">
+    <div class="h-shell">
+      <article class="p-story">
+        <figure class="p-story__media">
+          <img
+            src={asset('news-discussion-1000.webp')}
+            srcset={`${asset('news-discussion-660.webp')} 660w, ${asset('news-discussion-1000.webp')} 1000w`}
+            sizes="(min-width: 1041px) 680px, 100vw"
+            width="1000"
+            height="563"
+            alt={news.featured.imageAlt}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+
+        <div class="p-story__body">
+          <p class="p-label">{news.featured.eyebrow}</p>
+          <time class="p-date" datetime={news.featured.date}>{news.featured.dateLabel}</time>
+          <h2 class="h-h2 p-story__title" id="news-featured">{news.featured.title}</h2>
+          <hr class="h-rule" />
+          {news.featured.paragraphs.map((text) => (
+            <p class="p-story__text">{text}</p>
+          ))}
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-label="Другие материалы" data-reveal>
+    <div class="h-shell">
+      <ul class="p-stories" data-rise="1">
+        {news.items.map((item, index) => (
+          <li>
+            <article class={`p-stories__item${index === 1 ? ' p-stories__item--broad' : ''}`}>
+              <div class="p-stories__meta">
+                <time class="p-date" datetime={item.date}>{item.dateLabel}</time>
+              </div>
+
+              <div class="p-stories__body">
+                <h2 class="h-h3 p-stories__title">{item.title}</h2>
+                <p class="p-stories__text">{item.text}</p>
+                <p class="p-stories__detail">{item.detail}</p>
+              </div>
+
+              <figure class="p-stories__media" data-reveal-media>
+                <img
+                  src={asset(`${item.image}-${thumb}.webp`)}
+                  srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-${thumb}.webp`)} 400w`}
+                  sizes="(min-width: 1041px) 320px, 260px"
+                  width={thumb}
+                  height={thumb}
+                  alt={item.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="news-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="news-cta" data-rise="1">{news.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{news.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={news.cta.primary.href}>
+            <span>{news.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={news.cta.secondary.href}>
+            <span>{news.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>

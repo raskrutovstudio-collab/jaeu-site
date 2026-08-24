@@ -1,27 +1,167 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import DemoForm from '../../components/DemoForm.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, pageCopy, ui } from '../../data/copy';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { contacts } from '../../data/pages';
+import { org, routes } from '../../data/home';
+import { canonicalUrl, withBase } from '../../data/site';
 
-const page = pageCopy.contacts;
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+const canonical = canonicalUrl(routes.contacts);
+
+/* Схема повторяет только видимые на странице подтверждённые контакты. */
+const contactSchema = {
+  '@type': 'ContactPage',
+  '@id': `${canonical}#contactpage`,
+  url: canonical,
+  mainEntity: {
+    '@type': 'Organization',
+    name: org.legalName,
+    alternateName: org.shortName,
+    email: org.email,
+    telephone: org.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: org.address.country,
+      addressRegion: org.address.region,
+      addressLocality: org.address.city,
+      streetAddress: org.address.street,
+      postalCode: org.address.postalCode
+    }
+  }
+};
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.contacts}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
-
-    <div class="section two-col">
-      <section class="contact-box">
-        <p>{ui.ru.placeholders.contacts}</p>
-      </section>
-      <DemoForm variant="contact" title={page.formTitle} />
+<InnerLayout
+  title={contacts.meta.title}
+  description={contacts.meta.description}
+  ogTitle={contacts.meta.ogTitle}
+  path={routes.contacts}
+  crumb={contacts.crumb}
+  schema={[contactSchema]}
+>
+  <section class="p-hero p-hero--tight">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{contacts.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{contacts.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{contacts.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{contacts.hero.lead}</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <FaqAccordion items={faqCopy.contacts} />
-  </article>
-</PageLayout>
+  <!-- Контактные действия открываются в первом экране и не появляются по скроллу. -->
+  <section class="h-section h-section--white" aria-labelledby="contacts-actions">
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="contacts-actions">{contacts.actions.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+
+      <ul class="p-contact">
+        {contacts.actions.items.map((item) => (
+          <li class="p-contact__item">
+            <p class="p-contact__term">{item.term}</p>
+
+            {'href' in item && item.href ? (
+              <a class="p-contact__value" href={item.href}>{item.value}</a>
+            ) : (
+              <p class="p-contact__value p-contact__value--long">{item.value}</p>
+            )}
+
+            <p class="p-contact__hint">{item.hint}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p class="p-note">{contacts.actions.note}</p>
+
+      <div class="p-facet" aria-hidden="true">
+        <svg viewBox="0 0 1160 160" fill="none" stroke="currentColor" stroke-width="1" role="presentation">
+          <path d="M328 16H832L860 44V116L832 144H328L300 116V44Z" />
+          <path d="M348 42H812L834 64V96L812 118H348L326 96V64Z" />
+          <path d="M368 68H792L808 84L792 92H368L352 84Z" />
+          <path d="M328 16L348 42M832 16L812 42M832 144L812 118M328 144L348 118" />
+          <path d="M300 44L326 64M860 44L834 64M860 116L834 96M300 116L326 96" />
+          <path d="M0 84H300M860 84H1160" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="contacts-visual" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="contacts-visual" data-rise="1">{contacts.visual.title}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{contacts.visual.text}</p>
+      </div>
+
+      <figure class="p-belt p-belt--wide" data-reveal-media>
+        <img
+          src={asset('page-contacts-desk-1160.webp')}
+          srcset={`${asset('page-contacts-desk-760.webp')} 760w, ${asset('page-contacts-desk-1160.webp')} 1160w`}
+          sizes="(min-width: 1041px) 1160px, 100vw"
+          width="1160"
+          height="497"
+          alt={contacts.visual.imageAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="h-section h-section--white" aria-labelledby="contacts-requisites" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="contacts-requisites" data-rise="1">{contacts.requisites.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+
+      <dl class="p-facts" data-rise="2">
+        {contacts.requisites.items.map((item) => (
+          <>
+            <dt>{item.term}</dt>
+            <dd>{item.value}</dd>
+          </>
+        ))}
+      </dl>
+
+      <p class="p-note" data-rise="3">
+        <a class="p-lib__ref" href={contacts.requisites.link.href}>
+          <span>{contacts.requisites.link.label}</span>
+          <Icon name="arrow" class="p-lib__arrow" />
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="contacts-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="contacts-cta" data-rise="1">{contacts.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{contacts.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={contacts.cta.primary.href}>
+            <span>{contacts.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={contacts.cta.secondary.href}>
+            <span>{contacts.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>

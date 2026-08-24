@@ -1,39 +1,123 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import SearchFilter from '../../components/SearchFilter.astro';
-import DocumentRow from '../../components/DocumentRow.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, filterLabels, pageCopy, ui } from '../../data/copy';
-import { reportPlaceholders } from '../../data/placeholders';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { reports } from '../../data/pages';
+import { routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
-const page = pageCopy.reports;
-const items = reportPlaceholders('ru');
-const chrome = ui.ru;
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.reports}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
-
-    <div class="section">
-      <SearchFilter
-        searchLabel={chrome.search}
-        searchPlaceholder={chrome.search}
-        filters={filterLabels.documents}
-        emptyText={chrome.placeholders.emptySearch}
-      >
-        <div class="document-list">
-          {items.map((item) => (
-            <DocumentRow title={item.title} category={item.category} search={item.title} />
-          ))}
+<InnerLayout
+  title={reports.meta.title}
+  description={reports.meta.description}
+  ogTitle={reports.meta.ogTitle}
+  path={routes.reports}
+  crumb={reports.crumb}
+>
+  <section class="p-hero p-hero--tight">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{reports.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{reports.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{reports.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{reports.hero.lead}</p>
+          <p class="p-hero__note">{reports.hero.note}</p>
         </div>
-      </SearchFilter>
+      </div>
     </div>
+  </section>
 
-    <FaqAccordion items={faqCopy.reports} />
-  </article>
-</PageLayout>
+  <!-- Состав материалов виден в первом экране, поэтому идёт без reveal. -->
+  <section class="h-section h-section--white" aria-labelledby="reports-materials">
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="reports-materials">{reports.materials.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+
+      <dl class="p-facts">
+        {reports.materials.items.map((item) => (
+          <>
+            <dt>{item.term}</dt>
+            <dd>{item.value}</dd>
+          </>
+        ))}
+      </dl>
+      <p class="p-note">{reports.materials.note}</p>
+
+      <div class="p-slab">
+        <div>
+          <h2 class="h-h3 p-slab__title">{reports.access.h2}</h2>
+          <p class="p-slab__text">{reports.access.text}</p>
+        </div>
+
+        <div class="p-slab__action">
+          <a class="h-btn h-btn--light" href={reports.access.action.href}>
+            <span>{reports.access.action.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="reports-outcomes" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="reports-outcomes" data-rise="1">{reports.outcomes.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{reports.outcomes.lead}</p>
+      </div>
+
+      <ul class="p-cols p-cols--2" data-rise="3">
+        {reports.outcomes.items.map((item) => (
+          <li class="p-cols__item">
+            <h3 class="h-h3 p-cols__title">{item.title}</h3>
+            <p class="p-cols__text">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+
+      <figure class="p-belt p-belt--wide p-belt--tail" data-reveal-media>
+        <img
+          src={asset('page-reports-belt-1160.webp')}
+          srcset={`${asset('page-reports-belt-760.webp')} 760w, ${asset('page-reports-belt-1160.webp')} 1160w`}
+          sizes="(min-width: 1041px) 1160px, 100vw"
+          width="1160"
+          height="497"
+          alt={reports.belt.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="reports-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="reports-cta" data-rise="1">{reports.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{reports.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={reports.cta.primary.href}>
+            <span>{reports.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={reports.cta.secondary.href}>
+            <span>{reports.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>
