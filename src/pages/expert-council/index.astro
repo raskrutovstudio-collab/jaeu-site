@@ -1,37 +1,167 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CtaBanner from '../../components/CtaBanner.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, pageCopy, ui } from '../../data/copy';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { expertCouncil as council } from '../../data/pages';
+import { routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
-const page = pageCopy.expertCouncil;
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.expertCouncil}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
+<InnerLayout
+  title={council.meta.title}
+  description={council.meta.description}
+  ogTitle={council.meta.ogTitle}
+  path={routes.expertCouncil}
+  crumb={council.crumb}
+>
+  <section class="p-hero p-hero--split">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{council.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{council.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{council.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{council.hero.lead}</p>
+          <p class="p-hero__note">{council.hero.note}</p>
+        </div>
 
-    <section class="section">
-      <h2>{page.compositionTitle}</h2>
-      <div class="composition-box" style="margin-top: 20px;">
-        <p>{ui.ru.placeholders.composition}</p>
+        <figure class="p-hero__media">
+          <img
+            src={asset('page-council-group-1400.webp')}
+            srcset={`${asset('page-council-group-900.webp')} 900w, ${asset('page-council-group-1400.webp')} 1400w`}
+            sizes="(min-width: 1041px) 660px, 100vw"
+            width="1400"
+            height="600"
+            alt={council.hero.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
-    </section>
-
-    <div class="section">
-      <CtaBanner
-        variant="light"
-        title="Членство в Ассоциации"
-        text={ui.ru.placeholders.info}
-        ctaLabel={ui.ru.nav.join}
-        href={routes.membership}
-      />
     </div>
+  </section>
 
-    <FaqAccordion items={faqCopy.expertCouncil} />
-  </article>
-</PageLayout>
+  <section class="h-section h-section--white" aria-labelledby="council-expertise" data-reveal>
+    <div class="h-shell">
+      <div class="p-split">
+        <div class="p-split__body">
+          <h2 class="h-h2" id="council-expertise" data-rise="1">{council.expertise.h2}</h2>
+          <hr class="h-rule" />
+          {council.expertise.paragraphs.map((text, index) => (
+            <p class="h-text" data-rise={String(Math.min(index + 2, 4))}>{text}</p>
+          ))}
+        </div>
+
+        <figure class="p-split__media" data-reveal-media>
+          <img
+            src={asset('page-council-stone-1100.webp')}
+            srcset={`${asset('page-council-stone-700.webp')} 700w, ${asset('page-council-stone-1100.webp')} 1100w`}
+            sizes="(min-width: 1041px) 660px, 100vw"
+            width="1100"
+            height="825"
+            alt={council.expertise.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="council-principles" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="council-principles" data-rise="1">{council.principles.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{council.principles.lead}</p>
+      </div>
+
+      <ul class="p-cols p-cols--2" data-rise="3">
+        {council.principles.items.map((item) => (
+          <li class="p-cols__item">
+            <h3 class="h-h3 p-cols__title">{item.title}</h3>
+            <p class="p-cols__text">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="h-section h-section--white" aria-labelledby="council-topics" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="council-topics" data-rise="1">{council.topics.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{council.topics.lead}</p>
+      </div>
+
+      <ul class="p-cols p-cols--3" data-rise="3">
+        {council.topics.items.map((item) => (
+          <li class="p-cols__item">
+            <h3 class="h-h3 p-cols__title">{item.title}</h3>
+            <p class="p-cols__text">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="council-order" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="council-order" data-rise="1">{council.order.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+
+      <dl class="p-facts" data-rise="2">
+        {council.order.items.map((item) => (
+          <>
+            <dt>{item.term}</dt>
+            <dd>{item.value}</dd>
+          </>
+        ))}
+      </dl>
+      <p class="p-note" data-rise="3">{council.order.note}</p>
+
+      <figure class="p-belt p-belt--tail" data-reveal-media>
+        <img
+          src={asset('page-council-table-1160.webp')}
+          srcset={`${asset('page-council-table-760.webp')} 760w, ${asset('page-council-table-1160.webp')} 1160w`}
+          sizes="(min-width: 1041px) 1160px, 100vw"
+          width="1160"
+          height="326"
+          alt={council.order.tableAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="council-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="council-cta" data-rise="1">{council.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{council.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={council.cta.primary.href}>
+            <span>{council.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={council.cta.secondary.href}>
+            <span>{council.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>

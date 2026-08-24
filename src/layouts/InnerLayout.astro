@@ -1,0 +1,124 @@
+---
+/*
+  Лейаут внутренних страниц первого пакета.
+
+  Шапка, футер, токены и типографика взяты те же, что у утверждённой главной
+  (`home.css`, `SiteHeader`, `SiteFooter`), поэтому внутренние страницы
+  читаются как её продолжение. `inner.css` добавляет только композиции,
+  которых на главной нет.
+
+  Клиентский перевод сюда не переносится: русская версия — единственная.
+  Поэтому переключатель языков в шапке и футере скрыт, чтобы на странице не
+  оставалось неработающего органа управления.
+*/
+import '../styles/home.css';
+import '../styles/inner.css';
+import SiteHeader from '../components/home/SiteHeader.astro';
+import SiteFooter from '../components/home/SiteFooter.astro';
+import { org } from '../data/home';
+import { canonicalUrl, productionOrigin, withBase } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle: string;
+  path: string;
+  /** Видимая хлебная крошка текущей страницы. */
+  crumb: string;
+  /** Дополнительные узлы структурированных данных с подтверждёнными фактами. */
+  schema?: Record<string, unknown>[];
+}
+
+const { title, description, ogTitle, path, crumb, schema = [] } = Astro.props;
+
+const site = new URL(productionOrigin);
+const canonical = canonicalUrl(path);
+const homeUrl = new URL('/', site).href;
+const ogImage = new URL('/assets/jaeu/og-home.jpg', site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: 'ru',
+      isPartOf: { '@id': `${homeUrl}#website` },
+      about: { '@id': `${homeUrl}#organization` },
+      breadcrumb: { '@id': `${canonical}#breadcrumb` }
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: org.shortName, item: homeUrl },
+        { '@type': 'ListItem', position: 2, name: crumb, item: canonical }
+      ]
+    },
+    ...schema
+  ]
+};
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#202A57" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/assets/jaeu-emblem.svg')} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={org.shortName} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={org.shortName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+    <script is:inline>
+      // Начальное состояние stagger включаем до отрисовки, иначе контент мигнёт.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.dataset.motion = 'on';
+      }
+    </script>
+  </head>
+
+  <body class="h-body">
+    <a class="h-skip" href="#main">Перейти к содержимому</a>
+    <SiteHeader currentPath={path} withLangSwitch={false} />
+
+    <main class="p-main" id="main">
+      <slot />
+    </main>
+
+    <SiteFooter withLangSwitch={false} />
+
+    <script>
+      import '../scripts/inner';
+    </script>
+  </body>
+</html>

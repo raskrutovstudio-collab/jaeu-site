@@ -1,43 +1,200 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CtaBanner from '../../components/CtaBanner.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, pageCopy, ui } from '../../data/copy';
-import { activityItems, placeholderText } from '../../data/placeholders';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { activities } from '../../data/pages';
+import { routes } from '../../data/home';
+import { withBase } from '../../data/site';
 
-const page = pageCopy.activities;
-const info = placeholderText('ru');
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+const [firstHalf, secondHalf] = [
+  activities.directions.items.slice(0, 2),
+  activities.directions.items.slice(2)
+];
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.activities}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
+<InnerLayout
+  title={activities.meta.title}
+  description={activities.meta.description}
+  ogTitle={activities.meta.ogTitle}
+  path={routes.activities}
+  crumb={activities.crumb}
+>
+  <section class="p-hero p-hero--belt">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{activities.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{activities.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{activities.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{activities.hero.lead}</p>
+        </div>
 
-    <div class="section activities-grid">
-      {activityItems.map((item) => (
-        <section class:list={['activity-card', `activity-card--${item.span}`, `activity-card--${item.tone}`]}>
-          <div>
-            <h2>{item.title.ru}</h2>
-            <p>{info}</p>
-          </div>
-        </section>
-      ))}
+        <figure class="p-hero__media">
+          <img
+            src={asset('page-activities-materials-1160.webp')}
+            srcset={`${asset('page-activities-materials-760.webp')} 760w, ${asset('page-activities-materials-1160.webp')} 1160w`}
+            sizes="(min-width: 1041px) 1160px, 100vw"
+            width="1160"
+            height="261"
+            alt={activities.hero.beltAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
     </div>
+  </section>
 
-    <div class="section">
-      <CtaBanner
-        variant="dark"
-        title="Членство в Ассоциации"
-        text={ui.ru.placeholders.info}
-        ctaLabel={ui.ru.nav.join}
-        href={routes.membership}
-      />
+  <section class="h-section h-section--white" aria-labelledby="activities-directions" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="activities-directions" data-rise="1">{activities.directions.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+
+      <div class="p-dirs">
+        {firstHalf.map((item) => (
+          <article class="p-dirs__item" data-rise="2">
+            <div class="p-dirs__head">
+              <Icon name={item.icon} class="p-dirs__icon" />
+              <h3 class="h-h3">{item.title}</h3>
+            </div>
+            <div class="p-dirs__body">
+              <p class="p-dirs__text">{item.text}</p>
+              <p class="p-dirs__practice">{item.practice}</p>
+              <a class="h-link" href={item.link.href}>
+                <span>{item.link.label}</span>
+                <Icon name="arrow" class="h-link__arrow" />
+              </a>
+            </div>
+          </article>
+        ))}
+
+        <div class="p-inset">
+          <p class="p-inset__caption" data-rise="3">{activities.directions.mediaCaption}</p>
+          <figure class="p-inset__media" data-reveal-media>
+            <img
+              src={asset('page-activities-discussion-1200.webp')}
+              srcset={`${asset('page-activities-discussion-760.webp')} 760w, ${asset('page-activities-discussion-1200.webp')} 1200w`}
+              sizes="(min-width: 1041px) 760px, 100vw"
+              width="1200"
+              height="800"
+              alt={activities.directions.mediaAlt}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+        {secondHalf.map((item) => (
+          <article class="p-dirs__item" data-rise="4">
+            <div class="p-dirs__head">
+              <Icon name={item.icon} class="p-dirs__icon" />
+              <h3 class="h-h3">{item.title}</h3>
+            </div>
+            <div class="p-dirs__body">
+              <p class="p-dirs__text">{item.text}</p>
+              <p class="p-dirs__practice">{item.practice}</p>
+              <a class="h-link" href={item.link.href}>
+                <span>{item.link.label}</span>
+                <Icon name="arrow" class="h-link__arrow" />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
+  </section>
 
-    <FaqAccordion items={faqCopy.activities} />
-  </article>
-</PageLayout>
+  <section class="h-section h-section--stone" aria-labelledby="activities-tasks" data-reveal>
+    <div class="h-shell">
+      <div class="p-split">
+        <figure class="p-split__media" data-reveal-media>
+          <img
+            src={asset('page-activities-balance-1000.webp')}
+            srcset={`${asset('page-activities-balance-600.webp')} 600w, ${asset('page-activities-balance-1000.webp')} 1000w`}
+            sizes="(min-width: 1041px) 460px, 100vw"
+            width="1000"
+            height="750"
+            alt={activities.tasks.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+
+        <div class="p-split__body">
+          <h2 class="h-h2" id="activities-tasks" data-rise="1">{activities.tasks.h2}</h2>
+          <hr class="h-rule" />
+          <p class="h-text" data-rise="2">{activities.tasks.lead}</p>
+
+          <ul class="h-points" data-rise="3">
+            {activities.tasks.items.map((item) => (
+              <li class="h-points__item">
+                <h3 class="h-h3 h-points__title">{item.title}</h3>
+                <p class="h-points__text">{item.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--white" aria-labelledby="activities-flow" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="activities-flow" data-rise="1">{activities.flow.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{activities.flow.lead}</p>
+      </div>
+
+      <ul class="p-cols p-cols--3" data-rise="3">
+        {activities.flow.steps.map((step) => (
+          <li class="p-cols__item">
+            <h3 class="h-h3 p-cols__title">{step.title}</h3>
+            <p class="p-cols__text">{step.text}</p>
+          </li>
+        ))}
+      </ul>
+
+      <figure class="p-belt p-belt--wide p-belt--tail" data-reveal-media>
+        <img
+          src={asset('page-activities-workshop-1400.webp')}
+          srcset={`${asset('page-activities-workshop-900.webp')} 900w, ${asset('page-activities-workshop-1400.webp')} 1400w`}
+          sizes="(min-width: 1041px) 1160px, 100vw"
+          width="1400"
+          height="600"
+          alt={activities.flow.imageAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="activities-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="activities-cta" data-rise="1">{activities.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{activities.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={activities.cta.primary.href}>
+            <span>{activities.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={activities.cta.secondary.href}>
+            <span>{activities.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>

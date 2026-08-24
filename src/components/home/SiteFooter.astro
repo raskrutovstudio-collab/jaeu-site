@@ -3,6 +3,12 @@ import LangSwitch from './LangSwitch.astro';
 import { footer, org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
+interface Props {
+  /** На внутренних страницах клиентского перевода нет, поэтому переключатель скрыт. */
+  withLangSwitch?: boolean;
+}
+
+const { withLangSwitch = true } = Astro.props;
 const year = new Date().getFullYear();
 const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org.address.city}, ${org.address.street}`;
 ---
@@ -57,7 +63,7 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
 
     <div class="h-footer__bottom">
       <p>© {year} <span data-i18n="ui.orgShortName">{org.shortName}</span>. <span data-i18n="footer.rights">{footer.rights}</span></p>
-      <LangSwitch class="h-footer__langs" />
+      {withLangSwitch && <LangSwitch class="h-footer__langs" />}
     </div>
   </div>
 </footer>

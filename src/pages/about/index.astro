@@ -1,45 +1,236 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
-import CtaBanner from '../../components/CtaBanner.astro';
-import FaqAccordion from '../../components/FaqAccordion.astro';
-import { faqCopy, pageCopy, ui } from '../../data/copy';
-import { routes } from '../../data/site';
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import Icon from '../../components/home/Icon.astro';
+import { about } from '../../data/pages';
+import { routes } from '../../data/home';
+import { canonicalUrl, withBase } from '../../data/site';
 
-const page = pageCopy.about;
-const chrome = ui.ru;
+const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+const canonical = canonicalUrl(routes.about);
+
+/* Схема построена на видимых вопросах и ответах этой страницы. */
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${canonical}#faq`,
+  mainEntity: about.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a }
+  }))
+};
 ---
 
-<PageLayout locale="ru" title={page.title} description={page.description} path={routes.about}>
-  <article class="container page-intro">
-    <Breadcrumbs items={[{ label: page.h1 }]} />
-    <h1>{page.h1}</h1>
-    <p class="page-intro__lead">{page.lead}</p>
+<InnerLayout
+  title={about.meta.title}
+  description={about.meta.description}
+  ogTitle={about.meta.ogTitle}
+  path={routes.about}
+  crumb={about.crumb}
+  schema={[faqSchema]}
+>
+  <section class="p-hero p-hero--offset">
+    <div class="h-shell">
+      <div class="p-hero__inner">
+        <div class="p-hero__text">
+          <nav class="p-crumbs" aria-label="Хлебные крошки">
+            <a href={routes.home}>Главная</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{about.crumb}</span>
+          </nav>
+          <p class="h-eyebrow">{about.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title">{about.hero.h1}</h1>
+          <p class="h-lead p-hero__lead">{about.hero.lead}</p>
+          <p class="p-hero__note">{about.hero.note}</p>
+        </div>
 
-    <div class="section two-col">
-      {page.sections.map((section) => (
-        <section class="content-card">
-          <h2>{section.title}</h2>
-          <p>{section.text}</p>
-        </section>
-      ))}
+        <figure class="p-hero__media">
+          <img
+            src={asset('page-about-hero-1200.webp')}
+            srcset={`${asset('page-about-hero-760.webp')} 760w, ${asset('page-about-hero-1200.webp')} 1200w`}
+            sizes="(min-width: 1041px) 870px, 100vw"
+            width="1200"
+            height="514"
+            alt={about.hero.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
     </div>
+  </section>
 
-    <div class="section">
-      <ImagePlaceholder label={chrome.placeholders.image} variant="about" />
+  <section class="h-section h-section--white" aria-labelledby="about-purpose" data-reveal>
+    <div class="h-shell">
+      <div class="p-spread">
+        <div class="p-spread__aside">
+          <h2 class="h-h2" id="about-purpose" data-rise="1">{about.purpose.h2}</h2>
+          <hr class="h-rule" />
+        </div>
+
+        <div class="p-spread__body">
+          {about.purpose.paragraphs.map((text, index) => (
+            <p class="h-text" data-rise={String(index + 2)}>{text}</p>
+          ))}
+
+          <ul class="h-points" data-rise="4">
+            {about.purpose.points.map((point) => (
+              <li class="h-points__item">
+                <h3 class="h-h3 h-points__title">{point.title}</h3>
+                <p class="h-points__text">{point.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="section">
-      <CtaBanner
-        variant="dark"
-        title="Членство в Ассоциации"
-        text={chrome.placeholders.info}
-        ctaLabel={chrome.nav.join}
-        href={routes.membership}
-      />
+  <section class="h-section h-section--stone" aria-labelledby="about-role" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="about-role" data-rise="1">{about.role.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-lead" data-rise="2">{about.role.lead}</p>
+      </div>
+
+      <ul class="p-pillars" data-rise="3">
+        {about.role.pillars.map((pillar) => (
+          <li class="p-pillars__item">
+            <h3 class="h-h3 p-pillars__title">{pillar.title}</h3>
+            <p class="p-pillars__text">{pillar.text}</p>
+          </li>
+        ))}
+      </ul>
     </div>
+  </section>
 
-    <FaqAccordion items={faqCopy.about} />
-  </article>
-</PageLayout>
+  <section class="h-section h-section--white" aria-labelledby="about-practice" data-reveal>
+    <div class="h-shell">
+      <div class="p-duo">
+        <figure class="p-duo__portrait" data-reveal-media>
+          <img
+            src={asset('page-about-meeting-700.webp')}
+            srcset={`${asset('page-about-meeting-460.webp')} 460w, ${asset('page-about-meeting-700.webp')} 700w`}
+            sizes="(min-width: 1041px) 360px, (min-width: 761px) 40vw, 100vw"
+            width="700"
+            height="933"
+            alt={about.visual.portraitAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+
+        <div class="p-duo__body">
+          <h2 class="h-h3" id="about-practice" data-rise="1">{about.visual.asideTitle}</h2>
+          <p class="h-text" data-rise="2">{about.visual.asideText}</p>
+
+          <figure class="p-duo__detail" data-reveal-media>
+            <img
+              src={asset('page-about-hallmark-1200.webp')}
+              srcset={`${asset('page-about-hallmark-760.webp')} 760w, ${asset('page-about-hallmark-1200.webp')} 1200w`}
+              sizes="(min-width: 1041px) 660px, 100vw"
+              width="1200"
+              height="675"
+              alt={about.visual.detailAlt}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-labelledby="about-facts" data-reveal>
+    <div class="h-shell">
+      <figure class="p-belt" data-reveal-media>
+        <img
+          src={asset('page-about-archive-1160.webp')}
+          srcset={`${asset('page-about-archive-760.webp')} 760w, ${asset('page-about-archive-1160.webp')} 1160w`}
+          sizes="(min-width: 1041px) 1160px, 100vw"
+          width="1160"
+          height="326"
+          alt={about.visual.beltAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+
+      <div class="p-head p-head--belt">
+        <h2 class="h-h2" id="about-facts" data-rise="1">{about.facts.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+
+      <dl class="p-facts" data-rise="2">
+        {about.facts.items.map((item) => (
+          <>
+            <dt>{item.term}</dt>
+            <dd>{item.value}</dd>
+          </>
+        ))}
+      </dl>
+      <p class="p-note" data-rise="3">{about.facts.note}</p>
+    </div>
+  </section>
+
+  <section class="h-section h-section--white" aria-labelledby="about-faq" data-reveal>
+    <div class="h-shell h-faq">
+      <div class="p-spread__aside">
+        <h2 class="h-h2" id="about-faq" data-rise="1">{about.faq.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2">{about.faq.lead}</p>
+      </div>
+
+      <div class="h-faq__list" data-rise="3">
+        {about.faq.items.map((item, index) => (
+          <div class="h-faq__item">
+            <h3>
+              <button
+                class="h-faq__trigger"
+                type="button"
+                data-faq-trigger
+                id={`faq-trigger-${index}`}
+                aria-expanded={index === 0 ? 'true' : 'false'}
+                aria-controls={`faq-panel-${index}`}
+              >
+                <span>{item.q}</span>
+                <span class="h-faq__sign" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div
+              class="h-faq__panel"
+              id={`faq-panel-${index}`}
+              role="region"
+              aria-labelledby={`faq-trigger-${index}`}
+              hidden={index !== 0}
+            >
+              <p>{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="p-cta" aria-labelledby="about-cta" data-reveal>
+    <div class="h-shell">
+      <div class="p-cta__inner">
+        <div class="p-cta__text-col">
+          <h2 class="h-h2 p-cta__title" id="about-cta" data-rise="1">{about.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2">{about.cta.text}</p>
+        </div>
+
+        <div class="p-cta__actions" data-rise="3">
+          <a class="h-btn h-btn--light" href={about.cta.primary.href}>
+            <span>{about.cta.primary.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
+          <a class="p-cta__link" href={about.cta.secondary.href}>
+            <span>{about.cta.secondary.label}</span>
+            <Icon name="arrow" class="p-cta__arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</InnerLayout>

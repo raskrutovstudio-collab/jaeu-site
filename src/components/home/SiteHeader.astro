@@ -4,9 +4,23 @@ import LangSwitch from './LangSwitch.astro';
 import { nav, org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
+interface Props {
+  /** Путь текущей страницы: нужен для активного пункта и якорей на главную. */
+  currentPath?: string;
+  /** На внутренних страницах клиентского перевода нет, поэтому переключатель скрыт. */
+  withLangSwitch?: boolean;
+}
+
+const { currentPath = routes.home, withLangSwitch = true } = Astro.props;
+
 const cta = 'Стать членом Ассоциации';
 /* В строке шапки кнопка соседствует с восемью пунктами меню, поэтому короче. */
 const ctaShort = 'Стать членом';
+
+/* Якорь ведёт на блок главной, поэтому вне главной ему нужен полный путь. */
+const linkFor = (href: string) =>
+  href.startsWith('#') && currentPath !== routes.home ? `${routes.home}${href}` : href;
+const isCurrent = (href: string) => !href.startsWith('#') && href === currentPath;
 ---
 
 <header class="h-header">
@@ -31,14 +45,19 @@ const ctaShort = 'Стать членом';
       <ul class="h-nav__list">
         {nav.map((item) => (
           <li>
-            <a class="h-nav__link" href={item.href} data-i18n={item.i18n}>{item.label}</a>
+            <a
+              class="h-nav__link"
+              href={linkFor(item.href)}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+              data-i18n={item.i18n}
+            >{item.label}</a>
           </li>
         ))}
       </ul>
     </nav>
 
     <div class="h-header__aside">
-      <LangSwitch />
+      {withLangSwitch && <LangSwitch />}
       <a class="h-btn h-btn--primary h-header__cta" href={routes.membership}>
         <span data-i18n="ui.becomeMemberShort">{ctaShort}</span>
         <Icon name="arrow" class="h-btn__arrow" />
@@ -67,13 +86,18 @@ const ctaShort = 'Стать членом';
         <ul class="h-mobile__list">
           {nav.map((item) => (
             <li>
-              <a class="h-mobile__link" href={item.href} data-i18n={item.i18n}>{item.label}</a>
+              <a
+                class="h-mobile__link"
+                href={linkFor(item.href)}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                data-i18n={item.i18n}
+              >{item.label}</a>
             </li>
           ))}
         </ul>
       </nav>
       <div class="h-mobile__foot">
-        <LangSwitch />
+        {withLangSwitch && <LangSwitch />}
         <a class="h-btn h-btn--primary" href={routes.membership}>
           <span data-i18n="ui.becomeMember">{cta}</span>
           <Icon name="arrow" class="h-btn__arrow" />
