@@ -35,13 +35,14 @@ const [firstHalf, secondHalf] = [
 
         <figure class="p-hero__media">
           <img
-            src={asset('page-activities-materials-1160.webp')}
-            srcset={`${asset('page-activities-materials-760.webp')} 760w, ${asset('page-activities-materials-1160.webp')} 1160w`}
+            src={asset('page-activities-expertise-1160.webp')}
+            srcset={`${asset('page-activities-expertise-760.webp')} 760w, ${asset('page-activities-expertise-1160.webp')} 1160w`}
             sizes="(min-width: 1041px) 1160px, 100vw"
             width="1160"
             height="261"
             alt={activities.hero.beltAlt}
-            loading="lazy"
+            loading="eager"
+            fetchpriority="high"
             decoding="async"
           />
         </figure>

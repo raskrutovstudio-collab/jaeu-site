@@ -38,7 +38,8 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
             width="1400"
             height="600"
             alt={council.hero.imageAlt}
-            loading="lazy"
+            loading="eager"
+            fetchpriority="high"
             decoding="async"
           />
         </figure>

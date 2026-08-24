@@ -593,33 +593,18 @@
 }
 
 /*
-  Hero не зависит от JavaScript: композиция появляется собственной CSS-анимацией,
-  поэтому при отключённом скрипте заголовок и лид видны сразу.
+  Hero виден целиком уже в первой отрисовке: заголовок, лид и кадр не стартуют
+  из прозрачности и не сдвигаются. Единственное движение — золотая линия над
+  заголовком, она не влияет на читаемость composition в первый момент.
 */
-[data-motion='on'] .p-hero__text > * {
-  animation: p-rise-in 520ms var(--ease) both;
+[data-motion='on'] .p-hero .h-eyebrow::before {
+  transform-origin: left center;
+  animation: p-line-in 520ms var(--ease) both;
 }
 
-[data-motion='on'] .p-hero__text > *:nth-child(3) {
-  animation-delay: 90ms;
-}
-
-[data-motion='on'] .p-hero__text > *:nth-child(4) {
-  animation-delay: 180ms;
-}
-
-[data-motion='on'] .p-hero__text > *:nth-child(5) {
-  animation-delay: 270ms;
-}
-
-[data-motion='on'] .p-hero__media {
-  animation: p-media-in 620ms var(--ease) 240ms both;
-}
-
-@keyframes p-media-in {
+@keyframes p-line-in {
   from {
-    opacity: 0;
-    clip-path: inset(0 0 12% 0);
+    transform: scaleX(0);
   }
 }
 
@@ -917,8 +902,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .p-hero__text > *,
-  .p-hero__media,
+  .p-hero .h-eyebrow::before,
   [data-rise],
   [data-reveal-media] {
     animation: none !important;

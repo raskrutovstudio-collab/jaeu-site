@@ -34,7 +34,7 @@ function initMobileMenu(): void {
     }
   });
 
-  const media = window.matchMedia('(min-width: 1360px)');
+  const media = window.matchMedia('(min-width: 1440px)');
   media.addEventListener('change', (event) => {
     if (event.matches) setState(false);
   });

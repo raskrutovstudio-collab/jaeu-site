@@ -17,6 +17,15 @@ const cta = 'Стать членом Ассоциации';
 /* В строке шапки кнопка соседствует с восемью пунктами меню, поэтому короче. */
 const ctaShort = 'Стать членом';
 
+/* Ноутбучный десктоп 1200–1439 px: в строке остаются только эти разделы,
+   остальные доступны через burger. */
+const compactNav = new Set<string>([
+  routes.about,
+  routes.activities,
+  routes.expertCouncil,
+  routes.news
+]);
+
 /* Якорь ведёт на блок главной, поэтому вне главной ему нужен полный путь. */
 const linkFor = (href: string) =>
   href.startsWith('#') && currentPath !== routes.home ? `${routes.home}${href}` : href;
@@ -44,7 +53,7 @@ const isCurrent = (href: string) => !href.startsWith('#') && href === currentPat
     <nav class="h-nav" data-i18n-attrs="aria-label:ui.navLabel" aria-label="Основная навигация">
       <ul class="h-nav__list">
         {nav.map((item) => (
-          <li>
+          <li class:list={['h-nav__item', compactNav.has(item.href) && 'h-nav__item--key']}>
             <a
               class="h-nav__link"
               href={linkFor(item.href)}

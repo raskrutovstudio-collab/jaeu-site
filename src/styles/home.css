@@ -61,8 +61,8 @@ body.h-body {
 /* Масштеад шире контентной сетки: шесть разделов, языки и широкая CTA
    не укладываются в 1240 px при читаемых размерах. */
 .h-shell--wide {
-  max-width: 1440px;
-  padding-inline: 48px;
+  max-width: var(--shell);
+  padding-inline: 40px;
 }
 
 .h-skip {
@@ -294,6 +294,11 @@ body.h-body {
   object-fit: contain;
 }
 
+.h-nav,
+.h-header__aside {
+  display: none;
+}
+
 .h-nav {
   margin-inline: auto;
 }
@@ -340,7 +345,6 @@ body.h-body {
 
 .h-header__aside {
   flex: none;
-  display: flex;
   align-items: center;
   gap: 16px;
 }
@@ -389,7 +393,7 @@ body.h-body {
 }
 
 .h-burger {
-  display: none;
+  display: block;
   width: 48px;
   height: 48px;
   margin-left: auto;
@@ -1602,14 +1606,19 @@ body.h-body {
   }
 }
 
-@media (max-width: 1439px) {
-  .h-nav,
-  .h-header__aside {
-    display: none;
+/*
+  Шапка собрана каскадом без щели в 1 px между диапазонами:
+  по умолчанию — логотип и burger; от 1200 px — четыре ключевых раздела;
+  от 1440 px — полная строка. Так 1199 и 1439 не проваливаются в широкий
+  десктоп, где восемь пунктов и CTA не помещаются.
+*/
+@media (min-width: 1200px) {
+  .h-nav {
+    display: block;
   }
 
-  .h-burger {
-    display: block;
+  .h-header__aside {
+    display: flex;
   }
 
   .h-header__bar {
@@ -1617,9 +1626,63 @@ body.h-body {
     gap: 20px;
   }
 
+  .h-nav__list {
+    gap: 26px;
+  }
+
+  .h-nav__item:not(.h-nav__item--key) {
+    display: none;
+  }
+
+  .h-header__cta {
+    display: none;
+  }
+
+  .h-burger {
+    margin-left: 0;
+  }
+
+  /* На внутренних страницах переключателя нет: пустой aside не должен
+     оставлять зазор между меню и burger. */
+  .h-header__aside:not(:has(.h-langs)) {
+    display: none;
+  }
+
   .h-shell--wide {
     max-width: var(--shell);
     padding-inline: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .h-nav__item:not(.h-nav__item--key) {
+    display: list-item;
+  }
+
+  .h-header__cta {
+    display: inline-flex;
+  }
+
+  .h-header__aside,
+  .h-header__aside:not(:has(.h-langs)) {
+    display: flex;
+  }
+
+  .h-burger {
+    display: none;
+  }
+
+  .h-header__bar {
+    gap: 24px;
+  }
+
+  .h-nav__list {
+    gap: 18px;
+  }
+
+  .h-shell--wide {
+    max-width: 1440px;
+    padding-inline: 48px;
   }
 }
 
