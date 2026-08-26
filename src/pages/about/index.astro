@@ -2,11 +2,15 @@
 import InnerLayout from '../../layouts/InnerLayout.astro';
 import Icon from '../../components/home/Icon.astro';
 import { about } from '../../data/pages';
+import { aboutI18n } from '../../data/pagesI18n';
 import { routes } from '../../data/home';
 import { canonicalUrl, withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 const canonical = canonicalUrl(routes.about);
+
+/* Значение переключается только при подтверждённом переводе. */
+const translated = (key: string) => (key in aboutI18n ? key : undefined);
 
 /* Схема построена на видимых вопросах и ответах этой страницы. */
 const faqSchema = {
@@ -27,20 +31,21 @@ const faqSchema = {
   path={routes.about}
   crumb={about.crumb}
   schema={[faqSchema]}
+  i18n={aboutI18n}
 >
   <section class="p-hero p-hero--offset">
     <div class="h-shell">
       <div class="p-hero__inner">
         <div class="p-hero__text">
-          <nav class="p-crumbs" aria-label="Хлебные крошки">
-            <a href={routes.home}>Главная</a>
+          <nav class="p-crumbs" aria-label="Хлебные крошки" data-i18n-attrs="aria-label:ui.breadcrumbs">
+            <a href={routes.home} data-i18n="ui.home">Главная</a>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">{about.crumb}</span>
+            <span aria-current="page" data-i18n="crumb">{about.crumb}</span>
           </nav>
-          <p class="h-eyebrow">{about.hero.eyebrow}</p>
-          <h1 class="h-h1 p-hero__title">{about.hero.h1}</h1>
-          <p class="h-lead p-hero__lead">{about.hero.lead}</p>
-          <p class="p-hero__note">{about.hero.note}</p>
+          <p class="h-eyebrow" data-i18n="hero.eyebrow">{about.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{about.hero.h1}</h1>
+          <p class="h-lead p-hero__lead" data-i18n="hero.lead">{about.hero.lead}</p>
+          <p class="p-hero__note" data-i18n="hero.note">{about.hero.note}</p>
         </div>
 
         <figure class="p-hero__media">
@@ -51,6 +56,7 @@ const faqSchema = {
             width="1200"
             height="514"
             alt={about.hero.imageAlt}
+            data-i18n-attrs="alt:hero.imageAlt"
             loading="eager"
             fetchpriority="high"
             decoding="async"
@@ -64,20 +70,20 @@ const faqSchema = {
     <div class="h-shell">
       <div class="p-spread">
         <div class="p-spread__aside">
-          <h2 class="h-h2" id="about-purpose" data-rise="1">{about.purpose.h2}</h2>
+          <h2 class="h-h2" id="about-purpose" data-rise="1" data-i18n="purpose.h2">{about.purpose.h2}</h2>
           <hr class="h-rule" />
         </div>
 
         <div class="p-spread__body">
           {about.purpose.paragraphs.map((text, index) => (
-            <p class="h-text" data-rise={String(index + 2)}>{text}</p>
+            <p class="h-text" data-rise={String(index + 2)} data-i18n={`purpose.paragraphs.${index}`}>{text}</p>
           ))}
 
           <ul class="h-points" data-rise="4">
-            {about.purpose.points.map((point) => (
+            {about.purpose.points.map((point, index) => (
               <li class="h-points__item">
-                <h3 class="h-h3 h-points__title">{point.title}</h3>
-                <p class="h-points__text">{point.text}</p>
+                <h3 class="h-h3 h-points__title" data-i18n={`purpose.points.${index}.title`}>{point.title}</h3>
+                <p class="h-points__text" data-i18n={`purpose.points.${index}.text`}>{point.text}</p>
               </li>
             ))}
           </ul>
@@ -89,16 +95,16 @@ const faqSchema = {
   <section class="h-section h-section--stone" aria-labelledby="about-role" data-reveal>
     <div class="h-shell">
       <div class="p-head">
-        <h2 class="h-h2" id="about-role" data-rise="1">{about.role.h2}</h2>
+        <h2 class="h-h2" id="about-role" data-rise="1" data-i18n="role.h2">{about.role.h2}</h2>
         <hr class="h-rule" />
-        <p class="h-lead" data-rise="2">{about.role.lead}</p>
+        <p class="h-lead" data-rise="2" data-i18n="role.lead">{about.role.lead}</p>
       </div>
 
       <ul class="p-pillars" data-rise="3">
-        {about.role.pillars.map((pillar) => (
+        {about.role.pillars.map((pillar, index) => (
           <li class="p-pillars__item">
-            <h3 class="h-h3 p-pillars__title">{pillar.title}</h3>
-            <p class="p-pillars__text">{pillar.text}</p>
+            <h3 class="h-h3 p-pillars__title" data-i18n={`role.pillars.${index}.title`}>{pillar.title}</h3>
+            <p class="p-pillars__text" data-i18n={`role.pillars.${index}.text`}>{pillar.text}</p>
           </li>
         ))}
       </ul>
@@ -116,14 +122,15 @@ const faqSchema = {
             width="700"
             height="933"
             alt={about.visual.portraitAlt}
+            data-i18n-attrs="alt:visual.portraitAlt"
             loading="lazy"
             decoding="async"
           />
         </figure>
 
         <div class="p-duo__body">
-          <h2 class="h-h3" id="about-practice" data-rise="1">{about.visual.asideTitle}</h2>
-          <p class="h-text" data-rise="2">{about.visual.asideText}</p>
+          <h2 class="h-h3" id="about-practice" data-rise="1" data-i18n="visual.asideTitle">{about.visual.asideTitle}</h2>
+          <p class="h-text" data-rise="2" data-i18n="visual.asideText">{about.visual.asideText}</p>
 
           <figure class="p-duo__detail" data-reveal-media>
             <img
@@ -133,6 +140,7 @@ const faqSchema = {
               width="1200"
               height="675"
               alt={about.visual.detailAlt}
+              data-i18n-attrs="alt:visual.detailAlt"
               loading="lazy"
               decoding="async"
             />
@@ -152,34 +160,40 @@ const faqSchema = {
           width="1160"
           height="326"
           alt={about.visual.beltAlt}
+          data-i18n-attrs="alt:visual.beltAlt"
           loading="lazy"
           decoding="async"
         />
       </figure>
 
       <div class="p-head p-head--belt">
-        <h2 class="h-h2" id="about-facts" data-rise="1">{about.facts.h2}</h2>
+        <h2 class="h-h2" id="about-facts" data-rise="1" data-i18n="facts.h2">{about.facts.h2}</h2>
         <hr class="h-rule" />
       </div>
 
+      {/*
+        Полное зарегистрированное наименование и БИН остаются в исходном виде на
+        любом языке: это собственное наименование и номер, а не текст. Ключ
+        ставится только там, где перевод значения подтверждён словарём.
+      */}
       <dl class="p-facts" data-rise="2">
-        {about.facts.items.map((item) => (
+        {about.facts.items.map((item, index) => (
           <>
-            <dt>{item.term}</dt>
-            <dd>{item.value}</dd>
+            <dt data-i18n={`facts.items.${index}.term`}>{item.term}</dt>
+            <dd data-i18n={translated(`facts.items.${index}.value`)}>{item.value}</dd>
           </>
         ))}
       </dl>
-      <p class="p-note" data-rise="3">{about.facts.note}</p>
+      <p class="p-note" data-rise="3" data-i18n="facts.note">{about.facts.note}</p>
     </div>
   </section>
 
   <section class="h-section h-section--white" aria-labelledby="about-faq" data-reveal>
     <div class="h-shell h-faq">
       <div class="p-spread__aside">
-        <h2 class="h-h2" id="about-faq" data-rise="1">{about.faq.h2}</h2>
+        <h2 class="h-h2" id="about-faq" data-rise="1" data-i18n="faq.h2">{about.faq.h2}</h2>
         <hr class="h-rule" />
-        <p class="h-text" data-rise="2">{about.faq.lead}</p>
+        <p class="h-text" data-rise="2" data-i18n="faq.lead">{about.faq.lead}</p>
       </div>
 
       <div class="h-faq__list" data-rise="3">
@@ -194,7 +208,7 @@ const faqSchema = {
                 aria-expanded={index === 0 ? 'true' : 'false'}
                 aria-controls={`faq-panel-${index}`}
               >
-                <span>{item.q}</span>
+                <span data-i18n={`faq.items.${index}.q`}>{item.q}</span>
                 <span class="h-faq__sign" aria-hidden="true"></span>
               </button>
             </h3>
@@ -205,7 +219,7 @@ const faqSchema = {
               aria-labelledby={`faq-trigger-${index}`}
               hidden={index !== 0}
             >
-              <p>{item.a}</p>
+              <p data-i18n={`faq.items.${index}.a`}>{item.a}</p>
             </div>
           </div>
         ))}
@@ -217,17 +231,17 @@ const faqSchema = {
     <div class="h-shell">
       <div class="p-cta__inner">
         <div class="p-cta__text-col">
-          <h2 class="h-h2 p-cta__title" id="about-cta" data-rise="1">{about.cta.h2}</h2>
-          <p class="p-cta__text" data-rise="2">{about.cta.text}</p>
+          <h2 class="h-h2 p-cta__title" id="about-cta" data-rise="1" data-i18n="cta.h2">{about.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2" data-i18n="cta.text">{about.cta.text}</p>
         </div>
 
         <div class="p-cta__actions" data-rise="3">
           <a class="h-btn h-btn--light" href={about.cta.primary.href}>
-            <span>{about.cta.primary.label}</span>
+            <span data-i18n="cta.primary.label">{about.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
           </a>
           <a class="p-cta__link" href={about.cta.secondary.href}>
-            <span>{about.cta.secondary.label}</span>
+            <span data-i18n="cta.secondary.label">{about.cta.secondary.label}</span>
             <Icon name="arrow" class="p-cta__arrow" />
           </a>
         </div>

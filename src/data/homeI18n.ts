@@ -379,19 +379,41 @@ export const homeTranslations = {
 
 export type HomeI18nKey = keyof typeof homeTranslations;
 
+/** Ключи шапки, подвала и навигации, которых на главной нет. */
+const innerChrome = {
+  'ui.home': pair('Басты бет', 'Home'),
+  'ui.breadcrumbs': pair('Навигация тізбегі', 'Breadcrumb')
+} as const satisfies Record<string, Translation>;
+
+/**
+ * Шапка, подвал и навигация одинаковы на всех страницах, поэтому их перекрытия
+ * отбираются из словаря главной, а не дублируются: один русский источник —
+ * один перевод. Подмножество определяется префиксом ключа.
+ */
+export const chromeTranslations: Record<string, Translation> = {
+  ...Object.fromEntries(
+    Object.entries(homeTranslations).filter(([key]) =>
+      ['ui.', 'nav.', 'footer.'].some((prefix) => key.startsWith(prefix))
+    )
+  ),
+  ...innerChrome
+};
+
 /**
  * Полезная нагрузка для клиента: только перекрытия. Русский не передаётся,
- * потому что уже присутствует в разметке.
+ * потому что уже присутствует в разметке. Страница получает общие элементы
+ * интерфейса и свой собственный словарь, а не словари всех остальных страниц.
  */
-export const homeI18nPayload = {
-  storageKey: langStorageKey,
-  locales: homeLocales.map((item) => ({ id: item.id, lang: item.lang })),
-  overrides: {
-    kk: Object.fromEntries(
-      Object.entries(homeTranslations).map(([key, value]) => [key, value.kk])
-    ),
-    en: Object.fromEntries(
-      Object.entries(homeTranslations).map(([key, value]) => [key, value.en])
-    )
-  }
-} as const;
+export function buildI18nPayload(pageTranslations: Record<string, Translation> = {}) {
+  const table = { ...chromeTranslations, ...pageTranslations };
+  const overridesFor = (locale: 'kk' | 'en') =>
+    Object.fromEntries(Object.entries(table).map(([key, value]) => [key, value[locale]]));
+
+  return {
+    storageKey: langStorageKey,
+    locales: homeLocales.map((item) => ({ id: item.id, lang: item.lang })),
+    overrides: { kk: overridesFor('kk'), en: overridesFor('en') }
+  };
+}
+
+export const homeI18nPayload = buildI18nPayload(homeTranslations);

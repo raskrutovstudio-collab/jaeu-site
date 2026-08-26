@@ -2,6 +2,7 @@
 import InnerLayout from '../../layouts/InnerLayout.astro';
 import Icon from '../../components/home/Icon.astro';
 import { news } from '../../data/pages';
+import { newsI18n } from '../../data/pagesI18n';
 import { routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
@@ -17,19 +18,20 @@ const thumb = 400;
   ogTitle={news.meta.ogTitle}
   path={routes.news}
   crumb={news.crumb}
+  i18n={newsI18n}
 >
   <section class="p-hero p-hero--tight">
     <div class="h-shell">
       <div class="p-hero__inner">
         <div class="p-hero__text">
-          <nav class="p-crumbs" aria-label="Хлебные крошки">
-            <a href={routes.home}>Главная</a>
+          <nav class="p-crumbs" aria-label="Хлебные крошки" data-i18n-attrs="aria-label:ui.breadcrumbs">
+            <a href={routes.home} data-i18n="ui.home">Главная</a>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">{news.crumb}</span>
+            <span aria-current="page" data-i18n="crumb">{news.crumb}</span>
           </nav>
-          <p class="h-eyebrow">{news.hero.eyebrow}</p>
-          <h1 class="h-h1 p-hero__title">{news.hero.h1}</h1>
-          <p class="h-lead p-hero__lead">{news.hero.lead}</p>
+          <p class="h-eyebrow" data-i18n="hero.eyebrow">{news.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{news.hero.h1}</h1>
+          <p class="h-lead p-hero__lead" data-i18n="hero.lead">{news.hero.lead}</p>
         </div>
       </div>
     </div>
@@ -47,6 +49,7 @@ const thumb = 400;
             width="1000"
             height="563"
             alt={news.featured.imageAlt}
+            data-i18n-attrs="alt:featured.imageAlt"
             loading="eager"
             fetchpriority="high"
             decoding="async"
@@ -54,34 +57,40 @@ const thumb = 400;
         </figure>
 
         <div class="p-story__body">
-          <p class="p-label">{news.featured.eyebrow}</p>
-          <time class="p-date" datetime={news.featured.date}>{news.featured.dateLabel}</time>
-          <h2 class="h-h2 p-story__title" id="news-featured">{news.featured.title}</h2>
+          <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
+          <!-- Меняется только видимая подпись: datetime остаётся машинным. -->
+          <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
+          <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
           <hr class="h-rule" />
-          {news.featured.paragraphs.map((text) => (
-            <p class="p-story__text">{text}</p>
+          {news.featured.paragraphs.map((text, index) => (
+            <p class="p-story__text" data-i18n={`featured.paragraphs.${index}`}>{text}</p>
           ))}
         </div>
       </article>
     </div>
   </section>
 
-  <section class="h-section h-section--stone" aria-label="Другие материалы" data-reveal>
+  <section
+    class="h-section h-section--stone"
+    aria-label="Другие материалы"
+    data-i18n-attrs="aria-label:list.aria"
+    data-reveal
+  >
     <div class="h-shell">
-      <p class="p-hint p-hint--head" data-rise="1">{news.listNote}</p>
+      <p class="p-hint p-hint--head" data-rise="1" data-i18n="listNote">{news.listNote}</p>
 
       <ul class="p-stories" data-rise="1">
         {news.items.map((item, index) => (
           <li>
             <article class={`p-stories__item${index === 1 ? ' p-stories__item--broad' : ''}`}>
               <div class="p-stories__meta">
-                <time class="p-date" datetime={item.date}>{item.dateLabel}</time>
+                <time class="p-date" datetime={item.date} data-i18n={`items.${index}.dateLabel`}>{item.dateLabel}</time>
               </div>
 
               <div class="p-stories__body">
-                <h2 class="h-h3 p-stories__title">{item.title}</h2>
-                <p class="p-stories__text">{item.text}</p>
-                <p class="p-stories__detail">{item.detail}</p>
+                <h2 class="h-h3 p-stories__title" data-i18n={`items.${index}.title`}>{item.title}</h2>
+                <p class="p-stories__text" data-i18n={`items.${index}.text`}>{item.text}</p>
+                <p class="p-stories__detail" data-i18n={`items.${index}.detail`}>{item.detail}</p>
               </div>
 
               <figure class="p-stories__media" data-reveal-media>
@@ -92,6 +101,7 @@ const thumb = 400;
                   width={thumb}
                   height={thumb}
                   alt={item.imageAlt}
+                  data-i18n-attrs={`alt:items.${index}.imageAlt`}
                   loading="lazy"
                   decoding="async"
                 />
@@ -107,17 +117,21 @@ const thumb = 400;
     <div class="h-shell">
       <div class="p-cta__inner">
         <div class="p-cta__text-col">
-          <h2 class="h-h2 p-cta__title" id="news-cta" data-rise="1">{news.cta.h2}</h2>
-          <p class="p-cta__text" data-rise="2">{news.cta.text}</p>
+          <h2 class="h-h2 p-cta__title" id="news-cta" data-rise="1" data-i18n="cta.h2">{news.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2" data-i18n="cta.text">{news.cta.text}</p>
         </div>
 
         <div class="p-cta__actions" data-rise="3">
-          <a class="h-btn h-btn--light" href={news.cta.primary.href}>
-            <span>{news.cta.primary.label}</span>
+          <a
+            class="h-btn h-btn--light"
+            href={news.cta.primary.href}
+            data-i18n-attrs="href:cta.primary.href"
+          >
+            <span data-i18n="cta.primary.label">{news.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
           </a>
           <a class="p-cta__link" href={news.cta.secondary.href}>
-            <span>{news.cta.secondary.label}</span>
+            <span data-i18n="cta.secondary.label">{news.cta.secondary.label}</span>
             <Icon name="arrow" class="p-cta__arrow" />
           </a>
         </div>

@@ -1,0 +1,97 @@
+---
+/*
+  Клиентский перевод страницы без смены URL.
+
+  Компонент ставится последним в body: разметка к этому моменту разобрана, а
+  первая отрисовка ещё не произошла, поэтому сохранённый язык применяется без
+  русской вспышки и без сдвига layout.
+
+  Русские строки берутся из самой разметки, а не из полезной нагрузки, поэтому
+  без JavaScript страница остаётся полноценно русской и индексируемой.
+*/
+interface Props {
+  /** Перекрытия только для KZ/EN: см. `buildI18nPayload`. */
+  payload: {
+    storageKey: string;
+    locales: readonly { id: string; lang: string }[];
+    overrides: Record<string, Record<string, string>>;
+  };
+}
+
+const { payload } = Astro.props;
+---
+
+<script is:inline define:vars={{ i18n: payload }}>
+  (() => {
+    const root = document.documentElement;
+    const langAttr = new Map(i18n.locales.map((item) => [item.id, item.lang]));
+    const texts = [];
+    const attrs = [];
+
+    // Заголовок может содержать иконку, поэтому меняется только текстовый узел.
+    const firstText = (element) => {
+      for (const node of element.childNodes) {
+        if (node.nodeType === 3 && node.textContent.trim()) return node;
+      }
+      return null;
+    };
+
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      const node = firstText(element);
+      texts.push({
+        key: element.dataset.i18n,
+        target: node || element,
+        base: node ? node.textContent : element.textContent
+      });
+    });
+
+    document.querySelectorAll('[data-i18n-attrs]').forEach((element) => {
+      element.dataset.i18nAttrs.split(';').forEach((entry) => {
+        const separator = entry.indexOf(':');
+        if (separator < 1) return;
+        const attr = entry.slice(0, separator).trim();
+        const key = entry.slice(separator + 1).trim();
+        attrs.push({ element, attr, key, base: element.getAttribute(attr) || '' });
+      });
+    });
+
+    // Ключ без подтверждённого перевода остаётся русским из разметки.
+    const resolve = (locale, key, base) => {
+      if (locale === 'ru') return base;
+      const table = i18n.overrides[locale];
+      return (table && table[key]) || base;
+    };
+
+    let current = 'ru';
+
+    const apply = (locale) => {
+      const next = langAttr.has(locale) ? locale : 'ru';
+      current = next;
+      root.lang = langAttr.get(next);
+      texts.forEach((item) => {
+        item.target.textContent = resolve(next, item.key, item.base);
+      });
+      attrs.forEach((item) => {
+        item.element.setAttribute(item.attr, resolve(next, item.key, item.base));
+      });
+      document.dispatchEvent(new CustomEvent('jaeu:lang', { detail: next }));
+    };
+
+    window.jaeuLang = {
+      storageKey: i18n.storageKey,
+      locales: i18n.locales.map((item) => item.id),
+      apply,
+      get current() {
+        return current;
+      }
+    };
+
+    let stored = null;
+    try {
+      stored = localStorage.getItem(i18n.storageKey);
+    } catch {
+      stored = null;
+    }
+    if (stored && stored !== 'ru') apply(stored);
+  })();
+</script>

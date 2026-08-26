@@ -2,11 +2,18 @@
 import InnerLayout from '../../layouts/InnerLayout.astro';
 import Icon from '../../components/home/Icon.astro';
 import { contacts } from '../../data/pages';
+import { contactsI18n } from '../../data/pagesI18n';
 import { org, routes } from '../../data/home';
 import { canonicalUrl, withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 const canonical = canonicalUrl(routes.contacts);
+
+/*
+  Наименование юридического лица, БИН и номер телефона одинаковы на любом языке,
+  поэтому ключ ставится только там, где перевод значения подтверждён словарём.
+*/
+const translated = (key: string) => (key in contactsI18n ? key : undefined);
 
 /* Схема повторяет только видимые на странице подтверждённые контакты. */
 const contactSchema = {
@@ -38,22 +45,27 @@ const contactSchema = {
   path={routes.contacts}
   crumb={contacts.crumb}
   schema={[contactSchema]}
+  i18n={contactsI18n}
 >
   <section class="p-hero p-hero--split">
     <div class="h-shell">
       <div class="p-hero__inner">
         <div class="p-hero__text">
-          <nav class="p-crumbs" aria-label="Хлебные крошки">
-            <a href={routes.home}>Главная</a>
+          <nav class="p-crumbs" aria-label="Хлебные крошки" data-i18n-attrs="aria-label:ui.breadcrumbs">
+            <a href={routes.home} data-i18n="ui.home">Главная</a>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">{contacts.crumb}</span>
+            <span aria-current="page" data-i18n="crumb">{contacts.crumb}</span>
           </nav>
-          <p class="h-eyebrow">{contacts.hero.eyebrow}</p>
-          <h1 class="h-h1 p-hero__title">{contacts.hero.h1}</h1>
-          <p class="h-lead p-hero__lead">{contacts.hero.lead}</p>
+          <p class="h-eyebrow" data-i18n="hero.eyebrow">{contacts.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{contacts.hero.h1}</h1>
+          <p class="h-lead p-hero__lead" data-i18n="hero.lead">{contacts.hero.lead}</p>
 
-          <a class="h-btn h-btn--primary" href={contacts.hero.action.href}>
-            <span>{contacts.hero.action.label}</span>
+          <a
+            class="h-btn h-btn--primary"
+            href={contacts.hero.action.href}
+            data-i18n-attrs="href:hero.action.href"
+          >
+            <span data-i18n="hero.action.label">{contacts.hero.action.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
           </a>
         </div>
@@ -66,6 +78,7 @@ const contactSchema = {
             width="1160"
             height="497"
             alt={contacts.hero.imageAlt}
+            data-i18n-attrs="alt:hero.imageAlt"
             loading="eager"
             fetchpriority="high"
             decoding="async"
@@ -79,27 +92,36 @@ const contactSchema = {
   <section class="h-section h-section--white" aria-labelledby="contacts-actions">
     <div class="h-shell">
       <div class="p-head">
-        <h2 class="h-h2" id="contacts-actions">{contacts.actions.h2}</h2>
+        <h2 class="h-h2" id="contacts-actions" data-i18n="actions.h2">{contacts.actions.h2}</h2>
         <hr class="h-rule" />
       </div>
 
       <ul class="p-contact">
-        {contacts.actions.items.map((item) => (
+        {contacts.actions.items.map((item, index) => (
           <li class="p-contact__item">
-            <p class="p-contact__term">{item.term}</p>
+            <p class="p-contact__term" data-i18n={`actions.items.${index}.term`}>{item.term}</p>
 
             {'href' in item && item.href ? (
-              <a class="p-contact__value" href={item.href}>{item.value}</a>
+              /* Значение — адрес почты или телефон, поэтому переводится только тема письма. */
+              <a
+                class="p-contact__value"
+                href={item.href}
+                data-i18n-attrs={
+                  translated(`actions.items.${index}.href`)
+                    ? `href:actions.items.${index}.href`
+                    : undefined
+                }
+              >{item.value}</a>
             ) : (
-              <p class="p-contact__value p-contact__value--long">{item.value}</p>
+              <p class="p-contact__value p-contact__value--long" data-i18n={`actions.items.${index}.value`}>{item.value}</p>
             )}
 
-            <p class="p-contact__hint">{item.hint}</p>
+            <p class="p-contact__hint" data-i18n={`actions.items.${index}.hint`}>{item.hint}</p>
           </li>
         ))}
       </ul>
 
-      <p class="p-note">{contacts.actions.note}</p>
+      <p class="p-note" data-i18n="actions.note">{contacts.actions.note}</p>
 
       <div class="p-facet" aria-hidden="true">
         <svg viewBox="0 0 1160 160" fill="none" stroke="currentColor" stroke-width="1" role="presentation">
@@ -117,9 +139,9 @@ const contactSchema = {
   <section class="h-section h-section--stone" aria-labelledby="contacts-visual" data-reveal>
     <div class="h-shell">
       <div class="p-head p-head--flush">
-        <h2 class="h-h2" id="contacts-visual" data-rise="1">{contacts.visual.title}</h2>
+        <h2 class="h-h2" id="contacts-visual" data-rise="1" data-i18n="visual.title">{contacts.visual.title}</h2>
         <hr class="h-rule" />
-        <p class="h-text" data-rise="2">{contacts.visual.text}</p>
+        <p class="h-text" data-rise="2" data-i18n="visual.text">{contacts.visual.text}</p>
       </div>
     </div>
   </section>
@@ -127,22 +149,22 @@ const contactSchema = {
   <section class="h-section h-section--white" aria-labelledby="contacts-requisites" data-reveal>
     <div class="h-shell">
       <div class="p-head">
-        <h2 class="h-h2" id="contacts-requisites" data-rise="1">{contacts.requisites.h2}</h2>
+        <h2 class="h-h2" id="contacts-requisites" data-rise="1" data-i18n="requisites.h2">{contacts.requisites.h2}</h2>
         <hr class="h-rule" />
       </div>
 
       <dl class="p-facts" data-rise="2">
-        {contacts.requisites.items.map((item) => (
+        {contacts.requisites.items.map((item, index) => (
           <>
-            <dt>{item.term}</dt>
-            <dd>{item.value}</dd>
+            <dt data-i18n={`requisites.items.${index}.term`}>{item.term}</dt>
+            <dd data-i18n={translated(`requisites.items.${index}.value`)}>{item.value}</dd>
           </>
         ))}
       </dl>
 
       <p class="p-note" data-rise="3">
         <a class="p-lib__ref" href={contacts.requisites.link.href}>
-          <span>{contacts.requisites.link.label}</span>
+          <span data-i18n="requisites.link.label">{contacts.requisites.link.label}</span>
           <Icon name="arrow" class="p-lib__arrow" />
         </a>
       </p>
@@ -153,17 +175,21 @@ const contactSchema = {
     <div class="h-shell">
       <div class="p-cta__inner">
         <div class="p-cta__text-col">
-          <h2 class="h-h2 p-cta__title" id="contacts-cta" data-rise="1">{contacts.cta.h2}</h2>
-          <p class="p-cta__text" data-rise="2">{contacts.cta.text}</p>
+          <h2 class="h-h2 p-cta__title" id="contacts-cta" data-rise="1" data-i18n="cta.h2">{contacts.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2" data-i18n="cta.text">{contacts.cta.text}</p>
         </div>
 
         <div class="p-cta__actions" data-rise="3">
-          <a class="h-btn h-btn--light" href={contacts.cta.primary.href}>
-            <span>{contacts.cta.primary.label}</span>
+          <a
+            class="h-btn h-btn--light"
+            href={contacts.cta.primary.href}
+            data-i18n-attrs="href:cta.primary.href"
+          >
+            <span data-i18n="cta.primary.label">{contacts.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
           </a>
           <a class="p-cta__link" href={contacts.cta.secondary.href}>
-            <span>{contacts.cta.secondary.label}</span>
+            <span data-i18n="cta.secondary.label">{contacts.cta.secondary.label}</span>
             <Icon name="arrow" class="p-cta__arrow" />
           </a>
         </div>

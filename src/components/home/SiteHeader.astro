@@ -7,14 +7,12 @@ import { withBase } from '../../data/site';
 interface Props {
   /** Путь текущей страницы: нужен для активного пункта меню. */
   currentPath?: string;
-  /** На внутренних страницах клиентского перевода нет, поэтому переключатель скрыт. */
-  withLangSwitch?: boolean;
 }
 
-const { currentPath = routes.home, withLangSwitch = true } = Astro.props;
+const { currentPath = routes.home } = Astro.props;
 
 const cta = 'Стать членом Ассоциации';
-/* Компактный диапазон и главная: рядом стоят пункты меню и переключатель языка. */
+/* Рядом с пунктами меню и переключателем языка помещается только короткая подпись. */
 const ctaShort = 'Стать членом';
 
 const isCurrent = (href: string) => href === currentPath;
@@ -26,7 +24,7 @@ const isCurrent = (href: string) => href === currentPath;
   burger только с теми разделами, которых в строке нет; >=1440 — полная строка.
   Комментарий в фигурных скобках не попадает в отдаваемый HTML.
 */}
-<header class:list={['h-header', !withLangSwitch && 'h-header--no-langs']}>
+<header class="h-header">
   <div class="h-shell h-shell--wide h-header__bar">
     <a
       class="h-logo"
@@ -60,11 +58,9 @@ const isCurrent = (href: string) => href === currentPath;
     </nav>
 
     <div class="h-header__aside">
-      {withLangSwitch && <LangSwitch />}
+      <LangSwitch />
       <a class="h-btn h-btn--primary h-header__cta" href={routes.membership}>
-        <span class="h-header__cta-short" data-i18n="ui.becomeMemberShort">{ctaShort}</span>
-        {/* Полная формулировка помещается только там, где нет переключателя языка. */}
-        <span class="h-header__cta-full">{cta}</span>
+        <span data-i18n="ui.becomeMemberShort">{ctaShort}</span>
         <Icon name="arrow" class="h-btn__arrow" />
       </a>
     </div>
@@ -102,7 +98,7 @@ const isCurrent = (href: string) => href === currentPath;
         </ul>
       </nav>
       <div class="h-mobile__foot">
-        {withLangSwitch && <LangSwitch />}
+        <LangSwitch />
         <a class="h-btn h-btn--primary h-mobile__cta" href={routes.membership}>
           <span data-i18n="ui.becomeMember">{cta}</span>
           <Icon name="arrow" class="h-btn__arrow" />

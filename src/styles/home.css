@@ -416,14 +416,6 @@ body.h-body {
   font-size: 14px;
 }
 
-/*
-  Две подписи одной кнопки. Скрытая снимается через display: none, иначе она
-  попадёт в доступное имя ссылки.
-*/
-.h-header__cta-full {
-  display: none;
-}
-
 .h-burger {
   display: block;
   width: 48px;
@@ -1493,6 +1485,16 @@ body.h-body {
   color: var(--gold-light);
 }
 
+/*
+  Раздел отчётности в шапку не входит, поэтому текущее положение на нём видно
+  только по подвалу: отметка выражена и цветом, и золотой линией.
+*/
+.h-footer__link[aria-current='page'] {
+  color: #fff;
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--gold);
+}
+
 .h-footer__contacts {
   margin: 0;
   font-size: 16px;
@@ -1676,18 +1678,6 @@ body.h-body {
 
   .h-nav__list {
     gap: 18px;
-  }
-
-  /*
-    Внутренние страницы: место переключателя языка отдано полной формулировке
-    кнопки. На главной RU/KZ/EN остаются, поэтому подпись там короткая.
-  */
-  .h-header--no-langs .h-header__cta-short {
-    display: none;
-  }
-
-  .h-header--no-langs .h-header__cta-full {
-    display: inline;
   }
 
   .h-shell--wide {
@@ -2081,6 +2071,57 @@ body.h-body {
     grid-template-columns: 1fr;
     gap: 34px;
     padding-bottom: 40px;
+  }
+
+  /*
+    На телефоне подвал — полноценная навигация, поэтому его ссылки становятся
+    пальцевыми целями. Кегль и ритм колонок при этом не меняются: высоту даёт
+    сама область ссылки, а не увеличенный шрифт.
+  */
+  .h-footer__link,
+  .h-footer__contacts a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Разделение уже даёт высота областей нажатия, поэтому отступ снимается. */
+  .h-footer__list li + li {
+    margin-top: 0;
+  }
+
+  /*
+    Языки в подвале — такие же пальцевые цели, как в burger, поэтому получают
+    зону 44 px. Разделитель заменён коротким штрихом, чтобы увеличенная высота
+    не превратила границу в длинную линию.
+  */
+  .h-footer__langs {
+    gap: 4px;
+  }
+
+  .h-footer__langs .h-langs__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: 10px;
+  }
+
+  .h-footer__langs .h-langs__link + .h-langs__link {
+    border-left: 0;
+  }
+
+  .h-footer__langs .h-langs__link + .h-langs__link::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: -2px;
+    top: 50%;
+    width: 1px;
+    height: 16px;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.18);
   }
 
   .h-footer__bottom {

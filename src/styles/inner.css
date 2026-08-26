@@ -1586,7 +1586,10 @@ a.p-contact__value:focus-visible {
   .p-lib__action,
   .p-lib__ref,
   .p-hero__link,
-  .p-cta__link {
+  .p-cta__link,
+  .p-dirs__body .h-link {
+    display: inline-flex;
+    align-items: center;
     min-height: 44px;
   }
 

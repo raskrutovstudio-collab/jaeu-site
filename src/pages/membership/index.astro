@@ -2,6 +2,7 @@
 import InnerLayout from '../../layouts/InnerLayout.astro';
 import Icon from '../../components/home/Icon.astro';
 import { membership } from '../../data/pages';
+import { membershipI18n } from '../../data/pagesI18n';
 import { routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
@@ -14,26 +15,31 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   ogTitle={membership.meta.ogTitle}
   path={routes.membership}
   crumb={membership.crumb}
+  i18n={membershipI18n}
 >
   <section class="p-hero p-hero--calm">
     <div class="h-shell">
       <div class="p-hero__inner">
         <div class="p-hero__text">
-          <nav class="p-crumbs" aria-label="Хлебные крошки">
-            <a href={routes.home}>Главная</a>
+          <nav class="p-crumbs" aria-label="Хлебные крошки" data-i18n-attrs="aria-label:ui.breadcrumbs">
+            <a href={routes.home} data-i18n="ui.home">Главная</a>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">{membership.crumb}</span>
+            <span aria-current="page" data-i18n="crumb">{membership.crumb}</span>
           </nav>
-          <p class="h-eyebrow">{membership.hero.eyebrow}</p>
-          <h1 class="h-h1 p-hero__title">{membership.hero.h1}</h1>
-          <p class="h-lead p-hero__lead">{membership.hero.lead}</p>
+          <p class="h-eyebrow" data-i18n="hero.eyebrow">{membership.hero.eyebrow}</p>
+          <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{membership.hero.h1}</h1>
+          <p class="h-lead p-hero__lead" data-i18n="hero.lead">{membership.hero.lead}</p>
 
           <div class="p-hero__action">
-            <a class="h-btn h-btn--primary" href={membership.hero.action.href}>
-              <span>{membership.hero.action.label}</span>
+            <a
+              class="h-btn h-btn--primary"
+              href={membership.hero.action.href}
+              data-i18n-attrs="href:hero.action.href"
+            >
+              <span data-i18n="hero.action.label">{membership.hero.action.label}</span>
               <Icon name="arrow" class="h-btn__arrow" />
             </a>
-            <p class="p-hint">{membership.hero.note}</p>
+            <p class="p-hint" data-i18n="hero.note">{membership.hero.note}</p>
           </div>
         </div>
 
@@ -45,6 +51,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
             width="1160"
             height="773"
             alt={membership.hero.imageAlt}
+            data-i18n-attrs="alt:hero.imageAlt"
             loading="eager"
             fetchpriority="high"
             decoding="async"
@@ -60,23 +67,23 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
     <div class="h-shell">
       <div class="p-spread">
         <div class="p-spread__aside">
-          <h2 class="h-h2" id="membership-eligibility">{membership.eligibility.h2}</h2>
+          <h2 class="h-h2" id="membership-eligibility" data-i18n="eligibility.h2">{membership.eligibility.h2}</h2>
           <hr class="h-rule" />
         </div>
 
         <div class="p-spread__body">
-          {membership.eligibility.paragraphs.map((text) => (
-            <p class="h-text">{text}</p>
+          {membership.eligibility.paragraphs.map((text, index) => (
+            <p class="h-text" data-i18n={`eligibility.paragraphs.${index}`}>{text}</p>
           ))}
 
           <div>
-            <p class="p-label">{membership.eligibility.scopeTitle}</p>
+            <p class="p-label" data-i18n="eligibility.scopeTitle">{membership.eligibility.scopeTitle}</p>
             <ul class="p-scope">
-              {membership.eligibility.scope.map((item) => (
-                <li class="p-scope__item">{item}</li>
+              {membership.eligibility.scope.map((item, index) => (
+                <li class="p-scope__item" data-i18n={`eligibility.scope.${index}`}>{item}</li>
               ))}
             </ul>
-            <p class="p-note">{membership.eligibility.scopeNote}</p>
+            <p class="p-note" data-i18n="eligibility.scopeNote">{membership.eligibility.scopeNote}</p>
           </div>
         </div>
       </div>
@@ -86,16 +93,16 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   <section class="h-section h-section--stone" aria-labelledby="membership-steps" data-reveal>
     <div class="h-shell">
       <div class="p-head">
-        <h2 class="h-h2" id="membership-steps" data-rise="1">{membership.steps.h2}</h2>
+        <h2 class="h-h2" id="membership-steps" data-rise="1" data-i18n="steps.h2">{membership.steps.h2}</h2>
         <hr class="h-rule" />
-        <p class="h-text" data-rise="2">{membership.steps.lead}</p>
+        <p class="h-text" data-rise="2" data-i18n="steps.lead">{membership.steps.lead}</p>
       </div>
 
       <ol class="p-steps" data-rise="3">
-        {membership.steps.items.map((step) => (
+        {membership.steps.items.map((step, index) => (
           <li class="p-steps__item">
-            <h3 class="h-h3 p-steps__title">{step.title}</h3>
-            <p class="p-steps__text">{step.text}</p>
+            <h3 class="h-h3 p-steps__title" data-i18n={`steps.items.${index}.title`}>{step.title}</h3>
+            <p class="p-steps__text" data-i18n={`steps.items.${index}.text`}>{step.text}</p>
           </li>
         ))}
       </ol>
@@ -106,17 +113,17 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
     <div class="h-shell">
       <div class="p-narrow">
         <div class="p-narrow__body">
-          <h2 class="h-h2" id="membership-attachments" data-rise="1">{membership.attachments.h2}</h2>
+          <h2 class="h-h2" id="membership-attachments" data-rise="1" data-i18n="attachments.h2">{membership.attachments.h2}</h2>
           <hr class="h-rule" />
-          <p class="h-text" data-rise="2">{membership.attachments.lead}</p>
+          <p class="h-text" data-rise="2" data-i18n="attachments.lead">{membership.attachments.lead}</p>
 
           <ul class="p-list" data-rise="3">
-            {membership.attachments.items.map((item) => (
-              <li class="p-list__item">{item}</li>
+            {membership.attachments.items.map((item, index) => (
+              <li class="p-list__item" data-i18n={`attachments.items.${index}`}>{item}</li>
             ))}
           </ul>
 
-          <p class="p-note" data-rise="4">{membership.attachments.note}</p>
+          <p class="p-note" data-rise="4" data-i18n="attachments.note">{membership.attachments.note}</p>
         </div>
 
         <figure class="p-narrow__media" data-reveal-media>
@@ -127,6 +134,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
             width="700"
             height="933"
             alt={membership.attachments.imageAlt}
+            data-i18n-attrs="alt:attachments.imageAlt"
             loading="lazy"
             decoding="async"
           />
@@ -138,16 +146,16 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   <section class="h-section h-section--stone" aria-labelledby="membership-rights" data-reveal>
     <div class="h-shell">
       <div class="p-head">
-        <h2 class="h-h2" id="membership-rights" data-rise="1">{membership.rights.h2}</h2>
+        <h2 class="h-h2" id="membership-rights" data-rise="1" data-i18n="rights.h2">{membership.rights.h2}</h2>
         <hr class="h-rule" />
-        <p class="h-text" data-rise="2">{membership.rights.lead}</p>
+        <p class="h-text" data-rise="2" data-i18n="rights.lead">{membership.rights.lead}</p>
       </div>
 
       <ul class="p-cols p-cols--3" data-rise="3">
-        {membership.rights.items.map((item) => (
+        {membership.rights.items.map((item, index) => (
           <li class="p-cols__item">
-            <h3 class="h-h3 p-cols__title">{item.title}</h3>
-            <p class="p-cols__text">{item.text}</p>
+            <h3 class="h-h3 p-cols__title" data-i18n={`rights.items.${index}.title`}>{item.title}</h3>
+            <p class="p-cols__text" data-i18n={`rights.items.${index}.text`}>{item.text}</p>
           </li>
         ))}
       </ul>
@@ -157,19 +165,19 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   <section class="h-section h-section--white" aria-labelledby="membership-fees" data-reveal>
     <div class="h-shell">
       <div class="p-head">
-        <h2 class="h-h2" id="membership-fees" data-rise="1">{membership.fees.h2}</h2>
+        <h2 class="h-h2" id="membership-fees" data-rise="1" data-i18n="fees.h2">{membership.fees.h2}</h2>
         <hr class="h-rule" />
       </div>
 
       <dl class="p-facts" data-rise="2">
-        {membership.fees.items.map((item) => (
+        {membership.fees.items.map((item, index) => (
           <>
-            <dt>{item.term}</dt>
-            <dd>{item.value}</dd>
+            <dt data-i18n={`fees.items.${index}.term`}>{item.term}</dt>
+            <dd data-i18n={`fees.items.${index}.value`}>{item.value}</dd>
           </>
         ))}
       </dl>
-      <p class="p-note" data-rise="3">{membership.fees.note}</p>
+      <p class="p-note" data-rise="3" data-i18n="fees.note">{membership.fees.note}</p>
     </div>
   </section>
 
@@ -177,17 +185,21 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
     <div class="h-shell">
       <div class="p-cta__inner">
         <div class="p-cta__text-col">
-          <h2 class="h-h2 p-cta__title" id="membership-cta" data-rise="1">{membership.cta.h2}</h2>
-          <p class="p-cta__text" data-rise="2">{membership.cta.text}</p>
+          <h2 class="h-h2 p-cta__title" id="membership-cta" data-rise="1" data-i18n="cta.h2">{membership.cta.h2}</h2>
+          <p class="p-cta__text" data-rise="2" data-i18n="cta.text">{membership.cta.text}</p>
         </div>
 
         <div class="p-cta__actions" data-rise="3">
-          <a class="h-btn h-btn--light" href={membership.cta.primary.href}>
-            <span>{membership.cta.primary.label}</span>
+          <a
+            class="h-btn h-btn--light"
+            href={membership.cta.primary.href}
+            data-i18n-attrs="href:cta.primary.href"
+          >
+            <span data-i18n="cta.primary.label">{membership.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
           </a>
           <a class="p-cta__link" href={membership.cta.secondary.href}>
-            <span>{membership.cta.secondary.label}</span>
+            <span data-i18n="cta.secondary.label">{membership.cta.secondary.label}</span>
             <Icon name="arrow" class="p-cta__arrow" />
           </a>
         </div>

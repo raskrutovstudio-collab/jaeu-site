@@ -1,21 +1,23 @@
 ---
 /*
-  Лейаут внутренних страниц первого пакета.
+  Лейаут внутренних страниц.
 
   Шапка, футер, токены и типографика взяты те же, что у утверждённой главной
   (`home.css`, `SiteHeader`, `SiteFooter`), поэтому внутренние страницы
   читаются как её продолжение. `inner.css` добавляет только композиции,
   которых на главной нет.
 
-  Клиентский перевод сюда не переносится: русская версия — единственная.
-  Поэтому переключатель языков в шапке и футере скрыт, чтобы на странице не
-  оставалось неработающего органа управления.
+  Язык переключается тем же механизмом, что и на главной: русская разметка —
+  baseline и единственная индексируемая версия, KZ/EN подставляются на клиенте
+  по словарю страницы. URL при переключении не меняется.
 */
 import '../styles/home.css';
 import '../styles/inner.css';
+import I18nRuntime from '../components/I18nRuntime.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
 import { org } from '../data/home';
+import { buildI18nPayload } from '../data/homeI18n';
 import { canonicalUrl, productionOrigin, withBase } from '../data/site';
 
 interface Props {
@@ -27,9 +29,12 @@ interface Props {
   crumb: string;
   /** Дополнительные узлы структурированных данных с подтверждёнными фактами. */
   schema?: Record<string, unknown>[];
+  /** Перекрытия KZ/EN для ключей `data-i18n` этой страницы. */
+  i18n: Record<string, { kk: string; en: string }>;
 }
 
-const { title, description, ogTitle, path, crumb, schema = [] } = Astro.props;
+const { title, description, ogTitle, path, crumb, schema = [], i18n } = Astro.props;
+const i18nPayload = buildI18nPayload(i18n);
 
 const site = new URL(productionOrigin);
 const canonical = canonicalUrl(path);
@@ -68,8 +73,8 @@ const jsonLd = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title data-i18n="meta.title">{title}</title>
+    <meta name="description" content={description} data-i18n-attrs="content:meta.description" />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#202A57" />
     <link rel="icon" type="image/svg+xml" href={withBase('/assets/jaeu-emblem.svg')} />
@@ -108,14 +113,16 @@ const jsonLd = {
   </head>
 
   <body class="h-body">
-    <a class="h-skip" href="#main">Перейти к содержимому</a>
-    <SiteHeader currentPath={path} withLangSwitch={false} />
+    <a class="h-skip" href="#main" data-i18n="ui.skip">Перейти к содержимому</a>
+    <SiteHeader currentPath={path} />
 
     <main class="p-main" id="main">
       <slot />
     </main>
 
-    <SiteFooter withLangSwitch={false} />
+    <SiteFooter currentPath={path} />
+
+    <I18nRuntime payload={i18nPayload} />
 
     <script>
       import '../scripts/inner';

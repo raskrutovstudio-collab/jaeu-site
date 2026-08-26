@@ -1,11 +1,13 @@
 /**
- * Интерактив внутренних страниц: мобильное меню, аккордеон FAQ и
- * композиционное появление секций при скролле.
+ * Интерактив внутренних страниц: мобильное меню, переключатель языка,
+ * аккордеон FAQ и композиционное появление секций при скролле.
  *
- * Логика повторяет главную осознанно: `scripts/home.ts` выполняет действия
- * при импорте и дополнительно ведёт переключатель языка, которого на
- * внутренних страницах нет. Разделение оставляет главную неизменной.
+ * Логика повторяет главную осознанно: оба файла выполняют действия при
+ * импорте, но у появления секций здесь своя настройка порога. Общая часть
+ * переключателя языка вынесена в `scripts/langSwitch.ts`.
  */
+
+import { initLangSwitch } from './langSwitch';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -23,6 +25,11 @@ function initMobileMenu(): void {
 
   toggle.addEventListener('click', () => {
     setState(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Смена языка переписывает aria-label, поэтому состояние синхронизируем.
+  document.addEventListener('jaeu:lang', () => {
+    setState(toggle.getAttribute('aria-expanded') === 'true');
   });
 
   document.addEventListener('keydown', (event) => {
@@ -111,6 +118,7 @@ function initReveal(): void {
 }
 
 initMobileMenu();
+initLangSwitch();
 initFaq();
 initReveal();
 
