@@ -1,6 +1,6 @@
 ---
 import { ui } from '../data/copy';
-import { homePath, localeMeta, navMobileExtra, navPrimary, routes, withBase, type Locale } from '../data/site';
+import { homePath, localeMeta, navPrimary, routes, withBase, type Locale } from '../data/site';
 import MobileMenu from './MobileMenu.astro';
 
 interface Props {
@@ -73,5 +73,5 @@ const isCurrent = (href: string) => currentPath === href;
     </div>
   </div>
 
-  <MobileMenu locale={locale} currentPath={currentPath} extra={navMobileExtra} />
+  <MobileMenu locale={locale} currentPath={currentPath} />
 </header>

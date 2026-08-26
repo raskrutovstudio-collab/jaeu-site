@@ -2,7 +2,6 @@
 import '../styles/home.css';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
-import Icon from '../components/home/Icon.astro';
 import { faq, meta, org } from '../data/home';
 import { homeI18nPayload } from '../data/homeI18n';
 import { canonicalUrl, productionOrigin, withBase } from '../data/site';
@@ -130,24 +129,6 @@ const jsonLd = {
     </main>
 
     <SiteFooter />
-
-    <dialog class="h-lightbox" id="h-lightbox" aria-labelledby="h-lightbox-caption">
-      <div class="h-lightbox__panel">
-        <button
-          class="h-lightbox__close"
-          type="button"
-          data-lightbox-close
-          aria-label="Закрыть просмотр"
-          data-i18n-attrs="aria-label:ui.lightboxClose"
-        >
-          <Icon name="close" />
-        </button>
-        <figure class="h-lightbox__figure">
-          <img data-lightbox-image alt="" width="1600" height="1097" />
-          <figcaption class="h-lightbox__caption" id="h-lightbox-caption" data-lightbox-caption></figcaption>
-        </figure>
-      </div>
-    </dialog>
 
     {/*
       Экспериментальная локализация одной страницы без смены URL.

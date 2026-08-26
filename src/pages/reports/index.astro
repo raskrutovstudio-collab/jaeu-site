@@ -27,7 +27,11 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           <p class="h-eyebrow">{reports.hero.eyebrow}</p>
           <h1 class="h-h1 p-hero__title">{reports.hero.h1}</h1>
           <p class="h-lead p-hero__lead">{reports.hero.lead}</p>
-          <p class="p-hero__note">{reports.hero.note}</p>
+
+          <a class="p-hero__link" href={reports.hero.action.href}>
+            <span>{reports.hero.action.label}</span>
+            <Icon name="arrow" class="p-hero__arrow" />
+          </a>
         </div>
       </div>
     </div>
@@ -69,10 +73,14 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 
   <section class="h-section h-section--stone" aria-labelledby="reports-outcomes" data-reveal>
     <div class="h-shell">
-      <div class="p-head">
-        <h2 class="h-h2" id="reports-outcomes" data-rise="1">{reports.outcomes.h2}</h2>
-        <hr class="h-rule" />
-        <p class="h-text" data-rise="2">{reports.outcomes.lead}</p>
+      <div class="p-year">
+        <p class="p-year__mark" aria-hidden="true" data-rise="1">{reports.outcomes.year}</p>
+
+        <div class="p-head">
+          <h2 class="h-h2" id="reports-outcomes" data-rise="1">{reports.outcomes.h2}</h2>
+          <hr class="h-rule" />
+          <p class="h-text" data-rise="2">{reports.outcomes.lead}</p>
+        </div>
       </div>
 
       <ul class="p-cols p-cols--2" data-rise="3">

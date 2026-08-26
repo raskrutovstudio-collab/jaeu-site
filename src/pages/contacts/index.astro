@@ -39,7 +39,7 @@ const contactSchema = {
   crumb={contacts.crumb}
   schema={[contactSchema]}
 >
-  <section class="p-hero p-hero--tight">
+  <section class="p-hero p-hero--split">
     <div class="h-shell">
       <div class="p-hero__inner">
         <div class="p-hero__text">
@@ -51,7 +51,26 @@ const contactSchema = {
           <p class="h-eyebrow">{contacts.hero.eyebrow}</p>
           <h1 class="h-h1 p-hero__title">{contacts.hero.h1}</h1>
           <p class="h-lead p-hero__lead">{contacts.hero.lead}</p>
+
+          <a class="h-btn h-btn--primary" href={contacts.hero.action.href}>
+            <span>{contacts.hero.action.label}</span>
+            <Icon name="arrow" class="h-btn__arrow" />
+          </a>
         </div>
+
+        <figure class="p-hero__media">
+          <img
+            src={asset('page-contacts-desk-1160.webp')}
+            srcset={`${asset('page-contacts-desk-760.webp')} 760w, ${asset('page-contacts-desk-1160.webp')} 1160w`}
+            sizes="(min-width: 1041px) 660px, 100vw"
+            width="1160"
+            height="497"
+            alt={contacts.hero.imageAlt}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
       </div>
     </div>
   </section>
@@ -97,24 +116,11 @@ const contactSchema = {
 
   <section class="h-section h-section--stone" aria-labelledby="contacts-visual" data-reveal>
     <div class="h-shell">
-      <div class="p-head">
+      <div class="p-head p-head--flush">
         <h2 class="h-h2" id="contacts-visual" data-rise="1">{contacts.visual.title}</h2>
         <hr class="h-rule" />
         <p class="h-text" data-rise="2">{contacts.visual.text}</p>
       </div>
-
-      <figure class="p-belt p-belt--wide" data-reveal-media>
-        <img
-          src={asset('page-contacts-desk-1160.webp')}
-          srcset={`${asset('page-contacts-desk-760.webp')} 760w, ${asset('page-contacts-desk-1160.webp')} 1160w`}
-          sizes="(min-width: 1041px) 1160px, 100vw"
-          width="1160"
-          height="497"
-          alt={contacts.visual.imageAlt}
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
     </div>
   </section>
 

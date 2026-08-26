@@ -2,20 +2,14 @@
 import { ui } from '../data/copy';
 import { navPrimary, routes, type Locale } from '../data/site';
 
-interface ExtraLink {
-  href: string;
-  key: 'documents' | 'reports';
-}
-
 interface Props {
   locale: Locale;
   currentPath: string;
-  extra: ExtraLink[];
 }
 
-const { locale, currentPath, extra } = Astro.props;
+const { locale, currentPath } = Astro.props;
 const copy = ui[locale];
-const links = [...navPrimary, ...extra];
+const links = navPrimary;
 ---
 
 <div class="mobile-menu" id="mobile-menu" data-menu-panel hidden>

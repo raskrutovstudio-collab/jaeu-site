@@ -66,7 +66,6 @@ export const homeTranslations = {
     с восемью пунктами меню не укладывается в строку на 1440 px.
   */
   'ui.becomeMemberShort': pair('Мүше болу', 'Join'),
-  'ui.lightboxClose': pair('Қарауды жабу', 'Close the viewer'),
   'ui.orgShortName': reuse(ui.kz.brandSub, ui.en.brandSub),
   'ui.logoAria': pair(
     'ЕАЭО зергерлер қауымдастығы — басты бетке',
@@ -81,7 +80,6 @@ export const homeTranslations = {
   'nav.about': reuse(ui.kz.nav.about, ui.en.nav.about),
   'nav.activities': reuse(ui.kz.nav.activities, ui.en.nav.activities),
   'nav.experts': reuse(ui.kz.nav.experts, ui.en.nav.experts),
-  'nav.cooperation': pair('Ынтымақтастық', 'Cooperation'),
   /*
     Отдельный пункт исходной шапки. Не путать с `nav.knowledge` — «Центр
     знаний» в подвале; оба ведут на /knowledge/, но подписи разные.
@@ -157,21 +155,17 @@ export const homeTranslations = {
   'contour.eyebrow': pair('Институционалдық өзара іс-қимыл', 'Institutional engagement'),
   'contour.h2': pair('Салалық контур', 'The industry framework'),
   'contour.text': pair(
-    'Қауымдастықтың жұмысы қымбат металдар мен қымбат тастар нарығын реттеуді айқындайтын институттар мен ведомстволармен өзара іс-қимылда құрылады. Қауымдастық материалдарындағы инфографика осы өзара іс-қимылдың институционалдық контурын көрсетеді.',
-    'The work of the Association is built on engagement with the institutions and authorities that shape the regulation of the market for precious metals and precious stones. An infographic from the Association’s materials shows the institutional framework of this engagement.'
+    'Қауымдастықтың жұмысы қымбат металдар мен қымбат тастар нарығын реттеуді айқындайтын институттар мен ведомстволармен өзара іс-қимылда құрылады.',
+    'The work of the Association is built on engagement with the institutions and authorities that shape the regulation of the market for precious metals and precious stones.'
   ),
-  'contour.link': pair('Толық өлшемде ашу', 'Open at full size'),
-  'contour.caption': pair(
-    'Қауымдастық материалдарынан алынған инфографика',
-    'Infographic from the Association’s materials'
-  ),
-  'contour.figureAria': pair(
-    'Институционалдық контур инфографикасын толық өлшемде ашу',
-    'Open the institutional framework infographic at full size'
+  'contour.link': pair('Қауымдастық қызметі туралы', 'About the Association’s work'),
+  'contour.dialogue': pair(
+    'Салалық мәселе қоғамдастықта талқыланады және жеке компанияның емес, бірлестіктің атынан кәсіби талқылауға шығарылады.',
+    'An industry question is examined by the community and brought to professional discussion on behalf of the association rather than a single company.'
   ),
   'contour.imageAlt': pair(
-    'ЕАЭО зергерлер қауымдастығының институционалдық контур инфографикасы: ортада Қауымдастық логотипі және онымен байланысты ведомстволар мен институттар',
-    'Infographic of the institutional framework of the Association of Jewellers of the EAEU: the Association’s logo at the centre with the related authorities and institutions'
+    'Ашық түсті табақтың үстінде қырланған тас салынған пинцет, жанында зергер лупасы және тастарға арналған қағаз конверт',
+    'Tweezers holding a faceted stone above a light tray, with a jeweller’s loupe and a paper stone envelope beside them'
   ),
   'contour.contextAlt': pair(
     'Маманның қолдары құжаттар жатқан жұмыс үстелінің үстінде лупа арқылы тасы бар зергерлік жүзікті қарап тұр',
@@ -229,30 +223,18 @@ export const homeTranslations = {
     'A community united by a common goal'
   ),
   'community.text': pair(
-    'Қауымдастық бөлшек сауда желілерін, зергерлік бұйым өндірушілерін және салалық бірлестіктерді біріктіреді. Қоғамдастықтың құрамы Қауымдастық материалдарындағы схемада берілген.',
-    'The Association brings together retail chains, jewellery manufacturers and industry associations. The composition of the community is shown in a diagram from the Association’s materials.'
+    'Қауымдастық ЕАЭО мемлекеттеріндегі зергерлік бизнес қатысушыларын біріктіреді. Салалық мәселелер қоғамдастықта талқыланады: кәсіби тәжірибе мен сараптамалық баға ортақ ресурсқа айналады, ал жеке компанияның мәселесі бірлестік атынан талқылауға шығарылуы мүмкін.',
+    'The Association brings together jewellery business participants from the EAEU states. Industry questions are examined by the community: professional experience and expert assessment become a shared resource, and the question of an individual company can be brought to discussion on behalf of the association.'
   ),
-  'community.cta': pair('Схеманы ашу', 'Open the diagram'),
-  'community.caption': pair(
-    'Қауымдастық материалдарынан алынған инфографика',
-    'Infographic from the Association’s materials'
-  ),
-  'community.figureAria': pair(
-    'Қауымдастық құрамының схемасын толық өлшемде ашу',
-    'Open the diagram of the Association’s composition at full size'
-  ),
+  'community.cta': pair('Мүшелік шарттары', 'Membership terms'),
   'community.imageAlt': pair(
-    'ЕАЭО зергерлер қауымдастығының құрамы туралы инфографика: бөлшек сауда желілері, өндірушілер және салалық бірлестіктер',
-    'Infographic of the composition of the Association of Jewellers of the EAEU: retail chains, manufacturers and industry associations'
+    'Үш маман зергерлік бұйымды зерделеп отыр: зергер лупасы, өлшеу құралы және жұмыс жазбалары',
+    'Three specialists examining a piece of jewellery: a jeweller’s loupe, a measuring tool and working notes'
   ),
   'community.band.title': pair('Сараптама және бағалау', 'Expertise and appraisal'),
   'community.band.text': pair(
     'Қауымдастық геммолог қызметін ұсынады: ол қымбат тасты бағалайды, оның табиғи немесе жасанды шығу тегін және өңделу фактісін анықтайды.',
     'The Association provides gemmologist services: appraising a precious stone, determining whether it is of natural or synthetic origin, and identifying whether it has been treated.'
-  ),
-  'community.band.imageAlt': pair(
-    'Үш маман зергерлік бұйымды зерделеп отыр: зергер лупасы, өлшеу құралы және жұмыс жазбалары',
-    'Three specialists examining a piece of jewellery: a jeweller’s loupe, a measuring tool and working notes'
   ),
 
   // ---------- CTA членства ----------

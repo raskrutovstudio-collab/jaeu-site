@@ -48,6 +48,11 @@ export const routes = {
 
 export type RouteKey = keyof typeof routes;
 
+/*
+  Состав и порядок совпадают с шапкой основного пакета страниц. Отчётность —
+  вспомогательный маршрут: в навигации её нет ни в строке, ни в меню, точка
+  входа остаётся в футере.
+*/
 export const navPrimary = [
   { href: routes.about, key: 'about' as const },
   { href: routes.activities, key: 'activities' as const },
@@ -55,12 +60,8 @@ export const navPrimary = [
   { href: routes.membership, key: 'membership' as const },
   { href: routes.knowledge, key: 'knowledge' as const },
   { href: routes.news, key: 'news' as const },
-  { href: routes.contacts, key: 'contacts' as const }
-];
-
-export const navMobileExtra = [
   { href: routes.documents, key: 'documents' as const },
-  { href: routes.reports, key: 'reports' as const }
+  { href: routes.contacts, key: 'contacts' as const }
 ];
 
 export const footerGroups = {

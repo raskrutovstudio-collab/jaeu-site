@@ -30,7 +30,6 @@ const thumb = 400;
           <p class="h-eyebrow">{news.hero.eyebrow}</p>
           <h1 class="h-h1 p-hero__title">{news.hero.h1}</h1>
           <p class="h-lead p-hero__lead">{news.hero.lead}</p>
-          <p class="p-hero__note">{news.hero.note}</p>
         </div>
       </div>
     </div>
@@ -69,6 +68,8 @@ const thumb = 400;
 
   <section class="h-section h-section--stone" aria-label="Другие материалы" data-reveal>
     <div class="h-shell">
+      <p class="p-hint p-hint--head" data-rise="1">{news.listNote}</p>
+
       <ul class="p-stories" data-rise="1">
         {news.items.map((item, index) => (
           <li>

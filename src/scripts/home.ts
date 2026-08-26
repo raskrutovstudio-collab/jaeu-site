@@ -1,6 +1,6 @@
 /**
- * Интерактив главной страницы: мобильное меню, аккордеон FAQ,
- * lightbox инфографик и reveal секций при скролле.
+ * Интерактив главной страницы: мобильное меню, переключатель языка,
+ * аккордеон FAQ и reveal секций при скролле.
  */
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -155,52 +155,7 @@ function initReveal(): void {
   targets.forEach((target) => observer.observe(target));
 }
 
-function initLightbox(): void {
-  const dialog = document.getElementById('h-lightbox');
-  if (!(dialog instanceof HTMLDialogElement)) return;
-
-  const image = dialog.querySelector<HTMLImageElement>('[data-lightbox-image]');
-  const caption = dialog.querySelector<HTMLElement>('[data-lightbox-caption]');
-  const closeButton = dialog.querySelector<HTMLButtonElement>('[data-lightbox-close]');
-  let lastTrigger: HTMLElement | null = null;
-
-  document.querySelectorAll<HTMLElement>('[data-lightbox-src]').forEach((trigger) => {
-    trigger.addEventListener('click', () => {
-      if (!image) return;
-      lastTrigger = trigger;
-      image.src = trigger.dataset.lightboxSrc ?? '';
-      image.alt = trigger.dataset.lightboxAlt ?? '';
-      const width = Number(trigger.dataset.lightboxWidth);
-      const height = Number(trigger.dataset.lightboxHeight);
-      if (width && height) {
-        image.width = width;
-        image.height = height;
-      }
-      if (caption) caption.textContent = trigger.dataset.lightboxCaption ?? '';
-      dialog.showModal();
-      closeButton?.focus();
-    });
-  });
-
-  closeButton?.addEventListener('click', () => dialog.close());
-
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-
-  // <dialog> закрывается по Escape нативно; дублируем для предсказуемости.
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && dialog.open) dialog.close();
-  });
-
-  dialog.addEventListener('close', () => {
-    lastTrigger?.focus();
-    lastTrigger = null;
-  });
-}
-
 initMobileMenu();
 initLangSwitch();
 initFaq();
-initLightbox();
 initReveal();

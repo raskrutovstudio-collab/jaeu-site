@@ -27,7 +27,6 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           <p class="h-eyebrow">{knowledge.hero.eyebrow}</p>
           <h1 class="h-h1 p-hero__title">{knowledge.hero.h1}</h1>
           <p class="h-lead p-hero__lead">{knowledge.hero.lead}</p>
-          <p class="p-hero__note">{knowledge.hero.note}</p>
 
           <nav class="p-toc" aria-label={knowledge.toc.label}>
             {knowledge.toc.items.map((item) => (
@@ -40,9 +39,34 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   </section>
 
   <!-- Навигация открывается сразу: reveal подключён только к секциям ниже. -->
-  <section class="h-section h-section--white" aria-label="Навигация по материалам">
+  <section class="h-section h-section--white" aria-labelledby="knowledge-start">
     <div class="h-shell">
-      <div class="p-guide">
+      <div class="p-head">
+        <h2 class="h-h2" id="knowledge-start">{knowledge.start.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text">{knowledge.start.lead}</p>
+      </div>
+
+      <ul class="p-paths">
+        {knowledge.start.items.map((item) => (
+          <li class="p-paths__item">
+            <h3 class="h-h3 p-paths__title">{item.title}</h3>
+            <p class="p-paths__text">{item.text}</p>
+            <a class="p-paths__link" href={item.link.href}>
+              <span>{item.link.label}</span>
+              <Icon name="arrow" class="p-lib__arrow" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="h-section h-section--stone" aria-label="Навигация по материалам" data-reveal>
+    <div class="h-shell">
+      <p class="p-hint p-hint--head" data-rise="1">{knowledge.listNote}</p>
+
+      <div class="p-guide" data-rise="2">
         {knowledge.groups.map((group) => (
           <section class="p-guide__group" id={group.id} aria-labelledby={`${group.id}-title`}>
             <div class="p-guide__aside">
@@ -70,7 +94,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
     </div>
   </section>
 
-  <section class="h-section h-section--stone" aria-labelledby="knowledge-expertise" data-reveal>
+  <section class="h-section h-section--white" aria-labelledby="knowledge-expertise" data-reveal>
     <div class="h-shell">
       <div class="p-head">
         <h2 class="h-h2" id="knowledge-expertise" data-rise="1">{knowledge.expertise.h2}</h2>
@@ -87,16 +111,16 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
         ))}
       </ul>
 
-      <div class="p-inset">
+      <div class="p-inset p-inset--wide">
         <p class="p-inset__caption">{knowledge.expertise.caption}</p>
 
         <figure class="p-inset__media" data-reveal-media>
           <img
-            src={asset('about-detail-1200.webp')}
-            srcset={`${asset('about-detail-760.webp')} 760w, ${asset('about-detail-1200.webp')} 1200w`}
+            src={asset('documents-desk-1160.webp')}
+            srcset={`${asset('documents-desk-760.webp')} 760w, ${asset('documents-desk-1160.webp')} 1160w`}
             sizes="(min-width: 1041px) 760px, 100vw"
-            width="1200"
-            height="800"
+            width="1160"
+            height="261"
             alt={knowledge.expertise.imageAlt}
             loading="lazy"
             decoding="async"

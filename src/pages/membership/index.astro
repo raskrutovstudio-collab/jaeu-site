@@ -27,7 +27,14 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           <p class="h-eyebrow">{membership.hero.eyebrow}</p>
           <h1 class="h-h1 p-hero__title">{membership.hero.h1}</h1>
           <p class="h-lead p-hero__lead">{membership.hero.lead}</p>
-          <p class="p-hero__note">{membership.hero.note}</p>
+
+          <div class="p-hero__action">
+            <a class="h-btn h-btn--primary" href={membership.hero.action.href}>
+              <span>{membership.hero.action.label}</span>
+              <Icon name="arrow" class="h-btn__arrow" />
+            </a>
+            <p class="p-hint">{membership.hero.note}</p>
+          </div>
         </div>
 
         <figure class="p-hero__media">

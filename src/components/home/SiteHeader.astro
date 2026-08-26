@@ -5,7 +5,7 @@ import { nav, org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 interface Props {
-  /** Путь текущей страницы: нужен для активного пункта и якорей на главную. */
+  /** Путь текущей страницы: нужен для активного пункта меню. */
   currentPath?: string;
   /** На внутренних страницах клиентского перевода нет, поэтому переключатель скрыт. */
   withLangSwitch?: boolean;
@@ -14,25 +14,18 @@ interface Props {
 const { currentPath = routes.home, withLangSwitch = true } = Astro.props;
 
 const cta = 'Стать членом Ассоциации';
-/* В строке шапки кнопка соседствует с восемью пунктами меню, поэтому короче. */
+/* Компактный диапазон и главная: рядом стоят пункты меню и переключатель языка. */
 const ctaShort = 'Стать членом';
 
-/* Ноутбучный десктоп 1200–1439 px: в строке остаются только эти разделы,
-   остальные доступны через burger. */
-const compactNav = new Set<string>([
-  routes.about,
-  routes.activities,
-  routes.expertCouncil,
-  routes.news
-]);
-
-/* Якорь ведёт на блок главной, поэтому вне главной ему нужен полный путь. */
-const linkFor = (href: string) =>
-  href.startsWith('#') && currentPath !== routes.home ? `${routes.home}${href}` : href;
-const isCurrent = (href: string) => !href.startsWith('#') && href === currentPath;
+const isCurrent = (href: string) => href === currentPath;
 ---
 
-<header class="h-header">
+<!--
+  Три режима шапки без промежуточных состояний:
+  <1200 — логотип и burger; 1200–1439 — пять ключевых разделов, короткий CTA и
+  burger только с теми разделами, которых в строке нет; >=1440 — полная строка.
+-->
+<header class:list={['h-header', !withLangSwitch && 'h-header--no-langs']}>
   <div class="h-shell h-shell--wide h-header__bar">
     <a
       class="h-logo"
@@ -53,10 +46,10 @@ const isCurrent = (href: string) => !href.startsWith('#') && href === currentPat
     <nav class="h-nav" data-i18n-attrs="aria-label:ui.navLabel" aria-label="Основная навигация">
       <ul class="h-nav__list">
         {nav.map((item) => (
-          <li class:list={['h-nav__item', compactNav.has(item.href) && 'h-nav__item--key']}>
+          <li class:list={['h-nav__item', item.key && 'h-nav__item--key']}>
             <a
               class="h-nav__link"
-              href={linkFor(item.href)}
+              href={item.href}
               aria-current={isCurrent(item.href) ? 'page' : undefined}
               data-i18n={item.i18n}
             >{item.label}</a>
@@ -68,7 +61,9 @@ const isCurrent = (href: string) => !href.startsWith('#') && href === currentPat
     <div class="h-header__aside">
       {withLangSwitch && <LangSwitch />}
       <a class="h-btn h-btn--primary h-header__cta" href={routes.membership}>
-        <span data-i18n="ui.becomeMemberShort">{ctaShort}</span>
+        <span class="h-header__cta-short" data-i18n="ui.becomeMemberShort">{ctaShort}</span>
+        {/* Полная формулировка помещается только там, где нет переключателя языка. */}
+        <span class="h-header__cta-full">{cta}</span>
         <Icon name="arrow" class="h-btn__arrow" />
       </a>
     </div>
@@ -94,10 +89,10 @@ const isCurrent = (href: string) => !href.startsWith('#') && href === currentPat
       <nav aria-label="Мобильная навигация" data-i18n-attrs="aria-label:ui.navLabelMobile">
         <ul class="h-mobile__list">
           {nav.map((item) => (
-            <li>
+            <li class:list={['h-mobile__item', item.key && 'h-mobile__item--key']}>
               <a
                 class="h-mobile__link"
-                href={linkFor(item.href)}
+                href={item.href}
                 aria-current={isCurrent(item.href) ? 'page' : undefined}
                 data-i18n={item.i18n}
               >{item.label}</a>
@@ -107,7 +102,7 @@ const isCurrent = (href: string) => !href.startsWith('#') && href === currentPat
       </nav>
       <div class="h-mobile__foot">
         {withLangSwitch && <LangSwitch />}
-        <a class="h-btn h-btn--primary" href={routes.membership}>
+        <a class="h-btn h-btn--primary h-mobile__cta" href={routes.membership}>
           <span data-i18n="ui.becomeMember">{cta}</span>
           <Icon name="arrow" class="h-btn__arrow" />
         </a>

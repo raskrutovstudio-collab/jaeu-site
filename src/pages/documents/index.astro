@@ -35,7 +35,6 @@ const requestHref = (title: string) =>
           <p class="h-eyebrow">{documents.hero.eyebrow}</p>
           <h1 class="h-h1 p-hero__title">{documents.hero.h1}</h1>
           <p class="h-lead p-hero__lead">{documents.hero.lead}</p>
-          <p class="p-hero__note">{documents.hero.note}</p>
         </div>
       </div>
     </div>
@@ -78,6 +77,8 @@ const requestHref = (title: string) =>
                 </li>
               ))}
             </ul>
+
+            {index === 0 && <p class="p-hint">{documents.listNote}</p>}
           </section>
         ))}
       </div>
