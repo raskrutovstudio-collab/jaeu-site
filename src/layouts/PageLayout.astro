@@ -11,13 +11,22 @@ interface Props {
   description: string;
   path: string;
   withHreflang?: boolean;
+  /** Передаётся в BaseLayout: см. описание там. */
+  noindex?: boolean;
 }
 
-const { locale, title, description, path, withHreflang = false } = Astro.props;
+const { locale, title, description, path, withHreflang = false, noindex = false } = Astro.props;
 const copy = ui[locale];
 ---
 
-<BaseLayout locale={locale} title={title} description={description} path={path} withHreflang={withHreflang}>
+<BaseLayout
+  locale={locale}
+  title={title}
+  description={description}
+  path={path}
+  withHreflang={withHreflang}
+  noindex={noindex}
+>
   <a class="skip-link" href="#content">{copy.skip}</a>
   <Header locale={locale} currentPath={path} />
   <main id="content">

@@ -20,11 +20,12 @@ const ctaShort = 'Стать членом';
 const isCurrent = (href: string) => href === currentPath;
 ---
 
-<!--
+{/*
   Три режима шапки без промежуточных состояний:
   <1200 — логотип и burger; 1200–1439 — пять ключевых разделов, короткий CTA и
   burger только с теми разделами, которых в строке нет; >=1440 — полная строка.
--->
+  Комментарий в фигурных скобках не попадает в отдаваемый HTML.
+*/}
 <header class:list={['h-header', !withLangSwitch && 'h-header--no-langs']}>
   <div class="h-shell h-shell--wide h-header__bar">
     <a

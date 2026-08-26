@@ -272,7 +272,9 @@ export const finalCta = {
   text:
     'Заявления о вступлении принимаются на постоянной основе. Напишите нам, чтобы обсудить участие в работе Ассоциации.',
   primary: 'Стать членом Ассоциации',
-  secondary: 'Написать в Ассоциацию'
+  secondary: 'Написать в Ассоциацию',
+  /* Тема письма подставляется в mailto, как на внутренних страницах. */
+  mailSubject: 'Участие в работе Ассоциации'
 } as const;
 
 export const footer = {
@@ -292,14 +294,14 @@ export const footer = {
       links: [
         { href: routes.membership, label: 'Членство', i18n: 'nav.membership' },
         { href: routes.documents, label: 'Документы', i18n: 'nav.documents' },
-        { href: routes.knowledge, label: 'Центр знаний', i18n: 'nav.knowledge' }
+        { href: routes.knowledge, label: 'База знаний', i18n: 'nav.knowledgeBase' }
       ]
     },
     {
       heading: 'Материалы',
       links: [
         { href: routes.news, label: 'Новости', i18n: 'nav.news' },
-        { href: routes.reports, label: 'Отчёты', i18n: 'nav.reports' },
+        { href: routes.reports, label: 'Отчётность', i18n: 'nav.reports' },
         { href: routes.contacts, label: 'Контакты', i18n: 'nav.contacts' }
       ]
     }

@@ -1,6 +1,13 @@
 ---
 import Icon from './Icon.astro';
 import { finalCta, org, routes } from '../../data/home';
+
+/*
+  Тема письма, как на внутренних страницах: обращение приходит адресным.
+  Остаётся русской при любом выбранном языке — письмо читает русскоязычный
+  секретариат Ассоциации.
+*/
+const subject = encodeURIComponent(finalCta.mailSubject);
 ---
 
 <section class="h-final" aria-labelledby="final-title" data-reveal>
@@ -13,7 +20,7 @@ import { finalCta, org, routes } from '../../data/home';
         <span data-i18n="ui.becomeMember">{finalCta.primary}</span>
         <Icon name="arrow" class="h-btn__arrow" />
       </a>
-      <a class="h-link" href={`mailto:${org.email}`}>
+      <a class="h-link" href={`mailto:${org.email}?subject=${subject}`}>
         <span data-i18n="finalCta.secondary">{finalCta.secondary}</span>
         <Icon name="arrow" class="h-link__arrow" />
       </a>

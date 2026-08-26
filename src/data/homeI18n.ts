@@ -81,12 +81,12 @@ export const homeTranslations = {
   'nav.activities': reuse(ui.kz.nav.activities, ui.en.nav.activities),
   'nav.experts': reuse(ui.kz.nav.experts, ui.en.nav.experts),
   /*
-    Отдельный пункт исходной шапки. Не путать с `nav.knowledge` — «Центр
-    знаний» в подвале; оба ведут на /knowledge/, но подписи разные.
+    Один маршрут — одна подпись: после унификации шапка и подвал ведут на
+    /knowledge/ под названием самой страницы, поэтому ключ исходной шапки
+    `nav.knowledge` («Центр знаний») в разметке главной больше не встречается.
   */
   'nav.knowledgeBase': pair('Білім базасы', 'Knowledge base'),
   'nav.membership': reuse(ui.kz.nav.membership, ui.en.nav.membership),
-  'nav.knowledge': reuse(ui.kz.nav.knowledge, ui.en.nav.knowledge),
   'nav.news': reuse(ui.kz.nav.news, ui.en.nav.news),
   'nav.documents': reuse(ui.kz.nav.documents, ui.en.nav.documents),
   'nav.reports': reuse(ui.kz.nav.reports, ui.en.nav.reports),

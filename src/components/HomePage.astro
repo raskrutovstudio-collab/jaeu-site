@@ -23,7 +23,20 @@ const news = newsPlaceholders(locale);
 const documents = documentPlaceholders(locale);
 ---
 
-<PageLayout locale={locale} title={copy.title} description={copy.description} path={homePath(locale)} withHreflang>
+{/*
+  Маршруты /kz/ и /en/ остаются доступными, но это временные заглушки: реальное
+  содержание главной живёт на `/`, где язык переключается на том же URL.
+  Поэтому страницы закрыты от индексации, а ссылки на них по-прежнему обходятся.
+  Canonical и hreflang не меняются: адреса остаются прежними.
+*/}
+<PageLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.description}
+  path={homePath(locale)}
+  withHreflang
+  noindex
+>
   <Hero
     title={copy.h1}
     lead={copy.lead}

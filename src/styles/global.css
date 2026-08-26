@@ -1,22 +1,27 @@
+/*
+  Технические маршруты /kz/ и /en/ живут на этой таблице стилей. Они не входят
+  в основной пакет страниц, но говорят на одном с ним визуальном языке:
+  палитра, шрифты и активное состояние взяты из `home.css`.
+*/
 :root {
   color-scheme: light;
-  --emerald: #0e4b43;
-  --emerald-hover: #083630;
-  --emerald-light: #16645a;
-  --graphite: #202526;
-  --silver: #d9dedc;
-  --silver-dark: #bfc8c5;
-  --off-white: #f9fafa;
-  --surface: #f8f9f9;
-  --text-secondary: #5a5f60;
-  --text-muted: #707976;
-  --text-body: #404946;
+  --navy: #202a57;
+  --navy-deep: #172047;
+  --gold: #c89b32;
+  --graphite: #25272d;
+  --silver: rgba(23, 32, 71, 0.14);
+  --silver-dark: rgba(23, 32, 71, 0.24);
+  --off-white: #f5f3ee;
+  --surface: #fcfbf8;
+  --text-secondary: #646875;
+  --text-muted: #646875;
+  --text-body: #3f4350;
   --white: #ffffff;
   --danger: #8a1f1f;
   --container: 1280px;
   --header-h: 64px;
-  --font-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -55,12 +60,12 @@ p { margin: 0; }
 ul { margin: 0; padding: 0; list-style: none; }
 
 ::selection {
-  background: var(--emerald);
+  background: var(--navy);
   color: var(--white);
 }
 
 :focus-visible {
-  outline: 2px solid var(--emerald);
+  outline: 2px solid var(--navy);
   outline-offset: 3px;
 }
 
@@ -70,7 +75,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   top: -48px;
   z-index: 80;
   padding: 8px 14px;
-  background: var(--emerald);
+  background: var(--navy);
   color: var(--white);
   text-decoration: none;
   font-size: 14px;
@@ -152,7 +157,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: 24px;
   font-weight: 700;
   line-height: 1;
-  color: var(--emerald);
+  color: var(--navy);
 }
 
 .brand__sub {
@@ -180,10 +185,16 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 .nav-desktop a:hover,
-.mobile-menu a:hover,
+.mobile-menu a:hover {
+  color: var(--navy);
+}
+
+/* Активный пункт: тёмно-синяя подпись и золотая линия, как в основной шапке. */
 .nav-desktop a[aria-current="page"],
 .mobile-menu a[aria-current="page"] {
-  color: var(--emerald);
+  color: var(--navy-deep);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--gold);
 }
 
 .header-tools {
@@ -212,7 +223,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;
-  text-decoration-color: var(--emerald);
+  text-decoration-color: var(--gold);
 }
 
 .lang-switch span {
@@ -295,14 +306,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 .button--primary {
-  background: var(--emerald);
+  background: var(--navy);
   color: var(--white);
-  border-color: var(--emerald);
+  border-color: var(--navy);
 }
 
 .button--primary:hover {
-  background: var(--emerald-hover);
-  border-color: var(--emerald-hover);
+  background: var(--navy-deep);
+  border-color: var(--navy-deep);
 }
 
 .button--secondary {
@@ -312,7 +323,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 .button--secondary:hover {
-  background: #edeeee;
+  background: var(--off-white);
 }
 
 .button--ghost {
@@ -326,7 +337,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .button--light {
   background: var(--white);
-  color: var(--emerald);
+  color: var(--navy);
 }
 
 .button--light:hover {
@@ -434,13 +445,13 @@ main {
   text-align: center;
   border: 1px solid var(--silver);
   background:
-    linear-gradient(180deg, #eef2f1 0%, #dce3e1 100%),
+    linear-gradient(180deg, #f7f5ef 0%, #e8e4d9 100%),
     repeating-linear-gradient(
       135deg,
       transparent,
       transparent 14px,
-      rgba(14, 75, 67, 0.04) 14px,
-      rgba(14, 75, 67, 0.04) 15px
+      rgba(23, 32, 71, 0.05) 14px,
+      rgba(23, 32, 71, 0.05) 15px
     );
   color: var(--text-muted);
   font-size: 11px;
@@ -449,12 +460,17 @@ main {
   text-transform: uppercase;
 }
 
-.media-placeholder--hero { min-height: 320px; aspect-ratio: 16 / 11; }
+/*
+  Пропорция уже задаёт высоту, поэтому min-height здесь вреден: вместе с
+  aspect-ratio он расширял блок до 465 px и давал горизонтальный скролл на
+  360–390 px. Ширину определяет контейнер, высоту — соотношение сторон.
+*/
+.media-placeholder--hero { min-height: 0; aspect-ratio: 16 / 11; }
 .media-placeholder--about { min-height: 280px; }
 .media-placeholder--news { min-height: 240px; }
 
 @media (min-width: 768px) {
-  .media-placeholder--hero { min-height: 380px; }
+  .media-placeholder--hero { min-height: 0; }
   .media-placeholder--about { min-height: 360px; }
   .media-placeholder--news { min-height: 360px; }
 }
@@ -488,7 +504,7 @@ main {
 .trust-bar__mark {
   width: 24px;
   height: 24px;
-  background: rgba(217, 222, 220, 0.55);
+  background: rgba(23, 32, 71, 0.08);
 }
 
 @media (min-width: 768px) {
@@ -525,7 +541,7 @@ main {
   align-items: center;
   gap: 8px;
   margin: 20px 0 28px;
-  color: var(--emerald);
+  color: var(--navy);
   font-weight: 600;
   text-decoration: none;
 }
@@ -571,11 +587,11 @@ main {
 
 .cta-banner {
   padding: 36px 28px;
-  border: 1px solid var(--emerald);
+  border: 1px solid var(--navy);
 }
 
 .cta-banner--dark {
-  background: var(--emerald);
+  background: var(--navy);
   color: var(--white);
 }
 
@@ -690,7 +706,7 @@ main {
   width: 32px;
   height: 32px;
   flex: 0 0 auto;
-  background: rgba(217, 222, 220, 0.45);
+  background: rgba(23, 32, 71, 0.08);
 }
 
 .document-row h3,
@@ -747,7 +763,7 @@ main {
 
 .footer-nav a:hover,
 .footer-meta a:hover {
-  color: var(--emerald);
+  color: var(--navy);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -815,7 +831,7 @@ main {
   text-decoration: none;
 }
 
-.breadcrumbs a:hover { color: var(--emerald); }
+.breadcrumbs a:hover { color: var(--navy); }
 
 .content-stack {
   display: grid;
@@ -889,8 +905,8 @@ main {
 }
 
 .filter-pills button.is-active {
-  background: var(--emerald);
-  border-color: var(--emerald);
+  background: var(--navy);
+  border-color: var(--navy);
   color: var(--white);
 }
 
@@ -931,7 +947,7 @@ main {
 
 .faq__item button span[aria-hidden] {
   flex: 0 0 auto;
-  color: var(--emerald);
+  color: var(--navy);
   font-size: 22px;
   line-height: 1;
 }

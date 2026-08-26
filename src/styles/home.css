@@ -32,6 +32,11 @@
 
 html {
   scroll-behavior: smooth;
+  /*
+    Корневой фон совпадает с фоном страницы: во время cross-document
+    view-transition под снимками не показывается белая подложка браузера.
+  */
+  background: var(--ivory);
 }
 
 body.h-body {
@@ -500,6 +505,38 @@ body.h-body {
 
 .h-mobile__foot .h-btn {
   width: 100%;
+}
+
+/* Кнопки языков в burger — пальцевые цели, поэтому на телефоне им нужна зона
+   нажатия 44 px. Разделитель заменён коротким штрихом, чтобы увеличенная
+   высота не превратила границу в длинную линию. */
+.h-mobile__foot .h-langs {
+  gap: 4px;
+}
+
+.h-mobile__foot .h-langs__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: 10px;
+}
+
+.h-mobile__foot .h-langs__link + .h-langs__link {
+  border-left: 0;
+}
+
+.h-mobile__foot .h-langs__link + .h-langs__link::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -2px;
+  top: 50%;
+  width: 1px;
+  height: 16px;
+  background: var(--line);
+  transform: translateY(-50%);
 }
 
 /* ---------- Hero ---------- */
@@ -1605,7 +1642,11 @@ body.h-body {
     display: inline-flex;
   }
 
-  .h-mobile__cta {
+  /*
+    Кнопка и переключатель языка стоят в строке шапки, поэтому подвал burger
+    целиком лишний: иначе на 1200–1439 px оба элемента видны дважды.
+  */
+  .h-mobile__foot {
     display: none;
   }
 
