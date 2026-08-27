@@ -1,0 +1,51 @@
+name: Publish static build for Plesk
+
+on:
+  push:
+    branches: [design/home-v2]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Отдельная группа: не пересекается с публикацией GitHub Pages.
+concurrency:
+  group: deploy-plesk
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build and publish deploy/plesk
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for jaeu.kz
+        env:
+          JAEU_DEPLOY: plesk
+        run: npm run build
+
+      - name: Reject leftover GitHub Pages asset paths
+        run: |
+          if grep -F '/jaeu-site/' dist/index.html; then
+            echo 'Plesk build still contains /jaeu-site/ in dist/index.html' >&2
+            exit 1
+          fi
+
+      - name: Publish dist to deploy/plesk
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: deploy/plesk
+          clean: true
+          commit-message: 'deploy: static build for plesk'
