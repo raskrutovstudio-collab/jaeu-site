@@ -24,7 +24,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: 20
+          # Astro 7 требует Node >= 22.12. На Plesk Node не ставится:
+          # туда уходит только готовая статика из deploy/plesk.
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
