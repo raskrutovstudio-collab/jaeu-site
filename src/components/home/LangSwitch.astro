@@ -18,6 +18,7 @@ const { class: className } = Astro.props;
     <button
       class="h-langs__link"
       type="button"
+      lang={locale.lang}
       data-lang-switch={locale.id}
       aria-pressed={locale.id === 'ru' ? 'true' : 'false'}
     >

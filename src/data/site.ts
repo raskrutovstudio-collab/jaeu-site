@@ -46,6 +46,24 @@ export const routes = {
   en: withBase('/en/')
 } as const;
 
+/**
+ * Русские URL, которые можно отдавать поисковикам.
+ * Технические `/kz/`, `/en/` и прочие служебные маршруты сюда не входят:
+ * у них noindex, и в sitemap их быть не должно.
+ */
+export const indexablePaths = [
+  '/',
+  '/about/',
+  '/activities/',
+  '/expert-council/',
+  '/membership/',
+  '/knowledge/',
+  '/documents/',
+  '/reports/',
+  '/news/',
+  '/contacts/'
+] as const;
+
 export type RouteKey = keyof typeof routes;
 
 /*

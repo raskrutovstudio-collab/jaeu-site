@@ -1505,7 +1505,8 @@ body.h-body {
 .h-footer__contacts dt {
   margin-top: 14px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.44);
+  /* 0.44 на navy-deep даёт ~4.1:1 и не проходит AA для 13 px. */
+  color: rgba(255, 255, 255, 0.56);
 }
 
 .h-footer__contacts dt:first-child {
