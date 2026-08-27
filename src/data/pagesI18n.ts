@@ -873,8 +873,8 @@ export const newsI18n = {
     'News and events of the Association of Jewellers of the EAEU'
   ),
   'meta.description': pair(
-    'ЕАЭО зергерлер қауымдастығының 2025 жылғы салалық іс-шараларға қатысуы: саланы реттеу бойынша сараптамалық кеңес, Қазақстан зергерлерінің Бірінші Конгресі, реттеушілік әсерді талдауды талқылау.',
-    'Participation of the Association of Jewellers of the EAEU in industry events in 2025: an expert meeting on regulation of the industry, the First Congress of Jewellers of Kazakhstan, and the discussion of the regulatory impact assessment.'
+    'ЕАЭО зергерлер қауымдастығының 2024 және 2025 жылғы салалық іс-шараларға қатысу хроникасы: кеңестер, дөңгелек үстелдер, Қазақстан зергерлерінің Бірінші Конгресі және таңбалауды талқылау.',
+    'A chronicle of the Association of Jewellers of the EAEU’s participation in industry events in 2024 and 2025: meetings, round tables, the First Congress of Jewellers of Kazakhstan and discussions of marking.'
   ),
   crumb: pair('Жаңалықтар', 'News'),
   'hero.eyebrow': shared.newsAndEvents,
@@ -884,8 +884,8 @@ export const newsI18n = {
     'A chronicle of the Association’s participation in industry events: which questions were considered and what the participants concluded.'
   ),
   listNote: pair(
-    'Материалдар Қауымдастықтың 2025 жылғы іс-шаралар тізбесі бойынша дайындалған.',
-    'The materials are based on the Association’s list of events for 2025.'
+    'Материалдар Қауымдастықтың 2024 және 2025 жылғы іс-шаралар тізбелері бойынша дайындалған.',
+    'The materials are based on the Association’s lists of events for 2024 and 2025.'
   ),
   'list.aria': pair('Басқа материалдар', 'Other materials'),
   'featured.eyebrow': pair('Басты материал', 'Lead material'),
@@ -944,6 +944,210 @@ export const newsI18n = {
     'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
     'A hall at an industry event: participants at tables with handout materials'
   ),
+  'items.2.dateLabel': pair('2025 жылғы 23 қаңтар', '23 January 2025'),
+  'items.2.title': pair(
+    'Жеңіл өнеркәсіптегі міндетті таңбалау және шағын бизнес туралы конференция',
+    'Conference on mandatory marking and small business in light industry'
+  ),
+  'items.2.text': pair(
+    'Қауымдастық жеңіл өнеркәсіптегі шағын және микробизнес кәсіпорындарына міндетті таңбалаудың әсерін талдауға арналған конференцияға қатысты. Ұйымдастырушы — «Шағын бизнеске жәрдемдесу» өңірлік қоғамдық ұйымы, кәсіпкерлерге арналған «Свое дело плюс» порталының қолдауымен.',
+    'The Association took part in a conference on the impact of mandatory marking on small and micro-businesses in light industry. The organiser was the regional public organisation “Assistance to Small Business”, with support from the “Svoye delo plus” portal for entrepreneurs.'
+  ),
+  'items.2.detail': pair(
+    'Талқылауға Ресей мен Қазақстан кәсіпкерлері, РФ мемлекеттік органдарының өкілдері, үкіметтік емес ұйымдар және БАҚ қатысты. Қатысушылар таңбалауды енгізудің қаржылық және техникалық шығындары, әсіресе микробизнес үшін, және талаптарды шағын бизнестің мүмкіндіктеріне бейімдеу қажеттігі туралы айтты.',
+    'Entrepreneurs from Russia and Kazakhstan, representatives of Russian government authorities, non-governmental organisations and the media took part in the discussion. Participants spoke about the financial and technical costs of introducing marking, especially for micro-businesses, and about the need to adapt the requirements to the capacities of small business.'
+  ),
+  'items.2.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a ring through a loupe'
+  ),
+  'items.3.dateLabel': pair('2024 жылғы 26 желтоқсан', '26 December 2024'),
+  'items.3.title': pair(
+    'Міндетті таңбалау бойынша дөңгелек үстел',
+    'Round table on mandatory marking'
+  ),
+  'items.3.text': pair(
+    'Қауымдастық міндетті таңбалау бойынша дөңгелек үстелге қатысты. Ұйымдастырушы — «Республика» партиясы.',
+    'The Association took part in a round table on mandatory marking. The organiser was the Republic party.'
+  ),
+  'items.3.detail': pair(
+    'Таңбалаудың пилоттық жобаларының қорытындылары, өнімнің өзіндік құнына әсері және қазақстандық таңбаның мәртебесін арттыру қаралды. Міндетті таңбалауды енгізуге қарсы дәлелдер ұсынылды; реттеу жүйесін пысықтау бойынша келесі қадамдар белгіленді.',
+    'The results of pilot marking projects, the effect on production costs and raising the status of the Kazakhstani hallmark were considered. Arguments against introducing mandatory marking were presented; further steps to refine the regulatory system were outlined.'
+  ),
+  'items.3.imageAlt': pair(
+    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
+    'A hall at an industry event: participants at tables with handout materials'
+  ),
+  'items.4.dateLabel': pair('2024 жылғы 2 қазан', '2 October 2024'),
+  'items.4.title': pair(
+    'ҚР Сауда және интеграция министрлігіндегі кеңес',
+    'Meeting at the Ministry of Trade and Integration of the Republic of Kazakhstan'
+  ),
+  'items.4.text': pair(
+    'Қауымдастық Қазақстан Республикасының Сауда және интеграция министрлігіндегі кеңеске қатысты. Төрағалық еткен — Премьер-Министрдің орынбасары С. Жұманғарин.',
+    'The Association took part in a meeting at the Ministry of Trade and Integration of the Republic of Kazakhstan. It was chaired by Deputy Prime Minister S. Zhumangarin.'
+  ),
+  'items.4.detail': pair(
+    'Әртүрлі тауар топтары үшін таңбалауды енгізу, сауданы цифрландыру және көлеңкелі экономиканы азайту талқыланды. Таңбалау туралы заңнаманы қайта қарау бойынша ұсыныстар дайындалды.',
+    'The introduction of marking for various product groups, the digitalisation of trade and the reduction of the shadow economy were discussed. Proposals to revise the legislation on marking were prepared.'
+  ),
+  'items.4.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a ring through a loupe'
+  ),
+  'items.5.dateLabel': pair('2024 жылғы 11 қыркүйек', '11 September 2024'),
+  'items.5.title': pair(
+    '«Бизнес пен үкімет диалогы» дөңгелек үстелі',
+    'Round table “Dialogue of business and government”'
+  ),
+  'items.5.text': pair(
+    'Қауымдастық «Бизнес пен үкімет диалогы» дөңгелек үстеліне қатысты. Ұйымдастырушылар — Қазақстан Республикасының бизнес-қауымдастықтары.',
+    'The Association took part in the round table “Dialogue of business and government”. The organisers were business associations of the Republic of Kazakhstan.'
+  ),
+  'items.5.detail': pair(
+    'Таңбалаудың экономикаға және баға өсіміне әсері, мемлекеттің бизнес-процестерге араласуы және ДСҰ мен ЕАЭО халықаралық міндеттемелерін бұзу ықтималдығы қаралды. Бизнес мүддесін қорғау туралы ҚР Президентіне үндеу дайындалды.',
+    'The effect of marking on the economy and price growth, state intervention in business processes and possible breaches of WTO and EAEU international commitments were considered. An appeal to the President of the Republic of Kazakhstan asking to protect the interests of business was prepared.'
+  ),
+  'items.5.imageAlt': pair(
+    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
+    'A hall at an industry event: participants at tables with handout materials'
+  ),
+  'items.6.dateLabel': pair('2024 жылғы 10 қыркүйек', '10 September 2024'),
+  'items.6.title': pair(
+    '«Атамекен» ҰКП-дағы кеңес',
+    'Meeting at the Atameken National Chamber of Entrepreneurs'
+  ),
+  'items.6.text': pair(
+    'Қауымдастық «Атамекен» ҰКП-дағы кеңеске қатысты. Төрағалық еткен — «Атамекен» ҰКП Төралқасының төрағасы Райымбек Баталов.',
+    'The Association took part in a meeting at the Atameken National Chamber of Entrepreneurs. It was chaired by Raimbek Batalov, Chairman of the Presidium of Atameken.'
+  ),
+  'items.6.detail': pair(
+    'Міндетті таңбалаудың зергерлік бизнеске әсері, шағын және орта бизнеске жүктеме және бақылаудың қайталануы талқыланды. Қатысушылардың көпшілігі міндетті таңбалауды енгізуге қарсы шықты; балама шаралар ұсынылды.',
+    'The effect of mandatory marking on the jewellery business, the burden on small and medium-sized businesses and the duplication of control were discussed. Most participants opposed the introduction of mandatory marking; alternative measures were proposed.'
+  ),
+  'items.6.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a ring through a loupe'
+  ),
+  'items.7.dateLabel': pair('2024 жылғы 20 маусым', '20 June 2024'),
+  'items.7.title': pair(
+    'ҚР-ның ЕАЭО мен ДСҰ-ға қатысуы мәселелері бойынша Қоғамдық қабылдау отырысы',
+    'Public reception meeting on the participation of Kazakhstan in the EAEU and the WTO'
+  ),
+  'items.7.text': pair(
+    'Қауымдастық Қазақстан Республикасының ЕАЭО мен ДСҰ-ға қатысуы мәселелері бойынша Қоғамдық қабылдау отырысына қатысты. Ұйымдастырушы — ҚР Сауда және интеграция министрлігі, төраға — вице-министр Құшықова Ж.С.',
+    'The Association took part in a public reception meeting on the participation of the Republic of Kazakhstan in the EAEU and the WTO. The organiser was the Ministry of Trade and Integration of the Republic of Kazakhstan; the chair was Vice-Minister Kushukova Zh.S.'
+  ),
+  'items.7.detail': pair(
+    'Санкциялардың қазақстандық өнім экспортына әсері, шетелдік өндірушілердің демпингі және тұтынушылардың құқықтарын қорғау саласындағы ЕАЭО заңнамасын біріздендіру қаралды. Қатысушылар мемлекеттік органдармен диалогты жалғастыруға дайын екенін білдірді; сауда кедергілерін жою шаралары ұсынылды.',
+    'The effect of sanctions on Kazakhstani exports, dumping by foreign producers and the unification of EAEU legislation on consumer protection were considered. Participants expressed readiness to continue dialogue with government authorities; measures to remove trade barriers were proposed.'
+  ),
+  'items.7.imageAlt': pair(
+    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
+    'A hall at an industry event: participants at tables with handout materials'
+  ),
+  'items.8.dateLabel': pair('2024 жылғы 18 маусым', '18 June 2024'),
+  'items.8.title': pair(
+    'Зергерлік бұйымдарды таңбалау бойынша қоғамдық талқылау',
+    'Public consultation on the marking of jewellery items'
+  ),
+  'items.8.text': pair(
+    'Қауымдастық зергерлік бұйымдарды таңбалау бойынша онлайн талқылауға қатысты. Ұйымдастырушы — ҚР ӨҚС Өнеркәсіп комитеті, төраға — төрағаның орынбасары Жолмағамбетов Т.Б.',
+    'The Association took part in an online consultation on the marking of jewellery items. The organiser was the Committee for Industry of the Ministry of Industry and Construction of the Republic of Kazakhstan; the chair was Deputy Chairman Zholmagambetov T.B.'
+  ),
+  'items.8.detail': pair(
+    'Таңбалауды енгізудің реттеушілік әсерін талдау және бақылау сәйкестендіру белгілерінің құны қаралды. Талқылау қорытындысы бойынша зергерлік бұйымдарды таңбалау орынсыз деп танылды.',
+    'The regulatory impact assessment of introducing marking and the cost of control identification marks were considered. Following the discussion, the marking of jewellery items was found inexpedient.'
+  ),
+  'items.8.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a ring through a loupe'
+  ),
+  'items.9.dateLabel': pair('2024 жылғы 12 маусым', '12 June 2024'),
+  'items.9.title': pair(
+    '«Атамекен» ҰКП-дағы кеңес',
+    'Meeting at the Atameken National Chamber of Entrepreneurs'
+  ),
+  'items.9.text': pair(
+    'Қауымдастық «Атамекен» ҰКП-дағы кеңеске қатысты. Төрағалық еткен — ҚР ҰКП Басқарма төрағасының орынбасары Жаркенов Т.З.',
+    'The Association took part in a meeting at the Atameken National Chamber of Entrepreneurs. It was chaired by Zharkenov T.Z., Deputy Chairman of the Management Board of the National Chamber of Entrepreneurs of the Republic of Kazakhstan.'
+  ),
+  'items.9.detail': pair(
+    'Дәрілік заттарды таңбалауды енгізуге дайындық, бизнес-процестерді оңтайландыру және шағын бизнес үшін таңбалау шығындарын азайту талқыланды. Кәсіпкерлерге шығындарды өтеу бойынша ұсыныстар дайындалды.',
+    'Readiness to introduce marking of medicines, the optimisation of business processes and reducing marking costs for small business were discussed. Proposals to compensate entrepreneurs for the costs were prepared.'
+  ),
+  'items.9.imageAlt': pair(
+    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
+    'A hall at an industry event: participants at tables with handout materials'
+  ),
+  'items.10.dateLabel': pair('2024 жылғы 6 маусым', '6 June 2024'),
+  'items.10.title': pair(
+    '«Атамекен» ҰКП отырысы',
+    'Meeting of the Atameken National Chamber of Entrepreneurs'
+  ),
+  'items.10.text': pair(
+    'Қауымдастық «Атамекен» ҰКП отырысына қатысты. Төрағалық еткен — Премьер-Министрдің орынбасары С. Жұманғарин.',
+    'The Association took part in a meeting of the Atameken National Chamber of Entrepreneurs. It was chaired by Deputy Prime Minister S. Zhumangarin.'
+  ),
+  'items.10.detail': pair(
+    'Дәрілік заттар мен тауарларды таңбалауды енгізу, қоймадағы қорларды талдау және таңбалаудың бизнеске әсерін бағалау қаралды. Таңбалау қағидаларына техникалық түзетулер бойынша шешімдер қабылданды.',
+    'The introduction of marking for medicines and goods, an analysis of warehouse stocks and an assessment of the effect of marking on business were considered. Decisions were taken on technical adjustments to the marking rules.'
+  ),
+  'items.10.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a ring through a loupe'
+  ),
+  'items.11.dateLabel': pair('2024 жылғы 5 маусым', '5 June 2024'),
+  'items.11.title': pair(
+    'СҚО «Атамекен» ҰКП жанындағы Қоғамдық қабылдау',
+    'Public reception at the Atameken National Chamber of Entrepreneurs of the North Kazakhstan Region'
+  ),
+  'items.11.text': pair(
+    'Қауымдастық Солтүстік Қазақстан облысының «Атамекен» ҰКП жанындағы қоғамдық қабылдауға қатысты. Төрағалық еткен — СҚО прокуроры Ә. Әлиханұлы.',
+    'The Association took part in a public reception at the Atameken National Chamber of Entrepreneurs of the North Kazakhstan Region. It was chaired by the prosecutor of the North Kazakhstan Region, A. Alikhanuly.'
+  ),
+  'items.11.detail': pair(
+    'Зергерлік бұйымдарды лицензиялау және сертификаттау проблемалары, мемлекеттік бақылау тетіктерінің кемшіліктері және тұтынушылардың құқықтарын қорғау саласындағы ЕАЭО заңнамасын біріздендіру қажеттігі қаралды. Нормативтік актілерге өзгерістер енгізу ұсыныстары шығарылды; билік органдарымен диалог бастамашылық етілді.',
+    'Problems of licensing and certification of jewellery items, shortcomings of state control mechanisms and the need to unify EAEU legislation on consumer protection were considered. Proposals to amend regulatory acts were put forward; a dialogue with the authorities was initiated.'
+  ),
+  'items.11.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a ring through a loupe'
+  ),
+  'items.12.dateLabel': pair('2024 жылғы 16 мамыр', '16 May 2024'),
+  'items.12.title': pair(
+    'Өңірлік деңгейдегі қоғамдық қабылдау',
+    'Regional-level public reception'
+  ),
+  'items.12.text': pair(
+    'Қауымдастық өңірлік деңгейдегі қоғамдық қабылдауға қатысты.',
+    'The Association took part in a regional-level public reception.'
+  ),
+  'items.12.detail': pair(
+    'Зергерлік бизнестің өңірлік проблемалары, таңбалау мен сертификаттаудағы әкімшілік кедергілер және шағын және орта кәсіпорындардың қаржы құралдарына қолжетімділігі қаралды. Анықталған проблемаларды жою бойынша ұсынымдар ұсынылды; нормативтік актілерді түзету қажеттігі атап өтілді.',
+    'Regional problems of the jewellery business, administrative barriers in marking and certification, and access of small and medium-sized enterprises to financial instruments were considered. Recommendations to remove the identified problems were presented; the need to adjust regulatory acts was noted.'
+  ),
+  'items.12.imageAlt': pair(
+    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
+    'A hall at an industry event: participants at tables with handout materials'
+  ),
+  'items.13.dateLabel': pair('2024 жылғы 2 мамыр', '2 May 2024'),
+  'items.13.title': pair(
+    'ҚР Сауда және интеграция министрлігіндегі кеңес',
+    'Meeting at the Ministry of Trade and Integration of the Republic of Kazakhstan'
+  ),
+  'items.13.text': pair(
+    'Қауымдастық Қазақстан Республикасының Сауда және интеграция министрлігіндегі кеңеске қатысты. Төрағалық еткен — министр А. Шаққалиев.',
+    'The Association took part in a meeting at the Ministry of Trade and Integration of the Republic of Kazakhstan. It was chaired by Minister A. Shakkaliyev.'
+  ),
+  'items.13.detail': pair(
+    'Тауарларды таңбалау жүйесін ТЗТ АЖ-мен интеграциялау, мотор майын таңбалау бойынша пилоттық жоба және зергерлік бұйымдарды таңбалау ұсыныстары қаралды. Интеграцияны аяқтау кестесі бекітілді; бизнестің ұсыныстары қабылданды.',
+    'The integration of the goods marking system with the IS MPT, a pilot project on the marking of motor oil and proposals on the marking of jewellery items were considered. A schedule for completing the integration was approved; business proposals were accepted.'
+  ),
+  'items.13.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a ring through a loupe'
+  ),
   'cta.h2': pair('Іс-шаралардың толық материалдары', 'Full materials of the events'),
   'cta.text': pair(
     'Іс-шаралар тізбелерін және есептік материалдарды Қауымдастық ресми мекенжайға сұрау бойынша береді.',
@@ -975,6 +1179,8 @@ export const contactsI18n = {
   ),
   'hero.action.label': shared.writeToAssociation,
   'hero.action.href': mailtoPair('Қауымдастыққа өтініш', 'Enquiry to the Association'),
+  'hero.call.label': pair('Қоңырау шалу', 'Call'),
+  'hero.call.aria': pair(`Қоңырау шалу ${org.phone}`, `Call ${org.phone}`),
   'hero.imageAlt': pair(
     'Терезе жанындағы жұмыс үстелі: жабық блокнот, қалам, басып шығарылған беттер бумасы, телефон және су құйылған стақан',
     'A desk by a window: a closed notebook, a pen, a stack of printed pages, a telephone and a glass of water'
@@ -982,11 +1188,13 @@ export const contactsI18n = {
   'actions.h2': pair('Қалай байланысуға болады', 'How to get in touch'),
   'actions.items.0.term': pair('Электрондық пошта', 'Email'),
   'actions.items.0.href': mailtoPair('Қауымдастыққа өтініш', 'Enquiry to the Association'),
+  'actions.items.0.aria': pair(`Жазу: ${org.email}`, `Write to ${org.email}`),
   'actions.items.0.hint': pair(
     'Негізгі арна: өтініштер, кіру туралы өтініштер және оларға қоса берілетін құжаттар.',
     'The main channel: enquiries, applications to join and their attachments.'
   ),
   'actions.items.1.term': pair('Телефон', 'Telephone'),
+  'actions.items.1.aria': pair(`Қоңырау шалу ${org.phone}`, `Call ${org.phone}`),
   'actions.items.1.hint': pair(
     'Жалпы мәселелер бойынша Қауымдастыққа қоңырау.',
     'A call to the Association on general questions.'
@@ -1224,8 +1432,8 @@ export const reportsI18n = {
     'List of events for 2024'
   ),
   'materials.items.2.value': pair(
-    'Ұйымдастырушысы, қаралған мәселелері және әрқайсысы бойынша нәтижесі көрсетілген іс-шаралардың хронологиялық тізбесі.',
-    'A chronological list of events indicating the organiser, the questions considered and the result of each.'
+    'Ұйымдастырушысы, қаралған мәселелері және әрқайсысы бойынша нәтижесі көрсетілген іс-шаралардың хронологиялық тізбесі. Қысқаша хроника жаңалықтар бөлімінде жарияланған.',
+    'A chronological list of events indicating the organiser, the questions considered and the result of each. A short chronicle is published in the news section.'
   ),
   'materials.items.3.term': pair(
     '2025 жылғы іс-шаралар тізбесі',

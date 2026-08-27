@@ -63,9 +63,21 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
         <p class="h-footer__heading" data-i18n="nav.contacts">{footer.contactsHeading}</p>
         <dl class="h-footer__contacts">
           <dt data-i18n="footer.emailLabel">Электронная почта</dt>
-          <dd><a href={`mailto:${org.email}`}>{org.email}</a></dd>
+          <dd>
+            <a
+              href={`mailto:${org.email}`}
+              aria-label={`Написать на ${org.email}`}
+              data-i18n-attrs="aria-label:footer.emailAria"
+            >{org.email}</a>
+          </dd>
           <dt data-i18n="footer.phoneLabel">Телефон</dt>
-          <dd><a href={`tel:${org.phoneHref}`}>{org.phone}</a></dd>
+          <dd>
+            <a
+              href={`tel:${org.phoneHref}`}
+              aria-label={`Позвонить ${org.phone}`}
+              data-i18n-attrs="aria-label:footer.phoneAria"
+            >{org.phone}</a>
+          </dd>
           <dt data-i18n="footer.addressLabel">Адрес</dt>
           <dd data-i18n="footer.addressValue">Республика Казахстан, {addressLine}</dd>
         </dl>

@@ -4,12 +4,58 @@ import Icon from '../../components/home/Icon.astro';
 import { news } from '../../data/pages';
 import { newsI18n } from '../../data/pagesI18n';
 import { routes } from '../../data/home';
-import { withBase } from '../../data/site';
+import { canonicalUrl, withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+const canonical = canonicalUrl(routes.news);
 
 /* Квадратные превью материалов существуют в двух ширинах: 240 и 400 px. */
 const thumb = 400;
+
+const featuredLead = news.featured.paragraphs[0];
+const featuredRest = news.featured.paragraphs.slice(1);
+
+const itemsByYear = [...new Set(news.items.map((item) => item.date.slice(0, 4)))].map((year) => ({
+  year,
+  entries: news.items
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) => item.date.slice(0, 4) === year)
+}));
+
+/* Список отражает видимые на странице материалы с подтверждёнными датами. */
+const newsSchema = {
+  '@type': 'ItemList',
+  '@id': `${canonical}#newslist`,
+  name: news.meta.title,
+  numberOfItems: news.items.length + 1,
+  itemListOrder: 'https://schema.org/ItemListOrderDescending',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      item: {
+        '@type': 'NewsArticle',
+        headline: news.featured.title,
+        datePublished: news.featured.date,
+        description: featuredLead,
+        inLanguage: 'ru',
+        url: canonical
+      }
+    },
+    ...news.items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 2,
+      item: {
+        '@type': 'NewsArticle',
+        headline: item.title,
+        datePublished: item.date,
+        description: item.text,
+        inLanguage: 'ru',
+        url: canonical
+      }
+    }))
+  ]
+};
 ---
 
 <InnerLayout
@@ -18,6 +64,7 @@ const thumb = 400;
   ogTitle={news.meta.ogTitle}
   path={routes.news}
   crumb={news.crumb}
+  schema={[newsSchema]}
   i18n={newsI18n}
 >
   <section class="p-hero p-hero--tight">
@@ -62,8 +109,12 @@ const thumb = 400;
           <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
           <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
           <hr class="h-rule" />
-          {news.featured.paragraphs.map((text, index) => (
-            <p class="p-story__text" data-i18n={`featured.paragraphs.${index}`}>{text}</p>
+          <p class="p-story__text" data-i18n="featured.paragraphs.0">{featuredLead}</p>
+        </div>
+
+        <div class="p-story__continue">
+          {featuredRest.map((text, index) => (
+            <p class="p-story__text" data-i18n={`featured.paragraphs.${index + 1}`}>{text}</p>
           ))}
         </div>
       </article>
@@ -79,37 +130,42 @@ const thumb = 400;
     <div class="h-shell">
       <p class="p-hint p-hint--head" data-rise="1" data-i18n="listNote">{news.listNote}</p>
 
-      <ul class="p-stories" data-rise="1">
-        {news.items.map((item, index) => (
-          <li>
-            <article class={`p-stories__item${index === 1 ? ' p-stories__item--broad' : ''}`}>
-              <div class="p-stories__meta">
-                <time class="p-date" datetime={item.date} data-i18n={`items.${index}.dateLabel`}>{item.dateLabel}</time>
-              </div>
+      {itemsByYear.map((group) => (
+        <section class="p-stories__group" aria-labelledby={`news-year-${group.year}`}>
+          <h2 class="p-stories__year" id={`news-year-${group.year}`}>{group.year}</h2>
+          <ul class="p-stories" data-rise="1">
+            {group.entries.map(({ item, index }) => (
+              <li>
+                <article class="p-stories__item">
+                  <div class="p-stories__meta">
+                    <time class="p-date" datetime={item.date} data-i18n={`items.${index}.dateLabel`}>{item.dateLabel}</time>
+                  </div>
 
-              <div class="p-stories__body">
-                <h2 class="h-h3 p-stories__title" data-i18n={`items.${index}.title`}>{item.title}</h2>
-                <p class="p-stories__text" data-i18n={`items.${index}.text`}>{item.text}</p>
-                <p class="p-stories__detail" data-i18n={`items.${index}.detail`}>{item.detail}</p>
-              </div>
+                  <div class="p-stories__body">
+                    <h3 class="h-h3 p-stories__title" data-i18n={`items.${index}.title`}>{item.title}</h3>
+                    <p class="p-stories__text" data-i18n={`items.${index}.text`}>{item.text}</p>
+                    <p class="p-stories__detail" data-i18n={`items.${index}.detail`}>{item.detail}</p>
+                  </div>
 
-              <figure class="p-stories__media" data-reveal-media>
-                <img
-                  src={asset(`${item.image}-${thumb}.webp`)}
-                  srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-${thumb}.webp`)} 400w`}
-                  sizes="(min-width: 1041px) 320px, 260px"
-                  width={thumb}
-                  height={thumb}
-                  alt={item.imageAlt}
-                  data-i18n-attrs={`alt:items.${index}.imageAlt`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </figure>
-            </article>
-          </li>
-        ))}
-      </ul>
+                  <figure class="p-stories__media" data-reveal-media>
+                    <img
+                      src={asset(`${item.image}-${thumb}.webp`)}
+                      srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-${thumb}.webp`)} 400w`}
+                      sizes="(min-width: 1041px) 320px, 260px"
+                      width={thumb}
+                      height={thumb}
+                      alt={item.imageAlt}
+                      data-i18n-attrs={`alt:items.${index}.imageAlt`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </figure>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </div>
   </section>
 

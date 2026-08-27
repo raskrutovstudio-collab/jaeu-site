@@ -25,7 +25,7 @@ const contactSchema = {
     name: org.legalName,
     alternateName: org.shortName,
     email: org.email,
-    telephone: org.phone,
+    telephone: org.phoneHref,
     address: {
       '@type': 'PostalAddress',
       addressCountry: org.address.country,
@@ -60,14 +60,25 @@ const contactSchema = {
           <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{contacts.hero.h1}</h1>
           <p class="h-lead p-hero__lead" data-i18n="hero.lead">{contacts.hero.lead}</p>
 
-          <a
-            class="h-btn h-btn--primary"
-            href={contacts.hero.action.href}
-            data-i18n-attrs="href:hero.action.href"
-          >
-            <span data-i18n="hero.action.label">{contacts.hero.action.label}</span>
-            <Icon name="arrow" class="h-btn__arrow" />
-          </a>
+          <div class="p-hero__actions">
+            <a
+              class="h-btn h-btn--primary"
+              href={contacts.hero.action.href}
+              data-i18n-attrs="href:hero.action.href"
+            >
+              <span data-i18n="hero.action.label">{contacts.hero.action.label}</span>
+              <Icon name="arrow" class="h-btn__arrow" />
+            </a>
+            <a
+              class="h-link"
+              href={contacts.hero.call.href}
+              aria-label={`Позвонить ${org.phone}`}
+              data-i18n-attrs="aria-label:hero.call.aria"
+            >
+              <span data-i18n="hero.call.label">{contacts.hero.call.label}</span>
+              <Icon name="arrow" class="h-link__arrow" />
+            </a>
+          </div>
         </div>
 
         <figure class="p-hero__media">
@@ -106,11 +117,11 @@ const contactSchema = {
               <a
                 class="p-contact__value"
                 href={item.href}
-                data-i18n-attrs={
-                  translated(`actions.items.${index}.href`)
-                    ? `href:actions.items.${index}.href`
-                    : undefined
-                }
+                aria-label={'aria' in item ? item.aria : undefined}
+                data-i18n-attrs={[
+                  translated(`actions.items.${index}.href`) ? `href:actions.items.${index}.href` : '',
+                  translated(`actions.items.${index}.aria`) ? `aria-label:actions.items.${index}.aria` : ''
+                ].filter(Boolean).join(';') || undefined}
               >{item.value}</a>
             ) : (
               <p class="p-contact__value p-contact__value--long" data-i18n={`actions.items.${index}.value`}>{item.value}</p>

@@ -1,4 +1,8 @@
 import { homeCopy, ui } from './copy';
+import { org } from './home';
+
+const mailtoHref = (subject: string) =>
+  `mailto:${org.email}?subject=${encodeURIComponent(subject)}`;
 
 /**
  * Локализация главной страницы без отдельных URL.
@@ -358,6 +362,10 @@ export const homeTranslations = {
     'Applications to join are accepted on an ongoing basis. Write to us to discuss taking part in the Association’s work.'
   ),
   'finalCta.secondary': pair('Қауымдастыққа жазу', 'Write to the Association'),
+  'finalCta.secondaryHref': pair(
+    mailtoHref('Қауымдастық жұмысына қатысу'),
+    mailtoHref('Participation in the work of the Association')
+  ),
 
   // ---------- Подвал ----------
   'footer.blurb': pair(
@@ -368,7 +376,9 @@ export const homeTranslations = {
   'footer.columns.1.heading': pair('Қауымдастық мүшелеріне', 'For members'),
   'footer.columns.2.heading': pair('Материалдар', 'Materials'),
   'footer.emailLabel': pair('Электрондық пошта', 'Email'),
+  'footer.emailAria': pair(`Жазу: ${org.email}`, `Write to ${org.email}`),
   'footer.phoneLabel': pair('Телефон', 'Telephone'),
+  'footer.phoneAria': pair(`Қоңырау шалу: ${org.phone}`, `Call ${org.phone}`),
   'footer.addressLabel': pair('Мекенжай', 'Address'),
   'footer.addressValue': pair(
     'Қазақстан Республикасы, 150010, Солтүстік Қазақстан облысы, Петропавл қ., Интернациональная көшесі, 57',

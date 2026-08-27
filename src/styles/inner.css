@@ -913,7 +913,7 @@ html {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 40px;
-  row-gap: 32px;
+  row-gap: 0;
   align-items: start;
 }
 
@@ -948,9 +948,47 @@ html {
 }
 
 /*
-  Материалы обзора идут одним списком с разным масштабом кадра: равная
-  плитка карточек здесь была бы ложной ритмикой при трёх материалах.
+  Продолжение материала — отдельный блок на ширину контейнера: узкая колонка
+  справа держит только вступление, полный текст не растягивается от края до края.
 */
+.p-story__continue {
+  grid-column: 1 / -1;
+  max-width: 40.5rem;
+  margin-top: 8px;
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.p-story__continue::before {
+  content: "";
+  width: 64px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.p-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+  margin-top: 6px;
+}
+
+.p-stories__group + .p-stories__group {
+  margin-top: 20px;
+}
+
+.p-stories__year {
+  margin: 0 0 8px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+}
+
 .p-stories {
   display: flex;
   flex-direction: column;
@@ -1772,11 +1810,22 @@ a.p-contact__value:focus-visible {
   .p-story {
     grid-template-columns: 1fr;
     column-gap: 0;
+    row-gap: 28px;
   }
 
   .p-story__media,
-  .p-story__body {
+  .p-story__body,
+  .p-story__continue {
     grid-column: 1;
+  }
+
+  .p-story__continue {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .p-story__continue::before {
+    display: none;
   }
 
   .p-stories__item,
