@@ -1,0 +1,7 @@
+/*
+  Один вход для внутренних страниц: home.css уже тянет fonts.css,
+  inner.css добавляет только композиции. Два отдельных import в лейауте
+  давали два блокирующих CSS-запроса (SiteFooter.*.css + pagesI18n.*.css).
+*/
+@import './home.css';
+@import './inner.css';

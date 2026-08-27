@@ -27,12 +27,15 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
           data-i18n-attrs="aria-label:ui.logoAria"
         >
           <img
-            src={withBase('/assets/jaeu/logo-jaeu-invert.webp')}
+            src={withBase('/assets/jaeu/logo-jaeu-invert-210.webp')}
+            srcset={`${withBase('/assets/jaeu/logo-jaeu-invert-210.webp')} 210w, ${withBase('/assets/jaeu/logo-jaeu-invert-420.webp')} 420w`}
+            sizes="210px"
             width="210"
             height="66"
             alt="Ассоциация ювелиров Евразийского экономического союза"
             data-i18n-attrs="alt:ui.logoAlt"
             loading="lazy"
+            decoding="async"
           />
         </a>
         <p class="h-footer__blurb" data-i18n="footer.blurb">{footer.blurb}</p>

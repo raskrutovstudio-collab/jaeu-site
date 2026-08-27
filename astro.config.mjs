@@ -16,6 +16,13 @@ export default defineConfig({
   base: isPlesk ? '/' : '/jaeu-site',
   output: 'static',
   trailingSlash: 'always',
+  build: {
+    // Мелкие CSS-чанки (например прежний SiteFooter.*.css) вшиваются в HTML.
+    // Крупные листы остаются файлами и кэшируются. cssCodeSplit не отключаем:
+    // иначе home, inner и global сливаются в один лист, @font-face дублируется
+    // и Style & Layout на внутренних страницах заметно дорожает.
+    inlineStylesheets: 'auto'
+  },
   i18n: {
     locales: [
       { path: 'ru', codes: ['ru', 'ru-KZ'] },

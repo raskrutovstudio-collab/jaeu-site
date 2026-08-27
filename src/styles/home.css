@@ -1,4 +1,5 @@
 /* Главная страница JAEU. Автономная система, классы с префиксом h-. */
+@import './fonts.css';
 
 :root {
   --navy: #202a57;
@@ -18,8 +19,8 @@
 
   --line: rgba(23, 32, 71, 0.14);
   --line-soft: rgba(23, 32, 71, 0.08);
-  --serif: 'Playfair Display', 'Times New Roman', serif;
-  --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --serif: 'Playfair Display Variable', 'Playfair Display', 'Times New Roman', serif;
+  --sans: 'Inter Variable', 'Inter', 'Segoe UI', system-ui, sans-serif;
   --shell: 1240px;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }

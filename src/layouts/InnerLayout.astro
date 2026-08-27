@@ -11,8 +11,7 @@
   baseline и единственная индексируемая версия, KZ/EN подставляются на клиенте
   по словарю страницы. URL при переключении не меняется.
 */
-import '../styles/home.css';
-import '../styles/inner.css';
+import '../styles/inner-entry.css';
 import I18nRuntime from '../components/I18nRuntime.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
@@ -94,13 +93,6 @@ const jsonLd = {
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap"
-    />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 

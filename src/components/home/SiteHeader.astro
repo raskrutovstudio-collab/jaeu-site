@@ -33,12 +33,14 @@ const isCurrent = (href: string) => href === currentPath;
       data-i18n-attrs="aria-label:ui.logoAria"
     >
       <img
-        src={withBase('/assets/jaeu/logo-jaeu.webp')}
+        src={withBase('/assets/jaeu/logo-jaeu-200.webp')}
+        srcset={`${withBase('/assets/jaeu/logo-jaeu-200.webp')} 200w, ${withBase('/assets/jaeu/logo-jaeu-400.webp')} 400w`}
+        sizes="190px"
         width="190"
         height="60"
         alt="Ассоциация ювелиров Евразийского экономического союза"
         data-i18n-attrs="alt:ui.logoAlt"
-        fetchpriority="high"
+        decoding="async"
       />
     </a>
 
