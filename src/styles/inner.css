@@ -953,7 +953,8 @@ html {
 */
 .p-story__continue {
   grid-column: 1 / -1;
-  max-width: 40.5rem;
+  width: 100%;
+  max-width: 70rem;
   margin-top: 8px;
   padding-top: 28px;
   display: flex;

@@ -1,8 +1,7 @@
 ---
 import Icon from './Icon.astro';
-import { finalCta, org, routes } from '../../data/home';
-
-const subject = encodeURIComponent(finalCta.mailSubject);
+import { finalCta, routes } from '../../data/home';
+import { gmailCompose } from '../../data/mail';
 ---
 
 <section class="h-final" aria-labelledby="final-title" data-reveal>
@@ -15,7 +14,14 @@ const subject = encodeURIComponent(finalCta.mailSubject);
         <span data-i18n="ui.becomeMember">{finalCta.primary}</span>
         <Icon name="arrow" class="h-btn__arrow" />
       </a>
-      <a class="h-link" href={`mailto:${org.email}?subject=${subject}`} data-i18n-attrs="href:finalCta.secondaryHref">
+      <a
+        class="h-link"
+        href={gmailCompose(finalCta.mailSubject)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Написать в Ассоциацию в Gmail"
+        data-i18n-attrs="href:finalCta.secondaryHref;aria-label:ui.writeGmail"
+      >
         <span data-i18n="finalCta.secondary">{finalCta.secondary}</span>
         <Icon name="arrow" class="h-link__arrow" />
       </a>

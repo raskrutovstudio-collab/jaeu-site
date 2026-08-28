@@ -1,6 +1,7 @@
 ---
 import LangSwitch from './LangSwitch.astro';
 import { footer, org, routes } from '../../data/home';
+import { gmailCompose } from '../../data/mail';
 import { withBase } from '../../data/site';
 
 interface Props {
@@ -65,8 +66,10 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
           <dt data-i18n="footer.emailLabel">Электронная почта</dt>
           <dd>
             <a
-              href={`mailto:${org.email}`}
-              aria-label={`Написать на ${org.email}`}
+              href={gmailCompose()}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Написать на ${org.email} в Gmail`}
               data-i18n-attrs="aria-label:footer.emailAria"
             >{org.email}</a>
           </dd>

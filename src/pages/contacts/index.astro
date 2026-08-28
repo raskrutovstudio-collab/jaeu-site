@@ -64,7 +64,10 @@ const contactSchema = {
             <a
               class="h-btn h-btn--primary"
               href={contacts.hero.action.href}
-              data-i18n-attrs="href:hero.action.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Написать в Ассоциацию в Gmail"
+              data-i18n-attrs="href:hero.action.href;aria-label:ui.writeGmail"
             >
               <span data-i18n="hero.action.label">{contacts.hero.action.label}</span>
               <Icon name="arrow" class="h-btn__arrow" />
@@ -117,6 +120,8 @@ const contactSchema = {
               <a
                 class="p-contact__value"
                 href={item.href}
+                target={item.href.startsWith('tel:') ? undefined : '_blank'}
+                rel={item.href.startsWith('tel:') ? undefined : 'noopener noreferrer'}
                 aria-label={'aria' in item ? item.aria : undefined}
                 data-i18n-attrs={[
                   translated(`actions.items.${index}.href`) ? `href:actions.items.${index}.href` : '',
@@ -194,7 +199,10 @@ const contactSchema = {
           <a
             class="h-btn h-btn--light"
             href={contacts.cta.primary.href}
-            data-i18n-attrs="href:cta.primary.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Написать на ${org.email} в Gmail`}
+            data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail"
           >
             <span data-i18n="cta.primary.label">{contacts.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />

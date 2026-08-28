@@ -4,6 +4,7 @@ import Icon from '../../components/home/Icon.astro';
 import { documents } from '../../data/pages';
 import { documentsI18n } from '../../data/pagesI18n';
 import { org, routes } from '../../data/home';
+import { gmailCompose } from '../../data/mail';
 import { withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
@@ -14,7 +15,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   документа: действие честное и работает без backend.
 */
 const requestHref = (title: string) =>
-  `mailto:${org.email}?subject=${encodeURIComponent(`${documents.action.prefix}: ${title}`)}`;
+  gmailCompose(`${documents.action.prefix}: ${title}`);
 ---
 
 <InnerLayout
@@ -63,7 +64,9 @@ const requestHref = (title: string) =>
                     <a
                       class="p-lib__action"
                       href={requestHref(item.title)}
-                      aria-label={`${documents.action.label}: ${item.title}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${documents.action.label} в Gmail: ${item.title}`}
                       data-i18n-attrs={`href:groups.${index}.items.${itemIndex}.actionHref;aria-label:groups.${index}.items.${itemIndex}.actionAria`}
                     >
                       <span data-i18n="action.label">{documents.action.label}</span>
@@ -126,7 +129,10 @@ const requestHref = (title: string) =>
           <a
             class="h-btn h-btn--light"
             href={documents.cta.primary.href}
-            data-i18n-attrs="href:cta.primary.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Написать на ${org.email} в Gmail`}
+            data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail"
           >
             <span data-i18n="cta.primary.label">{documents.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />

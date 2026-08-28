@@ -1,8 +1,6 @@
 import { homeCopy, ui } from './copy';
 import { org } from './home';
-
-const mailtoHref = (subject: string) =>
-  `mailto:${org.email}?subject=${encodeURIComponent(subject)}`;
+import { gmailCompose } from './mail';
 
 /**
  * Локализация главной страницы без отдельных URL.
@@ -75,6 +73,8 @@ export const homeTranslations = {
     'ЕАЭО зергерлер қауымдастығы — басты бетке',
     'Association of Jewellers of the EAEU — to the homepage'
   ),
+  'ui.writeGmail': pair('Gmail арқылы Қауымдастыққа жазу', 'Write to the Association in Gmail'),
+  'ui.writeEmailGmail': pair(`Gmail арқылы жазу: ${org.email}`, `Write to ${org.email} in Gmail`),
   'ui.logoAlt': pair(
     'Еуразиялық экономикалық одақ зергерлер қауымдастығы',
     'Association of Jewellers of the Eurasian Economic Union'
@@ -363,8 +363,8 @@ export const homeTranslations = {
   ),
   'finalCta.secondary': pair('Қауымдастыққа жазу', 'Write to the Association'),
   'finalCta.secondaryHref': pair(
-    mailtoHref('Қауымдастық жұмысына қатысу'),
-    mailtoHref('Participation in the work of the Association')
+    gmailCompose('Қауымдастық жұмысына қатысу'),
+    gmailCompose('Participation in the work of the Association')
   ),
 
   // ---------- Подвал ----------
@@ -376,7 +376,7 @@ export const homeTranslations = {
   'footer.columns.1.heading': pair('Қауымдастық мүшелеріне', 'For members'),
   'footer.columns.2.heading': pair('Материалдар', 'Materials'),
   'footer.emailLabel': pair('Электрондық пошта', 'Email'),
-  'footer.emailAria': pair(`Жазу: ${org.email}`, `Write to ${org.email}`),
+  'footer.emailAria': pair(`Gmail арқылы жазу: ${org.email}`, `Write to ${org.email} in Gmail`),
   'footer.phoneLabel': pair('Телефон', 'Telephone'),
   'footer.phoneAria': pair(`Қоңырау шалу: ${org.phone}`, `Call ${org.phone}`),
   'footer.addressLabel': pair('Мекенжай', 'Address'),

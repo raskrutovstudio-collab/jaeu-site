@@ -1,4 +1,5 @@
 import { org } from './home';
+import { gmailCompose } from './mail';
 
 /**
  * Локализация внутренних страниц без отдельных URL.
@@ -34,10 +35,9 @@ const pair = (kk: string, en: string): Translation => ({ kk, en });
 
 /**
  * Тема письма — часть видимого действия, поэтому переводится вместе с
- * подписью кнопки. Адрес и структура ссылки не меняются.
+ * подписью кнопки. Адрес и структура Gmail-ссылки не меняются.
  */
-const mailto = (subject: string): string =>
-  `mailto:${org.email}?subject=${encodeURIComponent(subject)}`;
+const mailto = (subject: string): string => gmailCompose(subject);
 
 const mailtoPair = (kk: string, en: string): Translation => pair(mailto(kk), mailto(en));
 
@@ -856,8 +856,8 @@ const documentActionNames = Object.fromEntries(
     .map(([key, title]) => [
       key.replace(/\.title$/, '.actionAria'),
       pair(
-        `${documentsBase['action.label'].kk}: ${title.kk}`,
-        `${documentsBase['action.label'].en}: ${title.en}`
+        `${documentsBase['action.label'].kk} (Gmail): ${title.kk}`,
+        `${documentsBase['action.label'].en} in Gmail: ${title.en}`
       )
     ])
 );
@@ -1188,7 +1188,7 @@ export const contactsI18n = {
   'actions.h2': pair('Қалай байланысуға болады', 'How to get in touch'),
   'actions.items.0.term': pair('Электрондық пошта', 'Email'),
   'actions.items.0.href': mailtoPair('Қауымдастыққа өтініш', 'Enquiry to the Association'),
-  'actions.items.0.aria': pair(`Жазу: ${org.email}`, `Write to ${org.email}`),
+  'actions.items.0.aria': pair(`Gmail арқылы жазу: ${org.email}`, `Write to ${org.email} in Gmail`),
   'actions.items.0.hint': pair(
     'Негізгі арна: өтініштер, кіру туралы өтініштер және оларға қоса берілетін құжаттар.',
     'The main channel: enquiries, applications to join and their attachments.'

@@ -3,7 +3,7 @@ import InnerLayout from '../../layouts/InnerLayout.astro';
 import Icon from '../../components/home/Icon.astro';
 import { membership } from '../../data/pages';
 import { membershipI18n } from '../../data/pagesI18n';
-import { routes } from '../../data/home';
+import { org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
@@ -34,7 +34,10 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
             <a
               class="h-btn h-btn--primary"
               href={membership.hero.action.href}
-              data-i18n-attrs="href:hero.action.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Написать в Ассоциацию в Gmail"
+              data-i18n-attrs="href:hero.action.href;aria-label:ui.writeGmail"
             >
               <span data-i18n="hero.action.label">{membership.hero.action.label}</span>
               <Icon name="arrow" class="h-btn__arrow" />
@@ -193,7 +196,10 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           <a
             class="h-btn h-btn--light"
             href={membership.cta.primary.href}
-            data-i18n-attrs="href:cta.primary.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Написать на ${org.email} в Gmail`}
+            data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail"
           >
             <span data-i18n="cta.primary.label">{membership.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />

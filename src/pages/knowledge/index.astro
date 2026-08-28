@@ -3,7 +3,7 @@ import InnerLayout from '../../layouts/InnerLayout.astro';
 import Icon from '../../components/home/Icon.astro';
 import { knowledge } from '../../data/pages';
 import { knowledgeI18n } from '../../data/pagesI18n';
-import { routes } from '../../data/home';
+import { org, routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
@@ -150,7 +150,10 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           <a
             class="h-btn h-btn--light"
             href={knowledge.cta.primary.href}
-            data-i18n-attrs="href:cta.primary.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Написать на ${org.email} в Gmail`}
+            data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail"
           >
             <span data-i18n="cta.primary.label">{knowledge.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />

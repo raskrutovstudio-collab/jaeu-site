@@ -1,4 +1,5 @@
 import { org, routes } from './home';
+import { gmailCompose } from './mail';
 
 /**
  * Контент внутренних страниц: /about/, /activities/, /expert-council/ (первый
@@ -49,11 +50,11 @@ const ctaContacts = { label: 'Написать в Ассоциацию', href: r
 
 /**
  * Обращение на подтверждённый адрес Ассоциации. Тема письма подставляется в
- * mailto, чтобы запрос сразу был адресным: backend у статической сборки нет,
- * поэтому форма отправки не создаётся.
+ * Gmail Compose, чтобы запрос сразу был адресным: backend у статической сборки
+ * нет, поэтому форма отправки не создаётся.
  */
 function mailto(subject?: string): string {
-  return subject ? `mailto:${org.email}?subject=${encodeURIComponent(subject)}` : `mailto:${org.email}`;
+  return gmailCompose(subject);
 }
 
 export const about = {
@@ -915,7 +916,7 @@ export const contacts = {
         term: 'Электронная почта',
         value: org.email,
         href: mailto('Обращение в Ассоциацию'),
-        aria: `Написать на ${org.email}`,
+        aria: `Написать на ${org.email} в Gmail`,
         hint: 'Основной канал: обращения, заявления о вступлении и приложения к ним.'
       },
       {
