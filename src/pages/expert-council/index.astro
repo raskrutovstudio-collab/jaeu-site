@@ -52,12 +52,12 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 
   <section class="h-section h-section--white" aria-labelledby="council-expertise" data-reveal>
     <div class="h-shell">
-      <div class="p-split">
+      <div class="p-split p-split--editorial">
         <div class="p-split__body p-article">
           <h2 class="h-h2" id="council-expertise" data-rise="1" data-i18n="expertise.h2">{council.expertise.h2}</h2>
           <hr class="h-rule" />
-          {council.expertise.paragraphs.map((text, index) => (
-            <p class="h-text" data-rise={String(Math.min(index + 2, 4))} data-i18n={`expertise.paragraphs.${index}`}>{text}</p>
+          {council.expertise.paragraphs.slice(0, 2).map((text, index) => (
+            <p class="h-text" data-rise={String(index + 2)} data-i18n={`expertise.paragraphs.${index}`}>{text}</p>
           ))}
         </div>
 
@@ -65,15 +65,21 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           <img
             src={asset('page-council-stone-1100.webp')}
             srcset={`${asset('page-council-stone-700.webp')} 700w, ${asset('page-council-stone-1100.webp')} 1100w`}
-            sizes="(min-width: 1041px) 660px, 100vw"
+            sizes="(min-width: 1041px) 460px, 100vw"
             width="1100"
-            height="825"
+            height="1467"
             alt={council.expertise.imageAlt}
             data-i18n-attrs="alt:expertise.imageAlt"
             loading="lazy"
             decoding="async"
           />
         </figure>
+      </div>
+
+      <div class="p-article p-editorial__rest">
+        {council.expertise.paragraphs.slice(2).map((text, index) => (
+          <p class="h-text" data-i18n={`expertise.paragraphs.${index + 2}`}>{text}</p>
+        ))}
       </div>
     </div>
   </section>

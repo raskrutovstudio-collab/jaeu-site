@@ -9,9 +9,6 @@ import { canonicalUrl, withBase } from '../../data/site';
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
 const canonical = canonicalUrl(routes.news);
 
-/* Квадратные превью материалов существуют в двух ширинах: 240 и 400 px. */
-const thumb = 400;
-
 const featuredLead = news.featured.paragraphs[0];
 const featuredRest = news.featured.paragraphs.slice(1);
 
@@ -82,7 +79,7 @@ const newsSchema = {
   schema={[newsSchema]}
   i18n={newsI18n}
 >
-  <section class="p-hero p-hero--tight">
+  <section class="p-hero p-hero--news">
     <div class="h-shell">
       <div class="p-hero__inner">
         <div class="p-hero__text">
@@ -95,53 +92,51 @@ const newsSchema = {
           <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{news.hero.h1}</h1>
           <p class="h-lead p-hero__lead" data-i18n="hero.lead">{news.hero.lead}</p>
         </div>
+
+        <article class="p-story">
+          <figure class="p-story__media">
+            <img
+              src={asset(`${news.featured.image}-1000.webp`)}
+              srcset={`${asset(`${news.featured.image}-660.webp`)} 660w, ${asset(`${news.featured.image}-1000.webp`)} 1000w`}
+              sizes="(min-width: 1041px) 680px, 100vw"
+              width="1000"
+              height="563"
+              alt={news.featured.imageAlt}
+              data-i18n-attrs="alt:featured.imageAlt"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
+
+          <div class="p-story__body">
+            <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
+            <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
+            <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
+            <hr class="h-rule" />
+            <p class="p-story__text">{featuredLead}</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Ведущий материал попадает в первый экран, поэтому идёт без reveal. -->
-  <section class="h-section h-section--white" aria-labelledby="news-featured">
+  <section class="h-section h-section--white p-section--follow" aria-labelledby="news-featured">
     <div class="h-shell">
-      <article class="p-story">
-        <figure class="p-story__media">
-          <img
-            src={asset('news-discussion-1000.webp')}
-            srcset={`${asset('news-discussion-660.webp')} 660w, ${asset('news-discussion-1000.webp')} 1000w`}
-            sizes="(min-width: 1041px) 680px, 100vw"
-            width="1000"
-            height="563"
-            alt={news.featured.imageAlt}
-            data-i18n-attrs="alt:featured.imageAlt"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-        </figure>
-
-        <div class="p-story__body">
-          <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
-          <!-- Меняется только видимая подпись: datetime остаётся машинным. -->
-          <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
-          <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
-          <hr class="h-rule" />
-          <p class="p-story__text">{featuredLead}</p>
-        </div>
-
-        <div class="p-story__continue p-article">
-          {featuredRest.map((text) => (
-            <>
-              <p class="p-story__text">{text}</p>
-              {news.featured.points && text.trim().endsWith(':') && (
-                <ul>
-                  {news.featured.points.map((point) => (
-                    <li>{point}</li>
-                  ))}
-                </ul>
-              )}
-            </>
-          ))}
-        </div>
-      </article>
+      <div class="p-story__continue p-article">
+        {featuredRest.map((text) => (
+          <>
+            <p class="p-story__text">{text}</p>
+            {news.featured.points && text.trim().endsWith(':') && (
+              <ul>
+                {news.featured.points.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            )}
+          </>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -160,6 +155,7 @@ const newsSchema = {
           <ul class="p-stories" data-rise="1">
             {group.entries.map(({ item, index }) => {
               const fields = newsFields(item);
+              const landscape = fields.article;
               return (
               <li>
                 <article class:list={['p-stories__item', fields.article && 'p-stories__item--article']}>
@@ -169,6 +165,23 @@ const newsSchema = {
 
                   <div class:list={['p-stories__body', 'p-article']}>
                     <h3 class="h-h3 p-stories__title" data-i18n={`items.${index}.title`}>{item.title}</h3>
+
+                    {landscape && (
+                      <figure class="p-stories__media">
+                        <img
+                          src={asset(`${item.image}-760.webp`)}
+                          srcset={`${asset(`${item.image}-400.webp`)} 400w, ${asset(`${item.image}-760.webp`)} 760w`}
+                          sizes="(min-width: 1041px) 680px, 100vw"
+                          width="760"
+                          height="428"
+                          alt={item.imageAlt}
+                          data-i18n-attrs={`alt:items.${index}.imageAlt`}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </figure>
+                    )}
+
                     {fields.paragraphs?.map((text) => (
                       <>
                         <p class="p-stories__text">{text}</p>
@@ -192,19 +205,21 @@ const newsSchema = {
                     {fields.result && <p class="p-stories__result">{fields.result}</p>}
                   </div>
 
-                  <figure class="p-stories__media" data-reveal-media>
-                    <img
-                      src={asset(`${item.image}-${thumb}.webp`)}
-                      srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-${thumb}.webp`)} 400w`}
-                      sizes="(min-width: 1041px) 320px, 260px"
-                      width={thumb}
-                      height={thumb}
-                      alt={item.imageAlt}
-                      data-i18n-attrs={`alt:items.${index}.imageAlt`}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </figure>
+                  {!landscape && (
+                    <figure class="p-stories__media" data-reveal-media>
+                      <img
+                        src={asset(`${item.image}-400.webp`)}
+                        srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-400.webp`)} 400w`}
+                        sizes="(min-width: 1041px) 280px, 240px"
+                        width="400"
+                        height="300"
+                        alt={item.imageAlt}
+                        data-i18n-attrs={`alt:items.${index}.imageAlt`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                  )}
                 </article>
               </li>
               );

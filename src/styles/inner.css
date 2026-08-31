@@ -19,9 +19,31 @@ html {
   display: block;
 }
 
-/* Внутренние страницы плотнее главной: меньше воздуха между секциями. */
+/* Внутренние страницы плотнее главной: воздух только между смысловыми блоками. */
 .p-main .h-section {
-  padding-block: 86px;
+  padding-block: 68px;
+}
+
+/*
+  Иерархия текста внутренних страниц:
+  заголовок — navy-deep; основной текст — --text; мета и сноски — --muted.
+  Длинный отраслевой текст не может выглядеть как вторичный серый.
+*/
+.p-main .h-text,
+.p-main .h-points__text,
+.p-dirs__text,
+.p-pillars__text,
+.p-cols__text,
+.p-story__text,
+.p-stories__text,
+.p-article > p,
+.p-article > .h-text,
+.p-article .p-story__text,
+.p-article .p-stories__text,
+.p-article .p-stories__result,
+.p-article > ul > li,
+.p-article > ol > li {
+  color: var(--text);
 }
 
 /* ---------- Хлебные крошки ---------- */
@@ -230,6 +252,7 @@ html {
 */
 .p-main .h-lead {
   max-width: 50ch;
+  color: var(--text);
 }
 
 .p-main .h-points__text {
@@ -298,7 +321,7 @@ html {
   margin: 0;
   font-size: 17px;
   line-height: 1.68;
-  color: var(--muted);
+  color: var(--text);
   overflow-wrap: anywhere;
 }
 
@@ -309,7 +332,7 @@ html {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 40px;
   row-gap: 40px;
-  align-items: end;
+  align-items: start;
 }
 
 .p-duo__portrait {
@@ -419,7 +442,7 @@ html {
   margin: 0;
   font-size: 17px;
   line-height: 1.68;
-  color: var(--muted);
+  color: var(--text);
   overflow-wrap: anywhere;
 }
 
@@ -432,20 +455,20 @@ html {
   color: var(--text);
 }
 
-/* Врезка между рядами: подпись слева, кадр со сдвигом вправо. */
+/* Врезка: подпись и линия начинаются на одной высоте с кадром. */
 .p-inset {
-  align-items: end;
-  padding-block: 52px 44px;
+  align-items: start;
+  padding-block: 40px 36px;
 }
 
 .p-inset__caption {
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 4;
   margin: 0;
-  padding-top: 18px;
+  padding-top: 0;
   border-top: 2px solid var(--gold);
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text);
 }
 
 .p-inset__media {
@@ -460,8 +483,25 @@ html {
 }
 
 /* Панорамный кадр: пропорция совпадает с исходником, кадр не масштабируется. */
+.p-inset--wide .p-inset__media {
+  grid-column: 6 / span 7;
+}
+
 .p-inset--wide .p-inset__media img {
   aspect-ratio: 40 / 9;
+}
+
+/* Поддерживающий кадр: фото не должно давить короткий текст. */
+.p-inset--support .p-inset__caption {
+  grid-column: 1 / span 5;
+}
+
+.p-inset--support .p-inset__media {
+  grid-column: 7 / span 6;
+}
+
+.p-inset--support .p-inset__media img {
+  aspect-ratio: 4 / 3;
 }
 
 /* ---------- Текст и кадр ---------- */
@@ -488,6 +528,36 @@ html {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+/* Длинный отраслевой текст: кадр крупнее и на одной линии с заголовком. */
+.p-split--editorial {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.p-split--editorial .p-split__media img {
+  aspect-ratio: 3 / 4;
+}
+
+/* Компактный смысловой блок в пределах одного экрана. */
+.p-split--compact {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.p-split--compact .p-split__body {
+  gap: 18px;
+}
+
+.p-split--compact .p-split__media img {
+  aspect-ratio: 4 / 5;
+}
+
+.p-split--compact .h-points {
+  margin-top: 4px;
 }
 
 /* ---------- Колонки текстовых блоков ---------- */
@@ -534,7 +604,7 @@ html {
   margin: 0;
   font-size: 17px;
   line-height: 1.62;
-  color: var(--muted);
+  color: var(--text);
   max-width: 46ch;
 }
 
@@ -665,11 +735,87 @@ html {
 
 .p-hero--tight .p-hero__text {
   grid-column: 1 / span 9;
-  padding-block: 24px 44px;
+  padding-block: 24px 28px;
+}
+
+.p-hero--tight + .h-section {
+  padding-top: 40px;
 }
 
 .p-hero--tight .p-hero__inner {
   border-bottom: 1px solid var(--line);
+}
+
+/* Новости: шапка страницы и ведущий материал — один editorial-экран. */
+.p-hero--news {
+  padding-block: 8px 20px;
+}
+
+.p-hero--news .p-hero__inner {
+  align-items: start;
+  row-gap: 16px;
+}
+
+.p-hero--news .p-hero__text {
+  grid-column: 1 / span 12;
+  padding-block: 0;
+  gap: 6px;
+}
+
+.p-hero--news .p-hero__title {
+  max-width: none;
+  font-size: clamp(34px, 3.4vw, 44px);
+  line-height: 1.12;
+}
+
+.p-hero--news .h-eyebrow {
+  font-size: 13px;
+}
+
+.p-hero--news .p-hero__lead {
+  max-width: 68ch;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.p-hero--news .p-story {
+  grid-column: 1 / -1;
+}
+
+.p-hero--news .p-story__body {
+  gap: 12px;
+  padding-top: 2px;
+}
+
+.p-hero--news .p-story__title {
+  max-width: 24ch;
+}
+
+/* Об Ассоциации: текст и кадр в одной линии, без свисающего пояса. */
+.p-hero--pair .p-hero__inner {
+  align-items: start;
+}
+
+.p-hero--pair .p-hero__text {
+  grid-column: 1 / span 5;
+  padding-block: 28px 36px;
+  gap: 18px;
+}
+
+.p-hero--pair .p-hero__media {
+  grid-column: 6 / span 7;
+}
+
+.p-hero--pair .p-hero__media img {
+  aspect-ratio: 16 / 9;
+}
+
+.p-section--follow {
+  padding-block: 8px 68px;
+}
+
+.p-editorial__rest {
+  margin-top: 36px;
 }
 
 /* ---------- Малый заголовок группы ---------- */
@@ -734,7 +880,7 @@ html {
   margin: 0;
   font-size: 17px;
   line-height: 1.64;
-  color: var(--muted);
+  color: var(--text);
 }
 
 /* ---------- Текст и узкий вертикальный кадр ---------- */
@@ -845,7 +991,7 @@ html {
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .p-lib__side {
@@ -949,7 +1095,7 @@ html {
   margin: 0;
   font-size: 17px;
   line-height: 1.64;
-  color: var(--muted);
+  color: var(--text);
 }
 
 /*
@@ -977,6 +1123,7 @@ html {
   margin: 0;
   font-size: 17px;
   line-height: 1.72;
+  color: var(--text);
   text-align: justify;
   overflow-wrap: anywhere;
   hyphens: auto;
@@ -1000,7 +1147,9 @@ html {
 .p-article > ul + .h-text,
 .p-article > ol + p,
 .p-article > blockquote + p,
-.p-article > table + p {
+.p-article > table + p,
+.p-article > figure + p,
+.p-article .p-stories__media + .p-stories__text {
   text-indent: 0;
 }
 
@@ -1019,6 +1168,7 @@ html {
 .p-article > ol > li {
   margin: 0 0 0.45em;
   line-height: 1.72;
+  color: var(--text);
   text-align: left;
 }
 
@@ -1097,15 +1247,11 @@ html {
 .p-stories__item {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 7fr) minmax(0, 3fr);
-  column-gap: 48px;
-  row-gap: 22px;
+  column-gap: 40px;
+  row-gap: 18px;
   align-items: start;
-  padding: 40px 0 44px;
+  padding: 28px 0 30px;
   border-top: 1px solid var(--line);
-}
-
-.p-stories__item--broad {
-  grid-template-columns: minmax(0, 2fr) minmax(0, 6fr) minmax(0, 4fr);
 }
 
 .p-stories__item--article {
@@ -1117,13 +1263,14 @@ html {
 }
 
 .p-stories__item--article .p-stories__title {
-  margin-bottom: 1.1em;
+  margin-bottom: 0.85em;
 }
 
 .p-stories__item--article .p-stories__media {
-  grid-column: 2;
-  max-width: 280px;
-  margin-top: 1.25em;
+  grid-column: auto;
+  max-width: 42rem;
+  width: 100%;
+  margin: 0 0 1.15em;
 }
 
 .p-stories__body {
@@ -1141,7 +1288,7 @@ html {
   margin: 0;
   font-size: 17px;
   line-height: 1.64;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .p-stories__detail {
@@ -1159,12 +1306,12 @@ html {
 
 .p-stories__media img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-.p-stories__item--broad .p-stories__media img {
-  aspect-ratio: 3 / 2;
+.p-stories__item--article .p-stories__media img {
+  aspect-ratio: 16 / 9;
 }
 
 /* ---------- Контактные действия ---------- */
@@ -1319,7 +1466,7 @@ a.p-contact__value:focus-visible {
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
-  color: var(--muted);
+  color: var(--text);
   max-width: 40ch;
 }
 
@@ -1405,7 +1552,7 @@ a.p-contact__value:focus-visible {
   margin: 0;
   font-size: 16px;
   line-height: 1.62;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .p-paths__link {
@@ -1612,7 +1759,7 @@ a.p-contact__value:focus-visible {
 
 @media (max-width: 1040px) {
   .p-main .h-section {
-    padding-block: 76px;
+    padding-block: 56px;
   }
 
   .p-hero__inner {
@@ -1634,9 +1781,35 @@ a.p-contact__value:focus-visible {
 
   .p-hero--offset .p-hero__media,
   .p-hero--belt .p-hero__media,
-  .p-hero--split .p-hero__media {
+  .p-hero--split .p-hero__media,
+  .p-hero--pair .p-hero__media {
     grid-column: 1;
-    margin-top: 40px;
+    margin-top: 28px;
+  }
+
+  .p-hero--pair .p-hero__text {
+    grid-column: 1;
+    padding-block: 20px 0;
+  }
+
+  .p-split--editorial,
+  .p-split--compact {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .p-inset--wide .p-inset__media,
+  .p-inset--support .p-inset__media {
+    grid-column: 1 / span 12;
+  }
+
+  .p-inset--support .p-inset__caption,
+  .p-inset--wide .p-inset__caption {
+    grid-column: 1 / span 12;
+  }
+
+  .p-inset--support .p-inset__media img {
+    aspect-ratio: 16 / 10;
   }
 
   .p-hero--split .p-hero__media img {
@@ -1711,7 +1884,7 @@ a.p-contact__value:focus-visible {
 
 @media (max-width: 760px) {
   .p-main .h-section {
-    padding-block: 64px;
+    padding-block: 48px;
   }
 
   .p-hero {
@@ -1827,7 +2000,8 @@ a.p-contact__value:focus-visible {
   .p-hero__text,
   .p-hero--offset .p-hero__media,
   .p-hero--belt .p-hero__media,
-  .p-hero--split .p-hero__media {
+  .p-hero--split .p-hero__media,
+  .p-hero--pair .p-hero__media {
     grid-column: 1;
   }
 
@@ -1944,10 +2118,9 @@ a.p-contact__value:focus-visible {
   }
 
   .p-stories__item,
-  .p-stories__item--broad,
   .p-stories__item--article {
     grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
-    column-gap: 36px;
+    column-gap: 28px;
   }
 
   .p-stories__meta {
@@ -1959,8 +2132,21 @@ a.p-contact__value:focus-visible {
     grid-column: 2;
   }
 
+  .p-stories__item--article .p-stories__media {
+    grid-column: auto;
+    max-width: none;
+  }
+
   .p-stories__media {
-    max-width: 320px;
+    max-width: 280px;
+  }
+
+  .p-hero--news .p-hero__text {
+    padding-block: 8px 0;
+  }
+
+  .p-section--follow {
+    padding-block: 8px 56px;
   }
 
   .p-contact {
@@ -2031,7 +2217,6 @@ a.p-contact__value:focus-visible {
   .p-scope,
   .p-contact,
   .p-stories__item,
-  .p-stories__item--broad,
   .p-stories__item--article {
     grid-template-columns: 1fr;
     column-gap: 0;

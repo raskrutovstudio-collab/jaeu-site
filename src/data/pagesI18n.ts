@@ -875,10 +875,6 @@ export const newsI18n = {
     'Іс-шара қорытындысы бойынша ынтымақтастық туралы екі меморандумға қол қойылды: аффинаж және стандарттау саласында, сондай-ақ зергерлік айналымды заңдастыру және контрафактіге қарсы бастамалар шеңберінде өзара іс-қимыл мәселелері бойынша.',
     'Following the event, two memoranda of cooperation were signed: on refining and standardisation, and on the legalisation of jewellery circulation and cooperation within anti-counterfeiting initiatives.'
   ),
-  'featured.imageAlt': pair(
-    'Салалық кеңеске қатысушылар келіссөз үстелінде құжаттарды талқылап отыр',
-    'Participants in an industry meeting discussing documents at a negotiating table'
-  ),
   'items.0.dateLabel': pair('2025 жылғы 9 шілде', '9 July 2025'),
   'items.0.title': pair(
     'Бұйымдарды таңбалау бойынша реттеушілік әсерді талдауды талқылау',
@@ -891,10 +887,6 @@ export const newsI18n = {
   'items.0.detail': pair(
     'Қауымдастық нарық қатысушыларына әкімшілік және қаржылық жүктеменің өсу қаупіне және басқа салаларда ұқсас таңбалауды қолдану тәжірибесіне назар аудартты. Ашық нормативтік құқықтық актілер порталында міндетті таңбалауды енгізуге қарсы 26 пікірдің 25-і айтылды.',
     'The Association drew attention to the risk of a growing administrative and financial burden on market participants and to the experience of applying similar marking in other industries. On the portal of open regulatory legal acts, 25 of the 26 comments opposed the introduction of mandatory marking.'
-  ),
-  'items.0.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
   ),
   'items.1.dateLabel': pair('2025 жылғы 2 сәуір', '2 April 2025'),
   'items.1.title': pair(
@@ -909,10 +901,6 @@ export const newsI18n = {
     'Қатысушылар айналымның ресми есептіліктен тыс елеулі үлесін және субъектілер саны мен тауар айналымы көлемі бойынша дұрыс статистиканың жоқтығын атап өтті. Қауымдастық тіркеу кезінде дұрыс ЭҚЖЖ көрсетуді міндеттеу, өнімді сынау мен сертификаттауды күшейту, айналымның адал қатысушыларын салықтық ынталандыру және саланың бірыңғай үйлестіруші органын құру туралы ұсыныстарды қолдады.',
     'Participants noted the significant share of turnover outside official reporting and the absence of reliable statistics on the number of businesses and the volume of trade. The Association supported proposals to make the correct economic activity code mandatory at registration, to strengthen product testing and certification, to provide tax incentives for honest participants in the market and to create a single coordinating body for the industry.'
   ),
-  'items.1.imageAlt': pair(
-    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
-    'A hall at an industry event: participants at tables with handout materials'
-  ),
   'items.2.dateLabel': pair('2025 жылғы 23 қаңтар', '23 January 2025'),
   'items.2.title': pair(
     'Жеңіл өнеркәсіптегі міндетті таңбалау және шағын бизнес туралы конференция',
@@ -925,10 +913,6 @@ export const newsI18n = {
   'items.2.detail': pair(
     'Талқылауға Ресей мен Қазақстан кәсіпкерлері, РФ мемлекеттік органдарының өкілдері, үкіметтік емес ұйымдар және БАҚ қатысты. Қатысушылар таңбалауды енгізудің қаржылық және техникалық шығындары, әсіресе микробизнес үшін, және талаптарды шағын бизнестің мүмкіндіктеріне бейімдеу қажеттігі туралы айтты.',
     'Entrepreneurs from Russia and Kazakhstan, representatives of Russian government authorities, non-governmental organisations and the media took part in the discussion. Participants spoke about the financial and technical costs of introducing marking, especially for micro-businesses, and about the need to adapt the requirements to the capacities of small business.'
-  ),
-  'items.2.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
   ),
   'items.3.dateLabel': pair('2024 жылғы 26 желтоқсан', '26 December 2024'),
   'items.3.title': pair(
@@ -943,10 +927,6 @@ export const newsI18n = {
     'Таңбалаудың пилоттық жобаларының қорытындылары, өнімнің өзіндік құнына әсері және қазақстандық таңбаның мәртебесін арттыру қаралды. Міндетті таңбалауды енгізуге қарсы дәлелдер ұсынылды; реттеу жүйесін пысықтау бойынша келесі қадамдар белгіленді.',
     'The results of pilot marking projects, the effect on production costs and raising the status of the Kazakhstani hallmark were considered. Arguments against introducing mandatory marking were presented; further steps to refine the regulatory system were outlined.'
   ),
-  'items.3.imageAlt': pair(
-    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
-    'A hall at an industry event: participants at tables with handout materials'
-  ),
   'items.4.dateLabel': pair('2024 жылғы 2 қазан', '2 October 2024'),
   'items.4.title': pair(
     'ҚР Сауда және интеграция министрлігіндегі кеңес',
@@ -959,10 +939,6 @@ export const newsI18n = {
   'items.4.detail': pair(
     'Әртүрлі тауар топтары үшін таңбалауды енгізу, сауданы цифрландыру және көлеңкелі экономиканы азайту талқыланды. Таңбалау туралы заңнаманы қайта қарау бойынша ұсыныстар дайындалды.',
     'The introduction of marking for various product groups, the digitalisation of trade and the reduction of the shadow economy were discussed. Proposals to revise the legislation on marking were prepared.'
-  ),
-  'items.4.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
   ),
   'items.5.dateLabel': pair('2024 жылғы 11 қыркүйек', '11 September 2024'),
   'items.5.title': pair(
@@ -977,10 +953,6 @@ export const newsI18n = {
     'Таңбалаудың экономикаға және баға өсіміне әсері, мемлекеттің бизнес-процестерге араласуы және ДСҰ мен ЕАЭО халықаралық міндеттемелерін бұзу ықтималдығы қаралды. Бизнес мүддесін қорғау туралы ҚР Президентіне үндеу дайындалды.',
     'The effect of marking on the economy and price growth, state intervention in business processes and possible breaches of WTO and EAEU international commitments were considered. An appeal to the President of the Republic of Kazakhstan asking to protect the interests of business was prepared.'
   ),
-  'items.5.imageAlt': pair(
-    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
-    'A hall at an industry event: participants at tables with handout materials'
-  ),
   'items.6.dateLabel': pair('2024 жылғы 10 қыркүйек', '10 September 2024'),
   'items.6.title': pair(
     '«Атамекен» ҰКП-дағы кеңес',
@@ -993,10 +965,6 @@ export const newsI18n = {
   'items.6.detail': pair(
     'Міндетті таңбалаудың зергерлік бизнеске әсері, шағын және орта бизнеске жүктеме және бақылаудың қайталануы талқыланды. Қатысушылардың көпшілігі міндетті таңбалауды енгізуге қарсы шықты; балама шаралар ұсынылды.',
     'The effect of mandatory marking on the jewellery business, the burden on small and medium-sized businesses and the duplication of control were discussed. Most participants opposed the introduction of mandatory marking; alternative measures were proposed.'
-  ),
-  'items.6.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
   ),
   'items.7.dateLabel': pair('2024 жылғы 20 маусым', '20 June 2024'),
   'items.7.title': pair(
@@ -1011,10 +979,6 @@ export const newsI18n = {
     'Санкциялардың қазақстандық өнім экспортына әсері, шетелдік өндірушілердің демпингі және тұтынушылардың құқықтарын қорғау саласындағы ЕАЭО заңнамасын біріздендіру қаралды. Қатысушылар мемлекеттік органдармен диалогты жалғастыруға дайын екенін білдірді; сауда кедергілерін жою шаралары ұсынылды.',
     'The effect of sanctions on Kazakhstani exports, dumping by foreign producers and the unification of EAEU legislation on consumer protection were considered. Participants expressed readiness to continue dialogue with government authorities; measures to remove trade barriers were proposed.'
   ),
-  'items.7.imageAlt': pair(
-    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
-    'A hall at an industry event: participants at tables with handout materials'
-  ),
   'items.8.dateLabel': pair('2024 жылғы 18 маусым', '18 June 2024'),
   'items.8.title': pair(
     'Зергерлік бұйымдарды таңбалау бойынша қоғамдық талқылау',
@@ -1027,10 +991,6 @@ export const newsI18n = {
   'items.8.detail': pair(
     'Таңбалауды енгізудің реттеушілік әсерін талдау және бақылау сәйкестендіру белгілерінің құны қаралды. Талқылау қорытындысы бойынша зергерлік бұйымдарды таңбалау орынсыз деп танылды.',
     'The regulatory impact assessment of introducing marking and the cost of control identification marks were considered. Following the discussion, the marking of jewellery items was found inexpedient.'
-  ),
-  'items.8.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
   ),
   'items.9.dateLabel': pair('2024 жылғы 12 маусым', '12 June 2024'),
   'items.9.title': pair(
@@ -1045,10 +1005,6 @@ export const newsI18n = {
     'Дәрілік заттарды таңбалауды енгізуге дайындық, бизнес-процестерді оңтайландыру және шағын бизнес үшін таңбалау шығындарын азайту талқыланды. Кәсіпкерлерге шығындарды өтеу бойынша ұсыныстар дайындалды.',
     'Readiness to introduce marking of medicines, the optimisation of business processes and reducing marking costs for small business were discussed. Proposals to compensate entrepreneurs for the costs were prepared.'
   ),
-  'items.9.imageAlt': pair(
-    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
-    'A hall at an industry event: participants at tables with handout materials'
-  ),
   'items.10.dateLabel': pair('2024 жылғы 6 маусым', '6 June 2024'),
   'items.10.title': pair(
     '«Атамекен» ҰКП отырысы',
@@ -1061,10 +1017,6 @@ export const newsI18n = {
   'items.10.detail': pair(
     'Дәрілік заттар мен тауарларды таңбалауды енгізу, қоймадағы қорларды талдау және таңбалаудың бизнеске әсерін бағалау қаралды. Таңбалау қағидаларына техникалық түзетулер бойынша шешімдер қабылданды.',
     'The introduction of marking for medicines and goods, an analysis of warehouse stocks and an assessment of the effect of marking on business were considered. Decisions were taken on technical adjustments to the marking rules.'
-  ),
-  'items.10.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
   ),
   'items.11.dateLabel': pair('2024 жылғы 5 маусым', '5 June 2024'),
   'items.11.title': pair(
@@ -1079,10 +1031,6 @@ export const newsI18n = {
     'Зергерлік бұйымдарды лицензиялау және сертификаттау проблемалары, мемлекеттік бақылау тетіктерінің кемшіліктері және тұтынушылардың құқықтарын қорғау саласындағы ЕАЭО заңнамасын біріздендіру қажеттігі қаралды. Нормативтік актілерге өзгерістер енгізу ұсыныстары шығарылды; билік органдарымен диалог бастамашылық етілді.',
     'Problems of licensing and certification of jewellery items, shortcomings of state control mechanisms and the need to unify EAEU legislation on consumer protection were considered. Proposals to amend regulatory acts were put forward; a dialogue with the authorities was initiated.'
   ),
-  'items.11.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
-  ),
   'items.12.dateLabel': pair('2024 жылғы 16 мамыр', '16 May 2024'),
   'items.12.title': pair(
     'Өңірлік деңгейдегі қоғамдық қабылдау',
@@ -1096,10 +1044,6 @@ export const newsI18n = {
     'Зергерлік бизнестің өңірлік проблемалары, таңбалау мен сертификаттаудағы әкімшілік кедергілер және шағын және орта кәсіпорындардың қаржы құралдарына қолжетімділігі қаралды. Анықталған проблемаларды жою бойынша ұсынымдар ұсынылды; нормативтік актілерді түзету қажеттігі атап өтілді.',
     'Regional problems of the jewellery business, administrative barriers in marking and certification, and access of small and medium-sized enterprises to financial instruments were considered. Recommendations to remove the identified problems were presented; the need to adjust regulatory acts was noted.'
   ),
-  'items.12.imageAlt': pair(
-    'Салалық іс-шара залы: қатысушылар таратылатын материалдар қойылған үстелдерде',
-    'A hall at an industry event: participants at tables with handout materials'
-  ),
   'items.13.dateLabel': pair('2024 жылғы 2 мамыр', '2 May 2024'),
   'items.13.title': pair(
     'ҚР Сауда және интеграция министрлігіндегі кеңес',
@@ -1112,10 +1056,6 @@ export const newsI18n = {
   'items.13.detail': pair(
     'Тауарларды таңбалау жүйесін ТЗТ АЖ-мен интеграциялау, мотор майын таңбалау бойынша пилоттық жоба және зергерлік бұйымдарды таңбалау ұсыныстары қаралды. Интеграцияны аяқтау кестесі бекітілді; бизнестің ұсыныстары қабылданды.',
     'The integration of the goods marking system with the IS MPT, a pilot project on the marking of motor oil and proposals on the marking of jewellery items were considered. A schedule for completing the integration was approved; business proposals were accepted.'
-  ),
-  'items.13.imageAlt': pair(
-    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
-    'Close-up: a specialist examining a ring through a loupe'
   ),
   'cta.h2': pair('Іс-шаралардың толық материалдары', 'Full materials of the events'),
   'cta.text': pair(

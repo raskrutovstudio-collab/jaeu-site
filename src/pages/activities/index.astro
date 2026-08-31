@@ -82,7 +82,7 @@ const [firstHalf, secondHalf] = [
           </article>
         ))}
 
-        <div class="p-inset">
+        <div class="p-inset p-inset--support">
           <p class="p-inset__caption" data-rise="3" data-i18n="directions.mediaCaption">{activities.directions.mediaCaption}</p>
           <figure class="p-inset__media" data-reveal-media>
             <img
@@ -123,21 +123,7 @@ const [firstHalf, secondHalf] = [
 
   <section class="h-section h-section--stone" aria-labelledby="activities-tasks" data-reveal>
     <div class="h-shell">
-      <div class="p-split">
-        <figure class="p-split__media" data-reveal-media>
-          <img
-            src={asset('page-activities-balance-1000.webp')}
-            srcset={`${asset('page-activities-balance-600.webp')} 600w, ${asset('page-activities-balance-1000.webp')} 1000w`}
-            sizes="(min-width: 1041px) 460px, 100vw"
-            width="1000"
-            height="750"
-            alt={activities.tasks.imageAlt}
-            data-i18n-attrs="alt:tasks.imageAlt"
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
-
+      <div class="p-split p-split--compact">
         <div class="p-split__body">
           <h2 class="h-h2" id="activities-tasks" data-rise="1" data-i18n="tasks.h2">{activities.tasks.h2}</h2>
           <hr class="h-rule" />
@@ -152,6 +138,20 @@ const [firstHalf, secondHalf] = [
             ))}
           </ul>
         </div>
+
+        <figure class="p-split__media" data-reveal-media>
+          <img
+            src={asset('page-activities-balance-1000.webp')}
+            srcset={`${asset('page-activities-balance-600.webp')} 600w, ${asset('page-activities-balance-1000.webp')} 1000w`}
+            sizes="(min-width: 1041px) 420px, 100vw"
+            width="1000"
+            height="1250"
+            alt={activities.tasks.imageAlt}
+            data-i18n-attrs="alt:tasks.imageAlt"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
     </div>
   </section>
