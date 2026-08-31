@@ -259,6 +259,10 @@ html {
   gap: 26px;
 }
 
+.p-spread__body.p-article {
+  gap: 0;
+}
+
 /* ---------- Крупные текстовые опоры ---------- */
 
 .p-pillars {
@@ -293,9 +297,9 @@ html {
 .p-pillars__text {
   margin: 0;
   font-size: 17px;
-  line-height: 1.62;
+  line-height: 1.68;
   color: var(--muted);
-  max-width: 46ch;
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Асимметричная визуальная связка ---------- */
@@ -414,8 +418,9 @@ html {
 .p-dirs__text {
   margin: 0;
   font-size: 17px;
-  line-height: 1.64;
+  line-height: 1.68;
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .p-dirs__practice {
@@ -948,19 +953,110 @@ html {
 }
 
 /*
+  Длинные публикации: ширина внутри оболочки 1240 px, не на весь viewport.
+  77rem ≈ 1232 px — почти вся сетка, с небольшим запасом от края контейнера.
+*/
+.p-article,
+.p-story__continue {
+  width: 100%;
+  max-width: 77rem;
+}
+
+.p-article {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.p-article > p,
+.p-article > .h-text,
+.p-article .p-story__text,
+.p-article .p-stories__text,
+.p-article .p-stories__result {
+  max-width: none;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.72;
+  text-align: justify;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.p-article > p + p,
+.p-article > .h-text + .h-text,
+.p-article .p-story__text + .p-story__text,
+.p-article .p-stories__text + .p-stories__text {
+  margin-top: 0.85em;
+  text-indent: 1.5em;
+}
+
+.p-article > h2 + p,
+.p-article > h2 + .h-text,
+.p-article > h3 + p,
+.p-article > h3 + .h-text,
+.p-article > hr + p,
+.p-article > hr + .h-text,
+.p-article > ul + p,
+.p-article > ul + .h-text,
+.p-article > ol + p,
+.p-article > blockquote + p,
+.p-article > table + p {
+  text-indent: 0;
+}
+
+.p-article > ul,
+.p-article > ol {
+  margin: 1.1em 0 0;
+  padding-left: 1.35em;
+}
+
+.p-article > ul + p,
+.p-article .p-stories__result {
+  margin-top: 1.1em;
+}
+
+.p-article > ul > li,
+.p-article > ol > li {
+  margin: 0 0 0.45em;
+  line-height: 1.72;
+  text-align: left;
+}
+
+.p-article a {
+  color: var(--navy-deep);
+  text-underline-offset: 0.18em;
+}
+
+.p-article strong,
+.p-article em {
+  color: var(--text);
+}
+
+.p-article blockquote {
+  margin: 0;
+  padding: 0 0 0 1.1em;
+  border-left: 2px solid var(--gold);
+  font-style: italic;
+}
+
+/*
   Продолжение материала — отдельный блок на ширину контейнера: узкая колонка
   справа держит только вступление, полный текст не растягивается от края до края.
 */
 .p-story__continue {
   grid-column: 1 / -1;
-  width: 100%;
-  max-width: 70rem;
   margin-top: 8px;
   padding-top: 28px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
+  align-items: stretch;
+  gap: 0;
+}
+
+.p-story__continue.p-article .p-story__text + .p-story__text,
+.p-story__continue.p-article .p-story__text + ul,
+.p-story__continue.p-article ul + .p-story__text {
+  margin-top: 1.1em;
 }
 
 .p-story__continue::before {
@@ -1010,6 +1106,24 @@ html {
 
 .p-stories__item--broad {
   grid-template-columns: minmax(0, 2fr) minmax(0, 6fr) minmax(0, 4fr);
+}
+
+.p-stories__item--article {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 10fr);
+}
+
+.p-stories__item--article .p-stories__body.p-article {
+  gap: 0;
+}
+
+.p-stories__item--article .p-stories__title {
+  margin-bottom: 1.1em;
+}
+
+.p-stories__item--article .p-stories__media {
+  grid-column: 2;
+  max-width: 280px;
+  margin-top: 1.25em;
 }
 
 .p-stories__body {
@@ -1830,7 +1944,8 @@ a.p-contact__value:focus-visible {
   }
 
   .p-stories__item,
-  .p-stories__item--broad {
+  .p-stories__item--broad,
+  .p-stories__item--article {
     grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
     column-gap: 36px;
   }
@@ -1886,6 +2001,28 @@ a.p-contact__value:focus-visible {
   }
 }
 
+/*
+  На 768 px justify даёт заметные разрывы в кириллице: выравнивание по левому
+  краю включается раньше, чем ломается сетка страницы.
+*/
+@media (max-width: 900px) {
+  .p-article > p,
+  .p-article > .h-text,
+  .p-article .p-story__text,
+  .p-article .p-stories__text,
+  .p-article .p-stories__result {
+    text-align: left;
+    hyphens: none;
+  }
+
+  .p-article > p + p,
+  .p-article > .h-text + .h-text,
+  .p-article .p-story__text + .p-story__text,
+  .p-article .p-stories__text + .p-stories__text {
+    text-indent: 1em;
+  }
+}
+
 @media (max-width: 760px) {
   .p-hero--tight .p-hero__text {
     padding-block: 16px 32px;
@@ -1894,7 +2031,8 @@ a.p-contact__value:focus-visible {
   .p-scope,
   .p-contact,
   .p-stories__item,
-  .p-stories__item--broad {
+  .p-stories__item--broad,
+  .p-stories__item--article {
     grid-template-columns: 1fr;
     column-gap: 0;
   }

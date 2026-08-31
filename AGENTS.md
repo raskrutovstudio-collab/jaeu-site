@@ -5,6 +5,7 @@
 - Existing `jaeu.kz/page1` is not a code or design source. Preserve only verified information and approved menu meanings.
 - Materials from the supplied JAEU archive are content sources, but conflicting facts must be confirmed before publication.
 - Never invent members, partners, achievements, dates, contacts, services, statistics, offices, awards or legal claims.
+- Editorial rules for customer copy: `docs/CONTENT-GUIDELINES.md`. Do not shorten, simplify or rewrite industry texts without an explicit instruction.
 
 ## Architecture
 

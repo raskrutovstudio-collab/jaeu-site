@@ -53,7 +53,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   <section class="h-section h-section--white" aria-labelledby="council-expertise" data-reveal>
     <div class="h-shell">
       <div class="p-split">
-        <div class="p-split__body">
+        <div class="p-split__body p-article">
           <h2 class="h-h2" id="council-expertise" data-rise="1" data-i18n="expertise.h2">{council.expertise.h2}</h2>
           <hr class="h-rule" />
           {council.expertise.paragraphs.map((text, index) => (
@@ -74,6 +74,20 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
             decoding="async"
           />
         </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-section h-section--white" aria-labelledby="council-compliance" data-reveal>
+    <div class="h-shell">
+      <div class="p-head">
+        <h2 class="h-h2" id="council-compliance" data-rise="1">{council.compliance.h2}</h2>
+        <hr class="h-rule" />
+      </div>
+      <div class="p-article">
+        {council.compliance.paragraphs.map((text) => (
+          <p>{text}</p>
+        ))}
       </div>
     </div>
   </section>

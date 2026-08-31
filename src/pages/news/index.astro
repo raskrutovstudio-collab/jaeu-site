@@ -15,6 +15,21 @@ const thumb = 400;
 const featuredLead = news.featured.paragraphs[0];
 const featuredRest = news.featured.paragraphs.slice(1);
 
+type NewsItem = (typeof news.items)[number];
+
+const newsFields = (item: NewsItem) => ({
+  article: 'article' in item ? Boolean(item.article) : false,
+  paragraphs: 'paragraphs' in item ? item.paragraphs : undefined,
+  points: 'points' in item ? item.points : undefined,
+  text: 'text' in item ? item.text : undefined,
+  result: 'result' in item ? item.result : undefined
+});
+
+const itemDescription = (item: NewsItem) => {
+  const fields = newsFields(item);
+  return fields.paragraphs?.[0] || fields.text || '';
+};
+
 const itemsByYear = [...new Set(news.items.map((item) => item.date.slice(0, 4)))].map((year) => ({
   year,
   entries: news.items
@@ -49,7 +64,7 @@ const newsSchema = {
         '@type': 'NewsArticle',
         headline: item.title,
         datePublished: item.date,
-        description: item.text,
+        description: itemDescription(item),
         inLanguage: 'ru',
         url: canonical
       }
@@ -109,12 +124,21 @@ const newsSchema = {
           <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
           <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
           <hr class="h-rule" />
-          <p class="p-story__text" data-i18n="featured.paragraphs.0">{featuredLead}</p>
+          <p class="p-story__text">{featuredLead}</p>
         </div>
 
-        <div class="p-story__continue">
-          {featuredRest.map((text, index) => (
-            <p class="p-story__text" data-i18n={`featured.paragraphs.${index + 1}`}>{text}</p>
+        <div class="p-story__continue p-article">
+          {featuredRest.map((text) => (
+            <>
+              <p class="p-story__text">{text}</p>
+              {news.featured.points && text.trim().endsWith(':') && (
+                <ul>
+                  {news.featured.points.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              )}
+            </>
           ))}
         </div>
       </article>
@@ -134,17 +158,38 @@ const newsSchema = {
         <section class="p-stories__group" aria-labelledby={`news-year-${group.year}`}>
           <h2 class="p-stories__year" id={`news-year-${group.year}`}>{group.year}</h2>
           <ul class="p-stories" data-rise="1">
-            {group.entries.map(({ item, index }) => (
+            {group.entries.map(({ item, index }) => {
+              const fields = newsFields(item);
+              return (
               <li>
-                <article class="p-stories__item">
+                <article class:list={['p-stories__item', fields.article && 'p-stories__item--article']}>
                   <div class="p-stories__meta">
                     <time class="p-date" datetime={item.date} data-i18n={`items.${index}.dateLabel`}>{item.dateLabel}</time>
                   </div>
 
-                  <div class="p-stories__body">
+                  <div class:list={['p-stories__body', 'p-article']}>
                     <h3 class="h-h3 p-stories__title" data-i18n={`items.${index}.title`}>{item.title}</h3>
-                    <p class="p-stories__text" data-i18n={`items.${index}.text`}>{item.text}</p>
-                    <p class="p-stories__detail" data-i18n={`items.${index}.detail`}>{item.detail}</p>
+                    {fields.paragraphs?.map((text) => (
+                      <>
+                        <p class="p-stories__text">{text}</p>
+                        {fields.points && text.trim().endsWith(':') && (
+                          <ul>
+                            {fields.points.map((point) => (
+                              <li>{point}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </>
+                    ))}
+                    {fields.text && !fields.paragraphs && <p class="p-stories__text">{fields.text}</p>}
+                    {fields.points && !fields.paragraphs && (
+                      <ul>
+                        {fields.points.map((point) => (
+                          <li>{point}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {fields.result && <p class="p-stories__result">{fields.result}</p>}
                   </div>
 
                   <figure class="p-stories__media" data-reveal-media>
@@ -162,7 +207,8 @@ const newsSchema = {
                   </figure>
                 </article>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </section>
       ))}

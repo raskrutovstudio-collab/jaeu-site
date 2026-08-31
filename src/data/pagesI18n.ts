@@ -89,12 +89,12 @@ export const aboutI18n = {
   ),
   'purpose.h2': pair('Қауымдастық не үшін бар', 'Why the Association exists'),
   'purpose.paragraphs.0': pair(
-    'Қауымдастықтың мақсаты — ЕАЭО мемлекеттерінің аумағындағы зергерлік бизнес қатысушыларының мүддесін қорғау үшін тиімді және сындарлы алаң құру, сондай-ақ қатысушылары бизнесті жауапкершілікпен жүргізетін, әділ бәсеке қағидаларын ұстанатын және өз беделін бағалайтын іскерлік ортаны дамыту.',
-    'The purpose of the Association is to create an effective and constructive platform for protecting the interests of jewellery business participants across the EAEU states, and to develop a business environment whose participants conduct business responsibly, follow the rules of fair competition and value their reputation.'
+    'Еуразия Экономикалық одағының зергерлер қауымдастығы – ЕАЭО аумағында зергерлік бизнестің мүдделерін білдіретін мемлекеттік емес, коммерциялық емес ұйым. Біз ЕАЭО аумағында зергерлік істі дамытуға немқұрайлы қарамайтын, осы күрделі шаруаға өзінің жеке үлесін қосуға дайын жауапты зергерлер қауымдастығын құрып жатырмыз. Біз заңнаманы жетілдіру, серіктестерді іздеу мақсатында тәжірибелік қадамдарды уақтылы жасауға; ЕАЭО және шетелдік елдердің зергерлік секторын дамытудағы өзекті тенденцияларды айқындауға және енгізуге; Қауымдастық бастамаларын талқылау үшін билік өкілдерімен диалог жүргізуге ұмтыламыз.',
+    'The Jewellers Association of the Eurasian Economic Union is a non-governmental, non-profit organization representing the interests of the jewelry business within the EAEU. We are building a community of responsible jewelers who care about the development of the industry in the EAEU and are willing to contribute personally to this challenging endeavor. We aim to take timely practical steps to improve legislation, seek out partnerships, identify and implement current development trends within the jewelry sector in both the EAEU and abroad, and establish dialogue with government authorities to discuss the Association’s initiatives.'
   ),
   'purpose.paragraphs.1': pair(
-    'Жеке бағыт — қымбат металдар мен қымбат тастар саласында қоғамдық бақылау алаңын қалыптастыру.',
-    'A separate area of work is building a platform for public oversight in the field of precious metals and precious stones.'
+    'Біздің мақсат – ЕАЭО мемлекеттерінің аумағында зергерлік бизнеске қатысушылардың мүдделерін қорғауға арналған тиімді және құрылымды платформа жасау, сондай-ақ қатысушылары бизнес жүргізуге жауапкершілікпен қарайтын, әділетті бәсекелестік ережелерін ұстанатын және өз беделіне қамқорлықпен қарайтын іскерлік ортаны дамыту. Оған қоса біз бағалы металлдар мен бағалы тастар саласында қоғамдық бақылау жүргізуге арналған тиімді алаң жасауға бағдар ұстап отырмыз.',
+    'Our goal is to create an effective and constructive platform for protecting the interests of jewelry business participants across EAEU member states, as well as to develop a business environment rooted in responsibility, fair competition, and strong reputations. We also aim to establish an efficient platform for public oversight in the field of precious metals and gemstones.'
   ),
   'purpose.points.0.title': pair('Ортақ алаң', 'A shared platform'),
   'purpose.points.0.text': pair(
@@ -112,29 +112,32 @@ export const aboutI18n = {
     'The community is formed of those who follow the rules of fair competition and value their reputation.'
   ),
   'role.h2': pair('Кәсіби қоғамдастықтағы рөлі', 'Role in the professional community'),
-  'role.lead': pair(
-    'Қауымдастық тұрақты жұмыс істейді және оның материалдарында тіркелген төрт тірекке сүйенеді.',
-    'The Association works continuously on four pillars, each of them set out in its materials.'
-  ),
-  'role.pillars.0.title': pair('Мүдделерді білдіру', 'Representing interests'),
+  'role.lead': pair('Біздің негізгі қызмет бағыттарымыз:', 'Our core activities:'),
+  'role.pillars.0.title': pair('Диалог алаңын ұйымдастыру', 'Establishing a dialogue platform'),
   'role.pillars.0.text': pair(
-    'Қауымдастық зергерлік бизнес қатысушылары, мемлекеттік органдар, жергілікті өзін-өзі басқару органдары, ұлттан жоғары ұйымдар және басқа коммерциялық және коммерциялық емес құрылымдар арасында ашық диалог құрады.',
-    'The Association builds open dialogue between jewellery business participants, government authorities, local self-government bodies, supranational organisations and other commercial and non-commercial structures.'
+    'Біз зергерлік бизнеске қатысушылар, мемлекеттік органдар, жергілікті өзін-өзі басқару органдары, ұлттық органдардан жоғары тұратын ұйымдар мен басқа коммерциялық және коммерциялық емес құрылымдардың арасында ашық диалог жасау және қолдау бағытында белсенді жұмыс істеп келеміз. Біздің мақсат – барлық мүдделі тараптар арасында тиімді өзара әрекеттесу және тәжірибе алмасу жолдарын қамтамасыз ету. Осылайша, Қауымдастық басқа мүдделі қатысушылармен бірлесе отырып, Қазақстан Республикасында зергерлік бұйымдарды таңбалау жүйесін енгізу үрдісін оны осындай жүйелерді шетелде қолдану тәжірибесін ескере отырып толықтыру қажеттігін негізге алып, кейінге қалдыра алды.',
+    'We actively work to build and maintain open dialogue between jewelry business participants, government agencies, local authorities, supranational organizations, and other commercial and non-profit organizations. Our task is to ensure effective interaction and exchange of experience between all stakeholders. For example, the Association, together with other stakeholders, successfully postponed the implementation of jewelry marking systems in Kazakhstan to allow for adjustments based on international best practices.'
   ),
-  'role.pillars.1.title': pair('Бірыңғай ашық нарық', 'A single open market'),
+  'role.pillars.1.title': pair(
+    'Бірыңғай ашық нарықты ұйымдастыруға көмек',
+    'Assistance in organizing a unified open market'
+  ),
   'role.pillars.1.text': pair(
-    'Қауымдастық ұлттық реттеушілермен және Еуразиялық экономикалық комиссиямен өзара іс-қимыл жасай отырып, ЕАЭО-ға қатысушы мемлекеттер арасында зергерлік бизнес үшін бірыңғай ашық нарық ұйымдастыруға жәрдемдеседі.',
-    'The Association supports the organisation of a single open market for the jewellery business between the EAEU member states, working with national regulators and the Eurasian Economic Commission.'
+    'Біздің Қауымдастықтың негізгі мақсаттарының бірі – ЕАЭО қатысушы мемлекеттердің арасында зергерлік бизнеске арналған бірыңғай ашық нарықты жасауға көмек көрсету. Біз кедергілерді алып тастап, тауарлар мен қызметтерді еркін алмасуға арналған жағдай жасауға тырысамыз, ол саланы дамытуға және бизнеске арналған мүмкіндіктерді арттыруға септігін тигізеді. Ол үшін біз ЕАЭО мүше мемлекеттердің ұлттық реттеуші органдарымен де, Еуразия экономикалық комиссиясымен де, сондай-ақ бизнес көлеміне тәуелсіз түрде нарыққа қатысушы зергерлермен де тікелей өзара әрекеттесудеміз.',
+    'One of our key goals is to promote the creation of a unified open market for the jewelry business among EAEU member states. We strive to remove barriers and enable the free exchange of goods and services, which boosts industry growth and business opportunities. For this purpose, we engage with both the national regulators of the EAEU member states and the Eurasian Economic Commission, as well as directly with jewelers – market participants, regardless of the size of their business.'
   ),
   'role.pillars.2.title': pair('Құқықтық сараптама', 'Legal expertise'),
   'role.pillars.2.text': pair(
-    'Қауымдастық нормативтік құқықтық актілердің жобаларын қарайды және кәсіпкерлік мүддесіне қатысты реттеу саясатының консультативтік құжаттарын зерделейді.',
-    'The Association reviews draft regulatory legal acts and studies consultative documents on regulatory policy that affect the interests of business.'
+    '2021 жылдың наурыз айынан бастап Қауымдастық Солтүстік Қазақстан облысы Әкімдігінің жанындағы Кәсіпкерлік мәселелері жөніндегі сарапшылар кеңесі мүшелерінің қатарына кірген болатын. Сарапшылар кеңесіндегі жұмыс аясында Қауымдастық кәсіпкерлік мүдделерін қозғайтын нормативтік-құқықтық актілердің жобаларын, мемлекеттік жоспарлау жүйелері саласындағы құқықтық актілердің жобаларын, Қазақстан Республикасының халықаралық келісімшарт жобаларын, сондай-ақ Қазақстан Республикасы қатысуды жоспарлап отырған халықаралық келісімшарттарды қарастырумен айналысады. Оған қоса Қауымдастық мемлекеттік органдар әзірлеген және ұсынған реттеушілік саясатқа қатысты консультативтік құжаттарды оларды бұқаралық ақпарат құралдарында, оның ішінде мемлекеттік органдардың ресми интернет-ресурстарында міндетті жариялаудан (таратудан) кейін зерделеп отырады.',
+    'The Association has been a member of the Expert Council on Entrepreneurship under the Akimat of the North Kazakhstan Region since March 2021. As part of its work in the Expert Council, the Association reviews draft regulatory legal acts, draft legal acts in the field of the state planning system, draft international treaties of the Republic of Kazakhstan, as well as international treaties to which the Republic of Kazakhstan intends to become a party, affecting the interests of entrepreneurship. The Association also studies advisory regulatory policy documents developed and submitted by government agencies after their mandatory publication (dissemination) in the media, including the official Internet resources of government agencies.'
   ),
-  'role.pillars.3.title': pair('Қоғамдық бақылау', 'Public oversight'),
+  'role.pillars.3.title': pair(
+    'Бағалы металлдар мен бағалы тастар нарығына қатысушылармен өзара әрекеттесу',
+    'Cooperation with precious metals and gems market participants'
+  ),
   'role.pillars.3.text': pair(
-    'Қауымдастық қымбат металдар мен қымбат тастардың айналымы саласында қоғамдық бақылау алаңын дамытады.',
-    'The Association develops a platform for public oversight in the circulation of precious metals and precious stones.'
+    'Қауымдастық ЕАЭО аумағында да, одан тыс жерлерде де бағалы металлдар мен бағалы тастар секторына қатысушылардың басқа бірлестіктерімен ауқымды түрде өзара әрекеттесуге дайын. Біз CIBJO, Зергерлер қауымдастығы, «Аффинажды зауыттар бірлестігі» қауымдастығы, Еділ-Вятка аймағының зергерлер гильдиясы, «Тау-Кен Алтын» ЖШС және басқа қауымдастықтармен белсенді қызметтес болып келеміз.',
+    'The Association actively collaborates with other unions and associations in the precious metals and gemstones sector both within and outside the EAEU. Our partners include CIBJO, the Jewellers Association, Refining Plants Association, the Guild of Jewellers of the Volga-Vyatka Region, Tau-Ken Altyn LLP, and others.'
   ),
   'visual.asideTitle': pair('Күн тәртібін практика қалыптастырады', 'Practice shapes the agenda'),
   'visual.asideText': pair(
@@ -236,50 +239,36 @@ export const activitiesI18n = {
     'An open folder of documents, a jeweller’s loupe, a ring, a metal sample and a caliper on a desk'
   ),
   'directions.h2': pair('Негізгі бағыттар', 'Main areas'),
-  'directions.items.0.title': pair('Салалық диалог', 'Industry dialogue'),
+  'directions.items.0.title': pair('Диалог алаңын ұйымдастыру', 'Establishing a dialogue platform'),
   'directions.items.0.text': pair(
-    'Қауымдастық зергерлік бизнес қатысушылары, мемлекеттік органдар, жергілікті өзін-өзі басқару органдары, ұлттан жоғары ұйымдар және басқа бірлестіктер сала мәселелерін талқылайтын диалог алаңын ұйымдастырады.',
-    'The Association organises a dialogue platform where jewellery business participants, government authorities, local self-government bodies, supranational organisations and other associations discuss industry questions.'
-  ),
-  'directions.items.0.practice': pair(
-    'Іс жүзінде бұл — кеңестерге, дөңгелек үстелдерге және қоғамдық талқылауларға қатысу, онда ұстаным жеке компанияның емес, бірлестіктің атынан тұжырымдалады.',
-    'In practice this means taking part in meetings, round tables and public consultations, where a position is formulated on behalf of the association rather than a single company.'
+    'Біз зергерлік бизнеске қатысушылар, мемлекеттік органдар, жергілікті өзін-өзі басқару органдары, ұлттық органдардан жоғары тұратын ұйымдар мен басқа коммерциялық және коммерциялық емес құрылымдардың арасында ашық диалог жасау және қолдау бағытында белсенді жұмыс істеп келеміз. Біздің мақсат – барлық мүдделі тараптар арасында тиімді өзара әрекеттесу және тәжірибе алмасу жолдарын қамтамасыз ету. Осылайша, Қауымдастық басқа мүдделі қатысушылармен бірлесе отырып, Қазақстан Республикасында зергерлік бұйымдарды таңбалау жүйесін енгізу үрдісін оны осындай жүйелерді шетелде қолдану тәжірибесін ескере отырып толықтыру қажеттігін негізге алып, кейінге қалдыра алды.',
+    'We actively work to build and maintain open dialogue between jewelry business participants, government agencies, local authorities, supranational organizations, and other commercial and non-profit organizations. Our task is to ensure effective interaction and exchange of experience between all stakeholders. For example, the Association, together with other stakeholders, successfully postponed the implementation of jewelry marking systems in Kazakhstan to allow for adjustments based on international best practices.'
   ),
   'directions.items.0.link.label': pair('Қатысу хроникасы', 'Chronicle of participation'),
-  'directions.items.1.title': pair(
-    'Сараптамалық және консультациялық жұмыс',
-    'Expert and advisory work'
-  ),
+  'directions.items.1.title': pair('Құқықтық сараптама', 'Legal expertise'),
   'directions.items.1.text': pair(
-    'Қауымдастық нормативтік құқықтық актілердің жобаларын, мемлекеттік жоспарлау жүйесі саласындағы құқықтық актілердің жобаларын және кәсіпкерлік мүддесіне қатысты халықаралық шарттардың жобаларын қарайды, сондай-ақ реттеу саясатының консультативтік құжаттарын зерделейді.',
-    'The Association reviews draft regulatory legal acts, draft legal acts in the field of the state planning system and draft international treaties that affect the interests of business, and studies consultative documents on regulatory policy.'
-  ),
-  'directions.items.1.practice': pair(
-    '2021 жылғы наурыздан бастап Қауымдастық Солтүстік Қазақстан облысы Әкімдігі жанындағы Кәсіпкерлік мәселелері бойынша сарапшылар кеңесінің құрамына кіреді.',
-    'Since March 2021 the Association has been a member of the Expert Council on Entrepreneurship under the Akimat of the North Kazakhstan Region.'
+    '2021 жылдың наурыз айынан бастап Қауымдастық Солтүстік Қазақстан облысы Әкімдігінің жанындағы Кәсіпкерлік мәселелері жөніндегі сарапшылар кеңесі мүшелерінің қатарына кірген болатын. Сарапшылар кеңесіндегі жұмыс аясында Қауымдастық кәсіпкерлік мүдделерін қозғайтын нормативтік-құқықтық актілердің жобаларын, мемлекеттік жоспарлау жүйелері саласындағы құқықтық актілердің жобаларын, Қазақстан Республикасының халықаралық келісімшарт жобаларын, сондай-ақ Қазақстан Республикасы қатысуды жоспарлап отырған халықаралық келісімшарттарды қарастырумен айналысады. Оған қоса Қауымдастық мемлекеттік органдар әзірлеген және ұсынған реттеушілік саясатқа қатысты консультативтік құжаттарды оларды бұқаралық ақпарат құралдарында, оның ішінде мемлекеттік органдардың ресми интернет-ресурстарында міндетті жариялаудан (таратудан) кейін зерделеп отырады.',
+    'The Association has been a member of the Expert Council on Entrepreneurship under the Akimat of the North Kazakhstan Region since March 2021. As part of its work in the Expert Council, the Association reviews draft regulatory legal acts, draft legal acts in the field of the state planning system, draft international treaties of the Republic of Kazakhstan, as well as international treaties to which the Republic of Kazakhstan intends to become a party, affecting the interests of entrepreneurship. The Association also studies advisory regulatory policy documents developed and submitted by government agencies after their mandatory publication (dissemination) in the media, including the official Internet resources of government agencies.'
   ),
   'directions.items.1.link.label': shared.expertCouncil,
-  'directions.items.2.title': pair('Мүшелерді қолдау', 'Support for members'),
+  'directions.items.2.title': pair('Қолдау және консультациялар', 'Support and consultation'),
   'directions.items.2.text': pair(
-    'Қауымдастық мүшелері зергерлік бизнес, заңнама және стандарттар мәселелері бойынша қолдау мен консультация алады. Бөлек Қауымдастық геммолог қызметін ұсынады: маман қымбат тасты бағалайды, оның табиғи немесе жасанды шығу тегін және өңделу фактісін анықтайды.',
-    'Members of the Association receive support and advice on jewellery business, legislation and standards. Separately, the Association provides gemmologist services: the specialist appraises a precious stone, determines whether it is of natural or synthetic origin and identifies whether it has been treated.'
+    'Біздің ұйым зергерлік бизнеске, заңнама мен стандарттарға қатысты мәселелер бойынша қолдау көрсетеді және консультациялар береді. Қауымдастық геммолог қызметтерін ұсынады, ол бағалы тасты бағалап, оның табиғи немесе жасанды екенін, оның сәндеуден өткен-өтпегенін анықтауға көмектеседі.',
+    'We offer support and consulting services related to the jewelry business, legislation, and standards. We also provide gemmological expertise: our gemmologist can determine whether a stone is natural or synthetic and whether it has been treated.'
   ),
   'directions.items.2.practice': pair(
-    'Қауымдастық сондай-ақ өз мүшелерін ЕАЭО мемлекеттеріндегі және олардан тыс жердегі салалық алаңдарда білдіреді.',
-    'The Association also represents its members at industry forums both within the EAEU states and beyond them.'
+    'Қауымдастық әр түрлі форматтарда өзара әрекеттесуге арналған алаң қызметін атқарады және өз мүшелерінің арасында тікелей тілдесу мүмкіндігін ұйымдастырады. Біз нарыққа қатысушылар өзекті мәселелерді талқылай алатын, серіктестер тауып, өзара қызметтес бола алатын іс-шаралар ұйымдастырамыз. Қауымдастық өз мүшелерін ЕАЭО алаңдарында ғана емес, шетелде де таныстыруға ұмтылады.',
+    'We serve as a space for direct communication and cooperation between our members. We organize events where stakeholders can discuss relevant issues, find partners, and build collaborations. Our goal is to represent our members not only within the EAEU but also internationally.'
   ),
   'directions.items.2.link.label': shared.membershipTerms,
-  'directions.items.3.title': pair(
-    'Серіктестік және халықаралық ынтымақтастық',
-    'Partnerships and international cooperation'
-  ),
+  'directions.items.3.title': pair('Жаңа серіктестерді іздеу', 'Searching for new partners'),
   'directions.items.3.text': pair(
-    'Қауымдастық қымбат металдар мен қымбат тастар нарығына қатысушылардың бірлестіктерімен өзара іс-қимыл жасайды және ЕАЭО-ға қатысушы мемлекеттерден және басқа елдерден жаңа серіктестер тартады.',
-    'The Association works with associations of participants in the precious metals and precious stones market and attracts new partners from the EAEU member states and other countries.'
+    'Қауымдастық ЕАЭО аумағында да, одан тыс жерлерде де бағалы металлдар мен бағалы тастар секторына қатысушылардың басқа бірлестіктерімен ауқымды түрде өзара әрекеттесуге дайын. Біз CIBJO, Зергерлер қауымдастығы, «Аффинажды зауыттар бірлестігі» қауымдастығы, Еділ-Вятка аймағының зергерлер гильдиясы, «Тау-Кен Алтын» ЖШС және басқа қауымдастықтармен белсенді қызметтес болып келеміз.',
+    'The Association actively collaborates with other unions and associations in the precious metals and gemstones sector both within and outside the EAEU. Our partners include CIBJO, the Jewellers Association, Refining Plants Association, the Guild of Jewellers of the Volga-Vyatka Region, Tau-Ken Altyn LLP, and others.'
   ),
   'directions.items.3.practice': pair(
-    '2025 жылы салалық конгресс қорытындысы бойынша аффинаж және стандарттау саласындағы, сондай-ақ зергерлік айналымды заңдастыру мәселелері бойынша ынтымақтастық туралы меморандумдарға қол қойылды.',
-    'In 2025, following an industry congress, memoranda of cooperation were signed on refining and standardisation and on the legalisation of jewellery circulation.'
+    'Қауымдастық ЕАЭО қатысушы мемлекеттерден, сондай-ақ басқа мемлекеттерден жауапты бизнес жүргізетін, өз беделіне қамқорлықпен қарайтын және бағалы металлдар нарығын дамыту мақсатында белсенді түрде өзара әрекеттесуге дайын серіктестерді тартуға талпынады.',
+    'We are constantly seeking new partners from EAEU countries and beyond—those who conduct responsible business, value their reputation, and are open to cooperation in developing the precious metals market.'
   ),
   'directions.items.3.link.label': pair('Жаңалықтар мен материалдар', 'News and materials'),
   'directions.mediaAlt': pair(
@@ -383,18 +372,6 @@ export const expertCouncilI18n = {
   'expertise.h2': pair(
     'Сала мүддесі үшін кәсіби сараптама',
     'Professional expertise in the interests of the industry'
-  ),
-  'expertise.paragraphs.0': pair(
-    'Кеңес Қауымдастық қызметін сараптамалық, ғылыми және талдамалық сүйемелдеу және Еуразиялық экономикалық одаққа мүше мемлекеттердің зергерлік саласын дамытуға жәрдемдесу үшін құрылған.',
-    'The Council was set up to provide expert, academic and analytical support for the work of the Association and to contribute to the development of the jewellery industry of the member states of the Eurasian Economic Union.'
-  ),
-  'expertise.paragraphs.1': pair(
-    'Оның жұмысы құқықтық және техникалық реттеуді жетілдіру, кәсіпкерлікті дамыту және зергерлік нарықтың қолайлы жұмыс жағдайларын қалыптастыру мәселелері бойынша негізделген ұсыныстар мен ұсынымдар дайындауға бағытталған.',
-    'Its work is aimed at preparing well-founded proposals and recommendations on improving legal and technical regulation, developing entrepreneurship and creating favourable conditions for the jewellery market to operate.'
-  ),
-  'expertise.paragraphs.2': pair(
-    'Кеңес заңды тұлға емес, оның мүшелері қоғамдық негізде жұмыс істейді. Кеңестің қорытындылары мен ұсынымдары ұсынымдық сипатта болады: түпкілікті шешімдерді Қауымдастықтың басқару органдары қабылдайды.',
-    'The Council is not a legal entity and its members work on a voluntary basis. The conclusions and recommendations of the Council are advisory: final decisions are taken by the governing bodies of the Association.'
   ),
   'expertise.imageAlt': pair(
     'Ашық түсті табақтың үстінде қырланған тас салынған пинцет, жанында зергер лупасы және тастарға арналған қағаз конверт',
@@ -551,14 +528,6 @@ export const membershipI18n = {
     'Two specialists at a desk by a window: one is handing over a folder of documents, the other is studying printed pages'
   ),
   'eligibility.h2': pair('Кім кіре алады', 'Who can join'),
-  'eligibility.paragraphs.0': pair(
-    'Қауымдастыққа кіру құқығына қызметі қымбат металдарға, қымбат тастарға және олардан жасалған бұйымдарға байланысты заңды тұлғалар мен жеке кәсіпкерлер ие.',
-    'Legal entities and sole proprietors whose activity is connected with precious metals, precious stones and articles made from them are eligible to join the Association.'
-  ),
-  'eligibility.paragraphs.1': pair(
-    'Міндетті шарт — Қауымдастықтың Жарғысында және оның ішкі құжаттарында белгіленген талаптарға сәйкестік.',
-    'A mandatory condition is compliance with the requirements set out in the Charter of the Association and its internal documents.'
-  ),
   'eligibility.scopeTitle': pair('Қызмет түрлері', 'Types of activity'),
   'eligibility.scope.0': pair('Өндіп алу', 'Extraction'),
   'eligibility.scope.1': pair('Өндіру', 'Production'),
@@ -1459,25 +1428,9 @@ export const reportsI18n = {
     'Құжат жобаларының сараптамасы',
     'Review of draft documents'
   ),
-  'outcomes.items.0.text': pair(
-    'Қоғамдық талқылауға орналастырылған нормативтік құқықтық актілердің жобаларына ұсыныстар мен ескертулер жіберілді: бұйымдарды таңбалау және бақылау бойынша реттеушілік әсерді талдау, «Зергерлік және оған ұқсас бұйымдарды өндіру» кәсіби стандарты, қаржы мониторингіне жататын операциялар туралы мәліметтерді ұсыну қағидаларына өзгерістер.',
-    'Proposals and comments were submitted on draft regulatory legal acts published for public consultation: the regulatory impact assessment for the marking and traceability of items, the professional standard “Manufacture of jewellery and related articles”, and amendments to the rules for submitting information on transactions subject to financial monitoring.'
-  ),
   'outcomes.items.1.title': pair('Бұйымдарды таңбалау', 'Marking of items'),
-  'outcomes.items.1.text': pair(
-    'Қауымдастық қатысқан талқылаулардың қорытындысы бойынша зергерлік бұйымдарды міндетті таңбалау мақсатқа сай емес деп танылды.',
-    'Following the discussions involving the Association, mandatory marking of jewellery items was found to be inexpedient.'
-  ),
   'outcomes.items.2.title': pair('Тұтынушылардың құқықтарын қорғау', 'Consumer rights protection'),
-  'outcomes.items.2.text': pair(
-    'Зергерлік бұйымдарды қайтарылуға жататын тауарлар тізбесінен шығаруды көздейтін «Тұтынушылардың құқықтарын қорғау туралы» Заңға өзгерістер мен толықтырулар жобасы дайындалып, жіберілді.',
-    'A draft of amendments and additions to the Law “On the Protection of Consumer Rights” was prepared and submitted, providing for jewellery items to be excluded from the list of goods eligible for return.'
-  ),
   'outcomes.items.3.title': pair('Қызмет түрлерінің жіктелуі', 'Classification of types of activity'),
-  'outcomes.items.3.text': pair(
-    'Экономикалық қызмет түрлерінің жалпы жіктеуішін сала кәсіпорындарының нақты қызметіне сәйкес келтіру қажеттігінің негіздемесі дайындалды.',
-    'A justification was prepared for bringing the General Classifier of Types of Economic Activity into line with the actual activity of enterprises in the industry.'
-  ),
   'access.h2': pair('Материалдарды қалай алуға болады', 'How to obtain the materials'),
   'access.text': pair(
     'Есептік материалдарды Қауымдастық сұрау бойынша береді. Ресми мекенжайға өтініш жіберіп, қажет материалды көрсетіңіз: жауабында Қауымдастық оның қолжетімділігін және беру нысанын растайды.',

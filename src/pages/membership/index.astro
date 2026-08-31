@@ -74,7 +74,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           <hr class="h-rule" />
         </div>
 
-        <div class="p-spread__body">
+        <div class="p-spread__body p-article">
           {membership.eligibility.paragraphs.map((text, index) => (
             <p class="h-text" data-i18n={`eligibility.paragraphs.${index}`}>{text}</p>
           ))}

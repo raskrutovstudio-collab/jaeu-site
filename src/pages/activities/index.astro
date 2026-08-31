@@ -71,7 +71,9 @@ const [firstHalf, secondHalf] = [
             </div>
             <div class="p-dirs__body">
               <p class="p-dirs__text" data-i18n={`directions.items.${index}.text`}>{item.text}</p>
-              <p class="p-dirs__practice" data-i18n={`directions.items.${index}.practice`}>{item.practice}</p>
+              {item.practice && (
+                <p class="p-dirs__practice" data-i18n={`directions.items.${index}.practice`}>{item.practice}</p>
+              )}
               <a class="h-link" href={item.link.href}>
                 <span data-i18n={`directions.items.${index}.link.label`}>{item.link.label}</span>
                 <Icon name="arrow" class="h-link__arrow" />
@@ -105,7 +107,9 @@ const [firstHalf, secondHalf] = [
             </div>
             <div class="p-dirs__body">
               <p class="p-dirs__text" data-i18n={`directions.items.${offset + splitAt}.text`}>{item.text}</p>
-              <p class="p-dirs__practice" data-i18n={`directions.items.${offset + splitAt}.practice`}>{item.practice}</p>
+              {item.practice && (
+                <p class="p-dirs__practice" data-i18n={`directions.items.${offset + splitAt}.practice`}>{item.practice}</p>
+              )}
               <a class="h-link" href={item.link.href}>
                 <span data-i18n={`directions.items.${offset + splitAt}.link.label`}>{item.link.label}</span>
                 <Icon name="arrow" class="h-link__arrow" />

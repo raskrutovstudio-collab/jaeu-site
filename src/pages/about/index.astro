@@ -74,19 +74,21 @@ const faqSchema = {
           <hr class="h-rule" />
         </div>
 
-        <div class="p-spread__body">
+        <div class="p-spread__body p-article">
           {about.purpose.paragraphs.map((text, index) => (
             <p class="h-text" data-rise={String(index + 2)} data-i18n={`purpose.paragraphs.${index}`}>{text}</p>
           ))}
 
-          <ul class="h-points" data-rise="4">
-            {about.purpose.points.map((point, index) => (
-              <li class="h-points__item">
-                <h3 class="h-h3 h-points__title" data-i18n={`purpose.points.${index}.title`}>{point.title}</h3>
-                <p class="h-points__text" data-i18n={`purpose.points.${index}.text`}>{point.text}</p>
-              </li>
-            ))}
-          </ul>
+          {about.purpose.points.length > 0 && (
+            <ul class="h-points" data-rise="4">
+              {about.purpose.points.map((point, index) => (
+                <li class="h-points__item">
+                  <h3 class="h-h3 h-points__title" data-i18n={`purpose.points.${index}.title`}>{point.title}</h3>
+                  <p class="h-points__text" data-i18n={`purpose.points.${index}.text`}>{point.text}</p>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
