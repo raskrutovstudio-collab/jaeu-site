@@ -1,5 +1,6 @@
 ---
 import '../styles/home.css';
+import '../styles/visual-refine.css';
 import I18nRuntime from '../components/I18nRuntime.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
@@ -90,25 +91,16 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Ассоциация ювелиров ЕАЭС" />
+    <meta property="og:image:alt" content={org.shortName} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={meta.ogTitle} />
     <meta name="twitter:description" content={meta.ogDescription} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link
-      rel="preload"
-      as="image"
-      href={withBase('/assets/jaeu/hero-1600.webp')}
-      imagesrcset={`${withBase('/assets/jaeu/hero-760.webp')} 760w, ${withBase('/assets/jaeu/hero-1100.webp')} 1100w, ${withBase('/assets/jaeu/hero-1600.webp')} 1536w`}
-      imagesizes="(min-width: 1041px) 50vw, 100vw"
-    />
-
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
     <script is:inline>
-      // Начальное состояние reveal включаем до отрисовки, иначе контент мигнёт.
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.dataset.motion = 'on';
       }
@@ -117,13 +109,13 @@ const jsonLd = {
 
   <body class="h-body">
     <a class="h-skip" href="#main" data-i18n="ui.skip">Перейти к содержимому</a>
-    <SiteHeader />
+    <SiteHeader currentPath="/" />
 
     <main id="main">
       <slot />
     </main>
 
-    <SiteFooter />
+    <SiteFooter currentPath="/" />
 
     <I18nRuntime payload={homeI18nPayload} />
 
