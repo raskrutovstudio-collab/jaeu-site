@@ -1,0 +1,48 @@
+/*
+  Единая типографика содержательной части сайта.
+  Все смысловые абзацы в <main> выравниваются по ширине и имеют красную строку.
+  Навигация, кнопки, даты, eyebrow и другие UI-метки этим правилом не затрагиваются.
+*/
+
+main p:not(.h-eyebrow):not(.p-label) {
+  text-align: justify !important;
+  text-align-last: left;
+  text-justify: inter-word;
+  text-indent: 1.5em !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/*
+  Списки являются частью материала: строки также выравниваются по ширине,
+  но отдельная красная строка внутри маркера не нужна.
+*/
+main li {
+  text-align: justify !important;
+  text-align-last: left;
+  hyphens: auto !important;
+  -webkit-hyphens: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* Фактические значения в definition-list — содержательный текст, но не абзацы. */
+main dd {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/*
+  Короткие служебные подписи должны оставаться без красной строки,
+  даже если технически реализованы через <p>.
+*/
+main .h-eyebrow,
+main .p-label {
+  text-align: left !important;
+  text-indent: 0 !important;
+  hyphens: none !important;
+}
