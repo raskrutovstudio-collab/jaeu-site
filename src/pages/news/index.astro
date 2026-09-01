@@ -34,7 +34,6 @@ const itemsByYear = [...new Set(news.items.map((item) => item.date.slice(0, 4)))
     .filter(({ item }) => item.date.slice(0, 4) === year)
 }));
 
-/* Список отражает видимые на странице материалы с подтверждёнными датами. */
 const newsSchema = {
   '@type': 'ItemList',
   '@id': `${canonical}#newslist`,
@@ -79,68 +78,59 @@ const newsSchema = {
   schema={[newsSchema]}
   i18n={newsI18n}
 >
-  <section class="p-hero p-hero--news">
+  <section class="p-hero p-hero--news p-news-hero">
     <div class="h-shell">
-      <div class="p-hero__inner">
-        <div class="p-hero__text">
-          <nav class="p-crumbs" aria-label="Хлебные крошки" data-i18n-attrs="aria-label:ui.breadcrumbs">
-            <a href={routes.home} data-i18n="ui.home">Главная</a>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page" data-i18n="crumb">{news.crumb}</span>
-          </nav>
-          <p class="h-eyebrow" data-i18n="hero.eyebrow">{news.hero.eyebrow}</p>
-          <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{news.hero.h1}</h1>
-          <p class="h-lead p-hero__lead" data-i18n="hero.lead">{news.hero.lead}</p>
-        </div>
+      <div class="p-news-heading">
+        <nav class="p-crumbs" aria-label="Хлебные крошки" data-i18n-attrs="aria-label:ui.breadcrumbs">
+          <a href={routes.home} data-i18n="ui.home">Главная</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page" data-i18n="crumb">{news.crumb}</span>
+        </nav>
+        <p class="h-eyebrow" data-i18n="hero.eyebrow">{news.hero.eyebrow}</p>
+        <h1 class="h-h1" data-i18n="hero.h1">{news.hero.h1}</h1>
+        <p class="h-lead" data-i18n="hero.lead">{news.hero.lead}</p>
+      </div>
 
-        <article class="p-story">
-          <div class="p-story__intro">
-            <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
-            <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
-            <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
-          </div>
+      <article class="p-featured-news">
+        <div class="p-featured-news__content">
+          <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
+          <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
+          <h2 class="h-h2" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
 
-          <figure class="p-story__media">
-            <img
-              src={asset(`${news.featured.image}-1000.webp`)}
-              srcset={`${asset(`${news.featured.image}-660.webp`)} 660w, ${asset(`${news.featured.image}-1000.webp`)} 1000w`}
-              sizes="(min-width: 1041px) 560px, 100vw"
-              width="1000"
-              height="563"
-              alt={news.featured.imageAlt}
-              data-i18n-attrs="alt:featured.imageAlt"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
-          </figure>
-
-          <div class="p-story__continue p-article">
+          <div class="p-featured-news__text p-article">
             <p class="p-story__text">{featuredLead}</p>
             {featuredRest.map((text) => (
               <>
                 <p class="p-story__text">{text}</p>
                 {news.featured.points && text.trim().endsWith(':') && (
                   <ul>
-                    {news.featured.points.map((point) => (
-                      <li>{point}</li>
-                    ))}
+                    {news.featured.points.map((point) => <li>{point}</li>)}
                   </ul>
                 )}
               </>
             ))}
           </div>
-        </article>
-      </div>
+        </div>
+
+        <figure class="p-featured-news__media">
+          <img
+            src={asset(`${news.featured.image}-1000.webp`)}
+            srcset={`${asset(`${news.featured.image}-660.webp`)} 660w, ${asset(`${news.featured.image}-1000.webp`)} 1000w`}
+            sizes="(min-width: 1041px) 650px, 100vw"
+            width="1000"
+            height="563"
+            alt={news.featured.imageAlt}
+            data-i18n-attrs="alt:featured.imageAlt"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      </article>
     </div>
   </section>
 
-  <section
-    class="h-section h-section--stone"
-    aria-label="Другие материалы"
-    data-i18n-attrs="aria-label:list.aria"
-    data-reveal
-  >
+  <section class="h-section h-section--stone" aria-label="Другие материалы" data-i18n-attrs="aria-label:list.aria" data-reveal>
     <div class="h-shell">
       <p class="p-hint p-hint--head" data-rise="1" data-i18n="listNote">{news.listNote}</p>
 
@@ -152,23 +142,54 @@ const newsSchema = {
               const fields = newsFields(item);
               const landscape = fields.article;
               return (
-              <li>
-                <article class:list={['p-stories__item', fields.article && 'p-stories__item--article']}>
-                  <div class="p-stories__meta">
-                    <time class="p-date" datetime={item.date} data-i18n={`items.${index}.dateLabel`}>{item.dateLabel}</time>
-                  </div>
+                <li>
+                  <article class:list={['p-stories__item', landscape && 'p-stories__item--article', !landscape && 'p-stories__item--compact']}>
+                    <div class="p-stories__meta">
+                      <time class="p-date" datetime={item.date} data-i18n={`items.${index}.dateLabel`}>{item.dateLabel}</time>
+                    </div>
 
-                  <div class:list={['p-stories__body', 'p-article']}>
-                    <h3 class="h-h3 p-stories__title" data-i18n={`items.${index}.title`}>{item.title}</h3>
+                    <div class:list={['p-stories__body', landscape && 'p-stories__body--editorial']}>
+                      <h3 class="h-h3 p-stories__title" data-i18n={`items.${index}.title`}>{item.title}</h3>
 
-                    {landscape && (
-                      <figure class="p-stories__media">
+                      {landscape && (
+                        <figure class="p-stories__media p-stories__media--float">
+                          <img
+                            src={asset(`${item.image}-760.webp`)}
+                            srcset={`${asset(`${item.image}-400.webp`)} 400w, ${asset(`${item.image}-760.webp`)} 760w`}
+                            sizes="(min-width: 1041px) 340px, 100vw"
+                            width="760"
+                            height="428"
+                            alt={item.imageAlt}
+                            data-i18n-attrs={`alt:items.${index}.imageAlt`}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </figure>
+                      )}
+
+                      <div class:list={[landscape && 'p-stories__copy', 'p-article']}>
+                        {fields.paragraphs?.map((text) => (
+                          <>
+                            <p class="p-stories__text">{text}</p>
+                            {fields.points && text.trim().endsWith(':') && (
+                              <ul>{fields.points.map((point) => <li>{point}</li>)}</ul>
+                            )}
+                          </>
+                        ))}
+                        {fields.text && !fields.paragraphs && <p class="p-stories__text">{fields.text}</p>}
+                        {fields.points && !fields.paragraphs && <ul>{fields.points.map((point) => <li>{point}</li>)}</ul>}
+                        {fields.result && <p class="p-stories__result">{fields.result}</p>}
+                      </div>
+                    </div>
+
+                    {!landscape && (
+                      <figure class="p-stories__media" data-reveal-media>
                         <img
-                          src={asset(`${item.image}-760.webp`)}
-                          srcset={`${asset(`${item.image}-400.webp`)} 400w, ${asset(`${item.image}-760.webp`)} 760w`}
-                          sizes="(min-width: 1041px) 680px, 100vw"
-                          width="760"
-                          height="428"
+                          src={asset(`${item.image}-400.webp`)}
+                          srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-400.webp`)} 400w`}
+                          sizes="(min-width: 1041px) 250px, 240px"
+                          width="400"
+                          height="300"
                           alt={item.imageAlt}
                           data-i18n-attrs={`alt:items.${index}.imageAlt`}
                           loading="lazy"
@@ -176,47 +197,8 @@ const newsSchema = {
                         />
                       </figure>
                     )}
-
-                    {fields.paragraphs?.map((text) => (
-                      <>
-                        <p class="p-stories__text">{text}</p>
-                        {fields.points && text.trim().endsWith(':') && (
-                          <ul>
-                            {fields.points.map((point) => (
-                              <li>{point}</li>
-                            ))}
-                          </ul>
-                        )}
-                      </>
-                    ))}
-                    {fields.text && !fields.paragraphs && <p class="p-stories__text">{fields.text}</p>}
-                    {fields.points && !fields.paragraphs && (
-                      <ul>
-                        {fields.points.map((point) => (
-                          <li>{point}</li>
-                        ))}
-                      </ul>
-                    )}
-                    {fields.result && <p class="p-stories__result">{fields.result}</p>}
-                  </div>
-
-                  {!landscape && (
-                    <figure class="p-stories__media" data-reveal-media>
-                      <img
-                        src={asset(`${item.image}-400.webp`)}
-                        srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-400.webp`)} 400w`}
-                        sizes="(min-width: 1041px) 280px, 240px"
-                        width="400"
-                        height="300"
-                        alt={item.imageAlt}
-                        data-i18n-attrs={`alt:items.${index}.imageAlt`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </figure>
-                  )}
-                </article>
-              </li>
+                  </article>
+                </li>
               );
             })}
           </ul>
@@ -232,16 +214,8 @@ const newsSchema = {
           <h2 class="h-h2 p-cta__title" id="news-cta" data-rise="1" data-i18n="cta.h2">{news.cta.h2}</h2>
           <p class="p-cta__text" data-rise="2" data-i18n="cta.text">{news.cta.text}</p>
         </div>
-
         <div class="p-cta__actions" data-rise="3">
-          <a
-            class="h-btn h-btn--light"
-            href={news.cta.primary.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Написать на ${org.email} в Gmail`}
-            data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail"
-          >
+          <a class="h-btn h-btn--light" href={news.cta.primary.href} target="_blank" rel="noopener noreferrer" aria-label={`Написать на ${org.email} в Gmail`} data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail">
             <span data-i18n="cta.primary.label">{news.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
           </a>
@@ -254,3 +228,90 @@ const newsSchema = {
     </div>
   </section>
 </InnerLayout>
+
+<style>
+  .p-news-hero { padding: 28px 0 54px; }
+  .p-news-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 54rem;
+    margin-bottom: 34px;
+  }
+  .p-news-heading .h-h1 { font-size: clamp(40px, 4vw, 52px); }
+  .p-news-heading .h-lead { max-width: 58ch; font-size: 17px; line-height: 1.5; color: var(--text); }
+
+  .p-featured-news {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 56px;
+    align-items: start;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+  }
+  .p-featured-news__content { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .p-featured-news__content .p-label { margin-bottom: 2px; }
+  .p-featured-news__content .h-h2 { font-size: clamp(30px, 3vw, 40px); line-height: 1.12; max-width: 16ch; }
+  .p-featured-news__text { margin-top: 10px; }
+  .p-featured-news__text.p-article .p-story__text { text-align: left; hyphens: auto; font-size: 16px; line-height: 1.62; }
+  .p-featured-news__media { margin: 0; }
+  .p-featured-news__media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+
+  .p-stories__item--article {
+    grid-template-columns: minmax(7rem, 1.45fr) minmax(0, 10.55fr);
+    column-gap: 34px;
+    padding: 34px 0 40px;
+  }
+  .p-stories__body--editorial { display: block; }
+  .p-stories__body--editorial .p-stories__title { margin: 0 0 18px; max-width: 34ch; }
+  .p-stories__media--float {
+    float: right;
+    width: min(38%, 22rem);
+    margin: 0 0 18px 28px !important;
+  }
+  .p-stories__media--float img { aspect-ratio: 4 / 3 !important; object-fit: cover; }
+  .p-stories__copy.p-article { display: block; }
+  .p-stories__copy.p-article p,
+  .p-stories__copy.p-article .p-stories__text,
+  .p-stories__item--compact .p-article p,
+  .p-stories__item--compact .p-stories__text,
+  .p-stories__item--compact .p-stories__result {
+    text-align: left;
+    hyphens: auto;
+  }
+  .p-stories__copy::after { content: ''; display: table; clear: both; }
+
+  .p-stories__item--compact {
+    grid-template-columns: minmax(7rem, 1.45fr) minmax(0, 7.9fr) minmax(13rem, 2.65fr);
+    column-gap: 30px;
+    padding: 28px 0 32px;
+  }
+  .p-stories__item--compact .p-stories__body { gap: 13px; }
+  .p-stories__item--compact .p-stories__title { max-width: 34ch; }
+  .p-stories__item--compact > .p-stories__media { width: 100%; max-width: 16rem; justify-self: end; }
+  .p-stories__item--compact > .p-stories__media img { aspect-ratio: 4 / 3; object-fit: cover; }
+
+  @media (max-width: 1040px) {
+    .p-featured-news { grid-template-columns: 1fr; gap: 28px; }
+    .p-featured-news__content .h-h2 { max-width: 22ch; }
+    .p-featured-news__media { order: 2; }
+    .p-stories__media--float { width: 42%; }
+    .p-stories__item--compact { grid-template-columns: minmax(6.5rem, 1.3fr) minmax(0, 7fr) minmax(12rem, 3fr); }
+  }
+
+  @media (max-width: 760px) {
+    .p-news-hero { padding: 20px 0 38px; }
+    .p-news-heading { margin-bottom: 26px; }
+    .p-featured-news { padding-top: 24px; }
+    .p-featured-news__media { order: 2; }
+    .p-featured-news__text { order: 3; }
+    .p-stories__item--article,
+    .p-stories__item--compact { grid-template-columns: 1fr; gap: 12px; }
+    .p-stories__meta { grid-column: 1; }
+    .p-stories__body { grid-column: 1; }
+    .p-stories__media--float { float: none; width: 100%; margin: 0 0 18px !important; }
+    .p-stories__item--compact > .p-stories__media { grid-column: 1; max-width: none; justify-self: stretch; }
+    .p-stories__item--compact > .p-stories__media img { aspect-ratio: 16 / 9; }
+  }
+</style>
