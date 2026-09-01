@@ -5,16 +5,22 @@ import { gmailCompose } from '../../data/mail';
 import { withBase } from '../../data/site';
 
 interface Props {
-  /**
-   * Путь текущей страницы. Подвал — единственная навигация, которая ведёт на
-   * `/reports/`, поэтому активный раздел отмечается и здесь.
-   */
   currentPath?: string;
 }
 
 const { currentPath } = Astro.props;
 const year = new Date().getFullYear();
 const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org.address.city}, ${org.address.street}`;
+
+/*
+  Информационная архитектура строится по пользовательским задачам:
+  членство, документы и новости не должны дублироваться через промежуточные
+  «Базу знаний» и «Отчётность». Эти две ссылки исключены из футера вместе с шапкой.
+*/
+const footerColumns = footer.columns.map((column) => ({
+  ...column,
+  links: column.links.filter((link) => link.href !== routes.knowledge && link.href !== routes.reports)
+}));
 ---
 
 <footer class="h-footer">
@@ -42,7 +48,7 @@ const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org
         <p class="h-footer__blurb" data-i18n="footer.blurb">{footer.blurb}</p>
       </div>
 
-      {footer.columns.map((column, columnIndex) => (
+      {footerColumns.map((column, columnIndex) => (
         <nav aria-label={column.heading} data-i18n-attrs={`aria-label:footer.columns.${columnIndex}.heading`}>
           <p class="h-footer__heading" data-i18n={`footer.columns.${columnIndex}.heading`}>{column.heading}</p>
           <ul class="h-footer__list">
