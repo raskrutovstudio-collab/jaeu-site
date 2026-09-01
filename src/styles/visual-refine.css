@@ -1,0 +1,351 @@
+/*
+  Финальная визуальная доводка внутренних и главной страниц.
+  Здесь только композиционные overrides поверх home.css / inner.css:
+  базовые токены и компоненты не дублируются.
+*/
+
+@media (min-width: 1041px) {
+  /* Главная / Об Ассоциации: два кадра собраны как единая editorial-композиция. */
+  .h-about__grid > .h-about__portrait {
+    grid-column: 1 / span 4;
+    grid-row: 2;
+    width: 100%;
+    max-width: 18rem;
+    margin: 0;
+    justify-self: start;
+    align-self: start;
+    z-index: 2;
+  }
+
+  .h-about__grid > .h-about__portrait img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    outline: 1px solid rgba(200, 155, 50, 0.34);
+    outline-offset: 10px;
+  }
+
+  .h-about__grid > .h-about__detail {
+    grid-column: 4 / span 9;
+    grid-row: 2;
+    width: min(100%, 44rem);
+    margin: 84px 0 0;
+    justify-self: end;
+    align-self: start;
+  }
+
+  .h-about__grid > .h-about__detail img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  /* Главная / Отраслевой контур: высоту кадра задаёт текстовая колонка. */
+  .h-split--text-left {
+    align-items: stretch;
+  }
+
+  .h-split--text-left > .h-split__text {
+    align-self: center;
+  }
+
+  .h-split--text-left > .h-frame {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .h-split--text-left > .h-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* /about/: один кадр равен фактической высоте заголовка + текста. */
+  .p-main .p-practice {
+    align-items: stretch;
+  }
+
+  .p-main .p-practice__body {
+    align-self: center;
+  }
+
+  .p-main .p-practice__media {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .p-main .p-practice__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* /news/: продолжение ведущего материала занимает всю контентную ширину. */
+  .p-main .p-featured-news__continue {
+    width: 100%;
+    max-width: none;
+  }
+
+  .p-main .p-featured-news__continue.p-article .p-story__text {
+    max-width: none;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    overflow-wrap: normal;
+  }
+
+  .p-main .p-task-grid {
+    grid-auto-rows: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  /* На планшете и телефоне justify уже создаёт дыры между словами. */
+  .p-main .p-featured-news__continue.p-article .p-story__text {
+    text-align: left;
+    hyphens: none;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Общий мобильный масштаб: меньше display-типографики и короче секции. */
+  body.h-body {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .h-shell,
+  .h-shell--wide {
+    padding-inline: 18px;
+  }
+
+  .h-h1,
+  .h-hero__h1 {
+    font-size: 34px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .h-h2 {
+    font-size: 28px;
+    line-height: 1.12;
+  }
+
+  .h-h3 {
+    font-size: 20px;
+    line-height: 1.28;
+  }
+
+  .h-lead,
+  .p-main .h-lead {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .h-text,
+  .p-main .h-text,
+  .h-points__text,
+  .p-main .h-points__text {
+    font-size: 16px;
+    line-height: 1.58;
+  }
+
+  .h-eyebrow {
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .h-eyebrow::before {
+    width: 28px;
+  }
+
+  .h-section {
+    padding-block: 52px;
+  }
+
+  .h-body .p-main .h-section {
+    padding-block: 40px;
+  }
+
+  .h-section__head {
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .h-mobile__link {
+    padding-block: 13px;
+    font-size: 16px;
+  }
+
+  /* Главная: на телефоне оставляем один сильный кадр вместо двух длинных подряд. */
+  .h-about__grid {
+    row-gap: 28px;
+  }
+
+  .h-about__main {
+    gap: 20px;
+  }
+
+  .h-about__portrait {
+    display: none;
+  }
+
+  .h-about__detail {
+    width: 100%;
+    margin: 0;
+  }
+
+  .h-about__detail img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .h-points__item {
+    padding: 22px 0 24px;
+  }
+
+  .h-split,
+  .h-faq,
+  .h-news,
+  .h-band {
+    gap: 28px;
+  }
+
+  .h-split__text {
+    gap: 18px;
+  }
+
+  .h-split--text-left > .h-frame img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  /* Внутренние страницы: компактный первый экран и нормальный ритм текста. */
+  .p-main .p-hero {
+    padding-block: 20px 0;
+  }
+
+  .p-main .p-hero__text {
+    gap: 15px;
+  }
+
+  .p-main .p-crumbs {
+    gap: 7px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .p-main .p-head {
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+
+  .p-main .p-article > p,
+  .p-main .p-article > .h-text,
+  .p-main .p-article .p-story__text,
+  .p-main .p-article .p-stories__text,
+  .p-main .p-article .p-stories__result {
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
+  .p-main .p-practice {
+    gap: 22px;
+  }
+
+  .p-main .p-practice__body {
+    gap: 14px;
+  }
+
+  .p-main .p-practice__media img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .p-main .p-dirs__item {
+    padding: 22px 0 26px;
+  }
+
+  .p-main .p-dirs__body {
+    margin-top: 14px;
+  }
+
+  .p-main .p-dirs__text,
+  .p-main .p-dirs__practice {
+    font-size: 16px;
+    line-height: 1.58;
+  }
+
+  .p-main .p-pillars__item,
+  .p-main .p-cols__item {
+    padding: 22px 0 24px;
+  }
+
+  .p-main .p-task-grid__item {
+    padding: 22px 0 24px;
+  }
+
+  .p-main .p-task-grid__item .h-text {
+    font-size: 16px;
+    line-height: 1.58;
+  }
+
+  /* /news/: заголовки и ведущий материал больше не занимают почти весь экран. */
+  .h-body .p-main .p-news-heading .h-h1 {
+    font-size: 34px;
+  }
+
+  .h-body .p-main .p-news-heading .h-lead {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .h-body .p-main .p-featured-news__content .h-h2 {
+    max-width: none;
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .p-main .p-featured-news__content,
+  .p-main .p-featured-news__top {
+    gap: 14px;
+  }
+
+  .p-main .p-featured-news__lead {
+    margin-top: 2px;
+    font-size: 16px;
+    line-height: 1.58;
+  }
+
+  .p-main .p-featured-news__media img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .p-main .p-featured-news__continue {
+    margin-top: 20px;
+    padding-top: 18px;
+  }
+
+  .p-main .p-stories__item,
+  .p-main .p-stories__item--article,
+  .p-main .p-stories__item--compact {
+    padding: 22px 0 24px;
+  }
+
+  .p-main .p-stories__media--float {
+    margin-bottom: 14px !important;
+  }
+
+  .p-main .p-cta {
+    padding-block: 48px;
+  }
+}
