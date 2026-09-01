@@ -7,6 +7,26 @@ import { routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+
+/*
+  Четвёртая постоянная задача не вводит новый факт: это уже подтверждённое и
+  переведённое направление «Поддержка и консультации». Повтор здесь нужен как
+  краткий постоянный процесс, тогда как выше тот же материал раскрыт подробно.
+*/
+const taskItems = [
+  ...activities.tasks.items.map((item, index) => ({
+    title: item.title,
+    text: item.text,
+    titleKey: `tasks.items.${index}.title`,
+    textKey: `tasks.items.${index}.text`
+  })),
+  {
+    title: activities.directions.items[2].title,
+    text: activities.directions.items[2].text,
+    titleKey: 'directions.items.2.title',
+    textKey: 'directions.items.2.text'
+  }
+];
 ---
 
 <InnerLayout
@@ -88,10 +108,10 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
       </div>
 
       <ul class="p-task-grid" data-rise="3">
-        {activities.tasks.items.map((item, index) => (
+        {taskItems.map((item) => (
           <li class="p-task-grid__item">
-            <h3 class="h-h3" data-i18n={`tasks.items.${index}.title`}>{item.title}</h3>
-            <p class="h-text" data-i18n={`tasks.items.${index}.text`}>{item.text}</p>
+            <h3 class="h-h3" data-i18n={item.titleKey}>{item.title}</h3>
+            <p class="h-text" data-i18n={item.textKey}>{item.text}</p>
           </li>
         ))}
       </ul>
