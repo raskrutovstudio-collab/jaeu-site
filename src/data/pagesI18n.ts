@@ -863,6 +863,10 @@ export const newsI18n = {
     'Қазақстан зергерлерінің Бірінші Конгресі',
     'The First Congress of Jewellers of Kazakhstan'
   ),
+  'featured.imageAlt': pair(
+    'Ұзын үстелдерде отырған қатысушылар мінбедегі сөзді тыңдап отырған зал',
+    'A hall: participants at long tables listen to a speaker at a podium'
+  ),
   'featured.paragraphs.0': pair(
     'Қауымдастық бизнес, мемлекеттік органдар және халықаралық ұйымдар өкілдерін біріктірген салалық оқиға — Қазақстан зергерлерінің Бірінші Конгресіне қатысты.',
     'The Association took part in the First Congress of Jewellers of Kazakhstan, an industry event that brought together representatives of business, government authorities and international organisations.'
@@ -880,6 +884,10 @@ export const newsI18n = {
     'Бұйымдарды таңбалау бойынша реттеушілік әсерді талдауды талқылау',
     'Discussion of the regulatory impact assessment for the marking of items'
   ),
+  'items.0.imageAlt': pair(
+    'Жұмыс үстелінде онлайн-кеңесі бар ноутбук, құжаттар бумасы және зергер лупасы',
+    'A laptop showing an online meeting, a document folder and a jeweller’s loupe on a desk'
+  ),
   'items.0.text': pair(
     'Қауымдастық зергерлік бұйымдарды міндетті таңбалау және бақылауды енгізу бойынша реттеушілік әсерді талдау нәтижелерін қоғамдық талқылауға қатысты. Талқылау онлайн форматта өтті; ұстанымдарды мемлекеттік органдар және таңбалаудың бірыңғай операторы ұсынды.',
     'The Association took part in the public consultation on the results of the regulatory impact assessment for introducing mandatory marking and traceability of jewellery items. The consultation was held online; positions were presented by government authorities and the single marking operator.'
@@ -892,6 +900,10 @@ export const newsI18n = {
   'items.1.title': pair(
     'Саланы мемлекеттік реттеу бойынша сараптамалық кеңес',
     'Expert meeting on state regulation of the industry'
+  ),
+  'items.1.imageAlt': pair(
+    'Жұмыс үстелінде ашық том, мұрағат папкалары, көзілдірік және жүзік',
+    'An open volume, archival folders, spectacles and a ring on a desk'
   ),
   'items.1.text': pair(
     'Қауымдастық Қазақстан Республикасының зергерлік саласын мемлекеттік реттеуді жетілдіру мәселелері бойынша сараптамалық кеңеске қатысты. Талқылауға мемлекеттік органдардың, салалық бірлестіктердің және бизнестің өкілдері қатысты.',
@@ -906,6 +918,10 @@ export const newsI18n = {
     'Жеңіл өнеркәсіптегі міндетті таңбалау және шағын бизнес туралы конференция',
     'Conference on mandatory marking and small business in light industry'
   ),
+  'items.2.imageAlt': pair(
+    'Кафедрадағы баяндамашы залда отырған қатысушылардың алдында сөз сөйлеп тұр',
+    'A speaker at a lectern addresses seated participants in a hall'
+  ),
   'items.2.text': pair(
     'Қауымдастық жеңіл өнеркәсіптегі шағын және микробизнес кәсіпорындарына міндетті таңбалаудың әсерін талдауға арналған конференцияға қатысты. Ұйымдастырушы — «Шағын бизнеске жәрдемдесу» өңірлік қоғамдық ұйымы, кәсіпкерлерге арналған «Свое дело плюс» порталының қолдауымен.',
     'The Association took part in a conference on the impact of mandatory marking on small and micro-businesses in light industry. The organiser was the regional public organisation “Assistance to Small Business”, with support from the “Svoye delo plus” portal for entrepreneurs.'
@@ -918,6 +934,10 @@ export const newsI18n = {
   'items.3.title': pair(
     'Міндетті таңбалау бойынша дөңгелек үстел',
     'Round table on mandatory marking'
+  ),
+  'items.3.imageAlt': pair(
+    'Ағаш залдағы дөңгелек үстел: қатысушылар люстра астында шеңбер бойымен отыр',
+    'A round table in a wood-panelled hall: participants sit in a circle beneath a chandelier'
   ),
   'items.3.text': pair(
     'Қауымдастық міндетті таңбалау бойынша дөңгелек үстелге қатысты. Ұйымдастырушы — «Республика» партиясы.',
@@ -932,6 +952,10 @@ export const newsI18n = {
     'ҚР Сауда және интеграция министрлігіндегі кеңес',
     'Meeting at the Ministry of Trade and Integration of the Republic of Kazakhstan'
   ),
+  'items.4.imageAlt': pair(
+    'П-тәрізді үстелі, микрофондары және мінбері бар бос ресми зал',
+    'An empty official hall with a U-shaped table, microphones and a podium'
+  ),
   'items.4.text': pair(
     'Қауымдастық Қазақстан Республикасының Сауда және интеграция министрлігіндегі кеңеске қатысты. Төрағалық еткен — Премьер-Министрдің орынбасары С. Жұманғарин.',
     'The Association took part in a meeting at the Ministry of Trade and Integration of the Republic of Kazakhstan. It was chaired by Deputy Prime Minister S. Zhumangarin.'
@@ -944,6 +968,10 @@ export const newsI18n = {
   'items.5.title': pair(
     '«Бизнес пен үкімет диалогы» дөңгелек үстелі',
     'Round table “Dialogue of business and government”'
+  ),
+  'items.5.imageAlt': pair(
+    'Ұзын үстел басындағы екі тарап құжаттар папкасын беріп жатыр',
+    'Two sides at a long table pass a folder of documents'
   ),
   'items.5.text': pair(
     'Қауымдастық «Бизнес пен үкімет диалогы» дөңгелек үстеліне қатысты. Ұйымдастырушылар — Қазақстан Республикасының бизнес-қауымдастықтары.',
@@ -958,6 +986,10 @@ export const newsI18n = {
     '«Атамекен» ҰКП-дағы кеңес',
     'Meeting at the Atameken National Chamber of Entrepreneurs'
   ),
+  'items.6.imageAlt': pair(
+    'Мәжіліс залы: төралқа үстелі және кресло қатарлары',
+    'A meeting hall: a head table and rows of seats'
+  ),
   'items.6.text': pair(
     'Қауымдастық «Атамекен» ҰКП-дағы кеңеске қатысты. Төрағалық еткен — «Атамекен» ҰКП Төралқасының төрағасы Райымбек Баталов.',
     'The Association took part in a meeting at the Atameken National Chamber of Entrepreneurs. It was chaired by Raimbek Batalov, Chairman of the Presidium of Atameken.'
@@ -970,6 +1002,10 @@ export const newsI18n = {
   'items.7.title': pair(
     'ҚР-ның ЕАЭО мен ДСҰ-ға қатысуы мәселелері бойынша Қоғамдық қабылдау отырысы',
     'Public reception meeting on the participation of Kazakhstan in the EAEU and the WTO'
+  ),
+  'items.7.imageAlt': pair(
+    'Жұмыс үстелінде Еуразия атласы, папкалар, мөр және зергерлік білезік',
+    'An atlas of Eurasia, folders, a stamp and a jewellery bracelet on a desk'
   ),
   'items.7.text': pair(
     'Қауымдастық Қазақстан Республикасының ЕАЭО мен ДСҰ-ға қатысуы мәселелері бойынша Қоғамдық қабылдау отырысына қатысты. Ұйымдастырушы — ҚР Сауда және интеграция министрлігі, төраға — вице-министр Құшықова Ж.С.',
@@ -984,6 +1020,10 @@ export const newsI18n = {
     'Зергерлік бұйымдарды таңбалау бойынша қоғамдық талқылау',
     'Public consultation on the marking of jewellery items'
   ),
+  'items.8.imageAlt': pair(
+    'Жұмыс үстелінде таңба салатын құрал, таңбалы жүзік, лупа және құжаттар папкасы',
+    'A hallmark punch, a ring with an impression, a loupe and a document folder on a desk'
+  ),
   'items.8.text': pair(
     'Қауымдастық зергерлік бұйымдарды таңбалау бойынша онлайн талқылауға қатысты. Ұйымдастырушы — ҚР ӨҚС Өнеркәсіп комитеті, төраға — төрағаның орынбасары Жолмағамбетов Т.Б.',
     'The Association took part in an online consultation on the marking of jewellery items. The organiser was the Committee for Industry of the Ministry of Industry and Construction of the Republic of Kazakhstan; the chair was Deputy Chairman Zholmagambetov T.B.'
@@ -996,6 +1036,10 @@ export const newsI18n = {
   'items.9.title': pair(
     '«Атамекен» ҰКП-дағы кеңес',
     'Meeting at the Atameken National Chamber of Entrepreneurs'
+  ),
+  'items.9.imageAlt': pair(
+    'Қабылдау бөлмесі: үстел басында келуші мен маман құжатты қарап отыр',
+    'A reception: a visitor and a specialist review a document at a desk'
   ),
   'items.9.text': pair(
     'Қауымдастық «Атамекен» ҰКП-дағы кеңеске қатысты. Төрағалық еткен — ҚР ҰКП Басқарма төрағасының орынбасары Жаркенов Т.З.',
@@ -1010,6 +1054,10 @@ export const newsI18n = {
     '«Атамекен» ҰКП отырысы',
     'Meeting of the Atameken National Chamber of Entrepreneurs'
   ),
+  'items.10.imageAlt': pair(
+    'Зергерлік жұмыс үстелі: дәл таразы, жүзік өлшегіштер және шебердің қолдары',
+    'A jeweller’s workbench: precision scales, ring sizers and a craftsman’s hands'
+  ),
   'items.10.text': pair(
     'Қауымдастық «Атамекен» ҰКП отырысына қатысты. Төрағалық еткен — Премьер-Министрдің орынбасары С. Жұманғарин.',
     'The Association took part in a meeting of the Atameken National Chamber of Entrepreneurs. It was chaired by Deputy Prime Minister S. Zhumangarin.'
@@ -1022,6 +1070,10 @@ export const newsI18n = {
   'items.11.title': pair(
     'СҚО «Атамекен» ҰКП жанындағы Қоғамдық қабылдау',
     'Public reception at the Atameken National Chamber of Entrepreneurs of the North Kazakhstan Region'
+  ),
+  'items.11.imageAlt': pair(
+    'Ірі план: маман зергерлік жүзікті лупа арқылы қарап тұр',
+    'Close-up: a specialist examining a jewellery ring through a loupe'
   ),
   'items.11.text': pair(
     'Қауымдастық Солтүстік Қазақстан облысының «Атамекен» ҰКП жанындағы қоғамдық қабылдауға қатысты. Төрағалық еткен — СҚО прокуроры Ә. Әлиханұлы.',
@@ -1036,6 +1088,10 @@ export const newsI18n = {
     'Өңірлік деңгейдегі қоғамдық қабылдау',
     'Regional-level public reception'
   ),
+  'items.12.imageAlt': pair(
+    'Дәліз: терезе жақта папка ұстаған қызметкер және қабырға бойында отырған адамдар',
+    'A corridor: a staff member with a folder near a window and people seated along the wall'
+  ),
   'items.12.text': pair(
     'Қауымдастық өңірлік деңгейдегі қоғамдық қабылдауға қатысты.',
     'The Association took part in a regional-level public reception.'
@@ -1048,6 +1104,10 @@ export const newsI18n = {
   'items.13.title': pair(
     'ҚР Сауда және интеграция министрлігіндегі кеңес',
     'Meeting at the Ministry of Trade and Integration of the Republic of Kazakhstan'
+  ),
+  'items.13.imageAlt': pair(
+    'Техникалық үстелде сызбасы бар монитор, штрихкодтар және папкалар',
+    'A monitor with a process diagram, barcodes and folders on a technical desk'
   ),
   'items.13.text': pair(
     'Қауымдастық Қазақстан Республикасының Сауда және интеграция министрлігіндегі кеңеске қатысты. Төрағалық еткен — министр А. Шаққалиев.',

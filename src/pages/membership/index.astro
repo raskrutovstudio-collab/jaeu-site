@@ -79,7 +79,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
             <p class="h-text" data-i18n={`eligibility.paragraphs.${index}`}>{text}</p>
           ))}
 
-          <div>
+          <div class="p-scope-block">
             <p class="p-label" data-i18n="eligibility.scopeTitle">{membership.eligibility.scopeTitle}</p>
             <ul class="p-scope">
               {membership.eligibility.scope.map((item, index) => (

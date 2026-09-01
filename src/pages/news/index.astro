@@ -94,11 +94,17 @@ const newsSchema = {
         </div>
 
         <article class="p-story">
+          <div class="p-story__intro">
+            <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
+            <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
+            <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
+          </div>
+
           <figure class="p-story__media">
             <img
               src={asset(`${news.featured.image}-1000.webp`)}
               srcset={`${asset(`${news.featured.image}-660.webp`)} 660w, ${asset(`${news.featured.image}-1000.webp`)} 1000w`}
-              sizes="(min-width: 1041px) 680px, 100vw"
+              sizes="(min-width: 1041px) 560px, 100vw"
               width="1000"
               height="563"
               alt={news.featured.imageAlt}
@@ -109,33 +115,22 @@ const newsSchema = {
             />
           </figure>
 
-          <div class="p-story__body">
-            <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
-            <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
-            <h2 class="h-h2 p-story__title" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
-            <hr class="h-rule" />
+          <div class="p-story__continue p-article">
             <p class="p-story__text">{featuredLead}</p>
+            {featuredRest.map((text) => (
+              <>
+                <p class="p-story__text">{text}</p>
+                {news.featured.points && text.trim().endsWith(':') && (
+                  <ul>
+                    {news.featured.points.map((point) => (
+                      <li>{point}</li>
+                    ))}
+                  </ul>
+                )}
+              </>
+            ))}
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="h-section h-section--white p-section--follow" aria-labelledby="news-featured">
-    <div class="h-shell">
-      <div class="p-story__continue p-article">
-        {featuredRest.map((text) => (
-          <>
-            <p class="p-story__text">{text}</p>
-            {news.featured.points && text.trim().endsWith(':') && (
-              <ul>
-                {news.featured.points.map((point) => (
-                  <li>{point}</li>
-                ))}
-              </ul>
-            )}
-          </>
-        ))}
       </div>
     </div>
   </section>

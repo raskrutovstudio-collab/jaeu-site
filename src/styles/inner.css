@@ -491,13 +491,34 @@ html {
   aspect-ratio: 40 / 9;
 }
 
-/* Поддерживающий кадр: фото не должно давить короткий текст. */
+/*
+  Поддерживающий кадр: короткая подпись не стоит напротив высокого фото.
+  Кадр — компактная 4:3 врезка в текстовой колонке, секция не растягивается.
+*/
+.p-inset--support {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  grid-column: 6 / span 5;
+  max-width: 28rem;
+  padding-block: 8px 20px;
+}
+
 .p-inset--support .p-inset__caption {
-  grid-column: 1 / span 5;
+  grid-column: auto;
+  width: 100%;
+  border-top: none;
+  padding-top: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
 }
 
 .p-inset--support .p-inset__media {
-  grid-column: 7 / span 6;
+  grid-column: auto;
+  width: 100%;
+  margin: 0;
 }
 
 .p-inset--support .p-inset__media img {
@@ -541,10 +562,10 @@ html {
   aspect-ratio: 3 / 4;
 }
 
-/* Компактный смысловой блок в пределах одного экрана. */
+/* Компактный смысловой блок: фото поддерживает текст, не задаёт высоту секции. */
 .p-split--compact {
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: 40px;
   align-items: start;
 }
 
@@ -552,8 +573,12 @@ html {
   gap: 18px;
 }
 
+.p-split--compact .p-split__media {
+  max-width: 22rem;
+}
+
 .p-split--compact .p-split__media img {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
 }
 
 .p-split--compact .h-points {
@@ -748,7 +773,7 @@ html {
 
 /* Новости: шапка страницы и ведущий материал — один editorial-экран. */
 .p-hero--news {
-  padding-block: 8px 20px;
+  padding-block: 8px 48px;
 }
 
 .p-hero--news .p-hero__inner {
@@ -782,32 +807,70 @@ html {
   grid-column: 1 / -1;
 }
 
-.p-hero--news .p-story__body {
-  gap: 12px;
-  padding-top: 2px;
-}
-
 .p-hero--news .p-story__title {
-  max-width: 24ch;
+  max-width: 18ch;
+  font-size: clamp(28px, 2.6vw, 36px);
 }
 
-/* Об Ассоциации: текст и кадр в одной линии, без свисающего пояса. */
+/* Об Ассоциации: компактный editorial-герой в пределах первого экрана. */
+.p-hero--pair {
+  padding-block: 20px 8px;
+}
+
 .p-hero--pair .p-hero__inner {
-  align-items: start;
+  align-items: end;
+  column-gap: 36px;
 }
 
 .p-hero--pair .p-hero__text {
-  grid-column: 1 / span 5;
-  padding-block: 28px 36px;
-  gap: 18px;
+  grid-column: 1 / span 6;
+  padding-block: 12px 0;
+  gap: 12px;
+}
+
+.p-hero--pair .p-hero__title {
+  max-width: 12ch;
+  font-size: clamp(34px, 3.4vw, 46px);
+  line-height: 1.08;
+}
+
+.p-hero--pair .p-hero__lead {
+  max-width: 46ch;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.p-hero--pair .p-hero__note {
+  max-width: 48ch;
 }
 
 .p-hero--pair .p-hero__media {
-  grid-column: 6 / span 7;
+  grid-column: 7 / span 6;
 }
 
 .p-hero--pair .p-hero__media img {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
+}
+
+.p-hero--pair + .h-section {
+  padding-top: 48px;
+}
+
+/* Деятельность: кадр рядом с коротким intro, не задаёт высоту экрана. */
+.p-hero--support .p-hero__text {
+  grid-column: 1 / span 7;
+  align-self: start;
+}
+
+.p-hero--support .p-hero__media {
+  grid-column: 9 / span 4;
+  max-width: 20rem;
+  align-self: start;
+  margin-top: 36px;
+}
+
+.p-hero--support .p-hero__media img {
+  aspect-ratio: 4 / 3;
 }
 
 .p-section--follow {
@@ -826,6 +889,11 @@ html {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+/* Отступ перед «Виды деятельности»: вводный абзац не должен слипаться с лейблом. */
+.p-scope-block {
+  margin-top: 36px;
 }
 
 /* ---------- Перечень видов деятельности ---------- */
@@ -1064,27 +1132,29 @@ html {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 40px;
-  row-gap: 0;
+  row-gap: 20px;
   align-items: start;
 }
 
 .p-story__media {
-  grid-column: 1 / span 7;
+  grid-column: 1 / span 6;
   margin: 0;
 }
 
 .p-story__media img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
 }
 
+.p-story__intro,
 .p-story__body {
-  grid-column: 8 / span 5;
+  grid-column: 7 / span 6;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 18px;
+  gap: 12px;
+  padding-top: 2px;
 }
 
 .p-story__title {
@@ -1190,13 +1260,13 @@ html {
 }
 
 /*
-  Продолжение материала — отдельный блок на ширину контейнера: узкая колонка
-  справа держит только вступление, полный текст не растягивается от края до края.
+  Продолжение ведущего текста — сразу под общим нижним краем фото и заголовка,
+  без отдельной секции и без дырки под кадром.
 */
 .p-story__continue {
   grid-column: 1 / -1;
-  margin-top: 8px;
-  padding-top: 28px;
+  margin-top: 0;
+  padding-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -1214,6 +1284,7 @@ html {
   width: 64px;
   height: 1px;
   background: var(--gold);
+  margin-bottom: 16px;
 }
 
 .p-hero__actions {
@@ -1246,8 +1317,8 @@ html {
 
 .p-stories__item {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 7fr) minmax(0, 3fr);
-  column-gap: 40px;
+  grid-template-columns: minmax(7.5rem, 1.6fr) minmax(0, 7.4fr) minmax(0, 3fr);
+  column-gap: 32px;
   row-gap: 18px;
   align-items: start;
   padding: 28px 0 30px;
@@ -1255,7 +1326,11 @@ html {
 }
 
 .p-stories__item--article {
-  grid-template-columns: minmax(0, 2fr) minmax(0, 10fr);
+  grid-template-columns: minmax(7.5rem, 1.6fr) minmax(0, 10.4fr);
+}
+
+.p-stories__item--article .p-stories__meta {
+  padding-top: 0.45em;
 }
 
 .p-stories__item--article .p-stories__body.p-article {
@@ -1268,9 +1343,9 @@ html {
 
 .p-stories__item--article .p-stories__media {
   grid-column: auto;
-  max-width: 42rem;
+  max-width: none;
   width: 100%;
-  margin: 0 0 1.15em;
+  margin: 0 0 1em;
 }
 
 .p-stories__body {
@@ -1789,7 +1864,25 @@ a.p-contact__value:focus-visible {
 
   .p-hero--pair .p-hero__text {
     grid-column: 1;
-    padding-block: 20px 0;
+    padding-block: 12px 0;
+  }
+
+  .p-hero--pair .p-hero__media {
+    margin-top: 20px;
+  }
+
+  .p-hero--pair .p-hero__inner {
+    align-items: start;
+  }
+
+  .p-hero--support .p-hero__text,
+  .p-hero--support .p-hero__media {
+    grid-column: 1;
+  }
+
+  .p-hero--support .p-hero__media {
+    margin-top: 20px;
+    max-width: 20rem;
   }
 
   .p-split--editorial,
@@ -1798,18 +1891,31 @@ a.p-contact__value:focus-visible {
     gap: 32px;
   }
 
-  .p-inset--wide .p-inset__media,
-  .p-inset--support .p-inset__media {
+  .p-inset--wide .p-inset__media {
     grid-column: 1 / span 12;
   }
 
-  .p-inset--support .p-inset__caption,
   .p-inset--wide .p-inset__caption {
     grid-column: 1 / span 12;
   }
 
+  .p-inset--support {
+    grid-column: 1;
+    max-width: 28rem;
+    padding-block: 8px 16px;
+  }
+
+  .p-inset--support .p-inset__caption,
+  .p-inset--support .p-inset__media {
+    grid-column: auto;
+  }
+
   .p-inset--support .p-inset__media img {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 4 / 3;
+  }
+
+  .p-split--compact .p-split__media {
+    max-width: 22rem;
   }
 
   .p-hero--split .p-hero__media img {
@@ -1859,7 +1965,7 @@ a.p-contact__value:focus-visible {
     margin-top: 20px;
   }
 
-  .p-inset {
+  .p-inset:not(.p-inset--support) {
     padding-block: 44px 36px;
     row-gap: 28px;
   }
@@ -2103,6 +2209,7 @@ a.p-contact__value:focus-visible {
   }
 
   .p-story__media,
+  .p-story__intro,
   .p-story__body,
   .p-story__continue {
     grid-column: 1;
@@ -2135,9 +2242,10 @@ a.p-contact__value:focus-visible {
   .p-stories__item--article .p-stories__media {
     grid-column: auto;
     max-width: none;
+    width: 100%;
   }
 
-  .p-stories__media {
+  .p-stories__item:not(.p-stories__item--article) .p-stories__media {
     max-width: 280px;
   }
 
@@ -2232,12 +2340,27 @@ a.p-contact__value:focus-visible {
     grid-column: 1;
   }
 
-  .p-stories__item {
-    padding: 32px 0 34px;
+  .p-stories__item,
+  .p-stories__item--article {
+    padding: 28px 0 24px;
+    row-gap: 12px;
   }
 
-  .p-stories__media {
+  .p-stories__item--article .p-stories__meta {
+    padding-top: 0;
+  }
+
+  .p-stories__item--article .p-stories__media {
+    width: 100%;
+    margin: 0 0 0.85em;
+  }
+
+  .p-stories__item:not(.p-stories__item--article) .p-stories__media {
     max-width: 260px;
+  }
+
+  .p-scope-block {
+    margin-top: 20px;
   }
 
   .p-narrow__media {
