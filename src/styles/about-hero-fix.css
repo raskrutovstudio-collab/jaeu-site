@@ -1,0 +1,42 @@
+/*
+  Страница «Об Ассоциации»: на desktop изображение начинается ровно от H1
+  и заканчивается на последней строке пояснения. Высоту задаёт текстовая
+  колонка, а не собственная пропорция изображения.
+*/
+@media (min-width: 1041px) {
+  .p-hero--about-fill .p-hero__inner {
+    position: relative !important;
+    display: block !important;
+    margin-bottom: 36px !important;
+    min-height: 0 !important;
+  }
+
+  .p-hero--about-fill .p-hero__text {
+    width: 40% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .p-hero--about-fill .p-hero__media {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: calc(40% + 40px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .p-hero--about-fill .p-hero__media img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+  }
+}
