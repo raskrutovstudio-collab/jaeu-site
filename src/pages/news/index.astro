@@ -113,40 +113,42 @@ const newsSchema = {
       </div>
 
       <article class="p-featured-news">
-        <div class="p-featured-news__content">
-          <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
-          <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
-          <h2 class="h-h2" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
-
-          <div class="p-featured-news__text p-article">
-            <p class="p-story__text">{featuredLead}</p>
-            {featuredRest.map((text) => (
-              <>
-                <p class="p-story__text">{text}</p>
-                {news.featured.points && text.trim().endsWith(':') && (
-                  <ul>
-                    {news.featured.points.map((point) => <li>{point}</li>)}
-                  </ul>
-                )}
-              </>
-            ))}
+        <div class="p-featured-news__top">
+          <div class="p-featured-news__content">
+            <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
+            <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
+            <h2 class="h-h2" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
+            <p class="p-story__text p-featured-news__lead">{featuredLead}</p>
           </div>
+
+          <figure class="p-featured-news__media">
+            <img
+              src={asset(`${news.featured.image}-1000.webp`)}
+              srcset={`${asset(`${news.featured.image}-660.webp`)} 660w, ${asset(`${news.featured.image}-1000.webp`)} 1000w`}
+              sizes="(min-width: 1041px) 650px, 100vw"
+              width="1000"
+              height="563"
+              alt={news.featured.imageAlt}
+              data-i18n-attrs="alt:featured.imageAlt"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
         </div>
 
-        <figure class="p-featured-news__media">
-          <img
-            src={asset(`${news.featured.image}-1000.webp`)}
-            srcset={`${asset(`${news.featured.image}-660.webp`)} 660w, ${asset(`${news.featured.image}-1000.webp`)} 1000w`}
-            sizes="(min-width: 1041px) 650px, 100vw"
-            width="1000"
-            height="563"
-            alt={news.featured.imageAlt}
-            data-i18n-attrs="alt:featured.imageAlt"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-        </figure>
+        <div class="p-featured-news__continue p-article">
+          {featuredRest.map((text) => (
+            <>
+              <p class="p-story__text">{text}</p>
+              {news.featured.points && text.trim().endsWith(':') && (
+                <ul>
+                  {news.featured.points.map((point) => <li>{point}</li>)}
+                </ul>
+              )}
+            </>
+          ))}
+        </div>
       </article>
     </div>
   </section>
@@ -265,20 +267,34 @@ const newsSchema = {
   .p-news-heading .h-lead { max-width: 58ch; font-size: 17px; line-height: 1.5; color: var(--text); }
 
   .p-featured-news {
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+  }
+  .p-featured-news__top {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     gap: 56px;
     align-items: start;
-    padding-top: 30px;
-    border-top: 1px solid var(--line);
   }
   .p-featured-news__content { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
   .p-featured-news__content .p-label { margin-bottom: 2px; }
   .p-featured-news__content .h-h2 { font-size: clamp(30px, 3vw, 40px); line-height: 1.12; max-width: 16ch; }
-  .p-featured-news__text { margin-top: 10px; }
-  .p-featured-news__text.p-article .p-story__text { text-align: left; hyphens: auto; font-size: 16px; line-height: 1.62; }
+  .p-featured-news__lead { margin: 10px 0 0; font-size: 16px; line-height: 1.62; color: var(--text); text-align: left; hyphens: auto; }
   .p-featured-news__media { margin: 0; }
   .p-featured-news__media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .p-featured-news__continue {
+    max-width: 58rem;
+    margin-top: 34px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .p-featured-news__continue.p-article .p-story__text,
+  .p-featured-news__continue.p-article li {
+    text-align: left;
+    hyphens: auto;
+    font-size: 16px;
+    line-height: 1.68;
+  }
 
   .p-stories__item--article {
     grid-template-columns: minmax(7rem, 1.45fr) minmax(0, 10.55fr);
@@ -315,9 +331,9 @@ const newsSchema = {
   .p-stories__item--compact > .p-stories__media img { aspect-ratio: 4 / 3; object-fit: cover; }
 
   @media (max-width: 1040px) {
-    .p-featured-news { grid-template-columns: 1fr; gap: 28px; }
+    .p-featured-news__top { grid-template-columns: 1fr; gap: 28px; }
     .p-featured-news__content .h-h2 { max-width: 22ch; }
-    .p-featured-news__media { order: 2; }
+    .p-featured-news__continue { max-width: 48rem; margin-top: 28px; }
     .p-stories__media--float { width: 42%; }
     .p-stories__item--compact { grid-template-columns: minmax(6.5rem, 1.3fr) minmax(0, 7fr) minmax(12rem, 3fr); }
   }
@@ -326,7 +342,8 @@ const newsSchema = {
     .p-news-hero { padding: 20px 0 38px; }
     .p-news-heading { margin-bottom: 26px; }
     .p-featured-news { padding-top: 24px; }
-    .p-featured-news__media { order: 2; }
+    .p-featured-news__top { gap: 22px; }
+    .p-featured-news__continue { margin-top: 24px; padding-top: 22px; }
     .p-stories__item--article,
     .p-stories__item--compact { grid-template-columns: 1fr; gap: 12px; }
     .p-stories__meta { grid-column: 1; }
