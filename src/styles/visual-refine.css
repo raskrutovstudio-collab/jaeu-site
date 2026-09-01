@@ -353,3 +353,229 @@
     padding-block: 48px;
   }
 }
+
+/*
+  Телефоны 360–480 px: ещё компактнее, чем общий mobile breakpoint.
+  Цель — не уменьшить читаемость, а убрать desktop-масштаб и лишнюю высоту.
+*/
+@media (max-width: 480px) {
+  body.h-body {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .h-shell,
+  .h-shell--wide {
+    padding-inline: 16px;
+  }
+
+  .h-h1,
+  .h-hero__h1,
+  .h-body .p-main .p-news-heading .h-h1 {
+    font-size: 30px;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+  }
+
+  .h-h2 {
+    font-size: 24px;
+    line-height: 1.12;
+  }
+
+  .h-h3 {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .h-lead,
+  .p-main .h-lead,
+  .h-text,
+  .p-main .h-text,
+  .h-points__text,
+  .p-main .h-points__text,
+  .p-main .p-article > p,
+  .p-main .p-article > .h-text,
+  .p-main .p-article .p-story__text,
+  .p-main .p-article .p-stories__text,
+  .p-main .p-article .p-stories__result,
+  .p-main .p-dirs__text,
+  .p-main .p-dirs__practice,
+  .p-main .p-task-grid__item .h-text,
+  .p-main .p-featured-news__lead {
+    font-size: 15px;
+    line-height: 1.52;
+  }
+
+  .h-eyebrow {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .h-eyebrow::before {
+    width: 24px;
+  }
+
+  .h-section {
+    padding-block: 38px;
+  }
+
+  .h-body .p-main .h-section {
+    padding-block: 32px;
+  }
+
+  .h-section__head {
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .h-rule {
+    margin-block: 2px;
+  }
+
+  .h-mobile__link {
+    padding-block: 11px;
+    font-size: 15px;
+  }
+
+  .h-btn {
+    min-height: 44px;
+    padding-inline: 16px;
+    font-size: 14px;
+  }
+
+  .h-about__grid {
+    row-gap: 20px;
+  }
+
+  .h-about__main,
+  .h-split__text {
+    gap: 14px;
+  }
+
+  .h-about__detail img,
+  .h-split--text-left > .h-frame img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .h-points__item {
+    padding: 18px 0 20px;
+  }
+
+  .h-split,
+  .h-faq,
+  .h-news,
+  .h-band {
+    gap: 20px;
+  }
+
+  .p-main .p-hero {
+    padding-block: 14px 0;
+  }
+
+  .p-main .p-hero__text {
+    gap: 11px;
+    padding-block: 12px 0;
+  }
+
+  .p-main .p-crumbs {
+    gap: 5px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .p-main .p-head {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .p-main .p-practice {
+    gap: 16px;
+  }
+
+  .p-main .p-practice__body {
+    gap: 10px;
+  }
+
+  .p-main .p-practice__media img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .p-main .p-dirs__item {
+    padding: 18px 0 20px;
+  }
+
+  .p-main .p-dirs__body {
+    margin-top: 10px;
+    gap: 12px;
+  }
+
+  .p-main .p-pillars__item,
+  .p-main .p-cols__item,
+  .p-main .p-task-grid__item {
+    padding: 18px 0 20px;
+  }
+
+  .p-main .p-task-grid {
+    row-gap: 0;
+  }
+
+  .h-body .p-main .p-news-heading {
+    gap: 7px;
+    margin-bottom: 22px;
+  }
+
+  .h-body .p-main .p-news-heading .h-lead {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .h-body .p-main .p-featured-news__content .h-h2 {
+    font-size: 22px;
+    line-height: 1.12;
+  }
+
+  .p-main .p-featured-news {
+    padding-top: 20px;
+  }
+
+  .p-main .p-featured-news__content,
+  .p-main .p-featured-news__top {
+    gap: 10px;
+  }
+
+  .p-main .p-featured-news__media img,
+  .p-main .p-stories__media img,
+  .p-main .p-stories__media--float img {
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover;
+  }
+
+  .p-main .p-featured-news__continue {
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .p-main .p-featured-news__continue.p-article .p-story__text + .p-story__text,
+  .p-main .p-featured-news__continue.p-article .p-story__text + ul,
+  .p-main .p-featured-news__continue.p-article ul + .p-story__text {
+    margin-top: 0.75em;
+  }
+
+  .p-main .p-stories__item,
+  .p-main .p-stories__item--article,
+  .p-main .p-stories__item--compact {
+    padding: 18px 0 20px;
+  }
+
+  .p-main .p-stories__title {
+    margin-bottom: 10px;
+  }
+
+  .p-main .p-stories__media--float {
+    margin-bottom: 10px !important;
+  }
+
+  .p-main .p-cta {
+    padding-block: 36px;
+  }
+}
