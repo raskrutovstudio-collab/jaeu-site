@@ -87,10 +87,13 @@
     object-position: center;
   }
 
-  /* /news/: продолжение ведущего материала занимает всю контентную ширину. */
+  /* /news/: продолжение ведущего материала выходит из h-shell и занимает почти всю ширину viewport. */
   .p-main .p-featured-news__continue {
-    width: 100%;
+    position: relative;
+    left: 50%;
+    width: min(92rem, calc(100vw - 96px));
     max-width: none;
+    transform: translateX(-50%);
   }
 
   .p-main .p-featured-news__continue.p-article .p-story__text {
