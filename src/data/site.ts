@@ -1,7 +1,7 @@
 export type Locale = 'ru' | 'kz' | 'en';
 
 /**
- * Домен, на котором сайт будет работать в production. Canonical, hreflang и
+ * Домен, на котором сайт будет работать в production. Canonical и
  * структурированные данные всегда указывают сюда, даже когда сборка
  * опубликована как preview на GitHub Pages.
  */
@@ -31,6 +31,11 @@ export const localeMeta = {
   en: { lang: 'en', path: withBase('/en/'), label: 'EN' }
 } as const;
 
+/*
+  `knowledge` и `reports` сохранены только как legacy-пути на период очистки
+  внутренних ссылок. Страниц для них больше нет, в навигацию и sitemap они
+  не входят.
+*/
 export const routes = {
   home: withBase('/'),
   about: withBase('/about/'),
@@ -46,37 +51,27 @@ export const routes = {
   en: withBase('/en/')
 } as const;
 
-/**
- * Русские URL, которые можно отдавать поисковикам.
- * Технические `/kz/`, `/en/` и прочие служебные маршруты сюда не входят:
- * у них noindex, и в sitemap их быть не должно.
- */
+/** Русские URL, которые можно отдавать поисковикам. */
 export const indexablePaths = [
   '/',
   '/about/',
   '/activities/',
   '/expert-council/',
   '/membership/',
-  '/knowledge/',
   '/documents/',
-  '/reports/',
   '/news/',
   '/contacts/'
 ] as const;
 
 export type RouteKey = keyof typeof routes;
 
-/*
-  Состав и порядок совпадают с шапкой основного пакета страниц. Отчётность —
-  вспомогательный маршрут: в навигации её нет ни в строке, ни в меню, точка
-  входа остаётся в футере.
-*/
+/* Legacy-набор для старых компонентов. Актуальные SiteHeader/SiteFooter
+   дополнительно исключают retired-маршруты на уровне представления. */
 export const navPrimary = [
   { href: routes.about, key: 'about' as const },
   { href: routes.activities, key: 'activities' as const },
   { href: routes.expertCouncil, key: 'experts' as const },
   { href: routes.membership, key: 'membership' as const },
-  { href: routes.knowledge, key: 'knowledge' as const },
   { href: routes.news, key: 'news' as const },
   { href: routes.documents, key: 'documents' as const },
   { href: routes.contacts, key: 'contacts' as const }
@@ -90,9 +85,7 @@ export const footerGroups = {
   ],
   membership: [
     { href: routes.membership, key: 'membership' as const },
-    { href: routes.documents, key: 'documents' as const },
-    { href: routes.knowledge, key: 'knowledge' as const },
-    { href: routes.reports, key: 'reports' as const }
+    { href: routes.documents, key: 'documents' as const }
   ],
   press: [
     { href: routes.news, key: 'news' as const },
