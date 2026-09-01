@@ -29,7 +29,7 @@ import { withBase } from '../../data/site';
         <img
           src={withBase('/assets/jaeu/directions-review-1160.webp')}
           srcset={`${withBase('/assets/jaeu/directions-review-760.webp')} 760w, ${withBase('/assets/jaeu/directions-review-1160.webp')} 1160w`}
-          sizes="(min-width: 1041px) 870px, 100vw"
+          sizes="(min-width: 1041px) 1160px, 100vw"
           width="1160"
           height="326"
           alt={directions.reviewAlt}
@@ -55,3 +55,45 @@ import { withBase } from '../../data/site';
     </div>
   </div>
 </section>
+
+<style>
+  /* Первый промежуточный кадр теперь является осознанным медиапоясом,
+     а не плавающей картинкой, сдвинутой к правому краю. */
+  .h-dirs__strip {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    margin: 18px 0 24px;
+  }
+
+  .h-dirs__strip img {
+    width: 100%;
+    aspect-ratio: 18 / 5;
+    object-fit: cover;
+    object-position: center 48%;
+  }
+
+  @media (max-width: 1040px) {
+    .h-dirs__strip {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      margin: 14px 0 18px;
+    }
+
+    .h-dirs__strip img {
+      aspect-ratio: 21 / 9;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .h-dirs__strip {
+      grid-column: 1;
+      grid-row: auto;
+      margin: 8px 0 4px;
+    }
+
+    .h-dirs__strip img {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>
