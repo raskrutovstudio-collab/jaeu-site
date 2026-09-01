@@ -2,6 +2,12 @@
 import Icon from './Icon.astro';
 import { documents, routes } from '../../data/home';
 import { withBase } from '../../data/site';
+
+/* На главной показываем только самостоятельные документы, а не материалы,
+   которые уже полностью раскрыты в разделе «Членство». */
+const standaloneDocuments = documents.items.filter((title) =>
+  !title.includes('вступления') && !title.includes('членских взносов')
+);
 ---
 
 <section class="h-section h-section--white" aria-labelledby="documents-title" data-reveal>
@@ -29,15 +35,18 @@ import { withBase } from '../../data/site';
     </div>
 
     <ul class="h-docs">
-      {documents.items.map((title, index) => (
-        <li class="h-docs__item">
-          <a class="h-docs__link" href={routes.documents}>
-            <Icon name="document" class="h-docs__icon" />
-            <span class="h-docs__name" data-i18n={`documents.items.${index}`}>{title}</span>
-            <span class="h-docs__hint" data-i18n="documents.hint">{documents.hint}</span>
-          </a>
-        </li>
-      ))}
+      {standaloneDocuments.map((title) => {
+        const sourceIndex = documents.items.indexOf(title);
+        return (
+          <li class="h-docs__item">
+            <a class="h-docs__link" href={routes.documents}>
+              <Icon name="document" class="h-docs__icon" />
+              <span class="h-docs__name" data-i18n={`documents.items.${sourceIndex}`}>{title}</span>
+              <span class="h-docs__hint" data-i18n="documents.hint">{documents.hint}</span>
+            </a>
+          </li>
+        );
+      })}
     </ul>
   </div>
 </section>
