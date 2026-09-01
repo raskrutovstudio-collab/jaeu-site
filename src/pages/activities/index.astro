@@ -7,12 +7,6 @@ import { routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
-/* Второй ряд направлений идёт после врезки, поэтому ключи считаются со сдвига. */
-const splitAt = 2;
-const [firstHalf, secondHalf] = [
-  activities.directions.items.slice(0, splitAt),
-  activities.directions.items.slice(splitAt)
-];
 ---
 
 <InnerLayout
@@ -41,7 +35,7 @@ const [firstHalf, secondHalf] = [
           <img
             src={asset('page-activities-expertise-1160.webp')}
             srcset={`${asset('page-activities-expertise-760.webp')} 760w, ${asset('page-activities-expertise-1160.webp')} 1160w`}
-            sizes="(min-width: 1041px) 560px, 100vw"
+            sizes="(min-width: 1041px) 320px, 100vw"
             width="1160"
             height="261"
             alt={activities.hero.beltAlt}
@@ -62,8 +56,8 @@ const [firstHalf, secondHalf] = [
         <hr class="h-rule" />
       </div>
 
-      <div class="p-dirs">
-        {firstHalf.map((item, index) => (
+      <div class="p-dirs p-dirs--clean">
+        {activities.directions.items.map((item, index) => (
           <article class="p-dirs__item" data-rise="2">
             <div class="p-dirs__head">
               <Icon name={item.icon} class="p-dirs__icon" />
@@ -81,78 +75,26 @@ const [firstHalf, secondHalf] = [
             </div>
           </article>
         ))}
-
-        <div class="p-inset p-inset--support">
-          <p class="p-inset__caption" data-rise="3" data-i18n="directions.mediaCaption">{activities.directions.mediaCaption}</p>
-          <figure class="p-inset__media" data-reveal-media>
-            <img
-              src={asset('page-activities-discussion-1200.webp')}
-              srcset={`${asset('page-activities-discussion-760.webp')} 760w, ${asset('page-activities-discussion-1200.webp')} 1200w`}
-              sizes="(min-width: 1041px) 448px, (min-width: 761px) 60vw, 100vw"
-              width="1200"
-              height="800"
-              alt={activities.directions.mediaAlt}
-              data-i18n-attrs="alt:directions.mediaAlt"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        </div>
-
-        {secondHalf.map((item, offset) => (
-          <article class="p-dirs__item" data-rise="4">
-            <div class="p-dirs__head">
-              <Icon name={item.icon} class="p-dirs__icon" />
-              <h3 class="h-h3" data-i18n={`directions.items.${offset + splitAt}.title`}>{item.title}</h3>
-            </div>
-            <div class="p-dirs__body">
-              <p class="p-dirs__text" data-i18n={`directions.items.${offset + splitAt}.text`}>{item.text}</p>
-              {item.practice && (
-                <p class="p-dirs__practice" data-i18n={`directions.items.${offset + splitAt}.practice`}>{item.practice}</p>
-              )}
-              <a class="h-link" href={item.link.href}>
-                <span data-i18n={`directions.items.${offset + splitAt}.link.label`}>{item.link.label}</span>
-                <Icon name="arrow" class="h-link__arrow" />
-              </a>
-            </div>
-          </article>
-        ))}
       </div>
     </div>
   </section>
 
   <section class="h-section h-section--stone" aria-labelledby="activities-tasks" data-reveal>
     <div class="h-shell">
-      <div class="p-split p-split--compact">
-        <div class="p-split__body">
-          <h2 class="h-h2" id="activities-tasks" data-rise="1" data-i18n="tasks.h2">{activities.tasks.h2}</h2>
-          <hr class="h-rule" />
-          <p class="h-text" data-rise="2" data-i18n="tasks.lead">{activities.tasks.lead}</p>
-
-          <ul class="h-points" data-rise="3">
-            {activities.tasks.items.map((item, index) => (
-              <li class="h-points__item">
-                <h3 class="h-h3 h-points__title" data-i18n={`tasks.items.${index}.title`}>{item.title}</h3>
-                <p class="h-points__text" data-i18n={`tasks.items.${index}.text`}>{item.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <figure class="p-split__media" data-reveal-media>
-          <img
-            src={asset('page-activities-balance-1000.webp')}
-            srcset={`${asset('page-activities-balance-600.webp')} 600w, ${asset('page-activities-balance-1000.webp')} 1000w`}
-            sizes="(min-width: 1041px) 352px, (min-width: 761px) 40vw, 100vw"
-            width="1000"
-            height="1250"
-            alt={activities.tasks.imageAlt}
-            data-i18n-attrs="alt:tasks.imageAlt"
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
+      <div class="p-head p-head--tasks">
+        <h2 class="h-h2" id="activities-tasks" data-rise="1" data-i18n="tasks.h2">{activities.tasks.h2}</h2>
+        <hr class="h-rule" />
+        <p class="h-text" data-rise="2" data-i18n="tasks.lead">{activities.tasks.lead}</p>
       </div>
+
+      <ul class="p-task-grid" data-rise="3">
+        {activities.tasks.items.map((item, index) => (
+          <li class="p-task-grid__item">
+            <h3 class="h-h3" data-i18n={`tasks.items.${index}.title`}>{item.title}</h3>
+            <p class="h-text" data-i18n={`tasks.items.${index}.text`}>{item.text}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -196,7 +138,6 @@ const [firstHalf, secondHalf] = [
           <h2 class="h-h2 p-cta__title" id="activities-cta" data-rise="1" data-i18n="cta.h2">{activities.cta.h2}</h2>
           <p class="p-cta__text" data-rise="2" data-i18n="cta.text">{activities.cta.text}</p>
         </div>
-
         <div class="p-cta__actions" data-rise="3">
           <a class="h-btn h-btn--light" href={activities.cta.primary.href}>
             <span data-i18n="cta.primary.label">{activities.cta.primary.label}</span>
@@ -211,3 +152,57 @@ const [firstHalf, secondHalf] = [
     </div>
   </section>
 </InnerLayout>
+
+<style>
+  .p-dirs--clean .p-dirs__text,
+  .p-dirs--clean .p-dirs__practice {
+    text-align: left;
+    hyphens: auto;
+  }
+
+  .p-head--tasks {
+    margin-bottom: 34px;
+  }
+
+  .p-task-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 64px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .p-task-grid__item {
+    position: relative;
+    padding: 30px 0 34px;
+    border-top: 1px solid var(--line);
+  }
+
+  .p-task-grid__item::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .p-task-grid__item .h-h3 {
+    margin-bottom: 12px;
+  }
+
+  .p-task-grid__item .h-text {
+    max-width: 46ch;
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 760px) {
+    .p-task-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
