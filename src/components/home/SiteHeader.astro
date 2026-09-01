@@ -15,6 +15,13 @@ const cta = 'Стать членом Ассоциации';
 /* Рядом с пунктами меню и переключателем языка помещается только короткая подпись. */
 const ctaShort = 'Стать членом';
 
+/*
+  База знаний больше не является самостоятельной страницей: заказчику нужна
+  тематическая навигация без промежуточного хаба. Один и тот же набор пунктов
+  используется и в desktop, и в burger.
+*/
+const primaryNav = nav.filter((item) => item.href !== routes.knowledge);
+
 const isCurrent = (href: string) => href === currentPath;
 ---
 
@@ -46,7 +53,7 @@ const isCurrent = (href: string) => href === currentPath;
 
     <nav class="h-nav" data-i18n-attrs="aria-label:ui.navLabel" aria-label="Основная навигация">
       <ul class="h-nav__list">
-        {nav.map((item) => (
+        {primaryNav.map((item) => (
           <li class:list={['h-nav__item', item.key && 'h-nav__item--key']}>
             <a
               class="h-nav__link"
@@ -87,7 +94,7 @@ const isCurrent = (href: string) => href === currentPath;
     <div class="h-shell h-shell--wide h-mobile__inner">
       <nav aria-label="Мобильная навигация" data-i18n-attrs="aria-label:ui.navLabelMobile">
         <ul class="h-mobile__list">
-          {nav.map((item) => (
+          {primaryNav.map((item) => (
             <li class:list={['h-mobile__item', item.key && 'h-mobile__item--key']}>
               <a
                 class="h-mobile__link"
