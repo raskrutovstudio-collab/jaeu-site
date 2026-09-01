@@ -64,8 +64,6 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
     </div>
   </section>
 
-  <!-- Секция попадает в первый экран вместе с hero, поэтому reveal здесь не
-       подключается: содержимое не должно проявляться при загрузке. -->
   <section class="h-section h-section--white" aria-labelledby="membership-eligibility">
     <div class="h-shell">
       <div class="p-spread">
@@ -203,10 +201,6 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
           >
             <span data-i18n="cta.primary.label">{membership.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
-          </a>
-          <a class="p-cta__link" href={membership.cta.secondary.href}>
-            <span data-i18n="cta.secondary.label">{membership.cta.secondary.label}</span>
-            <Icon name="arrow" class="p-cta__arrow" />
           </a>
         </div>
       </div>
