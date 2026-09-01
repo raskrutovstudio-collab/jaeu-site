@@ -27,6 +27,27 @@ const itemDescription = (item: NewsItem) => {
   return fields.paragraphs?.[0] || fields.text || '';
 };
 
+const compactVisual = (item: NewsItem, index: number) => {
+  if (index === 4) {
+    return {
+      src: asset('page-council-table-1160.webp'),
+      srcset: `${asset('page-council-table-760.webp')} 760w, ${asset('page-council-table-1160.webp')} 1160w`
+    };
+  }
+
+  if (index === 5) {
+    return {
+      src: asset('page-council-group-1400.webp'),
+      srcset: `${asset('page-council-group-900.webp')} 900w, ${asset('page-council-group-1400.webp')} 1400w`
+    };
+  }
+
+  return {
+    src: asset(`${item.image}-400.webp`),
+    srcset: `${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-400.webp`)} 400w`
+  };
+};
+
 const itemsByYear = [...new Set(news.items.map((item) => item.date.slice(0, 4)))].map((year) => ({
   year,
   entries: news.items
@@ -141,6 +162,7 @@ const newsSchema = {
             {group.entries.map(({ item, index }) => {
               const fields = newsFields(item);
               const landscape = fields.article;
+              const visual = compactVisual(item, index);
               return (
                 <li>
                   <article class:list={['p-stories__item', landscape && 'p-stories__item--article', !landscape && 'p-stories__item--compact']}>
@@ -185,8 +207,8 @@ const newsSchema = {
                     {!landscape && (
                       <figure class="p-stories__media" data-reveal-media>
                         <img
-                          src={asset(`${item.image}-400.webp`)}
-                          srcset={`${asset(`${item.image}-240.webp`)} 240w, ${asset(`${item.image}-400.webp`)} 400w`}
+                          src={visual.src}
+                          srcset={visual.srcset}
                           sizes="(min-width: 1041px) 250px, 240px"
                           width="400"
                           height="300"
@@ -305,7 +327,6 @@ const newsSchema = {
     .p-news-heading { margin-bottom: 26px; }
     .p-featured-news { padding-top: 24px; }
     .p-featured-news__media { order: 2; }
-    .p-featured-news__text { order: 3; }
     .p-stories__item--article,
     .p-stories__item--compact { grid-template-columns: 1fr; gap: 12px; }
     .p-stories__meta { grid-column: 1; }
