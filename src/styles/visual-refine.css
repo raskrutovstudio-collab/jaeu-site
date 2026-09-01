@@ -87,16 +87,17 @@
     object-position: center;
   }
 
-  /* /news/: продолжение ведущего материала выходит из h-shell и занимает почти всю ширину viewport. */
+  /* /news/: продолжение ведущего материала ровно совпадает с границами h-shell. */
   .p-main .p-featured-news__continue {
-    position: relative;
-    left: 50%;
-    width: min(92rem, calc(100vw - 96px));
-    max-width: none;
-    transform: translateX(-50%);
+    position: static !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    transform: none !important;
   }
 
   .p-main .p-featured-news__continue.p-article .p-story__text {
+    width: 100%;
     max-width: none;
     text-align: justify;
     text-justify: inter-word;
@@ -110,7 +111,7 @@
 }
 
 @media (max-width: 900px) {
-  /* На планшете и телефоне justify уже создаёт дыры между словами. */
+  /* На планшете и телефоне justify даёт заметные разрывы между словами. */
   .p-main .p-featured-news__continue.p-article .p-story__text {
     text-align: left;
     hyphens: none;
