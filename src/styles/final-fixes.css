@@ -83,8 +83,35 @@ main section[aria-labelledby='contacts-actions'] > .h-shell > .p-note {
   }
 }
 
-/* Вводная строка над лентой новостей — одна строка на широком desktop. */
+/*
+  В русской desktop-версии короткие заголовки намеренно сужены до двух строк.
+  Для KZ/EN оставляем естественный перенос, но двухстрочная высота сохраняется.
+*/
 @media (min-width: 1041px) {
+  html[lang^='ru'] main section[aria-labelledby='membership-rights'] .p-cols__item:nth-child(1) .p-cols__title {
+    max-width: 9.5em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='membership-rights'] .p-cols__item:nth-child(2) .p-cols__title {
+    max-width: 12.5em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='membership-rights'] .p-cols__item:nth-child(3) .p-cols__title {
+    max-width: 8.5em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='membership-rights'] .p-cols__item:nth-child(4) .p-cols__title {
+    max-width: 11em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='membership-rights'] .p-cols__item:nth-child(5) .p-cols__title {
+    max-width: 10.5em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='membership-rights'] .p-cols__item:nth-child(6) .p-cols__title {
+    max-width: 8.5em;
+  }
+
   main .p-hint--head {
     display: block;
     width: max-content;
