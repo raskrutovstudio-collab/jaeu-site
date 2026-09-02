@@ -1,16 +1,5 @@
 ---
-/*
-  Клиентский перевод страницы без смены URL.
-
-  Компонент ставится последним в body: разметка к этому моменту разобрана, а
-  первая отрисовка ещё не произошла, поэтому сохранённый язык применяется без
-  русской вспышки и без сдвига layout.
-
-  Русские строки берутся из самой разметки, а не из полезной нагрузки, поэтому
-  без JavaScript страница остаётся полноценно русской и индексируемой.
-*/
 interface Props {
-  /** Перекрытия только для KZ/EN: см. `buildI18nPayload`. */
   payload: {
     storageKey: string;
     locales: readonly { id: string; lang: string }[];
@@ -27,8 +16,8 @@ const { payload } = Astro.props;
     const langAttr = new Map(i18n.locales.map((item) => [item.id, item.lang]));
     const texts = [];
     const attrs = [];
+    const variants = [];
 
-    // Заголовок может содержать иконку, поэтому меняется только текстовый узел.
     const firstText = (element) => {
       for (const node of element.childNodes) {
         if (node.nodeType === 3 && node.textContent.trim()) return node;
@@ -55,11 +44,21 @@ const { payload } = Astro.props;
       });
     });
 
-    // Ключ без подтверждённого перевода остаётся русским из разметки.
+    document.querySelectorAll('[data-lang-only]').forEach((element) => {
+      variants.push({ element, mode: element.dataset.langOnly });
+    });
+
     const resolve = (locale, key, base) => {
       if (locale === 'ru') return base;
       const table = i18n.overrides[locale];
       return (table && table[key]) || base;
+    };
+
+    const applyVariants = (locale) => {
+      variants.forEach((item) => {
+        const show = item.mode === 'translated' ? locale !== 'ru' : item.mode === locale;
+        item.element.hidden = !show;
+      });
     };
 
     let current = 'ru';
@@ -74,8 +73,11 @@ const { payload } = Astro.props;
       attrs.forEach((item) => {
         item.element.setAttribute(item.attr, resolve(next, item.key, item.base));
       });
+      applyVariants(next);
       document.dispatchEvent(new CustomEvent('jaeu:lang', { detail: next }));
     };
+
+    applyVariants('ru');
 
     window.jaeuLang = {
       storageKey: i18n.storageKey,
