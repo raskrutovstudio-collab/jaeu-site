@@ -7,6 +7,26 @@ import { routes } from '../../data/home';
 import { withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+
+const councilI18n = {
+  ...expertCouncilI18n,
+  'compliance.h2': {
+    kk: 'Қазақстан Республикасының КЖ/ТҚҚ/ЖҚҚТҚ саласындағы заңнама талаптарының сақталуын бақылау',
+    en: 'Monitoring compliance with the legislation of the Republic of Kazakhstan in the AML/CFT/CPF field'
+  },
+  'compliance.paragraphs.0': {
+    kk: 'Қауымдастық мүшелерінің қылмыстық жолмен алынған кірістерді заңдастыруға, терроризмді қаржыландыруға және жаппай қырып-жою қаруын таратуды қаржыландыруға қарсы іс-қимыл саласындағы Қазақстан Республикасы заңнамасының талаптарын сақтауына жәрдемдесу мақсатында Кеңес өз құзыреті шегінде осы талаптардың сақталуын мониторингтейді, келіп түскен материалдар мен мәліметтерді қарайды және заңнама талаптарының орындалуын бағалау үшін маңызы бар мән-жайларды талдайды.',
+    en: 'To support members of the Association in complying with the legislation of the Republic of Kazakhstan on anti-money laundering, counter-terrorist financing and counter-proliferation financing, the Council monitors compliance within its competence, reviews submitted materials and information, and analyses circumstances relevant to assessing compliance with the applicable requirements.'
+  },
+  'compliance.paragraphs.1': {
+    kk: 'Қазақстан Республикасының КЖ/ТҚҚ/ЖҚҚТҚ саласындағы заңнамасында белгіленген мінсіз іскерлік бедел талаптарына сәйкес келмейтін заңды және жеке тұлғалар Қауымдастық мүшесі бола алмайды. Бұл талаптарға сәйкестік мүшелікке кіру және оны сақтау үшін міндетті шарт болып табылады.',
+    en: 'Legal entities and individuals that do not meet the requirements for an impeccable business reputation established by the legislation of the Republic of Kazakhstan in the AML/CFT/CPF field may not be members of the Association. Compliance with these requirements is a mandatory condition for acquiring and retaining membership.'
+  },
+  'compliance.paragraphs.2': {
+    kk: 'Кеңес Қауымдастық мүшелерінің мінсіз іскерлік бедел талаптарына сәйкестігін бағалайды, КЖ/ТҚҚ/ЖҚҚТҚ саласындағы заңнаманы бұзу туралы мәліметтерді қарайды және осы заңнама талаптарын жүйелі түрде орындамау не тиісінше орындамау фактілерін талдайды.',
+    en: 'The Council assesses whether members of the Association meet the requirements for an impeccable business reputation, reviews information on breaches of AML/CFT/CPF legislation, and analyses cases of systematic failure or improper performance of the requirements of that legislation.'
+  }
+};
 ---
 
 <InnerLayout
@@ -15,7 +35,7 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   ogTitle={council.meta.ogTitle}
   path={routes.expertCouncil}
   crumb={council.crumb}
-  i18n={expertCouncilI18n}
+  i18n={councilI18n}
 >
   <section class="p-hero p-hero--split">
     <div class="h-shell">
@@ -87,12 +107,12 @@ const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
   <section class="h-section h-section--white" aria-labelledby="council-compliance" data-reveal>
     <div class="h-shell">
       <div class="p-head">
-        <h2 class="h-h2" id="council-compliance" data-rise="1">{council.compliance.h2}</h2>
+        <h2 class="h-h2" id="council-compliance" data-rise="1" data-i18n="compliance.h2">{council.compliance.h2}</h2>
         <hr class="h-rule" />
       </div>
       <div class="p-article">
-        {council.compliance.paragraphs.map((text) => (
-          <p>{text}</p>
+        {council.compliance.paragraphs.map((text, index) => (
+          <p data-i18n={`compliance.paragraphs.${index}`}>{text}</p>
         ))}
       </div>
     </div>
