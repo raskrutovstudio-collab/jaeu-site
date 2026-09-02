@@ -1,33 +1,22 @@
 export type Locale = 'ru' | 'kz' | 'en';
 
-/**
- * Домен, на котором сайт работает в production. Canonical и структурированные
- * данные всегда указывают сюда, независимо от preview-сборки.
- */
 export const productionOrigin = 'https://jaeu.kz';
 
-/** Astro `base`, всегда со слешами по краям: `/` или `/jaeu-site/`. */
 const base = `/${import.meta.env.BASE_URL.replace(/^\/|\/$/g, '')}/`.replace(/^\/\/$/, '/');
 
-/** Префиксует корневой путь значением Astro `base`: `/about/` → `/jaeu-site/about/`. */
 export function withBase(path: string): string {
   return `${base}${path.replace(/^\//, '')}`;
 }
 
-/** Убирает префикс `base`, возвращая путь относительно корня сайта. */
 export function withoutBase(path: string): string {
   return path.startsWith(base) ? `/${path.slice(base.length)}` : path;
 }
 
-/** Абсолютный URL страницы на production-домене, независимо от `base`. */
 export function canonicalUrl(path: string): string {
   return new URL(withoutBase(path), productionOrigin).href;
 }
 
-/*
-  Переключение RU/KZ/EN происходит на одном URL через I18nRuntime.
-  Отдельных индексируемых или технических `/kz/` и `/en/` больше нет.
-*/
+/* RU/KZ/EN переключаются на одном URL. */
 export const localeMeta = {
   ru: { lang: 'ru-KZ', path: withBase('/'), label: 'RU' },
   kz: { lang: 'kk-KZ', path: withBase('/'), label: 'KZ' },
@@ -42,10 +31,15 @@ export const routes = {
   membership: withBase('/membership/'),
   documents: withBase('/documents/'),
   news: withBase('/news/'),
-  contacts: withBase('/contacts/')
+  contacts: withBase('/contacts/'),
+
+  /* Deprecated aliases: не индексируются и не выводятся в навигации. */
+  knowledge: withBase('/knowledge/'),
+  reports: withBase('/reports/'),
+  kz: withBase('/kz/'),
+  en: withBase('/en/')
 } as const;
 
-/** Русские URL, которые можно отдавать поисковикам. */
 export const indexablePaths = [
   '/',
   '/about/',
