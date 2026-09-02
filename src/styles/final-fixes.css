@@ -15,6 +15,27 @@ main .p-facts dt {
   hyphens: none !important;
 }
 
+/*
+  Финальный CTA на главной — самостоятельный призыв, а не редакционный текст.
+  Вся композиция собирается по центральной оси: заголовок, линия, пояснение
+  и действия. Для короткого центрированного текста красная строка не нужна.
+*/
+main .h-final__title,
+main .h-final__text {
+  text-align: center !important;
+  text-align-last: center !important;
+  text-indent: 0 !important;
+}
+
+main .h-final__inner {
+  align-items: center;
+  text-align: center;
+}
+
+main .h-final__actions {
+  justify-content: center;
+}
+
 /* FAQ: весь вопрос — кликабельная строка, а не только символ справа. */
 main .h-faq__trigger {
   width: 100%;
