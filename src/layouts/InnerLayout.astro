@@ -1,16 +1,4 @@
 ---
-/*
-  Лейаут внутренних страниц.
-
-  Шапка, футер, токены и типографика взяты те же, что у утверждённой главной
-  (`home.css`, `SiteHeader`, `SiteFooter`), поэтому внутренние страницы
-  читаются как её продолжение. `inner.css` добавляет только композиции,
-  которых на главной нет.
-
-  Язык переключается тем же механизмом, что и на главной: русская разметка —
-  baseline и единственная индексируемая версия, KZ/EN подставляются на клиенте
-  по словарю страницы. URL при переключении не меняется.
-*/
 import '../styles/inner-entry.css';
 import I18nRuntime from '../components/I18nRuntime.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
@@ -24,11 +12,8 @@ interface Props {
   description: string;
   ogTitle: string;
   path: string;
-  /** Видимая хлебная крошка текущей страницы. */
   crumb: string;
-  /** Дополнительные узлы структурированных данных с подтверждёнными фактами. */
   schema?: Record<string, unknown>[];
-  /** Перекрытия KZ/EN для ключей `data-i18n` этой страницы. */
   i18n: Record<string, { kk: string; en: string }>;
 }
 
@@ -78,7 +63,7 @@ const jsonLd = {
     <meta name="theme-color" content="#202A57" />
     <link rel="icon" type="image/svg+xml" href={withBase('/assets/jaeu-emblem.svg')} />
 
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:site_name" content={org.shortName} />
     <meta property="og:title" content={ogTitle} />
@@ -97,7 +82,6 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
     <script is:inline>
-      // Начальное состояние stagger включаем до отрисовки, иначе контент мигнёт.
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.dataset.motion = 'on';
       }
