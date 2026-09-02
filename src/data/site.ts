@@ -1,9 +1,8 @@
 export type Locale = 'ru' | 'kz' | 'en';
 
 /**
- * Домен, на котором сайт будет работать в production. Canonical и
- * структурированные данные всегда указывают сюда, даже когда сборка
- * опубликована как preview на GitHub Pages.
+ * Домен, на котором сайт работает в production. Canonical и структурированные
+ * данные всегда указывают сюда, независимо от preview-сборки.
  */
 export const productionOrigin = 'https://jaeu.kz';
 
@@ -25,30 +24,25 @@ export function canonicalUrl(path: string): string {
   return new URL(withoutBase(path), productionOrigin).href;
 }
 
+/*
+  Переключение RU/KZ/EN происходит на одном URL через I18nRuntime.
+  Отдельных индексируемых или технических `/kz/` и `/en/` больше нет.
+*/
 export const localeMeta = {
   ru: { lang: 'ru-KZ', path: withBase('/'), label: 'RU' },
-  kz: { lang: 'kk-KZ', path: withBase('/kz/'), label: 'KZ' },
-  en: { lang: 'en', path: withBase('/en/'), label: 'EN' }
+  kz: { lang: 'kk-KZ', path: withBase('/'), label: 'KZ' },
+  en: { lang: 'en', path: withBase('/'), label: 'EN' }
 } as const;
 
-/*
-  `knowledge` и `reports` сохранены только как legacy-пути на период очистки
-  внутренних ссылок. Страниц для них больше нет, в навигацию и sitemap они
-  не входят.
-*/
 export const routes = {
   home: withBase('/'),
   about: withBase('/about/'),
   activities: withBase('/activities/'),
   expertCouncil: withBase('/expert-council/'),
   membership: withBase('/membership/'),
-  knowledge: withBase('/knowledge/'),
   documents: withBase('/documents/'),
-  reports: withBase('/reports/'),
   news: withBase('/news/'),
-  contacts: withBase('/contacts/'),
-  kz: withBase('/kz/'),
-  en: withBase('/en/')
+  contacts: withBase('/contacts/')
 } as const;
 
 /** Русские URL, которые можно отдавать поисковикам. */
@@ -65,8 +59,6 @@ export const indexablePaths = [
 
 export type RouteKey = keyof typeof routes;
 
-/* Legacy-набор для старых компонентов. Актуальные SiteHeader/SiteFooter
-   дополнительно исключают retired-маршруты на уровне представления. */
 export const navPrimary = [
   { href: routes.about, key: 'about' as const },
   { href: routes.activities, key: 'activities' as const },
@@ -93,8 +85,6 @@ export const footerGroups = {
   ]
 } as const;
 
-export function homePath(locale: Locale): string {
-  if (locale === 'kz') return routes.kz;
-  if (locale === 'en') return routes.en;
+export function homePath(_locale: Locale): string {
   return routes.home;
 }
