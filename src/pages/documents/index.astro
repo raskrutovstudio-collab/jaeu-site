@@ -8,15 +8,23 @@ import { gmailCompose } from '../../data/mail';
 import { withBase } from '../../data/site';
 
 const asset = (name: string) => withBase(`/assets/jaeu/${name}`);
+const pageDescription = 'Официальные положения и справочные материалы Ассоциации ювелиров ЕАЭС, которые не дублируют тематические разделы сайта. Копии предоставляются по запросу.';
+
+const documentsPageI18n = {
+  ...documentsI18n,
+  'meta.description': {
+    kk: 'ЕАЭО зергерлер қауымдастығының тақырыптық бөлімдерді қайталамайтын ресми ережелері мен анықтамалық материалдары. Көшірмелер сұрау бойынша беріледі.',
+    en: 'Official regulations and reference materials of the Association of Jewellers of the EAEU that do not duplicate the site’s thematic sections. Copies are provided on request.'
+  },
+  'hero.lead': {
+    kk: 'Қауымдастықтың тақырыптық бөлімдерді қайталамайтын ресми ережелері мен анықтамалық материалдары. Көшірмелер сұрау бойынша беріледі.',
+    en: 'Official regulations and reference materials of the Association that do not duplicate the site’s thematic sections. Copies are provided on request.'
+  }
+};
 
 const requestHref = (title: string) =>
   gmailCompose(`${documents.action.prefix}: ${title}`);
 
-/*
-  «Документы» содержат только самостоятельные официальные материалы.
-  Вступление и взносы полностью раскрыты на /membership/.
-  Мероприятия и результаты работы полностью раскрыты на /news/.
-*/
 const visibleGroups = documents.groups
   .map((group, sourceIndex) => ({ group, sourceIndex }))
   .filter(({ sourceIndex }) => sourceIndex === 1 || sourceIndex === 3);
@@ -24,11 +32,11 @@ const visibleGroups = documents.groups
 
 <InnerLayout
   title={documents.meta.title}
-  description={documents.meta.description}
+  description={pageDescription}
   ogTitle={documents.meta.ogTitle}
   path={routes.documents}
   crumb={documents.crumb}
-  i18n={documentsI18n}
+  i18n={documentsPageI18n}
 >
   <section class="p-hero p-hero--tight">
     <div class="h-shell">
@@ -41,9 +49,7 @@ const visibleGroups = documents.groups
           </nav>
           <p class="h-eyebrow" data-i18n="hero.eyebrow">Документы и материалы</p>
           <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{documents.hero.h1}</h1>
-          <p class="h-lead p-hero__lead" data-i18n="hero.lead">
-            Официальные положения и справочные материалы Ассоциации, которые не дублируют тематические разделы сайта. Копии предоставляются по запросу.
-          </p>
+          <p class="h-lead p-hero__lead" data-i18n="hero.lead">{pageDescription}</p>
         </div>
       </div>
     </div>
