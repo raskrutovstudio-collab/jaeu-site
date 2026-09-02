@@ -66,7 +66,8 @@ main section[aria-labelledby='contacts-requisites'] .p-facts dd {
   overflow-wrap: normal !important;
 }
 
-/* На странице контактов служебное пояснение о часах приёма больше не выводим. */
+/* На странице контактов убираем все служебные пояснения под каналами связи. */
+main section[aria-labelledby='contacts-actions'] .p-contact__hint,
 main section[aria-labelledby='contacts-actions'] > .h-shell > .p-note {
   display: none !important;
 }
@@ -117,6 +118,17 @@ main section[aria-labelledby='contacts-actions'] > .h-shell > .p-note {
     width: max-content;
     max-width: 100%;
     white-space: nowrap;
+    text-indent: 0 !important;
+  }
+
+  /* Служебная строка в разделе документов — одной строкой на desktop. */
+  main .p-lib__group > .p-hint {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    text-align: left !important;
+    text-align-last: left !important;
     text-indent: 0 !important;
   }
 
