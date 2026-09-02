@@ -11,6 +11,7 @@ interface Props {
 const { currentPath = routes.home } = Astro.props;
 const cta = 'Стать членом Ассоциации';
 const ctaShort = 'Стать членом';
+const primaryNav = nav.filter((item) => item.href !== routes.knowledge && item.href !== routes.reports);
 const isCurrent = (href: string) => href === currentPath;
 ---
 
@@ -36,14 +37,9 @@ const isCurrent = (href: string) => href === currentPath;
 
     <nav class="h-nav" data-i18n-attrs="aria-label:ui.navLabel" aria-label="Основная навигация">
       <ul class="h-nav__list">
-        {nav.map((item) => (
+        {primaryNav.map((item) => (
           <li class:list={['h-nav__item', item.key && 'h-nav__item--key']}>
-            <a
-              class="h-nav__link"
-              href={item.href}
-              aria-current={isCurrent(item.href) ? 'page' : undefined}
-              data-i18n={item.i18n}
-            >{item.label}</a>
+            <a class="h-nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} data-i18n={item.i18n}>{item.label}</a>
           </li>
         ))}
       </ul>
@@ -57,17 +53,7 @@ const isCurrent = (href: string) => href === currentPath;
       </a>
     </div>
 
-    <button
-      class="h-burger"
-      type="button"
-      id="h-burger"
-      aria-expanded="false"
-      aria-controls="h-mobile-menu"
-      aria-label="Открыть меню"
-      data-label-open="Открыть меню"
-      data-label-close="Закрыть меню"
-      data-i18n-attrs="aria-label:ui.menuOpen;data-label-open:ui.menuOpen;data-label-close:ui.menuClose"
-    >
+    <button class="h-burger" type="button" id="h-burger" aria-expanded="false" aria-controls="h-mobile-menu" aria-label="Открыть меню" data-label-open="Открыть меню" data-label-close="Закрыть меню" data-i18n-attrs="aria-label:ui.menuOpen;data-label-open:ui.menuOpen;data-label-close:ui.menuClose">
       <Icon name="burger" class="h-burger__open" />
       <Icon name="close" class="h-burger__close" />
     </button>
@@ -77,14 +63,9 @@ const isCurrent = (href: string) => href === currentPath;
     <div class="h-shell h-shell--wide h-mobile__inner">
       <nav aria-label="Мобильная навигация" data-i18n-attrs="aria-label:ui.navLabelMobile">
         <ul class="h-mobile__list">
-          {nav.map((item) => (
+          {primaryNav.map((item) => (
             <li class:list={['h-mobile__item', item.key && 'h-mobile__item--key']}>
-              <a
-                class="h-mobile__link"
-                href={item.href}
-                aria-current={isCurrent(item.href) ? 'page' : undefined}
-                data-i18n={item.i18n}
-              >{item.label}</a>
+              <a class="h-mobile__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} data-i18n={item.i18n}>{item.label}</a>
             </li>
           ))}
         </ul>
