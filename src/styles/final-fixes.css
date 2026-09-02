@@ -1,0 +1,82 @@
+/* Финальные точечные исключения после глобального editorial-type.css. */
+
+/* Заголовки карточек и аккордеонов всегда набираются естественно слева. */
+main .p-cols__title,
+main .p-pillars__title,
+main .p-steps__title,
+main .p-stories__title,
+main .h-faq__trigger,
+main .h-faq__trigger span,
+main .p-facts dt {
+  text-align: left !important;
+  text-align-last: auto !important;
+  text-indent: 0 !important;
+  word-spacing: normal !important;
+  hyphens: none !important;
+}
+
+/* FAQ: весь вопрос — кликабельная строка, а не только символ справа. */
+main .h-faq__trigger {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Значения в блоках фактов/взносов — полноценные абзацы с красной строкой. */
+main .p-facts dd {
+  text-align: justify !important;
+  text-align-last: left !important;
+  text-indent: 1.5em !important;
+  hyphens: auto !important;
+}
+
+/* Вводная строка над лентой новостей — одна строка на широком desktop. */
+@media (min-width: 1041px) {
+  main .p-hint--head {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    text-indent: 0 !important;
+  }
+
+  /* /about/ — возвращаем тематический кадр справа и не даём figure схлопнуться. */
+  main .p-practice {
+    align-items: stretch !important;
+  }
+
+  main .p-practice__body {
+    align-self: center;
+  }
+
+  main .p-practice__media {
+    position: relative !important;
+    min-height: 260px !important;
+    overflow: hidden;
+  }
+
+  main .p-practice__media img {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+    object-position: center;
+  }
+}
+
+@media (max-width: 1040px) {
+  main .p-practice__media {
+    position: static !important;
+    min-height: 0 !important;
+  }
+
+  main .p-practice__media img {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+  }
+}
