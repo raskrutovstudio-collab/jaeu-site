@@ -27,6 +27,11 @@ const itemDescription = (item: NewsItem) => {
   return fields.paragraphs?.[0] || fields.text || '';
 };
 
+const paragraphKey = (itemIndex: number, paragraphIndex: number) => {
+  const candidates = ['text', 'detail', 'result'];
+  return `items.${itemIndex}.${candidates[paragraphIndex] || `paragraphs.${paragraphIndex}`}`;
+};
+
 const compactVisual = (item: NewsItem, index: number) => {
   if (index === 4) {
     return {
@@ -118,7 +123,7 @@ const newsSchema = {
             <p class="p-label" data-i18n="featured.eyebrow">{news.featured.eyebrow}</p>
             <time class="p-date" datetime={news.featured.date} data-i18n="featured.dateLabel">{news.featured.dateLabel}</time>
             <h2 class="h-h2" id="news-featured" data-i18n="featured.title">{news.featured.title}</h2>
-            <p class="p-story__text p-featured-news__lead">{featuredLead}</p>
+            <p class="p-story__text p-featured-news__lead" data-i18n="featured.paragraphs.0">{featuredLead}</p>
           </div>
 
           <figure class="p-featured-news__media">
@@ -138,12 +143,12 @@ const newsSchema = {
         </div>
 
         <div class="p-featured-news__continue p-article">
-          {featuredRest.map((text) => (
+          {featuredRest.map((text, restIndex) => (
             <>
-              <p class="p-story__text">{text}</p>
+              <p class="p-story__text" data-i18n={`featured.paragraphs.${restIndex + 1}`}>{text}</p>
               {news.featured.points && text.trim().endsWith(':') && (
                 <ul>
-                  {news.featured.points.map((point) => <li>{point}</li>)}
+                  {news.featured.points.map((point, pointIndex) => <li data-i18n={`featured.points.${pointIndex}`}>{point}</li>)}
                 </ul>
               )}
             </>
@@ -192,17 +197,17 @@ const newsSchema = {
                       )}
 
                       <div class:list={[landscape && 'p-stories__copy', 'p-article']}>
-                        {fields.paragraphs?.map((text) => (
+                        {fields.paragraphs?.map((text, paragraphIndex) => (
                           <>
-                            <p class="p-stories__text">{text}</p>
+                            <p class="p-stories__text" data-i18n={paragraphKey(index, paragraphIndex)}>{text}</p>
                             {fields.points && text.trim().endsWith(':') && (
-                              <ul>{fields.points.map((point) => <li>{point}</li>)}</ul>
+                              <ul>{fields.points.map((point, pointIndex) => <li data-i18n={`items.${index}.points.${pointIndex}`}>{point}</li>)}</ul>
                             )}
                           </>
                         ))}
-                        {fields.text && !fields.paragraphs && <p class="p-stories__text">{fields.text}</p>}
-                        {fields.points && !fields.paragraphs && <ul>{fields.points.map((point) => <li>{point}</li>)}</ul>}
-                        {fields.result && <p class="p-stories__result">{fields.result}</p>}
+                        {fields.text && !fields.paragraphs && <p class="p-stories__text" data-i18n={`items.${index}.text`}>{fields.text}</p>}
+                        {fields.points && !fields.paragraphs && <ul>{fields.points.map((point, pointIndex) => <li data-i18n={`items.${index}.points.${pointIndex}`}>{point}</li>)}</ul>}
+                        {fields.result && <p class="p-stories__result" data-i18n={`items.${index}.result`}>{fields.result}</p>}
                       </div>
                     </div>
 
@@ -255,76 +260,28 @@ const newsSchema = {
 
 <style>
   .p-news-hero { padding: 28px 0 54px; }
-  .p-news-heading {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    max-width: 54rem;
-    margin-bottom: 34px;
-  }
+  .p-news-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; max-width: 54rem; margin-bottom: 34px; }
   .p-news-heading .h-h1 { font-size: clamp(40px, 4vw, 52px); }
   .p-news-heading .h-lead { max-width: 58ch; font-size: 17px; line-height: 1.5; color: var(--text); }
-
-  .p-featured-news {
-    padding-top: 30px;
-    border-top: 1px solid var(--line);
-  }
-  .p-featured-news__top {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 56px;
-    align-items: start;
-  }
+  .p-featured-news { padding-top: 30px; border-top: 1px solid var(--line); }
+  .p-featured-news__top { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start; }
   .p-featured-news__content { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
   .p-featured-news__content .p-label { margin-bottom: 2px; }
   .p-featured-news__content .h-h2 { font-size: clamp(30px, 3vw, 40px); line-height: 1.12; max-width: 16ch; }
-  .p-featured-news__lead { margin: 10px 0 0; font-size: 16px; line-height: 1.62; color: var(--text); text-align: left; hyphens: auto; }
+  .p-featured-news__lead { margin: 10px 0 0; font-size: 16px; line-height: 1.62; color: var(--text); }
   .p-featured-news__media { margin: 0; }
   .p-featured-news__media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
-  .p-featured-news__continue {
-    max-width: 58rem;
-    margin-top: 34px;
-    padding-top: 30px;
-    border-top: 1px solid var(--line-soft);
-  }
+  .p-featured-news__continue { max-width: 58rem; margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line-soft); }
   .p-featured-news__continue.p-article .p-story__text,
-  .p-featured-news__continue.p-article li {
-    text-align: left;
-    hyphens: auto;
-    font-size: 16px;
-    line-height: 1.68;
-  }
-
-  .p-stories__item--article {
-    grid-template-columns: minmax(7rem, 1.45fr) minmax(0, 10.55fr);
-    column-gap: 34px;
-    padding: 34px 0 40px;
-  }
+  .p-featured-news__continue.p-article li { font-size: 16px; line-height: 1.68; }
+  .p-stories__item--article { grid-template-columns: minmax(7rem, 1.45fr) minmax(0, 10.55fr); column-gap: 34px; padding: 34px 0 40px; }
   .p-stories__body--editorial { display: block; }
   .p-stories__body--editorial .p-stories__title { margin: 0 0 18px; max-width: 34ch; }
-  .p-stories__media--float {
-    float: right;
-    width: min(38%, 22rem);
-    margin: 0 0 18px 28px !important;
-  }
+  .p-stories__media--float { float: right; width: min(38%, 22rem); margin: 0 0 18px 28px !important; }
   .p-stories__media--float img { aspect-ratio: 4 / 3 !important; object-fit: cover; }
   .p-stories__copy.p-article { display: block; }
-  .p-stories__copy.p-article p,
-  .p-stories__copy.p-article .p-stories__text,
-  .p-stories__item--compact .p-article p,
-  .p-stories__item--compact .p-stories__text,
-  .p-stories__item--compact .p-stories__result {
-    text-align: left;
-    hyphens: auto;
-  }
   .p-stories__copy::after { content: ''; display: table; clear: both; }
-
-  .p-stories__item--compact {
-    grid-template-columns: minmax(7rem, 1.45fr) minmax(0, 7.9fr) minmax(13rem, 2.65fr);
-    column-gap: 30px;
-    padding: 28px 0 32px;
-  }
+  .p-stories__item--compact { grid-template-columns: minmax(7rem, 1.45fr) minmax(0, 7.9fr) minmax(13rem, 2.65fr); column-gap: 30px; padding: 28px 0 32px; }
   .p-stories__item--compact .p-stories__body { gap: 13px; }
   .p-stories__item--compact .p-stories__title { max-width: 34ch; }
   .p-stories__item--compact > .p-stories__media { width: 100%; max-width: 16rem; justify-self: end; }
