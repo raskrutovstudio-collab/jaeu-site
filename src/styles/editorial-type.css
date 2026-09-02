@@ -40,7 +40,6 @@ main .p-cta__text {
   начало строки и дополнительный отступ разрушает геометрию списка.
 */
 main li,
-main dd,
 main blockquote {
   text-align: justify !important;
   text-align-last: left !important;
@@ -49,6 +48,41 @@ main blockquote {
   -webkit-hyphens: auto;
   overflow-wrap: normal !important;
   word-break: normal !important;
+}
+
+/* Definition-list: значения — полноценный содержательный текст. */
+main dd {
+  text-align: justify !important;
+  text-align-last: left !important;
+  text-justify: inter-word;
+  text-indent: 1.5em !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+/*
+  Заголовки никогда не растягиваем по ширине: justify на них визуально создаёт
+  огромные пробелы в коротких карточках. То же касается терминов таблиц/facts.
+*/
+main h1,
+main h2,
+main h3,
+main h4,
+main dt,
+main .h-h1,
+main .h-h2,
+main .h-h3,
+main .p-cols__title,
+main .p-pillars__title,
+main .p-steps__title,
+main .p-stories__title {
+  text-align: left !important;
+  text-align-last: auto !important;
+  text-indent: 0 !important;
+  hyphens: none !important;
+  word-spacing: normal !important;
 }
 
 /* Служебная типографика — без красной строки и без растягивания пробелов. */
@@ -73,5 +107,13 @@ main figcaption {
   .p-news-heading > .h-h1 {
     max-width: none !important;
     white-space: nowrap;
+  }
+
+  /* Короткая вводная строка новостной ленты должна оставаться одной строкой. */
+  .p-hint--head {
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    text-indent: 0 !important;
   }
 }
