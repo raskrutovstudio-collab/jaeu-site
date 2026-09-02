@@ -1,48 +1,77 @@
 /*
-  Единая типографика содержательной части сайта.
-  Все смысловые абзацы в <main> выравниваются по ширине и имеют красную строку.
-  Навигация, кнопки, даты, eyebrow и другие UI-метки этим правилом не затрагиваются.
+  Единая типографика содержательной части JAEU.
+
+  Требование заказчика: весь содержательный текст сайта набирается по ширине,
+  каждый абзац начинается с красной строки. Правило действует одинаково на
+  главной, внутренних страницах, desktop и mobile.
+
+  UI-текст (навигация, кнопки, языки, даты, breadcrumb, eyebrow, label) не
+  является абзацным материалом и поэтому не получает красную строку.
 */
 
-main p:not(.h-eyebrow):not(.p-label) {
+main p:not(.h-eyebrow):not(.p-label),
+main .h-text,
+main .h-lead,
+main .h-points__text,
+main .p-hero__lead,
+main .p-hero__note,
+main .p-hint,
+main .p-dirs__text,
+main .p-dirs__practice,
+main .p-pillars__text,
+main .p-cols__text,
+main .p-story__text,
+main .p-stories__text,
+main .p-stories__result,
+main .p-cta__text {
   text-align: justify !important;
-  text-align-last: left;
+  text-align-last: left !important;
   text-justify: inter-word;
   text-indent: 1.5em !important;
   hyphens: auto !important;
   -webkit-hyphens: auto;
-  overflow-wrap: normal;
-  word-break: normal;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
 }
 
 /*
-  Списки являются частью материала: строки также выравниваются по ширине,
-  но отдельная красная строка внутри маркера не нужна.
+  Списки тоже являются частью материала. Текст выравнивается по ширине;
+  красную строку не добавляем поверх маркера, потому что сам маркер уже задаёт
+  начало строки и дополнительный отступ разрушает геометрию списка.
 */
-main li {
+main li,
+main dd,
+main blockquote {
   text-align: justify !important;
-  text-align-last: left;
+  text-align-last: left !important;
+  text-justify: inter-word;
   hyphens: auto !important;
   -webkit-hyphens: auto;
-  overflow-wrap: normal;
-  word-break: normal;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
 }
 
-/* Фактические значения в definition-list — содержательный текст, но не абзацы. */
-main dd {
-  text-align: justify;
-  text-align-last: left;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-}
-
-/*
-  Короткие служебные подписи должны оставаться без красной строки,
-  даже если технически реализованы через <p>.
-*/
+/* Служебная типографика — без красной строки и без растягивания пробелов. */
 main .h-eyebrow,
-main .p-label {
+main .p-label,
+main .p-date,
+main .p-crumbs,
+main .p-stories__year,
+main figcaption {
   text-align: left !important;
   text-indent: 0 !important;
   hyphens: none !important;
+}
+
+/*
+  Короткие desktop-заголовки не должны дробиться при наличии свободного места.
+  Длинные редакционные заголовки сюда намеренно не включены.
+*/
+@media (min-width: 1041px) {
+  .h-about__main > .h-h2,
+  .p-hero--about-fill .p-hero__title,
+  .p-news-heading > .h-h1 {
+    max-width: none !important;
+    white-space: nowrap;
+  }
 }
