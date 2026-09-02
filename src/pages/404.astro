@@ -1,21 +1,35 @@
 ---
-import HomeLayout from '../layouts/HomeLayout.astro';
+import InnerLayout from '../layouts/InnerLayout.astro';
 import { routes } from '../data/site';
+
+const emptyI18n = {};
 ---
 
-<HomeLayout>
-  <section class="h-section h-section--white" style="min-height: 70vh; display:grid; place-items:center;">
-    <div class="h-shell" style="text-align:center;">
-      <p class="h-eyebrow" style="justify-content:center;">Ошибка 404</p>
-      <h1 class="h-h1" style="margin-top:18px;">Страница не найдена</h1>
-      <p class="h-text" style="max-width:44rem; margin:24px auto 0; text-indent:0 !important; text-align:center !important;">
-        Возможно, адрес изменился или раздел был объединён с другой страницей сайта.
-      </p>
-      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:28px;">
+<InnerLayout
+  title="Страница не найдена — Ассоциация ювелиров ЕАЭС"
+  description="Запрошенная страница не найдена. Перейдите на главную, в документы или контакты Ассоциации ювелиров ЕАЭС."
+  ogTitle="Страница не найдена"
+  path="/404/"
+  crumb="404"
+  i18n={emptyI18n}
+>
+  <section class="h-section h-section--white p-error">
+    <div class="h-shell p-error__inner">
+      <p class="h-eyebrow">Ошибка 404</p>
+      <h1 class="h-h1">Страница не найдена</h1>
+      <p class="h-text p-error__text">Возможно, адрес изменился или раздел был объединён с другой страницей сайта.</p>
+      <div class="p-error__actions">
         <a class="h-btn h-btn--primary" href={routes.home}>На главную</a>
         <a class="h-btn" href={routes.documents}>Документы</a>
         <a class="h-btn" href={routes.contacts}>Контакты</a>
       </div>
     </div>
   </section>
-</HomeLayout>
+</InnerLayout>
+
+<style>
+  .p-error { min-height: 68vh; display: grid; place-items: center; }
+  .p-error__inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .p-error__text { max-width: 44rem; margin: 24px auto 0; text-indent: 0 !important; text-align: center !important; }
+  .p-error__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+</style>
