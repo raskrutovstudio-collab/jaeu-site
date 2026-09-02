@@ -2,6 +2,7 @@
 import '../styles/home.css';
 import '../styles/visual-refine.css';
 import '../styles/editorial-type.css';
+import '../styles/final-fixes.css';
 import I18nRuntime from '../components/I18nRuntime.astro';
 import SiteHeader from '../components/home/SiteHeader.astro';
 import SiteFooter from '../components/home/SiteFooter.astro';
@@ -76,11 +77,6 @@ const jsonLd = {
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#202A57" />
     <link rel="icon" type="image/svg+xml" href={withBase('/assets/jaeu-emblem.svg')} />
-
-    {/*
-      Языки главной переключаются на одном URL, поэтому hreflang-альтернатив
-      на псевдопути не добавляем.
-    */}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={org.shortName} />
     <meta property="og:title" content={meta.ogTitle} data-i18n-attrs="content:meta.ogTitle" />
