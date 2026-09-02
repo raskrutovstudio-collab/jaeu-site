@@ -66,6 +66,15 @@ main section[aria-labelledby='contacts-requisites'] .p-facts dd {
   overflow-wrap: normal !important;
 }
 
+/* Контактные подписи — служебные термины, всегда строго слева и без абзацного отступа. */
+main section[aria-labelledby='contacts-actions'] .p-contact__term {
+  text-align: left !important;
+  text-align-last: left !important;
+  text-indent: 0 !important;
+  word-spacing: normal !important;
+  hyphens: none !important;
+}
+
 /* На странице контактов убираем все служебные пояснения под каналами связи. */
 main section[aria-labelledby='contacts-actions'] .p-contact__hint,
 main section[aria-labelledby='contacts-actions'] > .h-shell > .p-note {
@@ -78,7 +87,8 @@ main section[aria-labelledby='contacts-actions'] > .h-shell > .p-note {
   на одной высоте внутри своего ряда.
 */
 @media (min-width: 761px) {
-  main section[aria-labelledby='membership-rights'] .p-cols__title {
+  main section[aria-labelledby='membership-rights'] .p-cols__title,
+  main section[aria-labelledby='council-topics'] .p-cols__title {
     min-height: 2.44em;
     margin-bottom: 12px;
   }
@@ -111,6 +121,31 @@ main section[aria-labelledby='contacts-actions'] > .h-shell > .p-note {
 
   html[lang^='ru'] main section[aria-labelledby='membership-rights'] .p-cols__item:nth-child(6) .p-cols__title {
     max-width: 8.5em;
+  }
+
+  /* Экспертный совет: все шесть тематических заголовков держим в двух строках. */
+  html[lang^='ru'] main section[aria-labelledby='council-topics'] .p-cols__item:nth-child(1) .p-cols__title {
+    max-width: 8.2em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='council-topics'] .p-cols__item:nth-child(2) .p-cols__title {
+    max-width: 9.5em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='council-topics'] .p-cols__item:nth-child(3) .p-cols__title {
+    max-width: 8.8em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='council-topics'] .p-cols__item:nth-child(4) .p-cols__title {
+    max-width: 9em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='council-topics'] .p-cols__item:nth-child(5) .p-cols__title {
+    max-width: 8.7em;
+  }
+
+  html[lang^='ru'] main section[aria-labelledby='council-topics'] .p-cols__item:nth-child(6) .p-cols__title {
+    max-width: 11.5em;
   }
 
   main .p-hint--head {
