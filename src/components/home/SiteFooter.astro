@@ -10,7 +10,7 @@ interface Props {
 
 const { currentPath } = Astro.props;
 const year = new Date().getFullYear();
-const addressLine = `${org.address.postalCode}, ${org.address.region}, г. ${org.address.city}, ${org.address.street}`;
+const addressLine = `${org.address.postalCode}, ${org.address.region}, г.\u00A0${org.address.city}, ${org.address.street}`;
 
 /*
   Информационная архитектура строится по пользовательским задачам:
