@@ -42,12 +42,45 @@ main .h-faq__trigger {
   cursor: pointer;
 }
 
-/* Значения в блоках фактов/взносов — полноценные абзацы с красной строкой. */
+/* По умолчанию содержательные значения фактов сохраняют редакционную красную строку. */
 main .p-facts dd {
   text-align: justify !important;
   text-align-last: left !important;
   text-indent: 1.5em !important;
   hyphens: auto !important;
+}
+
+/*
+  Табличные сведения — исключение из редакционного набора. В официальных
+  сведениях, порядке работы Совета и реквизитах значения должны начинаться
+  строго по одной вертикали, а переносы — продолжаться под первой строкой.
+*/
+main section[aria-labelledby='about-facts'] .p-facts dd,
+main section[aria-labelledby='council-order'] .p-facts dd,
+main section[aria-labelledby='contacts-requisites'] .p-facts dd {
+  text-align: left !important;
+  text-align-last: left !important;
+  text-indent: 0 !important;
+  word-spacing: normal !important;
+  hyphens: none !important;
+  overflow-wrap: normal !important;
+}
+
+/* На странице контактов служебное пояснение о часах приёма больше не выводим. */
+main section[aria-labelledby='contacts-actions'] > .h-shell > .p-note {
+  display: none !important;
+}
+
+/*
+  Карточки прав участника: под каждый заголовок резервируется одинаковая
+  двухстрочная зона, поэтому основной текст всех шести карточек начинается
+  на одной высоте внутри своего ряда.
+*/
+@media (min-width: 761px) {
+  main section[aria-labelledby='membership-rights'] .p-cols__title {
+    min-height: 2.44em;
+    margin-bottom: 12px;
+  }
 }
 
 /* Вводная строка над лентой новостей — одна строка на широком desktop. */
@@ -58,6 +91,13 @@ main .p-facts dd {
     max-width: 100%;
     white-space: nowrap;
     text-indent: 0 !important;
+  }
+
+  /* Последнее значение «Порядка работы» помещаем одной строкой на desktop. */
+  main section[aria-labelledby='council-order'] .p-facts dd:last-of-type {
+    white-space: nowrap;
+    font-size: 16px;
+    letter-spacing: -0.01em;
   }
 
   /* /about/ — возвращаем тематический кадр справа и не даём figure схлопнуться. */
