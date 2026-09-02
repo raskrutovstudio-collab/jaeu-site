@@ -1,0 +1,21 @@
+---
+import HomeLayout from '../layouts/HomeLayout.astro';
+import { routes } from '../data/site';
+---
+
+<HomeLayout>
+  <section class="h-section h-section--white" style="min-height: 70vh; display:grid; place-items:center;">
+    <div class="h-shell" style="text-align:center;">
+      <p class="h-eyebrow" style="justify-content:center;">Ошибка 404</p>
+      <h1 class="h-h1" style="margin-top:18px;">Страница не найдена</h1>
+      <p class="h-text" style="max-width:44rem; margin:24px auto 0; text-indent:0 !important; text-align:center !important;">
+        Возможно, адрес изменился или раздел был объединён с другой страницей сайта.
+      </p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:28px;">
+        <a class="h-btn h-btn--primary" href={routes.home}>На главную</a>
+        <a class="h-btn" href={routes.documents}>Документы</a>
+        <a class="h-btn" href={routes.contacts}>Контакты</a>
+      </div>
+    </div>
+  </section>
+</HomeLayout>
