@@ -27,11 +27,6 @@ const itemDescription = (item: NewsItem) => {
   return fields.paragraphs?.[0] || fields.text || '';
 };
 
-const paragraphKey = (itemIndex: number, paragraphIndex: number) => {
-  const candidates = ['text', 'detail', 'result'];
-  return `items.${itemIndex}.${candidates[paragraphIndex] || `paragraphs.${paragraphIndex}`}`;
-};
-
 const compactVisual = (item: NewsItem, index: number) => {
   if (index === 4) {
     return {
@@ -142,17 +137,20 @@ const newsSchema = {
           </figure>
         </div>
 
-        <div class="p-featured-news__continue p-article">
-          {featuredRest.map((text, restIndex) => (
+        <div class="p-featured-news__continue p-article" data-lang-only="ru">
+          {featuredRest.map((text) => (
             <>
-              <p class="p-story__text" data-i18n={`featured.paragraphs.${restIndex + 1}`}>{text}</p>
+              <p class="p-story__text">{text}</p>
               {news.featured.points && text.trim().endsWith(':') && (
-                <ul>
-                  {news.featured.points.map((point, pointIndex) => <li data-i18n={`featured.points.${pointIndex}`}>{point}</li>)}
-                </ul>
+                <ul>{news.featured.points.map((point) => <li>{point}</li>)}</ul>
               )}
             </>
           ))}
+        </div>
+
+        <div class="p-featured-news__continue p-article" data-lang-only="translated" hidden>
+          <p class="p-story__text" data-i18n="featured.paragraphs.1"></p>
+          <p class="p-story__text" data-i18n="featured.paragraphs.2"></p>
         </div>
       </article>
     </div>
@@ -196,18 +194,23 @@ const newsSchema = {
                         </figure>
                       )}
 
-                      <div class:list={[landscape && 'p-stories__copy', 'p-article']}>
-                        {fields.paragraphs?.map((text, paragraphIndex) => (
+                      <div class:list={[landscape && 'p-stories__copy', 'p-article']} data-lang-only="ru">
+                        {fields.paragraphs?.map((text) => (
                           <>
-                            <p class="p-stories__text" data-i18n={paragraphKey(index, paragraphIndex)}>{text}</p>
+                            <p class="p-stories__text">{text}</p>
                             {fields.points && text.trim().endsWith(':') && (
-                              <ul>{fields.points.map((point, pointIndex) => <li data-i18n={`items.${index}.points.${pointIndex}`}>{point}</li>)}</ul>
+                              <ul>{fields.points.map((point) => <li>{point}</li>)}</ul>
                             )}
                           </>
                         ))}
-                        {fields.text && !fields.paragraphs && <p class="p-stories__text" data-i18n={`items.${index}.text`}>{fields.text}</p>}
-                        {fields.points && !fields.paragraphs && <ul>{fields.points.map((point, pointIndex) => <li data-i18n={`items.${index}.points.${pointIndex}`}>{point}</li>)}</ul>}
-                        {fields.result && <p class="p-stories__result" data-i18n={`items.${index}.result`}>{fields.result}</p>}
+                        {fields.text && !fields.paragraphs && <p class="p-stories__text">{fields.text}</p>}
+                        {fields.points && !fields.paragraphs && <ul>{fields.points.map((point) => <li>{point}</li>)}</ul>}
+                        {fields.result && <p class="p-stories__result">{fields.result}</p>}
+                      </div>
+
+                      <div class:list={[landscape && 'p-stories__copy', 'p-article']} data-lang-only="translated" hidden>
+                        <p class="p-stories__text" data-i18n={`items.${index}.text`}></p>
+                        <p class="p-stories__text" data-i18n={`items.${index}.detail`}></p>
                       </div>
                     </div>
 
@@ -247,10 +250,6 @@ const newsSchema = {
           <a class="h-btn h-btn--light" href={news.cta.primary.href} target="_blank" rel="noopener noreferrer" aria-label={`Написать на ${org.email} в Gmail`} data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail">
             <span data-i18n="cta.primary.label">{news.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
-          </a>
-          <a class="p-cta__link" href={news.cta.secondary.href}>
-            <span data-i18n="cta.secondary.label">{news.cta.secondary.label}</span>
-            <Icon name="arrow" class="p-cta__arrow" />
           </a>
         </div>
       </div>
