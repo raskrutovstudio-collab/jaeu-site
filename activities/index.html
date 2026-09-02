@@ -10,8 +10,8 @@
     const langAttr = new Map(i18n.locales.map((item) => [item.id, item.lang]));
     const texts = [];
     const attrs = [];
+    const variants = [];
 
-    // Заголовок может содержать иконку, поэтому меняется только текстовый узел.
     const firstText = (element) => {
       for (const node of element.childNodes) {
         if (node.nodeType === 3 && node.textContent.trim()) return node;
@@ -38,11 +38,21 @@
       });
     });
 
-    // Ключ без подтверждённого перевода остаётся русским из разметки.
+    document.querySelectorAll('[data-lang-only]').forEach((element) => {
+      variants.push({ element, mode: element.dataset.langOnly });
+    });
+
     const resolve = (locale, key, base) => {
       if (locale === 'ru') return base;
       const table = i18n.overrides[locale];
       return (table && table[key]) || base;
+    };
+
+    const applyVariants = (locale) => {
+      variants.forEach((item) => {
+        const show = item.mode === 'translated' ? locale !== 'ru' : item.mode === locale;
+        item.element.hidden = !show;
+      });
     };
 
     let current = 'ru';
@@ -57,8 +67,11 @@
       attrs.forEach((item) => {
         item.element.setAttribute(item.attr, resolve(next, item.key, item.base));
       });
+      applyVariants(next);
       document.dispatchEvent(new CustomEvent('jaeu:lang', { detail: next }));
     };
+
+    applyVariants('ru');
 
     window.jaeuLang = {
       storageKey: i18n.storageKey,
