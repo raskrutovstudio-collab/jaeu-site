@@ -13,10 +13,9 @@ const requestHref = (title: string) =>
   gmailCompose(`${documents.action.prefix}: ${title}`);
 
 /*
-  «Документы» не дублируют тематические разделы. Всё, что относится к
-  вступлению и взносам, находится на /membership/. Мероприятия и результаты
-  участия Ассоциации находятся на /news/. Здесь остаются самостоятельные
-  документы и справочные материалы, у которых нет отдельной тематической страницы.
+  «Документы» содержат только самостоятельные официальные материалы.
+  Вступление и взносы полностью раскрыты на /membership/.
+  Мероприятия и результаты работы полностью раскрыты на /news/.
 */
 const visibleGroups = documents.groups
   .map((group, sourceIndex) => ({ group, sourceIndex }))
@@ -40,10 +39,10 @@ const visibleGroups = documents.groups
             <span aria-hidden="true">/</span>
             <span aria-current="page" data-i18n="crumb">{documents.crumb}</span>
           </nav>
-          <p class="h-eyebrow" data-i18n="hero.eyebrow">Документы Ассоциации</p>
+          <p class="h-eyebrow" data-i18n="hero.eyebrow">Документы и материалы</p>
           <h1 class="h-h1 p-hero__title" data-i18n="hero.h1">{documents.hero.h1}</h1>
-          <p class="h-lead p-hero__lead">
-            Официальные положения и справочные материалы Ассоциации, которые не относятся к отдельным тематическим разделам сайта.
+          <p class="h-lead p-hero__lead" data-i18n="hero.lead">
+            Официальные положения и справочные материалы Ассоциации, которые не дублируют тематические разделы сайта. Копии предоставляются по запросу.
           </p>
         </div>
       </div>
@@ -89,7 +88,7 @@ const visibleGroups = documents.groups
               ))}
             </ul>
 
-            {visibleIndex === 0 && <p class="p-hint">Копии материалов предоставляются по запросу в Ассоциацию.</p>}
+            {visibleIndex === 0 && <p class="p-hint" data-i18n="listNote">Копии материалов предоставляются по запросу в Ассоциацию.</p>}
           </section>
         ))}
       </div>
@@ -126,8 +125,8 @@ const visibleGroups = documents.groups
     <div class="h-shell">
       <div class="p-cta__inner">
         <div class="p-cta__text-col">
-          <h2 class="h-h2 p-cta__title" id="documents-cta" data-rise="1">Нужна копия документа?</h2>
-          <p class="p-cta__text" data-rise="2">Укажите название документа в обращении — Ассоциация подтвердит его доступность и форму предоставления.</p>
+          <h2 class="h-h2 p-cta__title" id="documents-cta" data-rise="1" data-i18n="cta.h2">Запросить документ</h2>
+          <p class="p-cta__text" data-rise="2" data-i18n="cta.text">Укажите название документа в обращении — Ассоциация подтвердит его доступность и форму предоставления.</p>
         </div>
 
         <div class="p-cta__actions" data-rise="3">
@@ -139,11 +138,11 @@ const visibleGroups = documents.groups
             aria-label={`Написать на ${org.email} в Gmail`}
             data-i18n-attrs="href:cta.primary.href;aria-label:ui.writeEmailGmail"
           >
-            <span>{documents.cta.primary.label}</span>
+            <span data-i18n="cta.primary.label">{documents.cta.primary.label}</span>
             <Icon name="arrow" class="h-btn__arrow" />
           </a>
           <a class="p-cta__link" href={routes.contacts}>
-            <span>Контакты</span>
+            <span data-i18n="nav.contacts">Контакты</span>
             <Icon name="arrow" class="p-cta__arrow" />
           </a>
         </div>
